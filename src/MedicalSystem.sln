@@ -5,19 +5,19 @@ VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{ABAF6BD2-218E-4718-9DBB-309F3622FCD8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Doctor", "Services\MedicalSystem.Services.Doctor\MedicalSystem.Services.Doctor.csproj", "{56778B85-CCCB-4495-A596-76DE2FFCF866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Doctor", "Services\Doctor\MedicalSystem.Services.Doctor.csproj", "{56778B85-CCCB-4495-A596-76DE2FFCF866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Services.Patent", "Services\MedicalSystem.Services.Patent\MedicalSystem.Services.Patent.csproj", "{7C3D2CDC-9338-4485-A399-2027A9507A67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Services.Patent", "Services\Patent\MedicalSystem.Services.Patent.csproj", "{7C3D2CDC-9338-4485-A399-2027A9507A67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Services.Consultation", "Services\MedicalSystem.Services.Consultation\MedicalSystem.Services.Consultation.csproj", "{75606F3A-07D3-4542-B248-3137D74717BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Services.Consultation", "Services\Consultation\MedicalSystem.Services.Consultation.csproj", "{75606F3A-07D3-4542-B248-3137D74717BE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1488AC4C-E1AC-4800-8CA9-1526892A3224}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Consultation", "Tests\MedicalSystem.Tests.Services.Consultation\MedicalSystem.Tests.Services.Consultation.csproj", "{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Consultation", "Tests\Consultation\MedicalSystem.Tests.Services.Consultation.csproj", "{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Doctor", "Tests\MedicalSystem.Tests.Services.Doctor\MedicalSystem.Tests.Services.Doctor.csproj", "{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Doctor", "Tests\Doctor\MedicalSystem.Tests.Services.Doctor.csproj", "{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Patent", "Tests\MedicalSystem.Tests.Services.Patent\MedicalSystem.Tests.Services.Patent.csproj", "{A079278E-555F-45C2-BCDC-4AD610218F3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Patent", "Tests\Patent\MedicalSystem.Tests.Services.Patent.csproj", "{A079278E-555F-45C2-BCDC-4AD610218F3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
