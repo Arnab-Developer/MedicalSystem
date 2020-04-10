@@ -1,2 +1,2 @@
-# medical-system
+# Medical system
 Personal medical system.
