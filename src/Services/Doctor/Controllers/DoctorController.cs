@@ -18,7 +18,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<DoctorModel> GetAllDoctors()
+        public IEnumerable<DoctorModel> GetAll()
         {
             var doctors = _doctorContext.Doctors.OrderBy(doctor => doctor.FirstName);
             return doctors;
