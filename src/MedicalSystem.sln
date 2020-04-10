@@ -11,6 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Services.Pate
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Services.Consultation", "Services\MedicalSystem.Services.Consultation\MedicalSystem.Services.Consultation.csproj", "{75606F3A-07D3-4542-B248-3137D74717BE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1488AC4C-E1AC-4800-8CA9-1526892A3224}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Consultation", "Tests\MedicalSystem.Tests.Services.Consultation\MedicalSystem.Tests.Services.Consultation.csproj", "{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Doctor", "Tests\MedicalSystem.Tests.Services.Doctor\MedicalSystem.Tests.Services.Doctor.csproj", "{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Patent", "Tests\MedicalSystem.Tests.Services.Patent\MedicalSystem.Tests.Services.Patent.csproj", "{A079278E-555F-45C2-BCDC-4AD610218F3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +37,18 @@ Global
 		{75606F3A-07D3-4542-B248-3137D74717BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75606F3A-07D3-4542-B248-3137D74717BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75606F3A-07D3-4542-B248-3137D74717BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A079278E-555F-45C2-BCDC-4AD610218F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A079278E-555F-45C2-BCDC-4AD610218F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A079278E-555F-45C2-BCDC-4AD610218F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A079278E-555F-45C2-BCDC-4AD610218F3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +57,9 @@ Global
 		{56778B85-CCCB-4495-A596-76DE2FFCF866} = {ABAF6BD2-218E-4718-9DBB-309F3622FCD8}
 		{7C3D2CDC-9338-4485-A399-2027A9507A67} = {ABAF6BD2-218E-4718-9DBB-309F3622FCD8}
 		{75606F3A-07D3-4542-B248-3137D74717BE} = {ABAF6BD2-218E-4718-9DBB-309F3622FCD8}
+		{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94} = {1488AC4C-E1AC-4800-8CA9-1526892A3224}
+		{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33} = {1488AC4C-E1AC-4800-8CA9-1526892A3224}
+		{A079278E-555F-45C2-BCDC-4AD610218F3F} = {1488AC4C-E1AC-4800-8CA9-1526892A3224}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {52221F93-7556-4DAB-A5ED-97E1C70E5377}
