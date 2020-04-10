@@ -1,5 +1,7 @@
+using MedicalSystem.Services.Patent.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,6 +21,7 @@ namespace MedicalSystem.Services.Patent
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<PatentContext>(option => option.UseInMemoryDatabase("PatentDb"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
