@@ -15,5 +15,11 @@ namespace MedicalSystem.Services.Consultation.Data
         public DbSet<ConsultationDomainModel> Consultations { get; set; }
         public DbSet<DoctorDomainModel> Doctors { get; set; }
         public DbSet<PatentDomainModel> Patents { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ConsultationDomainModel>()
+                .OwnsOne(consultation => consultation.Place);
+        }
     }
 }

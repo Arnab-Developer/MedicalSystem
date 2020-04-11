@@ -7,21 +7,17 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         public int Id { get; set; }
         public DateTime Date { get; set; }
 
-        private string _place;
-        public string? Place
+        private Place _place;
+        public Place? Place
         {
             get { return _place; }
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (value == null)
                 {
                     throw new ArgumentException();
                 }
-                if (value.Length > 10)
-                {
-                    throw new ArgumentException();
-                }
-                _place = value;
+                _place = new Place(value.Country, value.State, value.City, value.PinCode);
             }
         }
 
@@ -70,20 +66,20 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         {
             Id = 0;
             Date = DateTime.Now;
-            _place = string.Empty;
+            _place = new Place();
             _problem = string.Empty;
             _medicine = string.Empty;
             DoctorId = 0;
             PatentId = 0;
         }
 
-        public ConsultationDomainModel(int id, DateTime date, string? place, string? problem,
-            string? medicine, int doctorId, int patentId)
+        public ConsultationDomainModel(int id, DateTime date, string? country, string? state, string? city,
+            string? pinCode, string? problem, string? medicine, int doctorId, int patentId)
             : this()
         {
             Id = id;
             Date = date;
-            Place = place;
+            Place = new Place(country, state, city, pinCode);
             Problem = problem;
             Medicine = medicine;
             DoctorId = doctorId;

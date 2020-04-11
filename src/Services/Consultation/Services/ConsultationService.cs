@@ -30,7 +30,10 @@ namespace MedicalSystem.Services.Consultation.Services
                 {
                     Id = consultationDomainModel.Id,
                     Date = consultationDomainModel.Date,
-                    Place = consultationDomainModel.Place,
+                    Country = consultationDomainModel.Place!.Country,
+                    State = consultationDomainModel.Place!.State,
+                    City = consultationDomainModel.Place!.City,
+                    PinCode = consultationDomainModel.Place!.PinCode,
                     Problem = consultationDomainModel.Problem,
                     Medicine = consultationDomainModel.Medicine,
                     DoctorId = consultationDomainModel.DoctorId,
@@ -69,7 +72,10 @@ namespace MedicalSystem.Services.Consultation.Services
             {
                 Id = consultationDomainModel.Id,
                 Date = consultationDomainModel.Date,
-                Place = consultationDomainModel.Place,
+                Country = consultationDomainModel.Place!.Country,
+                State = consultationDomainModel.Place!.State,
+                City = consultationDomainModel.Place!.City,
+                PinCode = consultationDomainModel.Place!.PinCode,
                 Problem = consultationDomainModel.Problem,
                 Medicine = consultationDomainModel.Medicine,
                 DoctorId = consultationDomainModel.DoctorId,
@@ -92,7 +98,8 @@ namespace MedicalSystem.Services.Consultation.Services
         public void Add(ConsultationViewModel consultationViewModel)
         {
             var consultationDomainModel = new ConsultationDomainModel(consultationViewModel.Id,
-                consultationViewModel.Date, consultationViewModel.Place, consultationViewModel.Problem,
+                consultationViewModel.Date, consultationViewModel.Country, consultationViewModel.State,
+                consultationViewModel.City, consultationViewModel.PinCode, consultationViewModel.Problem,
                 consultationViewModel.Medicine, consultationViewModel.DoctorId, consultationViewModel.PatentId);
 
             _consultationContext.Consultations.Add(consultationDomainModel);
@@ -105,7 +112,8 @@ namespace MedicalSystem.Services.Consultation.Services
                 .FirstOrDefault(consultation => consultation.Id == id);
 
             consultationDomainModel.Date = consultationViewModel.Date;
-            consultationDomainModel.Place = consultationViewModel.Place;
+            consultationDomainModel.Place = new Place(consultationViewModel.Country,
+                consultationViewModel.State, consultationViewModel.City, consultationViewModel.PinCode);
             consultationDomainModel.Problem = consultationViewModel.Problem;
             consultationDomainModel.Medicine = consultationViewModel.Medicine;
             consultationDomainModel.DoctorId = consultationViewModel.DoctorId;
