@@ -59,12 +59,12 @@ namespace MedicalSystem.Services.Consultation.Services
                 .Include(consultation => consultation.Doctor)
                 .Include(consultation => consultation.Patent)
                 .FirstOrDefault(consultation => consultation.Id == id);
-            
-            if(consultationDomainModel == null)
-            {                
+
+            if (consultationDomainModel == null)
+            {
                 return null;
             }
-            
+
             var consultationViewModel = new ConsultationViewModel()
             {
                 Id = consultationDomainModel.Id,
