@@ -1,4 +1,6 @@
-﻿using MedicalSystem.Services.Consultation.DomainModels;
+﻿#nullable disable
+
+using MedicalSystem.Services.Consultation.DomainModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalSystem.Services.Consultation.Data
@@ -10,8 +12,8 @@ namespace MedicalSystem.Services.Consultation.Data
         {
         }
 
-        public DbSet<ConsultationDomainModel>? Consultations { get; set; }
-        public DbSet<DoctorDomainModel>? Doctors { get; set; }
-        public DbSet<PatentDomainModel>? Patents { get; set; }
+        public DbSet<ConsultationDomainModel> Consultations { get; set; }
+        public DbSet<DoctorDomainModel> Doctors { get; set; }
+        public DbSet<PatentDomainModel> Patents { get; set; }
     }
 }

@@ -95,7 +95,7 @@ namespace MedicalSystem.Services.Consultation.Services
                 consultationViewModel.Date, consultationViewModel.Place, consultationViewModel.Problem,
                 consultationViewModel.Medicine, consultationViewModel.DoctorId, consultationViewModel.PatentId);
 
-            _consultationContext.Consultations!.Add(consultationDomainModel);
+            _consultationContext.Consultations.Add(consultationDomainModel);
             _consultationContext.SaveChanges();
         }
 
@@ -118,7 +118,7 @@ namespace MedicalSystem.Services.Consultation.Services
         {
             var consultationDomainModel = _consultationContext.Consultations
                 .FirstOrDefault(consultation => consultation.Id == id);
-            _consultationContext.Consultations!.Remove(consultationDomainModel);
+            _consultationContext.Consultations.Remove(consultationDomainModel);
             _consultationContext.SaveChanges();
         }
     }
