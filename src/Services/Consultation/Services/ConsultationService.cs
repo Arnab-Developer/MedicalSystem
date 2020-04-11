@@ -1,27 +1,22 @@
-﻿using MedicalSystem.Services.Consultation.Data;
+﻿using MedicalSystem.Services.Consultation.Dals;
 using MedicalSystem.Services.Consultation.DomainModels;
 using MedicalSystem.Services.Consultation.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MedicalSystem.Services.Consultation.Services
 {
     public class ConsultationService : IConsultationService
     {
-        private readonly ConsultationContext _consultationContext;
+        private readonly IConsultationDal _consultationDal;
 
-        public ConsultationService(ConsultationContext consultationContext)
+        public ConsultationService(IConsultationDal consultationDal)
         {
-            _consultationContext = consultationContext;
+            _consultationDal = consultationDal;
         }
 
         public IEnumerable<ConsultationViewModel> GetAll()
         {
-            var consultationDomainModels = _consultationContext.Consultations
-                .Include(consultation => consultation.Doctor)
-                .Include(consultation => consultation.Patent)
-                .OrderByDescending(consultation => consultation.Date);
+            var consultationDomainModels = _consultationDal.GetAll();
 
             var consultationViewModels = new List<ConsultationViewModel>();
             foreach (var consultationDomainModel in consultationDomainModels)
@@ -58,10 +53,7 @@ namespace MedicalSystem.Services.Consultation.Services
 
         public ConsultationViewModel? GetById(int id)
         {
-            var consultationDomainModel = _consultationContext.Consultations
-                .Include(consultation => consultation.Doctor)
-                .Include(consultation => consultation.Patent)
-                .FirstOrDefault(consultation => consultation.Id == id);
+            var consultationDomainModel = _consultationDal.GetById(id);
 
             if (consultationDomainModel == null)
             {
@@ -102,14 +94,17 @@ namespace MedicalSystem.Services.Consultation.Services
                 consultationViewModel.City, consultationViewModel.PinCode, consultationViewModel.Problem,
                 consultationViewModel.Medicine, consultationViewModel.DoctorId, consultationViewModel.PatentId);
 
-            _consultationContext.Consultations.Add(consultationDomainModel);
-            _consultationContext.SaveChanges();
+            _consultationDal.Add(consultationDomainModel);
         }
 
         public void Update(int id, ConsultationViewModel consultationViewModel)
         {
-            var consultationDomainModel = _consultationContext.Consultations
-                .FirstOrDefault(consultation => consultation.Id == id);
+            var consultationDomainModel = _consultationDal.GetById(id);
+
+            if (consultationDomainModel == null)
+            {
+                return;
+            }
 
             consultationDomainModel.Date = consultationViewModel.Date;
             consultationDomainModel.Place = new Place(consultationViewModel.Country,
@@ -119,15 +114,17 @@ namespace MedicalSystem.Services.Consultation.Services
             consultationDomainModel.DoctorId = consultationViewModel.DoctorId;
             consultationDomainModel.PatentId = consultationViewModel.PatentId;
 
-            _consultationContext.SaveChanges();
+            _consultationDal.Update(consultationDomainModel);
         }
 
         public void Delete(int id)
         {
-            var consultationDomainModel = _consultationContext.Consultations
-                .FirstOrDefault(consultation => consultation.Id == id);
-            _consultationContext.Consultations.Remove(consultationDomainModel);
-            _consultationContext.SaveChanges();
+            var consultationDomainModel = _consultationDal.GetById(id);
+            if (consultationDomainModel == null)
+            {
+                return;
+            }
+            _consultationDal.Delete(consultationDomainModel);
         }
     }
 }

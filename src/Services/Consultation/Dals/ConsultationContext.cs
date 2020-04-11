@@ -3,7 +3,7 @@
 using MedicalSystem.Services.Consultation.DomainModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedicalSystem.Services.Consultation.Data
+namespace MedicalSystem.Services.Consultation.Dals
 {
     public class ConsultationContext : DbContext
     {
