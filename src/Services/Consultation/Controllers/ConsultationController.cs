@@ -1,9 +1,7 @@
-﻿using MedicalSystem.Services.Consultation.Data;
-using MedicalSystem.Services.Consultation.Models;
+﻿using MedicalSystem.Services.Consultation.Services;
+using MedicalSystem.Services.Consultation.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MedicalSystem.Services.Consultation.Controllers
 {
@@ -11,76 +9,46 @@ namespace MedicalSystem.Services.Consultation.Controllers
     [Route("[controller]")]
     public class ConsultationController
     {
-        private readonly ConsultationContext _consultationContext;
+        private readonly IConsultationService _consultationService;
 
-        public ConsultationController(ConsultationContext consultationContext)
+        public ConsultationController(IConsultationService consultationService)
         {
-            _consultationContext = consultationContext;
+            _consultationService = consultationService;
         }
 
         [HttpGet]
-        public IEnumerable<ConsultationModel> GetAll()
+        public IEnumerable<ConsultationViewModel> GetAll()
         {
-            var consultations = _consultationContext.Consultations
-                .Include(consultation => consultation.Doctor)
-                .Include(consultation => consultation.Patent)
-                .OrderByDescending(consultation => consultation.Date);
-            return consultations.ToList();
+            var consultationViewModels = _consultationService.GetAll();
+            return consultationViewModels;
         }
 
         [HttpGet]
         [Route("{id:int}")]
-        public ConsultationModel GetById(int id)
+        public ConsultationViewModel? GetById(int id)
         {
-            var consultation = _consultationContext.Consultations
-                .Include(consultation => consultation.Doctor)
-                .Include(consultation => consultation.Patent)
-                .FirstOrDefault(consultation => consultation.Id == id);
-            return consultation;
+            var consultationViewModel = _consultationService.GetById(id);
+            return consultationViewModel;
         }
 
         [HttpPost]
-        public void Add(ConsultationModel consultation)
+        public void Add(ConsultationViewModel consultationViewModel)
         {
-            var c = new ConsultationModel()
-            {
-                Id = consultation.Id,
-                Date = consultation.Date,
-                Place = consultation.Place,
-                Problem = consultation.Problem,
-                Medicine = consultation.Medicine,
-                DoctorId = consultation.DoctorId,
-                PatentId = consultation.PatentId
-            };
-            _consultationContext.Consultations.Add(c);
-            _consultationContext.SaveChanges();
+            _consultationService.Add(consultationViewModel);
         }
 
         [HttpPut]
         [Route("{id:int}")]
-        public void Update(int id, ConsultationModel consultation)
+        public void Update(int id, ConsultationViewModel consultationViewModel)
         {
-            var c = _consultationContext.Consultations
-                .FirstOrDefault(consultation => consultation.Id == id);
-
-            c.Date = consultation.Date;
-            c.Place = consultation.Place;
-            c.Problem = consultation.Problem;
-            c.Medicine = consultation.Medicine;
-            c.DoctorId = consultation.DoctorId;
-            c.PatentId = consultation.PatentId;
-
-            _consultationContext.SaveChanges();
+            _consultationService.Update(id, consultationViewModel);
         }
 
         [HttpDelete]
         [Route("{id:int}")]
         public void Delete(int id)
         {
-            var consultation = _consultationContext.Consultations
-                .FirstOrDefault(consultation => consultation.Id == id);
-            _consultationContext.Consultations.Remove(consultation);
-            _consultationContext.SaveChanges();
+            _consultationService.Delete(id);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using MedicalSystem.Services.Consultation.Models;
+﻿using MedicalSystem.Services.Consultation.DomainModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalSystem.Services.Consultation.Data
@@ -10,23 +10,8 @@ namespace MedicalSystem.Services.Consultation.Data
         {
         }
 
-        public DbSet<ConsultationModel> Consultations { get; set; }
-        public DbSet<DoctorModel> Doctors { get; set; }
-        public DbSet<PatentModel> Patents { get; set; }
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<ConsultationModel>()
-        //        .HasOne(c => c.Doctor)
-        //        .WithOne()
-        //        .IsRequired(false);
-        //    //.OnDelete(DeleteBehavior.Restrict);
-
-        //    modelBuilder.Entity<ConsultationModel>()
-        //        .HasOne(c => c.Patent)
-        //        .WithOne()
-        //        .IsRequired(false);
-        //        //.OnDelete(DeleteBehavior.Restrict);
-        //}
+        public DbSet<ConsultationDomainModel>? Consultations { get; set; }
+        public DbSet<DoctorDomainModel>? Doctors { get; set; }
+        public DbSet<PatentDomainModel>? Patents { get; set; }
     }
 }

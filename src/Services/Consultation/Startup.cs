@@ -1,4 +1,5 @@
 using MedicalSystem.Services.Consultation.Data;
+using MedicalSystem.Services.Consultation.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace MedicalSystem.Services.Consultation
             services.AddControllers();
             var consultationDbConnectionString = Configuration.GetValue<string>("consultationDbConnectionString");
             services.AddDbContext<ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
+            services.AddTransient(typeof(IConsultationService), typeof(ConsultationService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
