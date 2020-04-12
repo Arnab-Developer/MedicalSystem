@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
-    public class ConsultationServiceTests
+    internal class ConsultationServiceTests
     {
         private ConsultationService? _consultationService;
         private Mock<IConsultationDal>? _consultationDalMock;
@@ -91,7 +91,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         }
 
         [Test]
-        public void GetAll_GivenNullDomainModels_ExpectNullReferenceException()
+        public void GetAll_GivenNullDomainModels_ExpectException()
         {
             _consultationDalMock!.Setup(dal => dal.GetAll()).Returns<IEnumerable<ConsultationDomainModel>>(null);
             Assert.Throws<NullReferenceException>(() => _consultationService!.GetAll());
