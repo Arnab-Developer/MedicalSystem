@@ -169,7 +169,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 }
             };
 
-            _consultationDalMock!.Setup(dal => dal.Add(It.IsAny<ConsultationDomainModel>()));
+            _consultationDalMock!.Setup(dal => dal.Add(It.IsAny<ConsultationDomainModel>())).Verifiable();
             _consultationService!.Add(consultationViewModel);
             _consultationDalMock.Verify();
         }
@@ -208,8 +208,8 @@ namespace MedicalSystem.Tests.Services.Consultation
                 Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
                 Patent = new PatentDomainModel(1, "pat1first", "pat1last")
             };
-            _consultationDalMock!.Setup(dal => dal.GetById(It.IsAny<int>())).Returns(consultationDomainModel);
-            _consultationDalMock!.Setup(dal => dal.Update(consultationDomainModel));
+            _consultationDalMock!.Setup(dal => dal.GetById(It.IsAny<int>())).Returns(consultationDomainModel).Verifiable();
+            _consultationDalMock!.Setup(dal => dal.Update(consultationDomainModel)).Verifiable();
             _consultationService!.Update(It.IsAny<int>(), consultationViewModel);
             _consultationDalMock.Verify();
         }
@@ -217,7 +217,14 @@ namespace MedicalSystem.Tests.Services.Consultation
         [Test]
         public void Delete_CanCallDalDelete()
         {
-            _consultationDalMock!.Setup(dal => dal.Delete(It.IsAny<ConsultationDomainModel>()));
+            var consultationDomainModel = new ConsultationDomainModel(1, DateTime.Now, "India",
+                "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1)
+            {
+                Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
+                Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+            };
+            _consultationDalMock!.Setup(dal => dal.GetById(It.IsAny<int>())).Returns(consultationDomainModel).Verifiable();
+            _consultationDalMock!.Setup(dal => dal.Delete(consultationDomainModel)).Verifiable();
             _consultationService!.Delete(It.IsAny<int>());
             _consultationDalMock.Verify();
         }
