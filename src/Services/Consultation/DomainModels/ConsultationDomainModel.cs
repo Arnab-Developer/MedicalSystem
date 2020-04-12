@@ -62,7 +62,7 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         public int PatentId { get; set; }
         public PatentDomainModel? Patent { get; set; }
 
-        public ConsultationDomainModel()
+        private ConsultationDomainModel()
         {
             Id = 0;
             Date = DateTime.Now;

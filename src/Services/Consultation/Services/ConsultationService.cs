@@ -38,6 +38,7 @@ namespace MedicalSystem.Services.Consultation.Services
                         FirstName = consultationDomainModel.Doctor.FirstName,
                         LastName = consultationDomainModel.Doctor.LastName
                     },
+                    PatentId = consultationDomainModel.PatentId,
                     Patent = new PatentViewModel()
                     {
                         Id = consultationDomainModel.Patent!.Id,
@@ -77,6 +78,7 @@ namespace MedicalSystem.Services.Consultation.Services
                     FirstName = consultationDomainModel.Doctor.FirstName,
                     LastName = consultationDomainModel.Doctor.LastName
                 },
+                PatentId = consultationDomainModel.PatentId,
                 Patent = new PatentViewModel()
                 {
                     Id = consultationDomainModel.Patent!.Id,
