@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using MedicalSystem.Services.Consultation.DomainModels;
+﻿using MedicalSystem.Services.Consultation.DomainModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalSystem.Services.Consultation.Dals
@@ -12,9 +10,9 @@ namespace MedicalSystem.Services.Consultation.Dals
         {
         }
 
-        public DbSet<ConsultationDomainModel> Consultations { get; set; }
-        public DbSet<DoctorDomainModel> Doctors { get; set; }
-        public DbSet<PatentDomainModel> Patents { get; set; }
+        public DbSet<ConsultationDomainModel>? Consultations { get; set; }
+        public DbSet<DoctorDomainModel>? Doctors { get; set; }
+        public DbSet<PatentDomainModel>? Patents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -36,7 +36,7 @@ namespace MedicalSystem.Services.Consultation.Dals
 
         public void Add(ConsultationDomainModel consultationDomainModel)
         {
-            _consultationContext.Consultations.Add(consultationDomainModel);
+            _consultationContext.Consultations!.Add(consultationDomainModel);
             _consultationContext.SaveChanges();
         }
 
@@ -47,7 +47,7 @@ namespace MedicalSystem.Services.Consultation.Dals
 
         public void Delete(ConsultationDomainModel consultationDomainModel)
         {
-            _consultationContext.Consultations.Remove(consultationDomainModel);
+            _consultationContext.Consultations!.Remove(consultationDomainModel);
             _consultationContext.SaveChanges();
         }
     }
