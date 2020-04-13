@@ -10,6 +10,6 @@ namespace MedicalSystem.Services.Patent.Data
         {
         }
 
-        public DbSet<PatentModel> Patents { get; set; }
+        public DbSet<PatentModel>? Patents { get; set; }
     }
 }

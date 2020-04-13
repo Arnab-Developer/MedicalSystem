@@ -35,7 +35,7 @@ namespace MedicalSystem.Services.Patent.Controllers
         [HttpPost]
         public void Add(PatentModel patent)
         {
-            _patentContext.Patents.Add(patent);
+            _patentContext.Patents!.Add(patent);
             _patentContext.SaveChanges();
         }
 
@@ -56,7 +56,7 @@ namespace MedicalSystem.Services.Patent.Controllers
         public void Delete(int id)
         {
             var patent = _patentContext.Patents.FirstOrDefault(patent => patent.Id == id);
-            _patentContext.Patents.Remove(patent);
+            _patentContext.Patents!.Remove(patent);
             _patentContext.SaveChanges();
         }
     }
