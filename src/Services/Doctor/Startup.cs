@@ -21,7 +21,8 @@ namespace MedicalSystem.Services.Doctor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<DoctorContext>(option => option.UseInMemoryDatabase("DoctorDb"));
+            var doctorDbConnectionString = Configuration.GetValue<string>("doctorDbConnectionString");
+            services.AddDbContext<DoctorContext>(option => option.UseSqlServer(doctorDbConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
