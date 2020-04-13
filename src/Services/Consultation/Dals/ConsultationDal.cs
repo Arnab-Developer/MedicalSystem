@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MedicalSystem.Services.Consultation.Dals
 {
-    public class ConsultationDal : IConsultationDal
+    internal class ConsultationDal : IConsultationDal
     {
         private readonly ConsultationContext _consultationContext;
 

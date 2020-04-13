@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MedicalSystem.Services.Consultation.Dals
 {
-    public class ConsultationContext : DbContext
+    internal class ConsultationContext : DbContext
     {
         public ConsultationContext(DbContextOptions<ConsultationContext> options)
             : base(options)

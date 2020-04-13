@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MedicalSystem.Services.Consultation.Dals
 {
-    public interface IConsultationDal
+    internal interface IConsultationDal
     {
         IEnumerable<ConsultationDomainModel> GetAll();
         ConsultationDomainModel? GetById(int id);

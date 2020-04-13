@@ -2,7 +2,7 @@
 
 namespace MedicalSystem.Services.Consultation.DomainModels
 {
-    public class Place
+    internal class Place
     {
         private string _country;
         public string? Country

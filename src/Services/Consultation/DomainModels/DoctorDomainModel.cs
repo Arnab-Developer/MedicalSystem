@@ -1,6 +1,6 @@
 ﻿namespace MedicalSystem.Services.Consultation.DomainModels
 {
-    public class DoctorDomainModel
+    internal class DoctorDomainModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

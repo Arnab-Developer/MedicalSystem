@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MedicalSystem.Services.Consultation.Services
 {
-    public class ConsultationService : IConsultationService
+    internal class ConsultationService : IConsultationService
     {
         private readonly IConsultationDal _consultationDal;
 

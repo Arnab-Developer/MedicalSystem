@@ -2,7 +2,7 @@
 
 namespace MedicalSystem.Services.Consultation.DomainModels
 {
-    public class ConsultationDomainModel
+    internal class ConsultationDomainModel
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace MedicalSystem.Services.Consultation.DomainModels
 {
-    public class PatentDomainModel
+    internal class PatentDomainModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

@@ -6,7 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("MedicalSystem.Tests.Services.Consultation")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace MedicalSystem.Services.Consultation
 {
     public class Startup
