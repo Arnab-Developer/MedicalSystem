@@ -17,7 +17,7 @@ namespace MedicalSystem.Tests.Services.Doctor
         public void Setup()
         {
             var options = new DbContextOptionsBuilder<DoctorContext>()
-                .UseInMemoryDatabase("ConsultationTestDb")
+                .UseInMemoryDatabase("DoctorTestDb")
                 .Options;
             _doctorContext = new DoctorContext(options);
             _doctorController = new DoctorController(_doctorContext);
