@@ -21,7 +21,8 @@ namespace MedicalSystem.Services.Patent
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<PatentContext>(option => option.UseInMemoryDatabase("PatentDb"));
+            var patentDbConnectionString = Configuration.GetValue<string>("patentDbConnectionString");
+            services.AddDbContext<PatentContext>(option => option.UseSqlServer(patentDbConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
