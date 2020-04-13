@@ -10,6 +10,6 @@ namespace MedicalSystem.Services.Doctor.Data
         {
         }
 
-        public DbSet<DoctorModel> Doctors { get; set; }
+        public DbSet<DoctorModel>? Doctors { get; set; }
     }
 }

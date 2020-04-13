@@ -35,7 +35,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
         [HttpPost]
         public void Add(DoctorModel doctor)
         {
-            _doctorContext.Doctors.Add(doctor);
+            _doctorContext.Doctors!.Add(doctor);
             _doctorContext.SaveChanges();
         }
 
@@ -56,7 +56,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
         public void Delete(int id)
         {
             var doctor = _doctorContext.Doctors.FirstOrDefault(doctor => doctor.Id == id);
-            _doctorContext.Doctors.Remove(doctor);
+            _doctorContext.Doctors!.Remove(doctor);
             _doctorContext.SaveChanges();
         }
     }
