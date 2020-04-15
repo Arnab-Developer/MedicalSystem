@@ -7,17 +7,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Doctor", "Services\Doctor\MedicalSystem.Services.Doctor.csproj", "{56778B85-CCCB-4495-A596-76DE2FFCF866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Services.Patent", "Services\Patent\MedicalSystem.Services.Patent.csproj", "{7C3D2CDC-9338-4485-A399-2027A9507A67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Patent", "Services\Patent\MedicalSystem.Services.Patent.csproj", "{7C3D2CDC-9338-4485-A399-2027A9507A67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Services.Consultation", "Services\Consultation\MedicalSystem.Services.Consultation.csproj", "{75606F3A-07D3-4542-B248-3137D74717BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Consultation", "Services\Consultation\MedicalSystem.Services.Consultation.csproj", "{75606F3A-07D3-4542-B248-3137D74717BE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1488AC4C-E1AC-4800-8CA9-1526892A3224}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Consultation", "Tests\Consultation\MedicalSystem.Tests.Services.Consultation.csproj", "{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Tests.Services.Consultation", "Tests\Consultation\MedicalSystem.Tests.Services.Consultation.csproj", "{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Doctor", "Tests\Doctor\MedicalSystem.Tests.Services.Doctor.csproj", "{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Tests.Services.Doctor", "Tests\Doctor\MedicalSystem.Tests.Services.Doctor.csproj", "{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.Services.Patent", "Tests\Patent\MedicalSystem.Tests.Services.Patent.csproj", "{A079278E-555F-45C2-BCDC-4AD610218F3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Tests.Services.Patent", "Tests\Patent\MedicalSystem.Tests.Services.Patent.csproj", "{A079278E-555F-45C2-BCDC-4AD610218F3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnds", "FrontEnds", "{A48AFBBA-21CE-4309-A53B-307F6EA3315E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{01C8872A-ECD9-4B48-AB99-FD3B952EDD15}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Gateways.WebGateway", "Gateways\WebGateway\MedicalSystem.Gateways.WebGateway.csproj", "{473DBC68-25C6-488B-AEB4-1E95246AECB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.FrontEnds.WebMvc", "FrontEnds\WebMvc\MedicalSystem.FrontEnds.WebMvc.csproj", "{7A0242EE-8A58-4731-B2A9-86132669F83A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +57,14 @@ Global
 		{A079278E-555F-45C2-BCDC-4AD610218F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A079278E-555F-45C2-BCDC-4AD610218F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A079278E-555F-45C2-BCDC-4AD610218F3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{473DBC68-25C6-488B-AEB4-1E95246AECB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{473DBC68-25C6-488B-AEB4-1E95246AECB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{473DBC68-25C6-488B-AEB4-1E95246AECB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{473DBC68-25C6-488B-AEB4-1E95246AECB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A0242EE-8A58-4731-B2A9-86132669F83A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A0242EE-8A58-4731-B2A9-86132669F83A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A0242EE-8A58-4731-B2A9-86132669F83A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A0242EE-8A58-4731-B2A9-86132669F83A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +76,8 @@ Global
 		{78C8D9A3-C7D5-48BF-80FD-8D92D92F7E94} = {1488AC4C-E1AC-4800-8CA9-1526892A3224}
 		{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33} = {1488AC4C-E1AC-4800-8CA9-1526892A3224}
 		{A079278E-555F-45C2-BCDC-4AD610218F3F} = {1488AC4C-E1AC-4800-8CA9-1526892A3224}
+		{473DBC68-25C6-488B-AEB4-1E95246AECB3} = {01C8872A-ECD9-4B48-AB99-FD3B952EDD15}
+		{7A0242EE-8A58-4731-B2A9-86132669F83A} = {A48AFBBA-21CE-4309-A53B-307F6EA3315E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {52221F93-7556-4DAB-A5ED-97E1C70E5377}
