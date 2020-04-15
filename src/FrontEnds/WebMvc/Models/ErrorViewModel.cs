@@ -1,5 +1,3 @@
-using System;
-
 namespace MedicalSystem.FrontEnds.WebMvc.Models
 {
     public class ErrorViewModel
@@ -7,5 +5,10 @@ namespace MedicalSystem.FrontEnds.WebMvc.Models
         public string RequestId { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
+        public ErrorViewModel()
+        {
+            RequestId = string.Empty;
+        }
     }
 }
