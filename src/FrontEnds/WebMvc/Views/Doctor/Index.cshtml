@@ -6,19 +6,23 @@
 
 <div class="text-center">
     <h1 class="display-4">Doctor</h1>
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>First name</td>
-            <td>Last name</td>
-        </tr>
-        @foreach (var doctor in Model)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td>@doctor.Id</td>
-                <td>@doctor.FirstName</td>
-                <td>@doctor.LastName</td>
+                <th>Id</th>
+                <th>First name</th>
+                <th>Last name</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var doctor in Model)
+            {
+                <tr>
+                    <td>@doctor.Id</td>
+                    <td>@doctor.FirstName</td>
+                    <td>@doctor.LastName</td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
