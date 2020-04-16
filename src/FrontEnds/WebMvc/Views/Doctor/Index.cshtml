@@ -24,7 +24,11 @@
                 <td>@doctor.Id</td>
                 <td>@doctor.FirstName</td>
                 <td>@doctor.LastName</td>
-                <td><a asp-controller="Doctor" asp-action="Details" asp-route-id="@doctor.Id">Details</a></td>
+                <td>
+                    <a asp-controller="Doctor" asp-action="Details" asp-route-id="@doctor.Id">Details</a>
+                    <a asp-controller="Doctor" asp-action="Edit" asp-route-id="@doctor.Id">Edit</a>
+                    <a asp-controller="Doctor" asp-action="Delete" asp-route-id="@doctor.Id">Delete</a>
+                </td>
             </tr>
         }
     </tbody>

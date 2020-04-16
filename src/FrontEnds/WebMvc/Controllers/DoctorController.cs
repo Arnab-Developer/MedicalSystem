@@ -77,5 +77,44 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             var doctorApiResponseMessage = await httpClient.PostAsync(_doctorOptions.DoctorGatewayUrl, doctorContent);            
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+            var doctorGetByIdGatewayUrl = $"{_doctorOptions.DoctorGatewayUrl}/{id}";
+            var doctorApiResponseMessage = await httpClient.GetAsync(doctorGetByIdGatewayUrl);
+            if (doctorApiResponseMessage.IsSuccessStatusCode)
+            {
+                using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
+                var doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
+                if (doctorModel == null)
+                {
+                    return NotFound();
+                }
+                return View(doctorModel);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, DoctorModel doctor)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+            var doctorUpdateGatewayUrl = $"{_doctorOptions.DoctorGatewayUrl}/{id}";
+            var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), System.Text.Encoding.UTF8, "application/json");
+            var doctorApiResponseMessage = await httpClient.PutAsync(doctorUpdateGatewayUrl, doctorContent);
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+            var doctorDeleteGatewayUrl = $"{_doctorOptions.DoctorGatewayUrl}/{id}";
+            var doctorApiResponseMessage = await httpClient.DeleteAsync(doctorDeleteGatewayUrl);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

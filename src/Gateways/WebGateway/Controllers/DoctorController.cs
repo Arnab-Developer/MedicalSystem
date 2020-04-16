@@ -81,5 +81,38 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             }
             return StatusCode(500);
         }
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Update(int id, DoctorModel doctor)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+            var doctorUpdateUrl = $"{_doctorOptions.DoctorApiUrl}/{id}";
+            var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), System.Text.Encoding.UTF8, "application/json");
+            var doctorApiResponseMessage = await httpClient.PutAsync(doctorUpdateUrl, doctorContent);
+            if (doctorApiResponseMessage.IsSuccessStatusCode)
+            {
+                return Ok();
+            }
+            return StatusCode(500);
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var httpClient = _httpClientFactory.CreateClient();
+            var doctorDeleteUrl = $"{_doctorOptions.DoctorApiUrl}/{id}";
+            var doctorApiResponseMessage = await httpClient.DeleteAsync(doctorDeleteUrl);
+            if (doctorApiResponseMessage.IsSuccessStatusCode)
+            {
+                return Ok();
+            }
+            return StatusCode(500);
+        }
     }
 }
