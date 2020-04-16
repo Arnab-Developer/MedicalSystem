@@ -1,7 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Patent";
+﻿@using MedicalSystem.FrontEnds.WebMvc.Models
+@model IEnumerable<PatentModel>
+@{
+    ViewData["Title"] = "Patents";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Patent</h1>
-</div>
+<h1>Patents</h1>
+<p>
+    <a asp-controller="Patent" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var patent in Model)
+        {
+            <tr>
+                <td>@patent.Id</td>
+                <td>@patent.FirstName</td>
+                <td>@patent.LastName</td>
+                <td>
+                    <a asp-controller="Patent" asp-action="Details" asp-route-id="@patent.Id">Details</a>
+                    <a asp-controller="Patent" asp-action="Edit" asp-route-id="@patent.Id">Edit</a>
+                    <a asp-controller="Patent" asp-action="Delete" asp-route-id="@patent.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

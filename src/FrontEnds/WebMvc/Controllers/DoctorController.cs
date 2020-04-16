@@ -39,7 +39,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             else
             {
                 return NotFound();
-            }            
+            }
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -74,7 +74,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         {
             var httpClient = _httpClientFactory.CreateClient();
             var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), System.Text.Encoding.UTF8, "application/json");
-            var doctorApiResponseMessage = await httpClient.PostAsync(_doctorOptions.DoctorGatewayUrl, doctorContent);            
+            var doctorApiResponseMessage = await httpClient.PostAsync(_doctorOptions.DoctorGatewayUrl, doctorContent);
             return RedirectToAction(nameof(Index));
         }
 
