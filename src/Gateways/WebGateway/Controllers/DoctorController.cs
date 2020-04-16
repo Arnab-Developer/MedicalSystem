@@ -68,5 +68,18 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(DoctorModel doctor)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+            var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), System.Text.Encoding.UTF8, "application/json");
+            var doctorApiResponseMessage = await httpClient.PostAsync(_doctorOptions.DoctorApiUrl, doctorContent);
+            if (doctorApiResponseMessage.IsSuccessStatusCode)
+            {
+                return Ok();
+            }
+            return StatusCode(500);
+        }
     }
 }

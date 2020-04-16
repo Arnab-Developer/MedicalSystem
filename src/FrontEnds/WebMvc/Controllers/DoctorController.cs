@@ -62,5 +62,20 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                 return NotFound();
             }
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(DoctorModel doctor)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+            var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), System.Text.Encoding.UTF8, "application/json");
+            var doctorApiResponseMessage = await httpClient.PostAsync(_doctorOptions.DoctorGatewayUrl, doctorContent);            
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
