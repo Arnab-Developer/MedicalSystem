@@ -4,25 +4,25 @@
     ViewData["Title"] = "Doctor";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Doctor</h1>
-    <table class="table">
-        <thead>
+<h1>Doctors</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doctor in Model)
+        {
             <tr>
-                <th>Id</th>
-                <th>First name</th>
-                <th>Last name</th>
+                <td>@doctor.Id</td>
+                <td>@doctor.FirstName</td>
+                <td>@doctor.LastName</td>
+                <td><a asp-controller="Doctor" asp-action="Details" asp-route-id="@doctor.Id">Details</a></td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var doctor in Model)
-            {
-                <tr>
-                    <td>@doctor.Id</td>
-                    <td>@doctor.FirstName</td>
-                    <td>@doctor.LastName</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        }
+    </tbody>
+</table>

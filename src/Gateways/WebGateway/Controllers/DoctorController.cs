@@ -3,6 +3,7 @@ using MedicalSystem.Gateways.WebGateway.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DoctorController
+    public class DoctorController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly DoctorOptions _doctorOptions;
@@ -24,19 +25,48 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<DoctorModel>> GetAll()
+        public async Task<ActionResult<IEnumerable<DoctorModel>>> GetAll()
         {
             var httpClient = _httpClientFactory.CreateClient();
             var doctorApiResponseMessage = await httpClient.GetAsync(_doctorOptions.DoctorApiUrl);
-            IEnumerable<DoctorModel> doctorModels;
             if (doctorApiResponseMessage.IsSuccessStatusCode)
             {
                 using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
-                return doctorModels;
+                var doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
+                if (doctorModels == null || doctorModels.Count() == 0)
+                {
+                    return NotFound();
+                }
+                return Ok(doctorModels);
             }
-            doctorModels = new List<DoctorModel>();
-            return doctorModels;
+            return NotFound();
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<ActionResult<DoctorModel>> GetById(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var httpClient = _httpClientFactory.CreateClient();
+            var doctorGetByIdUrl = $"{_doctorOptions.DoctorApiUrl}/{id}";
+            var doctorApiResponseMessage = await httpClient.GetAsync(doctorGetByIdUrl);
+            if (doctorApiResponseMessage.IsSuccessStatusCode)
+            {
+                using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
+                var doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
+                if (doctorModel == null)
+                {
+                    return NotFound();
+                }
+                return Ok(doctorModel);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

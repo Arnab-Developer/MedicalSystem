@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MedicalSystem.FrontEnds.WebMvc.Models
 {
@@ -7,8 +8,10 @@ namespace MedicalSystem.FrontEnds.WebMvc.Models
         [JsonPropertyName("id")]
         public int Id { get; set; }
         [JsonPropertyName("firstName")]
+        [Display(Name = "First name")]
         public string FirstName { get; set; }
         [JsonPropertyName("lastName")]
+        [Display(Name = "Last name")]
         public string LastName { get; set; }
 
         public DoctorModel()
