@@ -23,6 +23,7 @@ namespace MedicalSystem.Gateways.WebGateway
             services.AddHttpClient();
             services.Configure<DoctorOptions>(Configuration);
             services.Configure<PatentOptions>(Configuration);
+            services.Configure<ConsultationOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
