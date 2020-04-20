@@ -25,7 +25,7 @@ namespace MedicalSystem.Services.Consultation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var consultationDbConnectionString = Configuration.GetValue<string>("consultationDbConnectionString");
+            var consultationDbConnectionString = Configuration.GetConnectionString("ConsultationDbConnectionString");
             services.AddDbContext<ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
             services.AddTransient(typeof(IConsultationService), typeof(ConsultationService));
             services.AddTransient(typeof(IConsultationDal), typeof(ConsultationDal));

@@ -21,7 +21,7 @@ namespace MedicalSystem.Services.Patent
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var patentDbConnectionString = Configuration.GetValue<string>("patentDbConnectionString");
+            var patentDbConnectionString = Configuration.GetConnectionString("PatentDbConnectionString");
             services.AddDbContext<PatentContext>(option => option.UseSqlServer(patentDbConnectionString));
         }
 
