@@ -6,17 +6,28 @@ using System.Linq;
 
 namespace MedicalSystem.Services.Doctor.Controllers
 {
+    /// <summary>
+    /// Controller for doctor.
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class DoctorController
     {
         private readonly DoctorContext _doctorContext;
 
+        /// <summary>
+        /// Creates new doctor controller object.
+        /// </summary>
+        /// <param name="doctorContext"></param>
         public DoctorController(DoctorContext doctorContext)
         {
             _doctorContext = doctorContext;
         }
 
+        /// <summary>
+        /// Get all doctor data.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<DoctorModel> GetAll()
         {
@@ -24,6 +35,11 @@ namespace MedicalSystem.Services.Doctor.Controllers
             return doctors;
         }
 
+        /// <summary>
+        /// Get doctor data by id.
+        /// </summary>
+        /// <param name="id">Takes doctor id to search.</param>
+        /// <returns>Return doctor data.</returns>
         [HttpGet]
         [Route("{id:int}")]
         public DoctorModel GetById(int id)
@@ -32,6 +48,10 @@ namespace MedicalSystem.Services.Doctor.Controllers
             return doctor;
         }
 
+        /// <summary>
+        /// Add new doctor object.
+        /// </summary>
+        /// <param name="doctor">Takes new doctor object to add.</param>
         [HttpPost]
         public void Add(DoctorModel doctor)
         {
@@ -39,6 +59,11 @@ namespace MedicalSystem.Services.Doctor.Controllers
             _doctorContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Update existing doctor object.
+        /// </summary>
+        /// <param name="id">Takes doctor id to locate the existing doctor object.</param>
+        /// <param name="doctor">Takes updated doctor object to update.</param>
         [HttpPut]
         [Route("{id:int}")]
         public void Update(int id, DoctorModel doctor)
@@ -51,6 +76,10 @@ namespace MedicalSystem.Services.Doctor.Controllers
             _doctorContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Delete existing doctor object.
+        /// </summary>
+        /// <param name="id">Takes doctor id to locate and delete the existing doctor object.</param>
         [HttpDelete]
         [Route("{id:int}")]
         public void Delete(int id)
