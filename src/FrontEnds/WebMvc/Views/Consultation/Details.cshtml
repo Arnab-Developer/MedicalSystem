@@ -63,10 +63,34 @@
             @Html.DisplayFor(model => model.DoctorId)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Doctor!.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Doctor!.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Doctor!.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Doctor!.LastName)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PatentId)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PatentId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Patent!.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Patent!.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Patent!.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Patent!.LastName)
         </dd>
     </dl>
 </div>
