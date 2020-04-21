@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -30,37 +31,34 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             {
                 using var consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
                 var consultationModels = await JsonSerializer.DeserializeAsync<IEnumerable<ConsultationModel>>(consultationApiResponseStream);
-                if (consultationModels == null || consultationModels.Count() == 0)
-                {
-                    return NotFound();
-                }
                 return View(consultationModels);
             }
-            else
+            if (consultationApiResponseMessage.StatusCode == HttpStatusCode.NotFound)
             {
-                return NotFound();
+                using var consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
+                var errorModel = await JsonSerializer.DeserializeAsync<ErrorModel>(consultationApiResponseStream);
+                ViewData["ErrorReason"] = errorModel.Reason;
+                return View();
             }
+            return StatusCode((int)consultationApiResponseMessage.StatusCode);
         }
 
         public async Task<IActionResult> Details(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             var httpClient = _httpClientFactory.CreateClient();
             var consultationGetByIdGatewayUrl = $"{_consultationOptions.ConsultationGatewayUrl}/{id}";
             var consultationApiResponseMessage = await httpClient.GetAsync(consultationGetByIdGatewayUrl);
-            if (consultationApiResponseMessage.IsSuccessStatusCode)
+            if (consultationApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using var consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
                 var consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationApiResponseStream);
-                if (consultationModel == null)
-                {
-                    return NotFound();
-                }
                 return View(consultationModel);
             }
-            else
-            {
-                return NotFound();
-            }
+            return StatusCode((int)consultationApiResponseMessage.StatusCode);
         }
 
         public IActionResult Create()
@@ -84,23 +82,20 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             var httpClient = _httpClientFactory.CreateClient();
             var consultationGetByIdGatewayUrl = $"{_consultationOptions.ConsultationGatewayUrl}/{id}";
             var consultationApiResponseMessage = await httpClient.GetAsync(consultationGetByIdGatewayUrl);
-            if (consultationApiResponseMessage.IsSuccessStatusCode)
+            if (consultationApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using var consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
                 var consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationApiResponseStream);
-                if (consultationModel == null)
-                {
-                    return NotFound();
-                }
                 return View(consultationModel);
             }
-            else
-            {
-                return NotFound();
-            }
+            return StatusCode((int)consultationApiResponseMessage.StatusCode);
         }
 
         [HttpPost]

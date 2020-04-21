@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -35,11 +36,12 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 var doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
                 if (doctorModels == null || doctorModels.Count() == 0)
                 {
-                    return NotFound();
+                    var error = new ErrorModel("No doctor record found.");
+                    return NotFound(error);
                 }
                 return Ok(doctorModels);
             }
-            return NotFound();
+            return StatusCode((int)doctorApiResponseMessage.StatusCode);
         }
 
         [HttpGet]
@@ -48,24 +50,21 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                var error = new ErrorModel("Id is null");
+                return NotFound(error);
             }
             var httpClient = _httpClientFactory.CreateClient();
             var doctorGetByIdUrl = $"{_doctorOptions.DoctorApiUrl}/{id}";
             var doctorApiResponseMessage = await httpClient.GetAsync(doctorGetByIdUrl);
-            if (doctorApiResponseMessage.IsSuccessStatusCode)
+            if (doctorApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
                 var doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
-                if (doctorModel == null)
-                {
-                    return NotFound();
-                }
                 return Ok(doctorModel);
             }
             else
             {
-                return NotFound();
+                return StatusCode((int)doctorApiResponseMessage.StatusCode);
             }
         }
 

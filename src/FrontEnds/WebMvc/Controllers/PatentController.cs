@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -30,37 +31,34 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             {
                 using var patentApiResponseStream = await patentApiResponseMessage.Content.ReadAsStreamAsync();
                 var patentModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatentModel>>(patentApiResponseStream);
-                if (patentModels == null || patentModels.Count() == 0)
-                {
-                    return NotFound();
-                }
                 return View(patentModels);
             }
-            else
+            if (patentApiResponseMessage.StatusCode == HttpStatusCode.NotFound)
             {
-                return NotFound();
+                using var patentApiResponseStream = await patentApiResponseMessage.Content.ReadAsStreamAsync();
+                var errorModel = await JsonSerializer.DeserializeAsync<ErrorModel>(patentApiResponseStream);
+                ViewData["ErrorReason"] = errorModel.Reason;
+                return View();
             }
+            return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
 
         public async Task<IActionResult> Details(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             var httpClient = _httpClientFactory.CreateClient();
             var patentGetByIdGatewayUrl = $"{_patentOptions.PatentGatewayUrl}/{id}";
             var patentApiResponseMessage = await httpClient.GetAsync(patentGetByIdGatewayUrl);
-            if (patentApiResponseMessage.IsSuccessStatusCode)
+            if (patentApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using var patentApiResponseStream = await patentApiResponseMessage.Content.ReadAsStreamAsync();
                 var patentModel = await JsonSerializer.DeserializeAsync<PatentModel>(patentApiResponseStream);
-                if (patentModel == null)
-                {
-                    return NotFound();
-                }
                 return View(patentModel);
             }
-            else
-            {
-                return NotFound();
-            }
+            return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
 
         public IActionResult Create()
@@ -84,23 +82,20 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             var httpClient = _httpClientFactory.CreateClient();
             var patentGetByIdGatewayUrl = $"{_patentOptions.PatentGatewayUrl}/{id}";
             var patentApiResponseMessage = await httpClient.GetAsync(patentGetByIdGatewayUrl);
-            if (patentApiResponseMessage.IsSuccessStatusCode)
+            if (patentApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using var patentApiResponseStream = await patentApiResponseMessage.Content.ReadAsStreamAsync();
                 var patentModel = await JsonSerializer.DeserializeAsync<PatentModel>(patentApiResponseStream);
-                if (patentModel == null)
-                {
-                    return NotFound();
-                }
                 return View(patentModel);
             }
-            else
-            {
-                return NotFound();
-            }
+            return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
 
         [HttpPost]

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -35,7 +36,8 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 var patentModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatentModel>>(patentApiResponseStream);
                 if (patentModels == null || patentModels.Count() == 0)
                 {
-                    return NotFound();
+                    var error = new ErrorModel("No doctor record found.");
+                    return NotFound(error);
                 }
                 return Ok(patentModels);
             }
@@ -48,24 +50,21 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                var error = new ErrorModel("Id is null");
+                return NotFound(error);
             }
             var httpClient = _httpClientFactory.CreateClient();
             var patentGetByIdUrl = $"{_patentOptions.PatentApiUrl}/{id}";
             var patentApiResponseMessage = await httpClient.GetAsync(patentGetByIdUrl);
-            if (patentApiResponseMessage.IsSuccessStatusCode)
+            if (patentApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using var patentApiResponseStream = await patentApiResponseMessage.Content.ReadAsStreamAsync();
                 var patentModel = await JsonSerializer.DeserializeAsync<PatentModel>(patentApiResponseStream);
-                if (patentModel == null)
-                {
-                    return NotFound();
-                }
                 return Ok(patentModel);
             }
             else
             {
-                return NotFound();
+                return StatusCode((int)patentApiResponseMessage.StatusCode);
             }
         }
 

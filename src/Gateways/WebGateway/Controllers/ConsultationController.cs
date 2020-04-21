@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -35,7 +36,8 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 var consultationModels = await JsonSerializer.DeserializeAsync<IEnumerable<ConsultationModel>>(consultationApiResponseStream);
                 if (consultationModels == null || consultationModels.Count() == 0)
                 {
-                    return NotFound();
+                    var error = new ErrorModel("No doctor record found.");
+                    return NotFound(error);
                 }
                 return Ok(consultationModels);
             }
@@ -48,24 +50,21 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                var error = new ErrorModel("Id is null");
+                return NotFound(error);
             }
             var httpClient = _httpClientFactory.CreateClient();
             var consultationGetByIdUrl = $"{_consultationOptions.ConsultationApiUrl}/{id}";
             var consultationApiResponseMessage = await httpClient.GetAsync(consultationGetByIdUrl);
-            if (consultationApiResponseMessage.IsSuccessStatusCode)
+            if (consultationApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using var consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
                 var consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationApiResponseStream);
-                if (consultationModel == null)
-                {
-                    return NotFound();
-                }
                 return Ok(consultationModel);
             }
             else
             {
-                return NotFound();
+                return StatusCode((int)consultationApiResponseMessage.StatusCode);
             }
         }
 
