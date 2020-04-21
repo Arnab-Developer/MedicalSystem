@@ -1,7 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Service error";
+    var code = (int)ViewData["Code"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Error with status code @ViewData["Code"]</h1>
+<div>
+    @switch (code)
+    {
+        case 500:
+            <p>Internal server error.</p>
+            break;
+        case 404:
+            <p>Not found.</p>
+            break;
+        default:
+            <p>An error occured.</p>
+            break;
+    }
 </div>
