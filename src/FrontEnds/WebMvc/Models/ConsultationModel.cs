@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace MedicalSystem.FrontEnds.WebMvc.Models
@@ -29,5 +31,8 @@ namespace MedicalSystem.FrontEnds.WebMvc.Models
         public int PatentId { get; set; }
         [JsonPropertyName("patent")]
         public PatentModel? Patent { get; set; }
+
+        public IEnumerable<SelectListItem>? Doctors { get; set; }
+        public IEnumerable<SelectListItem>? Patents { get; set; }
     }
 }
