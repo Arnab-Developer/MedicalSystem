@@ -75,7 +75,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             var httpClient = _httpClientFactory.CreateClient();
             var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), System.Text.Encoding.UTF8, "application/json");
             var doctorApiResponseMessage = await httpClient.PostAsync(_doctorOptions.DoctorGatewayUrl, doctorContent);
-            return RedirectToAction(nameof(Index));
+            if (doctorApiResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return StatusCode((int)doctorApiResponseMessage.StatusCode);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -106,7 +110,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             var doctorUpdateGatewayUrl = $"{_doctorOptions.DoctorGatewayUrl}/{id}";
             var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), System.Text.Encoding.UTF8, "application/json");
             var doctorApiResponseMessage = await httpClient.PutAsync(doctorUpdateGatewayUrl, doctorContent);
-            return RedirectToAction(nameof(Details), new { id });
+            if (doctorApiResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Details), new { id });
+            }
+            return StatusCode((int)doctorApiResponseMessage.StatusCode);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -114,7 +122,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             var httpClient = _httpClientFactory.CreateClient();
             var doctorDeleteGatewayUrl = $"{_doctorOptions.DoctorGatewayUrl}/{id}";
             var doctorApiResponseMessage = await httpClient.DeleteAsync(doctorDeleteGatewayUrl);
-            return RedirectToAction(nameof(Index));
+            if (doctorApiResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return StatusCode((int)doctorApiResponseMessage.StatusCode);
         }
     }
 }

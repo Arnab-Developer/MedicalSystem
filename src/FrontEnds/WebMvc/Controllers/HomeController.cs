@@ -29,5 +29,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult StatusCodePages(int code)
+        {
+            ViewData["Code"] = code;
+            return View();
+        }
     }
 }

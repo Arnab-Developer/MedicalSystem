@@ -37,6 +37,7 @@ namespace MedicalSystem.FrontEnds.WebMvc
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseStatusCodePagesWithRedirects("~/Home/StatusCodePages?code={0}");
             app.UseStaticFiles();
 
             app.UseRouting();

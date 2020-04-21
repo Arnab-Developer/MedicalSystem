@@ -9,7 +9,7 @@
         /// Id of doctor.
         /// </summary>
         public int Id { get; set; }
-        
+
         /// <summary>
         /// First name of doctor.
         /// </summary>

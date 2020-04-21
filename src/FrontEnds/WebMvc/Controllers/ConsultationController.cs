@@ -75,7 +75,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             var httpClient = _httpClientFactory.CreateClient();
             var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), System.Text.Encoding.UTF8, "application/json");
             var consultationApiResponseMessage = await httpClient.PostAsync(_consultationOptions.ConsultationGatewayUrl, consultationContent);
-            return RedirectToAction(nameof(Index));
+            if (consultationApiResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return StatusCode((int)consultationApiResponseMessage.StatusCode);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -106,7 +110,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             var consultationUpdateGatewayUrl = $"{_consultationOptions.ConsultationGatewayUrl}/{id}";
             var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), System.Text.Encoding.UTF8, "application/json");
             var consultationApiResponseMessage = await httpClient.PutAsync(consultationUpdateGatewayUrl, consultationContent);
-            return RedirectToAction(nameof(Details), new { id });
+            if (consultationApiResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Details), new { id });
+            }
+            return StatusCode((int)consultationApiResponseMessage.StatusCode);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -114,7 +122,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             var httpClient = _httpClientFactory.CreateClient();
             var consultationDeleteGatewayUrl = $"{_consultationOptions.ConsultationGatewayUrl}/{id}";
             var consultationApiResponseMessage = await httpClient.DeleteAsync(consultationDeleteGatewayUrl);
-            return RedirectToAction(nameof(Index));
+            if (consultationApiResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return StatusCode((int)consultationApiResponseMessage.StatusCode);
         }
     }
 }

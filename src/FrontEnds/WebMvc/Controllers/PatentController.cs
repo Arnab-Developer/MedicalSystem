@@ -75,7 +75,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             var httpClient = _httpClientFactory.CreateClient();
             var patentContent = new StringContent(JsonSerializer.Serialize(patent), System.Text.Encoding.UTF8, "application/json");
             var patentApiResponseMessage = await httpClient.PostAsync(_patentOptions.PatentGatewayUrl, patentContent);
-            return RedirectToAction(nameof(Index));
+            if (patentApiResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -106,7 +110,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             var patentUpdateGatewayUrl = $"{_patentOptions.PatentGatewayUrl}/{id}";
             var patentContent = new StringContent(JsonSerializer.Serialize(patent), System.Text.Encoding.UTF8, "application/json");
             var patentApiResponseMessage = await httpClient.PutAsync(patentUpdateGatewayUrl, patentContent);
-            return RedirectToAction(nameof(Details), new { id });
+            if (patentApiResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Details), new { id });
+            }
+            return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -114,7 +122,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             var httpClient = _httpClientFactory.CreateClient();
             var patentDeleteGatewayUrl = $"{_patentOptions.PatentGatewayUrl}/{id}";
             var patentApiResponseMessage = await httpClient.DeleteAsync(patentDeleteGatewayUrl);
-            return RedirectToAction(nameof(Index));
+            if (patentApiResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
     }
 }
