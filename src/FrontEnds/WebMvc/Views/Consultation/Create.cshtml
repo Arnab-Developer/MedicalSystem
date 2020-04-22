@@ -50,10 +50,12 @@
                 <span asp-validation-for="Medicine" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <select asp-for="DoctorId" asp-items="Model.Doctors"></select>
+                <label asp-for="DoctorId" class="control-label"></label>
+                <select asp-for="DoctorId" asp-items="Model.DoctorSelectList"></select>
             </div>
             <div class="form-group">
-                <select asp-for="PatentId" asp-items="Model.Patents"></select>
+                <label asp-for="PatentId" class="control-label"></label>
+                <select asp-for="PatentId" asp-items="Model.PatentSelectList"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

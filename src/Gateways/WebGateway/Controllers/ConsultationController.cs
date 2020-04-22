@@ -68,6 +68,39 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("AddEditInitData")]
+        public async Task<ActionResult<ConsultationModel>> GetAddEditInitData()
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+
+            var doctorApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationDoctorApiUrl);
+            IEnumerable<DoctorModel>? doctorModels;
+            if (doctorApiResponseMessage.StatusCode != HttpStatusCode.OK)
+            {
+                return StatusCode((int)doctorApiResponseMessage.StatusCode);
+            }
+
+            var patentApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationPatentApiUrl);
+            if (patentApiResponseMessage.StatusCode != HttpStatusCode.OK)
+            {
+                return StatusCode((int)patentApiResponseMessage.StatusCode);
+            }
+
+            using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
+            doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
+
+            using var patentApiResponseStream = await patentApiResponseMessage.Content.ReadAsStreamAsync();
+            var patentModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatentModel>>(patentApiResponseStream);
+
+            var consultationModel = new ConsultationModel()
+            {
+                Doctors = doctorModels,
+                Patents = patentModels
+            };
+            return Ok(consultationModel);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add(ConsultationModel consultation)
         {

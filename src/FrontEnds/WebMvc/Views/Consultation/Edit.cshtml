@@ -47,13 +47,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="DoctorId" class="control-label"></label>
-                <input asp-for="DoctorId" class="form-control" />
-                <span asp-validation-for="DoctorId" class="text-danger"></span>
+                <select asp-for="DoctorId" asp-items="Model.DoctorSelectList"></select>
             </div>
             <div class="form-group">
                 <label asp-for="PatentId" class="control-label"></label>
-                <input asp-for="PatentId" class="form-control" />
-                <span asp-validation-for="PatentId" class="text-danger"></span>
+                <select asp-for="PatentId" asp-items="Model.PatentSelectList"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

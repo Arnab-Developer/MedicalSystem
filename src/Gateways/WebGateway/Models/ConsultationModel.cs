@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace MedicalSystem.Gateways.WebGateway.Models
@@ -29,5 +30,8 @@ namespace MedicalSystem.Gateways.WebGateway.Models
         public int PatentId { get; set; }
         [JsonPropertyName("patent")]
         public PatentModel? Patent { get; set; }
+
+        public IEnumerable<DoctorModel>? Doctors { get; set; }
+        public IEnumerable<PatentModel>? Patents { get; set; }
     }
 }

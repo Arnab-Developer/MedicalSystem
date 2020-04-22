@@ -32,7 +32,12 @@ namespace MedicalSystem.FrontEnds.WebMvc.Models
         [JsonPropertyName("patent")]
         public PatentModel? Patent { get; set; }
 
-        public IEnumerable<SelectListItem>? Doctors { get; set; }
-        public IEnumerable<SelectListItem>? Patents { get; set; }
+        [JsonPropertyName("doctors")]
+        public IEnumerable<DoctorModel>? Doctors { get; set; }
+        [JsonPropertyName("patents")]
+        public IEnumerable<PatentModel>? Patents { get; set; }
+
+        public IEnumerable<SelectListItem>? DoctorSelectList { get; set; }
+        public IEnumerable<SelectListItem>? PatentSelectList { get; set; }
     }
 }

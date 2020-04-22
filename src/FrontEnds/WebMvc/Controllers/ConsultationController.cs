@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -15,18 +16,12 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ConsultationOptions _consultationOptions;
-        private readonly DoctorOptions _doctorOptions;
-        private readonly PatentOptions _patentOptions;
 
         public ConsultationController(IHttpClientFactory httpClientFactory,
-            IOptionsMonitor<ConsultationOptions> consultationOptionsAccessor, 
-            IOptionsMonitor<DoctorOptions> doctorOptionsAccessor,
-            IOptionsMonitor<PatentOptions> patentOptionsAccessor)
+            IOptionsMonitor<ConsultationOptions> consultationOptionsAccessor)
         {
             _httpClientFactory = httpClientFactory;
             _consultationOptions = consultationOptionsAccessor.CurrentValue;
-            _doctorOptions = doctorOptionsAccessor.CurrentValue;
-            _patentOptions = patentOptionsAccessor.CurrentValue;
         }
 
         public async Task<IActionResult> Index()
@@ -70,37 +65,34 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         public async Task<IActionResult> Create()
         {
             var httpClient = _httpClientFactory.CreateClient();
-            
-            var doctorApiResponseMessage = await httpClient.GetAsync(_doctorOptions.DoctorGatewayUrl);
-            IEnumerable<DoctorModel>? doctorModels = null;
-            if (doctorApiResponseMessage.StatusCode != HttpStatusCode.OK)
+
+            var consultationAddEditInitResponseMessage =
+                await httpClient.GetAsync(_consultationOptions.ConsultationGatewayAddEditInitDataUrl);
+            if (consultationAddEditInitResponseMessage.StatusCode != HttpStatusCode.OK)
             {
-                return StatusCode((int)doctorApiResponseMessage.StatusCode);
+                return StatusCode((int)consultationAddEditInitResponseMessage.StatusCode);
             }
 
-            var patentApiResponseMessage = await httpClient.GetAsync(_patentOptions.PatentGatewayUrl);
-            if (patentApiResponseMessage.StatusCode != HttpStatusCode.OK)
+            using var consultationAddEditInitResponseStream =
+                await consultationAddEditInitResponseMessage.Content.ReadAsStreamAsync();
+            var consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationAddEditInitResponseStream);
+
+            if (!(consultationModel.Doctors.Count() > 0 && consultationModel.Patents.Count() > 0))
             {
-                return StatusCode((int)patentApiResponseMessage.StatusCode);
+                return RedirectToAction(nameof(Index));
             }
-
-            using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-            doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
-
-            using var patentApiResponseStream = await patentApiResponseMessage.Content.ReadAsStreamAsync();
-            var patentModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatentModel>>(patentApiResponseStream);
 
             var doctorListItems = new List<SelectListItem>();
-            foreach (var doctorModel in doctorModels)
+            foreach (var doctorModel in consultationModel.Doctors!)
             {
                 var doctorListItem = new SelectListItem(
-                    $"{doctorModel.FirstName} {doctorModel.LastName}", 
+                    $"{doctorModel.FirstName} {doctorModel.LastName}",
                     doctorModel.Id.ToString());
                 doctorListItems.Add(doctorListItem);
             }
 
             var patentListItems = new List<SelectListItem>();
-            foreach (var patentModel in patentModels)
+            foreach (var patentModel in consultationModel.Patents!)
             {
                 var patentListItem = new SelectListItem(
                     $"{patentModel.FirstName} {patentModel.LastName}",
@@ -108,11 +100,8 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                 patentListItems.Add(patentListItem);
             }
 
-            var consultationModel = new ConsultationModel()
-            {
-                Doctors = doctorListItems,
-                Patents = patentListItems
-            };
+            consultationModel.DoctorSelectList = doctorListItems;
+            consultationModel.PatentSelectList = patentListItems;
             return View(consultationModel);
         }
 
@@ -143,6 +132,43 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             {
                 using var consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
                 var consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationApiResponseStream);
+
+                var consultationAddEditInitResponseMessage =
+                    await httpClient.GetAsync(_consultationOptions.ConsultationGatewayAddEditInitDataUrl);
+                if (consultationAddEditInitResponseMessage.StatusCode != HttpStatusCode.OK)
+                {
+                    return StatusCode((int)consultationAddEditInitResponseMessage.StatusCode);
+                }
+
+                using var consultationAddEditInitResponseStream =
+                    await consultationAddEditInitResponseMessage.Content.ReadAsStreamAsync();
+                var consultationModelAddEditInit = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationAddEditInitResponseStream);
+
+                if (!(consultationModelAddEditInit.Doctors.Count() > 0 && consultationModelAddEditInit.Patents.Count() > 0))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                var doctorListItems = new List<SelectListItem>();
+                foreach (var doctorModel in consultationModelAddEditInit.Doctors!)
+                {
+                    var doctorListItem = new SelectListItem(
+                        $"{doctorModel.FirstName} {doctorModel.LastName}",
+                        doctorModel.Id.ToString());
+                    doctorListItems.Add(doctorListItem);
+                }
+
+                var patentListItems = new List<SelectListItem>();
+                foreach (var patentModel in consultationModelAddEditInit.Patents!)
+                {
+                    var patentListItem = new SelectListItem(
+                        $"{patentModel.FirstName} {patentModel.LastName}",
+                        patentModel.Id.ToString());
+                    patentListItems.Add(patentListItem);
+                }
+
+                consultationModel.DoctorSelectList = doctorListItems;
+                consultationModel.PatentSelectList = patentListItems;
                 return View(consultationModel);
             }
             return StatusCode((int)consultationApiResponseMessage.StatusCode);
