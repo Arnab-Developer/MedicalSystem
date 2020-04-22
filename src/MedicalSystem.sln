@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.FrontEnds.Web
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Tests.Gateways.WebGateway", "Tests\WebGateway\MedicalSystem.Tests.Gateways.WebGateway.csproj", "{939ADFF2-8236-4168-9DF6-726AB893AB54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.FrontEnds.WebMvc", "Tests\MedicalSystem.Tests.FrontEnds.WebMvc\MedicalSystem.Tests.FrontEnds.WebMvc.csproj", "{1D291802-4314-46BA-A5C0-AE18CEEAD5AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.FrontEnds.WebMvc", "Tests\WebMvc\MedicalSystem.Tests.FrontEnds.WebMvc.csproj", "{1D291802-4314-46BA-A5C0-AE18CEEAD5AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
