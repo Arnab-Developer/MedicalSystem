@@ -175,17 +175,3 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-
-ALTER TABLE [dbo].[Consultations]  WITH CHECK ADD  CONSTRAINT [FK_Consultations_Doctors] FOREIGN KEY([DoctorId])
-REFERENCES [dbo].[Doctors] ([Id])
-GO
-
-ALTER TABLE [dbo].[Consultations] CHECK CONSTRAINT [FK_Consultations_Doctors]
-GO
-
-ALTER TABLE [dbo].[Consultations]  WITH CHECK ADD  CONSTRAINT [FK_Consultations_Patents] FOREIGN KEY([PatentId])
-REFERENCES [dbo].[Patents] ([Id])
-GO
-
-ALTER TABLE [dbo].[Consultations] CHECK CONSTRAINT [FK_Consultations_Patents]
-GO
