@@ -1,6 +1,6 @@
 ﻿namespace MedicalSystem.Jobs.DoctorSync.Models
 {
-    public class DoctorModel
+    internal class DoctorModel
     {
         /// <summary>
         /// Id of doctor.
