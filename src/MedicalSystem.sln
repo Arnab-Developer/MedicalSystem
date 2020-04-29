@@ -29,7 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.FrontEnds.Web
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Tests.Gateways.WebGateway", "Tests\WebGateway\MedicalSystem.Tests.Gateways.WebGateway.csproj", "{939ADFF2-8236-4168-9DF6-726AB893AB54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Tests.FrontEnds.WebMvc", "Tests\WebMvc\MedicalSystem.Tests.FrontEnds.WebMvc.csproj", "{1D291802-4314-46BA-A5C0-AE18CEEAD5AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Tests.FrontEnds.WebMvc", "Tests\WebMvc\MedicalSystem.Tests.FrontEnds.WebMvc.csproj", "{1D291802-4314-46BA-A5C0-AE18CEEAD5AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jobs", "Jobs", "{F8BC2CD2-FFE8-4DB0-854E-A2B70E7364EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Jobs.DoctorSync", "Jobs\DoctorSync\MedicalSystem.Jobs.DoctorSync.csproj", "{ED47585E-32FF-4114-95D9-5CEB30D66CB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +81,10 @@ Global
 		{1D291802-4314-46BA-A5C0-AE18CEEAD5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D291802-4314-46BA-A5C0-AE18CEEAD5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D291802-4314-46BA-A5C0-AE18CEEAD5AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED47585E-32FF-4114-95D9-5CEB30D66CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED47585E-32FF-4114-95D9-5CEB30D66CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED47585E-32FF-4114-95D9-5CEB30D66CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED47585E-32FF-4114-95D9-5CEB30D66CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +100,7 @@ Global
 		{7A0242EE-8A58-4731-B2A9-86132669F83A} = {A48AFBBA-21CE-4309-A53B-307F6EA3315E}
 		{939ADFF2-8236-4168-9DF6-726AB893AB54} = {1488AC4C-E1AC-4800-8CA9-1526892A3224}
 		{1D291802-4314-46BA-A5C0-AE18CEEAD5AE} = {1488AC4C-E1AC-4800-8CA9-1526892A3224}
+		{ED47585E-32FF-4114-95D9-5CEB30D66CB7} = {F8BC2CD2-FFE8-4DB0-854E-A2B70E7364EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {52221F93-7556-4DAB-A5ED-97E1C70E5377}
