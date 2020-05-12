@@ -80,17 +80,17 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         /// Id of doctor.
         /// </summary>
         public int DoctorId { get; set; }
-        
+
         /// <summary>
         /// Doctor navigation property.
         /// </summary>
         public DoctorDomainModel? Doctor { get; set; }
-        
+
         /// <summary>
         /// Id of patent.
         /// </summary>
         public int PatentId { get; set; }
-        
+
         /// <summary>
         /// Patent navigation property.
         /// </summary>
