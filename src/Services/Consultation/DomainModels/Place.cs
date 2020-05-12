@@ -2,9 +2,15 @@
 
 namespace MedicalSystem.Services.Consultation.DomainModels
 {
+    /// <summary>
+    /// Place class. This is a value object.
+    /// </summary>
     internal class Place
     {
         private string _country;
+        /// <summary>
+        /// Country of place.
+        /// </summary>
         public string? Country
         {
             get { return _country; }
@@ -19,6 +25,9 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         }
 
         private string _state;
+        /// <summary>
+        /// State of place.
+        /// </summary>
         public string? State
         {
             get { return _state; }
@@ -33,6 +42,9 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         }
 
         private string _city;
+        /// <summary>
+        /// City of place.
+        /// </summary>
         public string? City
         {
             get { return _city; }
@@ -47,6 +59,9 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         }
 
         private string _pinCode;
+        /// <summary>
+        /// Pincode of place.
+        /// </summary>
         public string? PinCode
         {
             get { return _pinCode; }
@@ -60,6 +75,9 @@ namespace MedicalSystem.Services.Consultation.DomainModels
             }
         }
 
+        /// <summary>
+        /// Create new place object with default value.
+        /// </summary>
         public Place()
         {
             _country = string.Empty;
@@ -68,6 +86,13 @@ namespace MedicalSystem.Services.Consultation.DomainModels
             _pinCode = string.Empty;
         }
 
+        /// <summary>
+        /// Create new place object with input value.
+        /// </summary>
+        /// <param name="country">Country of place.</param>
+        /// <param name="state">State of place.</param>
+        /// <param name="city">City of place.</param>
+        /// <param name="pinCode">Pincode of place.</param>
         public Place(string? country, string? state, string? city, string? pinCode)
             : this()
         {
