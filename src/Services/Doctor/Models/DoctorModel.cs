@@ -1,28 +1,18 @@
 ﻿namespace MedicalSystem.Services.Doctor.Models
 {
-    /// <summary>
-    /// All the properties of docotor.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="DoctorModel"]/doctorModel/*'/>
     public class DoctorModel
     {
-        /// <summary>
-        /// Id of doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorModel"]/id/*'/>
         public int Id { get; set; }
 
-        /// <summary>
-        /// First name of doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorModel"]/firstName/*'/>
         public string FirstName { get; set; }
 
-        /// <summary>
-        /// Last name of doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorModel"]/lastName/*'/>
         public string LastName { get; set; }
 
-        /// <summary>
-        /// Creates new object of doctor and initialize with default data.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorModel"]/doctorModelConstructor/*'/>
         public DoctorModel()
         {
             Id = 0;

@@ -6,28 +6,20 @@ using System.Linq;
 
 namespace MedicalSystem.Services.Doctor.Controllers
 {
-    /// <summary>
-    /// Controller for doctor.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/doctorController/*'/>
     [ApiController]
     [Route("[controller]")]
     public class DoctorController
     {
         private readonly DoctorContext _doctorContext;
 
-        /// <summary>
-        /// Creates new doctor controller object.
-        /// </summary>
-        /// <param name="doctorContext"></param>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/doctorControllerConstructor/*'/>
         public DoctorController(DoctorContext doctorContext)
         {
             _doctorContext = doctorContext;
         }
 
-        /// <summary>
-        /// Get all doctor data.
-        /// </summary>
-        /// <returns></returns>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/getAll/*'/>
         [HttpGet]
         public IEnumerable<DoctorModel> GetAll()
         {
@@ -35,11 +27,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
             return doctors;
         }
 
-        /// <summary>
-        /// Get doctor data by id.
-        /// </summary>
-        /// <param name="id">Takes doctor id to search.</param>
-        /// <returns>Return doctor data.</returns>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/getById/*'/>
         [HttpGet]
         [Route("{id:int}")]
         public DoctorModel GetById(int id)
@@ -48,10 +36,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
             return doctor;
         }
 
-        /// <summary>
-        /// Add new doctor object.
-        /// </summary>
-        /// <param name="doctor">Takes new doctor object to add.</param>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/add/*'/>
         [HttpPost]
         public void Add(DoctorModel doctor)
         {
@@ -59,11 +44,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
             _doctorContext.SaveChanges();
         }
 
-        /// <summary>
-        /// Update existing doctor object.
-        /// </summary>
-        /// <param name="id">Takes doctor id to locate the existing doctor object.</param>
-        /// <param name="doctor">Takes updated doctor object to update.</param>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/update/*'/>
         [HttpPut]
         [Route("{id:int}")]
         public void Update(int id, DoctorModel doctor)
@@ -76,10 +57,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
             _doctorContext.SaveChanges();
         }
 
-        /// <summary>
-        /// Delete existing doctor object.
-        /// </summary>
-        /// <param name="id">Takes doctor id to locate and delete the existing doctor object.</param>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/delete/*'/>
         [HttpDelete]
         [Route("{id:int}")]
         public void Delete(int id)

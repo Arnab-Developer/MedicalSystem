@@ -3,23 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MedicalSystem.Services.Doctor.Data
 {
-    /// <summary>
-    /// Data context of doctor.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="DoctorContext"]/doctorContext/*'/>
     public class DoctorContext : DbContext
     {
-        /// <summary>
-        /// Creates a new DbContext object.
-        /// </summary>
-        /// <param name="options"></param>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorContext"]/doctorContextConstructor/*'/>
         public DoctorContext(DbContextOptions<DoctorContext> options)
             : base(options)
         {
         }
 
-        /// <summary>
-        /// DbSet for doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorContext"]/doctors/*'/>
         public DbSet<DoctorModel>? Doctors { get; set; }
     }
 }
