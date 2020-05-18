@@ -1,31 +1,18 @@
 ﻿namespace MedicalSystem.Services.Consultation.DomainModels
 {
-    /// <summary>
-    /// Patent model.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="PatentDomainModel"]/patentDomainModel/*'/>
     internal class PatentDomainModel
     {
-        /// <summary>
-        /// Id of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentDomainModel"]/id/*'/>
         public int Id { get; set; }
 
-        /// <summary>
-        /// First name of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentDomainModel"]/firstName/*'/>
         public string FirstName { get; set; }
 
-        /// <summary>
-        /// Last name of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentDomainModel"]/lastName/*'/>
         public string LastName { get; set; }
 
-        /// <summary>
-        /// Create new patent object.
-        /// </summary>
-        /// <param name="id">Id of patent.</param>
-        /// <param name="firstName">First name of patent.</param>
-        /// <param name="lastName">Last name of patent.</param>
+        /// <include file='docs.xml' path='docs/members[@name="PatentDomainModel"]/patentDomainModelConstructor/*'/>
         public PatentDomainModel(int id, string firstName, string lastName)
         {
             Id = id;

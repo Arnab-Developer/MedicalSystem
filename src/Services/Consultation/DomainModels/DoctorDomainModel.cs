@@ -1,31 +1,18 @@
 ﻿namespace MedicalSystem.Services.Consultation.DomainModels
 {
-    /// <summary>
-    /// Doctor domain model.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="DoctorDomainModel"]/doctorDomainModel/*'/>
     internal class DoctorDomainModel
     {
-        /// <summary>
-        /// Id of doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorDomainModel"]/id/*'/>
         public int Id { get; set; }
 
-        /// <summary>
-        /// First name of doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorDomainModel"]/firstName/*'/>
         public string FirstName { get; set; }
 
-        /// <summary>
-        /// Last name of doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorDomainModel"]/lastName/*'/>
         public string LastName { get; set; }
 
-        /// <summary>
-        /// Create new doctor object.
-        /// </summary>
-        /// <param name="id">Id of doctor.</param>
-        /// <param name="firstName">First name of doctor.</param>
-        /// <param name="lastName">Last name of doctor.</param>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorDomainModel"]/doctorDomainModelConstructor/*'/>
         public DoctorDomainModel(int id, string firstName, string lastName)
         {
             Id = id;
