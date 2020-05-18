@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+
+    <members name="PatentModel">
+        <patentModel>
+            <summary>
+                All the properties of docotor.
+            </summary>
+        </patentModel>
+        <id>
+            <summary>
+                Id of patent.
+            </summary>
+        </id>
+        <firstName>
+            <summary>
+                First name of patent.
+            </summary>
+        </firstName>
+        <lastName>
+            <summary>
+                Last name of patent.
+            </summary>
+        </lastName>
+        <patentModelConstructor>
+            <summary>
+                Creates new object of patent and initialize with default data.
+            </summary>
+        </patentModelConstructor>
+    </members>
+
+    <members name="PatentContext">
+        <patentContext>
+            <summary>
+                Data context of patent.
+            </summary>
+        </patentContext>
+        <patentContextConstructor>
+            <summary>
+                Creates a new DbContext object.
+            </summary>
+            <param name="options">
+                DbContext options.
+            </param>
+        </patentContextConstructor>
+        <patents>
+            <summary>
+                DbSet for patent.
+            </summary>
+        </patents>
+    </members>
+
+    <members name="PatentController">
+        <patentController>
+            <summary>
+                Controller for patent.
+            </summary>
+        </patentController>
+        <patentControllerConstructor>
+            <summary>
+                Creates new patent controller object.
+            </summary>
+        </patentControllerConstructor>
+        <getAll>
+            <summary>
+                Get all patent data.
+            </summary>
+            <returns>
+                All patent data.
+            </returns>
+        </getAll>
+        <getById>
+            <summary>
+                Get patent data by id.
+            </summary>
+            <param name="id">
+                Takes patent id to search.
+            </param>
+            <returns>
+                Return patent data.
+            </returns>
+        </getById>
+        <add>
+            <summary>
+                Add new patent object.
+            </summary>
+            <param name="patent">
+                Takes new patent object to add.
+            </param>
+        </add>
+        <update>
+            <summary>
+                Update existing patent object.
+            </summary>
+            <param name="id">
+                Takes patent id to locate the existing patent object.
+            </param>
+            <param name="patent">
+                Takes updated patent object to update.
+            </param>
+        </update>
+        <delete>
+            <summary>
+                Delete existing patent object.
+            </summary>
+            <param name="id">
+                Takes patent id to locate and delete the existing patent object.
+            </param>
+        </delete>
+    </members>
+
+</docs>

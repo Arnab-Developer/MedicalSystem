@@ -1,28 +1,18 @@
 ﻿namespace MedicalSystem.Services.Patent.Models
 {
-    /// <summary>
-    /// All the properties of patent.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/doctorModel/*'/>
     public class PatentModel
     {
-        /// <summary>
-        /// Id of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/id/*'/>
         public int Id { get; set; }
 
-        /// <summary>
-        /// First name of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/firstName/*'/>
         public string FirstName { get; set; }
 
-        /// <summary>
-        /// Last name of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/lastName/*'/>
         public string LastName { get; set; }
 
-        /// <summary>
-        /// Create a new object of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/doctorModelConstructor/*'/>
         public PatentModel()
         {
             Id = 0;

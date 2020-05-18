@@ -3,23 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MedicalSystem.Services.Patent.Data
 {
-    /// <summary>
-    /// Data context of patent data.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="PatentContext"]/doctorContext/*'/>
     public class PatentContext : DbContext
     {
-        /// <summary>
-        /// Create a new object of patent context.
-        /// </summary>
-        /// <param name="options"></param>
+        /// <include file='docs.xml' path='docs/members[@name="PatentContext"]/doctorContextConstructor/*'/>
         public PatentContext(DbContextOptions<PatentContext> options)
             : base(options)
         {
         }
 
-        /// <summary>
-        /// DbSet for patents.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentContext"]/doctors/*'/>
         public DbSet<PatentModel>? Patents { get; set; }
     }
 }

@@ -6,28 +6,20 @@ using System.Linq;
 
 namespace MedicalSystem.Services.Patent.Controllers
 {
-    /// <summary>
-    /// Controller for patent.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="PatentController"]/doctorController/*'/>
     [ApiController]
     [Route("[controller]")]
     public class PatentController
     {
         private readonly PatentContext _patentContext;
 
-        /// <summary>
-        /// Create a new object of patent controller.
-        /// </summary>
-        /// <param name="patentContext"></param>
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/doctorControllerConstructor/*'/>
         public PatentController(PatentContext patentContext)
         {
             _patentContext = patentContext;
         }
 
-        /// <summary>
-        /// Get all patent data.
-        /// </summary>
-        /// <returns></returns>
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/getAll/*'/>
         [HttpGet]
         public IEnumerable<PatentModel> GetAll()
         {
@@ -35,11 +27,7 @@ namespace MedicalSystem.Services.Patent.Controllers
             return patents;
         }
 
-        /// <summary>
-        /// Get patent data by id.
-        /// </summary>
-        /// <param name="id">Id of patent.</param>
-        /// <returns>Patent data.</returns>
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/getById/*'/>
         [HttpGet]
         [Route("{id:int}")]
         public PatentModel GetById(int id)
@@ -48,10 +36,7 @@ namespace MedicalSystem.Services.Patent.Controllers
             return patent;
         }
 
-        /// <summary>
-        /// Create new patent data.
-        /// </summary>
-        /// <param name="patent">Patent object.</param>
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/add/*'/>
         [HttpPost]
         public void Add(PatentModel patent)
         {
@@ -59,11 +44,7 @@ namespace MedicalSystem.Services.Patent.Controllers
             _patentContext.SaveChanges();
         }
 
-        /// <summary>
-        /// Update existing patent object.
-        /// </summary>
-        /// <param name="id">Id of patent.</param>
-        /// <param name="patent">Patent object.</param>
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/update/*'/>
         [HttpPut]
         [Route("{id:int}")]
         public void Update(int id, PatentModel patent)
@@ -76,10 +57,7 @@ namespace MedicalSystem.Services.Patent.Controllers
             _patentContext.SaveChanges();
         }
 
-        /// <summary>
-        /// Delete patent object.
-        /// </summary>
-        /// <param name="id">Id of patent.</param>
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/delete/*'/>
         [HttpDelete]
         [Route("{id:int}")]
         public void Delete(int id)
