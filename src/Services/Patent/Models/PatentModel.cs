@@ -1,6 +1,6 @@
 ﻿namespace MedicalSystem.Services.Patent.Models
 {
-    /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/doctorModel/*'/>
+    /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/patentModel/*'/>
     public class PatentModel
     {
         /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/id/*'/>
@@ -12,7 +12,7 @@
         /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/lastName/*'/>
         public string LastName { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/doctorModelConstructor/*'/>
+        /// <include file='docs.xml' path='docs/members[@name="PatentModel"]/patentModelConstructor/*'/>
         public PatentModel()
         {
             Id = 0;

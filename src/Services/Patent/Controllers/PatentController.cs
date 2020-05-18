@@ -6,14 +6,14 @@ using System.Linq;
 
 namespace MedicalSystem.Services.Patent.Controllers
 {
-    /// <include file='docs.xml' path='docs/members[@name="PatentController"]/doctorController/*'/>
+    /// <include file='docs.xml' path='docs/members[@name="PatentController"]/patentController/*'/>
     [ApiController]
     [Route("[controller]")]
     public class PatentController
     {
         private readonly PatentContext _patentContext;
 
-        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/doctorControllerConstructor/*'/>
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/patentControllerConstructor/*'/>
         public PatentController(PatentContext patentContext)
         {
             _patentContext = patentContext;
