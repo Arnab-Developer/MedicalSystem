@@ -2,25 +2,17 @@
 
 namespace MedicalSystem.Services.Consultation.DomainModels
 {
-    /// <summary>
-    /// Consultation model.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/consultationDomainModel/*'/>
     internal class ConsultationDomainModel
     {
-        /// <summary>
-        /// Id of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/id/*'/>
         public int Id { get; set; }
 
-        /// <summary>
-        /// Date of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/date/*'/>
         public DateTime Date { get; set; }
 
         private Place _place;
-        /// <summary>
-        /// Place of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/place/*'/>
         public Place? Place
         {
             get { return _place; }
@@ -35,9 +27,7 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         }
 
         private string _problem;
-        /// <summary>
-        /// Problem of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/problem/*'/>
         public string? Problem
         {
             get { return _problem; }
@@ -56,9 +46,7 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         }
 
         private string _medicine;
-        /// <summary>
-        /// Medicine of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/medicine/*'/>
         public string? Medicine
         {
             get { return _medicine; }
@@ -76,24 +64,16 @@ namespace MedicalSystem.Services.Consultation.DomainModels
             }
         }
 
-        /// <summary>
-        /// Id of doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/doctorId/*'/>
         public int DoctorId { get; set; }
 
-        /// <summary>
-        /// Doctor navigation property.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/doctor/*'/>
         public DoctorDomainModel? Doctor { get; set; }
 
-        /// <summary>
-        /// Id of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/patentId/*'/>
         public int PatentId { get; set; }
 
-        /// <summary>
-        /// Patent navigation property.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/patent/*'/>
         public PatentDomainModel? Patent { get; set; }
 
         private ConsultationDomainModel()
@@ -107,19 +87,7 @@ namespace MedicalSystem.Services.Consultation.DomainModels
             PatentId = 0;
         }
 
-        /// <summary>
-        /// Create new Consultation object.
-        /// </summary>
-        /// <param name="id">Id of Consultation.</param>
-        /// <param name="date">Date of Consultation.</param>
-        /// <param name="country">Country of Consultation.</param>
-        /// <param name="state">State of Consultation.</param>
-        /// <param name="city">City of Consultation.</param>
-        /// <param name="pinCode">Pincode of Consultation.</param>
-        /// <param name="problem">Problem of Consultation.</param>
-        /// <param name="medicine">Medicine of Consultation.</param>
-        /// <param name="doctorId">Id of doctor for Consultation.</param>
-        /// <param name="patentId">Id of patent for Consultation.</param>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/consultationDomainModelConstructor/*'/>
         public ConsultationDomainModel(int id, DateTime date, string? country, string? state, string? city,
             string? pinCode, string? problem, string? medicine, int doctorId, int patentId)
             : this()

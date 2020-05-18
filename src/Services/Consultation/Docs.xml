@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+
+    <members name="DoctorDomainModel">
+        <doctorDomainModel>
+            <summary>
+                Doctor domain model.
+            </summary>
+        </doctorDomainModel>
+        <id>
+            <summary>
+                Id of doctor.
+            </summary>
+        </id>
+        <firstName>
+            <summary>
+                First Name of doctor.
+            </summary>
+        </firstName>
+        <lastName>
+            <summary>
+                Last Name of doctor.
+            </summary>
+        </lastName>
+        <doctorDomainModelConstructor>
+            <summary>
+                Create new doctor object.
+            </summary>
+            <param name="id">
+                Id of doctor.
+            </param>
+            <param name="firstName">
+                First name of doctor.
+            </param>
+            <param name="lastName">
+                Last name of doctor.
+            </param>
+        </doctorDomainModelConstructor>
+    </members>
+
+    <members name="PatentDomainModel">
+        <patentDomainModel>
+            <summary>
+                Patent domain model.
+            </summary>
+        </patentDomainModel>
+        <id>
+            <summary>
+                Id of patent.
+            </summary>
+        </id>
+        <firstName>
+            <summary>
+                First Name of patent.
+            </summary>
+        </firstName>
+        <lastName>
+            <summary>
+                Last Name of patent.
+            </summary>
+        </lastName>
+        <patentDomainModelConstructor>
+            <summary>
+                Create new patent object.
+            </summary>
+            <param name="id">
+                Id of patent.
+            </param>
+            <param name="firstName">
+                First name of patent.
+            </param>
+            <param name="lastName">
+                Last name of patent.
+            </param>
+        </patentDomainModelConstructor>
+    </members>
+
+    <members name="ConsultationDomainModel">
+        <consultationDomainModel>
+            <summary>
+                Consultation model.
+            </summary>
+        </consultationDomainModel>
+        <id>
+            <summary>
+                Id of Consultation.
+            </summary>
+        </id>
+        <date>
+            <summary>
+                Date of Consultation.
+            </summary>
+        </date>
+        <place>
+            <summary>
+                Place of Consultation.
+            </summary>
+        </place>
+        <problem>
+            <summary>
+                Problem of Consultation.
+            </summary>
+        </problem>
+        <medicine>
+            <summary>
+                Medicine of Consultation.
+            </summary>
+        </medicine>
+        <doctorId>
+            <summary>
+                Id of doctor.
+            </summary>
+        </doctorId>
+        <doctor>
+            <summary>
+                Doctor navigation property.
+            </summary>
+        </doctor>
+        <patentId>
+            <summary>
+                Id of patent.
+            </summary>
+        </patentId>
+        <patent>
+            <summary>
+                Patent navigation property.
+            </summary>
+        </patent>
+        <consultationDomainModelConstructor>
+            <summary>
+                Create new Consultation object.
+            </summary>
+            <param name="id">
+                Id of Consultation.
+            </param>
+            <param name="date">
+                Date of Consultation.
+            </param>
+            <param name="country">
+                Country of Consultation.
+            </param>
+            <param name="state">
+                State of Consultation.
+            </param>
+            <param name="city">
+                City of Consultation.
+            </param>
+            <param name="pinCode">
+                Pincode of Consultation.
+            </param>
+            <param name="problem">
+                Problem of Consultation.
+            </param>
+            <param name="medicine">
+                Medicine of Consultation.
+            </param>
+            <param name="doctorId">
+                Id of doctor for Consultation.
+            </param>
+            <param name="patentId">
+                Id of patent for Consultation.
+            </param>
+        </consultationDomainModelConstructor>
+    </members>
+
+    <members name="Place">
+        <place>
+            <summary>
+                Place class. This is a value object.
+            </summary>
+        </place>
+        <country>
+            <summary>
+                Country of place.
+            </summary>
+        </country>
+        <state>
+            <summary>
+                State of place.
+            </summary>
+        </state>
+        <city>
+            <summary>
+                City of place.
+            </summary>
+        </city>
+        <pinCode>
+            <summary>
+                Pincode of place.
+            </summary>
+        </pinCode>
+        <placeDefaultConstructor>
+            <summary>
+                Create new place object with default value.
+            </summary>
+        </placeDefaultConstructor>
+        <placeParameterConstructor>
+            <summary>
+                Create new place object with input value.
+            </summary>
+            <param name="country">
+                Country of place.
+            </param>
+            <param name="state">
+                State of place.
+            </param>
+            <param name="city">
+                City of place.
+            </param>
+            <param name="pinCode">
+                Pincode of place.
+            </param>
+        </placeParameterConstructor>
+    </members>
+
+</docs>
