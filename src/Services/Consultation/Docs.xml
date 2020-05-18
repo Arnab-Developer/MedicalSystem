@@ -213,4 +213,118 @@
         </placeParameterConstructor>
     </members>
 
+    <members name="DoctorViewModel">
+        <doctorViewModel>
+            <summary>
+                Doctor view model class.
+            </summary>
+        </doctorViewModel>
+        <id>
+            <summary>
+                Id of doctor.
+            </summary>
+        </id>
+        <firstName>
+            <summary>
+                First name of doctor.
+            </summary>
+        </firstName>
+        <lastName>
+            <summary>
+                Last name of doctor.
+            </summary>
+        </lastName>
+    </members>
+
+    <members name="PatentViewModel">
+        <patentViewModel>
+            <summary>
+                Patent view model class.
+            </summary>
+        </patentViewModel>
+        <id>
+            <summary>
+                Id of patent.
+            </summary>
+        </id>
+        <firstName>
+            <summary>
+                First name of patent.
+            </summary>
+        </firstName>
+        <lastName>
+            <summary>
+                Last name of patent.
+            </summary>
+        </lastName>
+    </members>
+
+    <members name="ConsultationViewModel">
+        <consultationViewModel>
+            <summary>
+                Consultation view model class.
+            </summary>
+        </consultationViewModel>
+        <id>
+            <summary>
+                Id of Consultation.
+            </summary>
+        </id>
+        <date>
+            <summary>
+                Date of Consultation.
+            </summary>
+        </date>
+        <country>
+            <summary>
+                Country of Consultation.
+            </summary>
+        </country>
+        <state>
+            <summary>
+                State of Consultation.
+            </summary>
+        </state>
+        <city>
+            <summary>
+                City of Consultation.
+            </summary>
+        </city>
+        <pinCode>
+            <summary>
+                PinCode of Consultation.
+            </summary>
+        </pinCode>
+        <problem>
+            <summary>
+                Problem of Consultation.
+            </summary>
+        </problem>
+        <medicine>
+            <summary>
+                Medicine of Consultation.
+            </summary>
+        </medicine>
+        <doctorId>
+            <summary>
+                Doctor id of Consultation.
+            </summary>
+        </doctorId>
+        <doctor>
+            <summary>
+                Doctor navigation property.
+            </summary>
+        </doctor>
+        <patentId>
+            <summary>
+                Patent id of Consultation.
+            </summary>
+        </patentId>
+        <patent>
+            <summary>
+                Patent navigation property.
+            </summary>
+        </patent>
+    </members>
+
 </docs>
