@@ -1,23 +1,15 @@
 ﻿namespace MedicalSystem.Services.Consultation.ViewModels
 {
-    /// <summary>
-    /// Doctor class.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="DoctorViewModel"]/doctorViewModel/*'/>
     public class DoctorViewModel
     {
-        /// <summary>
-        /// Id of doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorViewModel"]/id/*'/>
         public int Id { get; set; }
 
-        /// <summary>
-        /// First name of doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorViewModel"]/firstName/*'/>
         public string? FirstName { get; set; }
 
-        /// <summary>
-        /// Last name of doctor.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorViewModel"]/lastName/*'/>
         public string? LastName { get; set; }
     }
 }

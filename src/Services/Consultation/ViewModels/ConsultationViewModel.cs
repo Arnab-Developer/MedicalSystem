@@ -2,69 +2,43 @@
 
 namespace MedicalSystem.Services.Consultation.ViewModels
 {
-    /// <summary>
-    /// Consultation class.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/consultationViewModel/*'/>
     public class ConsultationViewModel
     {
-        /// <summary>
-        /// Id of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/id/*'/>
         public int Id { get; set; }
 
-        /// <summary>
-        /// Date of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/date/*'/>
         public DateTime Date { get; set; }
 
-        /// <summary>
-        /// Country of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/country/*'/>
         public string? Country { get; set; }
 
-        /// <summary>
-        /// State of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/state/*'/>
         public string? State { get; set; }
 
-        /// <summary>
-        /// City of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/city/*'/>
         public string? City { get; set; }
 
-        /// <summary>
-        /// Pincode of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/pinCode/*'/>
         public string? PinCode { get; set; }
 
-        /// <summary>
-        /// Problem of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/problem/*'/>
         public string? Problem { get; set; }
 
-        /// <summary>
-        /// Medicine of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/medicine/*'/>
         public string? Medicine { get; set; }
 
-        /// <summary>
-        /// Doctor id of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/doctorId/*'/>
         public int DoctorId { get; set; }
 
-        /// <summary>
-        /// Doctor of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/doctor/*'/>
         public DoctorViewModel? Doctor { get; set; }
 
-        /// <summary>
-        /// Patent id of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patentId/*'/>
         public int PatentId { get; set; }
 
-        /// <summary>
-        /// Patent of Consultation.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patent/*'/>
         public PatentViewModel? Patent { get; set; }
     }
 }

@@ -1,23 +1,15 @@
 ﻿namespace MedicalSystem.Services.Consultation.ViewModels
 {
-    /// <summary>
-    /// Patent class.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="PatentViewModel"]/patentViewModel/*'/>
     public class PatentViewModel
     {
-        /// <summary>
-        /// Id of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentViewModel"]/id/*'/>
         public int Id { get; set; }
 
-        /// <summary>
-        /// First name of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentViewModel"]/firstName/*'/>
         public string? FirstName { get; set; }
 
-        /// <summary>
-        /// Last name of patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentViewModel"]/lastName/*'/>
         public string? LastName { get; set; }
     }
 }
