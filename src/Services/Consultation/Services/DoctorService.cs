@@ -4,26 +4,18 @@ using System.Collections.Generic;
 
 namespace MedicalSystem.Services.Consultation.Services
 {
-    /// <summary>
-    /// Doctor service class.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="DoctorService"]/doctorService/*'/>
     internal class DoctorService : IDoctorService
     {
         private readonly IDoctorDal _doctorDal;
 
-        /// <summary>
-        /// Create new doctor service object.
-        /// </summary>
-        /// <param name="doctorDal">Doctor dal.</param>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorService"]/doctorServiceConstructor/*'/>
         public DoctorService(IDoctorDal doctorDal)
         {
             _doctorDal = doctorDal;
         }
 
-        /// <summary>
-        /// Get all doctor data.
-        /// </summary>
-        /// <returns>Collection of doctor data.</returns>
+        /// <include file='docs.xml' path='docs/members[@name="DoctorService"]/getAll/*'/>
         public IEnumerable<DoctorViewModel> GetAll()
         {
             var doctorDomainModels = _doctorDal.GetAll();

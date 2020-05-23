@@ -3,15 +3,10 @@ using System.Collections.Generic;
 
 namespace MedicalSystem.Services.Consultation.Services
 {
-    /// <summary>
-    /// Doctor service interface.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="IDoctorService"]/iDoctorService/*'/>
     public interface IDoctorService
     {
-        /// <summary>
-        /// Get all doctor data.
-        /// </summary>
-        /// <returns>Collection of doctor data.</returns>
+        /// <include file='docs.xml' path='docs/members[@name="IDoctorService"]/getAll/*'/>
         IEnumerable<DoctorViewModel> GetAll();
     }
 }

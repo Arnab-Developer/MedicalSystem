@@ -327,4 +327,44 @@
         </patent>
     </members>
 
+    <members name="IDoctorService">
+        <iDoctorService>
+            <summary>
+                Doctor service interface.
+            </summary>
+        </iDoctorService>
+        <getAll>
+            <summary>
+                Get all doctor data.
+            </summary>
+            <returns>
+                Collection of doctor data.
+            </returns>
+        </getAll>
+    </members>
+    
+    <members name="DoctorService">
+        <doctorService>
+            <summary>
+                Doctor service class.
+            </summary>
+        </doctorService>
+        <doctorServiceConstructor>
+            <summary>
+                Create a new object of doctor service.
+            </summary>
+            <param name="doctorDal">
+                Doctor dal object.
+            </param>
+        </doctorServiceConstructor>        
+        <getAll>
+            <summary>
+                Get all doctor data.
+            </summary>
+            <returns>
+                Collection of doctor data.
+            </returns>
+        </getAll>
+    </members>
+
 </docs>
