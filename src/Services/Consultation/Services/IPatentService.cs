@@ -3,15 +3,10 @@ using System.Collections.Generic;
 
 namespace MedicalSystem.Services.Consultation.Services
 {
-    /// <summary>
-    /// Patent service interface.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="IPatentService"]/iPatentService/*'/>
     public interface IPatentService
     {
-        /// <summary>
-        /// Get all patent data.
-        /// </summary>
-        /// <returns>Collection of patent data.</returns>
+        /// <include file='docs.xml' path='docs/members[@name="IPatentService"]/getAll/*'/>
         IEnumerable<PatentViewModel> GetAll();
     }
 }

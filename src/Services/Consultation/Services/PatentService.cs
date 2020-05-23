@@ -4,26 +4,18 @@ using System.Collections.Generic;
 
 namespace MedicalSystem.Services.Consultation.Services
 {
-    /// <summary>
-    /// Patent service class.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="PatentService"]/patentService/*'/>
     internal class PatentService : IPatentService
     {
         private readonly IPatentDal _patentDal;
 
-        /// <summary>
-        /// Create new object of patent service.
-        /// </summary>
-        /// <param name="patentDal">Patent dal.</param>
+        /// <include file='docs.xml' path='docs/members[@name="PatentService"]/patentServiceConstructor/*'/>
         public PatentService(IPatentDal patentDal)
         {
             _patentDal = patentDal;
         }
 
-        /// <summary>
-        /// Get all patent data.
-        /// </summary>
-        /// <returns>Collection of patent data.</returns>
+        /// <include file='docs.xml' path='docs/members[@name="PatentService"]/getAll/*'/>
         public IEnumerable<PatentViewModel> GetAll()
         {
             var patentDomainModels = _patentDal.GetAll();

@@ -367,4 +367,44 @@
         </getAll>
     </members>
 
+    <members name="IPatentService">
+        <iPatentService>
+            <summary>
+                Patent service interface.
+            </summary>
+        </iPatentService>
+        <getAll>
+            <summary>
+                Get all patent data.
+            </summary>
+            <returns>
+                Collection of patent data.
+            </returns>
+        </getAll>
+    </members>
+    
+    <members name="PatentService">
+        <patentService>
+            <summary>
+                Patent service class.
+            </summary>
+        </patentService>
+        <patentServiceConstructor>
+            <summary>
+                Create a new object of patent service.
+            </summary>
+            <param name="patentDal">
+                Patent dal object.
+            </param>
+        </patentServiceConstructor>
+        <getAll>
+            <summary>
+                Get all patent data.
+            </summary>
+            <returns>
+                Collection of patent data.
+            </returns>
+        </getAll>
+    </members>
+    
 </docs>
