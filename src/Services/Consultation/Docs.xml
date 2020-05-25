@@ -543,8 +543,8 @@
             <summary>
                 Create a new object of doctor dal.
             </summary>
-            <param name="doctorDal">
-                Doctor dal object.
+            <param name="consultationContext">
+                Consultation context.
             </param>
         </doctorDalConstructor>
         <getAll>
@@ -583,8 +583,8 @@
             <summary>
                 Create a new object of patent dal.
             </summary>
-            <param name="patentDal">
-                Patent dal object.
+            <param name="consultationContext">
+                Consultation context.
             </param>
         </patentDalConstructor>
         <getAll>
@@ -658,8 +658,8 @@
             <summary>
                 Consultation dal interface.
             </summary>
-            <param name="consultationDal">
-                Consultation dal.
+            <param name="consultationContext">
+                Consultation context.
             </param>
         </consultationDalConstructor>
         <getAll>
