@@ -3,41 +3,22 @@ using System.Collections.Generic;
 
 namespace MedicalSystem.Services.Consultation.Services
 {
-    /// <summary>
-    /// Consultation service interface.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="IConsultationService"]/iConsultationService/*'/>
     public interface IConsultationService
     {
-        /// <summary>
-        /// Get all Consultation data.
-        /// </summary>
-        /// <returns>Collection of Consultation data.</returns>
+        /// <include file='docs.xml' path='docs/members[@name="IConsultationService"]/iConsultationService/*'/>
         IEnumerable<ConsultationViewModel> GetAll();
 
-        /// <summary>
-        /// Get single Consultation data by id.
-        /// </summary>
-        /// <param name="id">Id of Consultation.</param>
-        /// <returns>Single Consultation data.</returns>
+        /// <include file='docs.xml' path='docs/members[@name="IConsultationService"]/getById/*'/>
         ConsultationViewModel? GetById(int id);
 
-        /// <summary>
-        /// Add new Consultation data.
-        /// </summary>
-        /// <param name="consultation">New Consultation data.</param>
+        /// <include file='docs.xml' path='docs/members[@name="IConsultationService"]/add/*'/>
         void Add(ConsultationViewModel consultation);
 
-        /// <summary>
-        /// Update existing Consultation data.
-        /// </summary>
-        /// <param name="id">Id of Consultation.</param>
-        /// <param name="consultation">Existing Consultation data.</param>
+        /// <include file='docs.xml' path='docs/members[@name="IConsultationService"]/update/*'/>
         void Update(int id, ConsultationViewModel consultation);
 
-        /// <summary>
-        /// Delete Consultation data.
-        /// </summary>
-        /// <param name="id">Id of Consultation.</param>
+        /// <include file='docs.xml' path='docs/members[@name="IConsultationService"]/delete/*'/>
         void Delete(int id);
     }
 }

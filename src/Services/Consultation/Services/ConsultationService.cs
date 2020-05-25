@@ -5,26 +5,18 @@ using System.Collections.Generic;
 
 namespace MedicalSystem.Services.Consultation.Services
 {
-    /// <summary>
-    /// Consultation service class.
-    /// </summary>
+    /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/consultationService/*'/>
     internal class ConsultationService : IConsultationService
     {
         private readonly IConsultationDal _consultationDal;
 
-        /// <summary>
-        /// Create new Consultation service object.
-        /// </summary>
-        /// <param name="consultationDal">Consultation dal.</param>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/consultationServiceConstructor/*'/>
         public ConsultationService(IConsultationDal consultationDal)
         {
             _consultationDal = consultationDal;
         }
 
-        /// <summary>
-        /// Get all Consultation data.
-        /// </summary>
-        /// <returns>Collection of Consultation data.</returns>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/getAll/*'/>
         public IEnumerable<ConsultationViewModel> GetAll()
         {
             var consultationDomainModels = _consultationDal.GetAll();
@@ -63,11 +55,7 @@ namespace MedicalSystem.Services.Consultation.Services
             return consultationViewModels;
         }
 
-        /// <summary>
-        /// Get single Consultation data by id.
-        /// </summary>
-        /// <param name="id">Id of Consultation.</param>
-        /// <returns>Single Consultation data.</returns>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/getById/*'/>
         public ConsultationViewModel? GetById(int id)
         {
             var consultationDomainModel = _consultationDal.GetById(id);
@@ -105,10 +93,7 @@ namespace MedicalSystem.Services.Consultation.Services
             return consultationViewModel;
         }
 
-        /// <summary>
-        /// Add new Consultation data.
-        /// </summary>
-        /// <param name="consultation">New Consultation data.</param>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/add/*'/>
         public void Add(ConsultationViewModel consultationViewModel)
         {
             var consultationDomainModel = new ConsultationDomainModel(consultationViewModel.Id,
@@ -119,11 +104,7 @@ namespace MedicalSystem.Services.Consultation.Services
             _consultationDal.Add(consultationDomainModel);
         }
 
-        /// <summary>
-        /// Update existing Consultation data.
-        /// </summary>
-        /// <param name="id">Id of Consultation.</param>
-        /// <param name="consultation">Existing Consultation data.</param>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/update/*'/>
         public void Update(int id, ConsultationViewModel consultationViewModel)
         {
             var consultationDomainModel = _consultationDal.GetById(id);
@@ -144,10 +125,7 @@ namespace MedicalSystem.Services.Consultation.Services
             _consultationDal.Update(consultationDomainModel);
         }
 
-        /// <summary>
-        /// Delete Consultation data.
-        /// </summary>
-        /// <param name="id">Id of Consultation.</param>
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/delete/*'/>
         public void Delete(int id)
         {
             var consultationDomainModel = _consultationDal.GetById(id);
