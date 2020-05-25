@@ -3,8 +3,7 @@
 Medical system is a small application build with ASP.NET Core and EF Core to document medical records. User can store doctor, patent and consultation information in this application with their web browser.
 
 ## Build status
-![deploy-master](https://github.com/Arnab-Developer/medical-system/workflows/deploy-master/badge.svg?branch=master)
-![build-test-dev](https://github.com/Arnab-Developer/medical-system/workflows/build-test-dev/badge.svg?branch=dev)
+![build-test](https://github.com/Arnab-Developer/medical-system/workflows/build-test/badge.svg?branch=master)
 
 ## Tech stack
 | Module | Tech |
