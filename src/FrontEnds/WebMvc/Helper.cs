@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 namespace MedicalSystem.FrontEnds.WebMvc
 {
@@ -6,6 +7,8 @@ namespace MedicalSystem.FrontEnds.WebMvc
     {
         static Helper()
         {
+            CurrentYear = DateTime.Now.Year;
+
             ApplicationVersionNumber = string.Empty;
             var executingAssembly = Assembly.GetExecutingAssembly();
             if (executingAssembly == null) return;
@@ -17,5 +20,6 @@ namespace MedicalSystem.FrontEnds.WebMvc
         }
 
         public static string ApplicationVersionNumber { get; }
+        public static int CurrentYear { get; }
     }
 }
