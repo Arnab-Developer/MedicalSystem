@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.Controllers
 {
+    /// <include file='docs.xml' path='docs/members[@name="PatentController"]/patentController/*'/>
     [ApiController]
     [Route("[controller]")]
     public class PatentController : ControllerBase
@@ -18,6 +19,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly PatentOptions _patentOptions;
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/patentControllerConstructor/*'/>
         public PatentController(IHttpClientFactory httpClientFactory,
             IOptionsMonitor<PatentOptions> optionsAccessor)
         {
@@ -25,6 +27,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             _patentOptions = optionsAccessor.CurrentValue;
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/getAll/*'/>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PatentModel>>> GetAll()
         {
@@ -44,6 +47,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return NotFound();
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/getById/*'/>
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<PatentModel>> GetById(int? id)
@@ -68,6 +72,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             }
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/add/*'/>
         [HttpPost]
         public async Task<IActionResult> Add(PatentModel patent)
         {
@@ -81,6 +86,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return StatusCode(500);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/update/*'/>
         [HttpPut]
         [Route("{id:int}")]
         public async Task<IActionResult> Update(int id, PatentModel patent)
@@ -96,6 +102,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return StatusCode(500);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/delete/*'/>
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete(int? id)

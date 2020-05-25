@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.Controllers
 {
+    /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/doctorController/*'/>
     [ApiController]
     [Route("[controller]")]
     public class DoctorController : ControllerBase
@@ -18,6 +19,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly DoctorOptions _doctorOptions;
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/doctorControllerConstructor/*'/>
         public DoctorController(IHttpClientFactory httpClientFactory,
             IOptionsMonitor<DoctorOptions> optionsAccessor)
         {
@@ -25,6 +27,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             _doctorOptions = optionsAccessor.CurrentValue;
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/getAll/*'/>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DoctorModel>>> GetAll()
         {
@@ -44,6 +47,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return StatusCode((int)doctorApiResponseMessage.StatusCode);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/getById/*'/>
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<DoctorModel>> GetById(int? id)
@@ -68,6 +72,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             }
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/add/*'/>
         [HttpPost]
         public async Task<IActionResult> Add(DoctorModel doctor)
         {
@@ -81,6 +86,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return StatusCode(500);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/update/*'/>
         [HttpPut]
         [Route("{id:int}")]
         public async Task<IActionResult> Update(int id, DoctorModel doctor)
@@ -96,6 +102,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return StatusCode(500);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/delete/*'/>
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete(int? id)

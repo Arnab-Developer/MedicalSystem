@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.Controllers
 {
+    /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/consultationController/*'/>
     [ApiController]
     [Route("[controller]")]
     public class ConsultationController : ControllerBase
@@ -18,6 +19,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ConsultationOptions _consultationOptions;
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/consultationControllerConstructor/*'/>
         public ConsultationController(IHttpClientFactory httpClientFactory,
             IOptionsMonitor<ConsultationOptions> optionsAccessor)
         {
@@ -25,6 +27,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             _consultationOptions = optionsAccessor.CurrentValue;
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getAll/*'/>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ConsultationModel>>> GetAll()
         {
@@ -44,6 +47,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return NotFound();
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getById/*'/>
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<ConsultationModel>> GetById(int? id)
@@ -68,6 +72,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             }
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getAddEditInitData/*'/>
         [HttpGet]
         [Route("AddEditInitData")]
         public async Task<ActionResult<ConsultationModel>> GetAddEditInitData()
@@ -101,6 +106,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return Ok(consultationModel);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/add/*'/>
         [HttpPost]
         public async Task<IActionResult> Add(ConsultationModel consultation)
         {
@@ -114,6 +120,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return StatusCode(500);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/update/*'/>
         [HttpPut]
         [Route("{id:int}")]
         public async Task<IActionResult> Update(int id, ConsultationModel consultation)
@@ -129,6 +136,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return StatusCode(500);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/delete/*'/>
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete(int? id)
