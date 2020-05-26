@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+
+    <members name="ConsultationOptions">
+        <consultationOptions>
+            <summary>
+                Consultation option class.
+            </summary>
+        </consultationOptions>
+        <consultationOptionsConstructor>
+            <summary>
+                Create a new Consultation option object.
+            </summary>
+        </consultationOptionsConstructor>
+        <consultationGatewayAddEditInitDataUrl>
+            <summary>
+                Consultation gateway add edit initial data URL.
+            </summary>
+        </consultationGatewayAddEditInitDataUrl>
+        <consultationGatewayUrl>
+            <summary>
+                Consultation gateway URL.
+            </summary>
+        </consultationGatewayUrl>
+    </members>
+
+    <members name="DoctorOptions">
+        <doctorOptions>
+            <summary>
+                Doctor option class.
+            </summary>
+        </doctorOptions>
+        <doctorOptionsConstructor>
+            <summary>
+                Create a new doctor option object.
+            </summary>
+        </doctorOptionsConstructor>
+        <doctorGatewayUrl>
+            <summary>
+                Doctor gateway URL
+            </summary>
+        </doctorGatewayUrl>
+    </members>
+
+    <members name="PatentOptions">
+        <patentOptions>
+            <summary>
+                Patent option class.
+            </summary>
+        </patentOptions>
+        <patentOptionsConstructor>
+            <summary>
+                Create a new patent option object.
+            </summary>
+        </patentOptionsConstructor>
+        <patentGatewayUrl>
+            <summary>
+                Patent gateway URL
+            </summary>
+        </patentGatewayUrl>
+    </members>
+    
+</docs>
