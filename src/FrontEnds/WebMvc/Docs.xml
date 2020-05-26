@@ -1,6 +1,151 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <docs>
 
+    <members name="DoctorModel">
+        <doctorModel>
+            <summary>
+                Doctor view model class.
+            </summary>
+        </doctorModel>
+        <doctorModelConstructor>
+            <summary>
+                Create a new doctor model class.
+            </summary>
+        </doctorModelConstructor>
+        <id>
+            <summary>
+                Id of doctor.
+            </summary>
+        </id>
+        <firstName>
+            <summary>
+                First name of doctor.
+            </summary>
+        </firstName>
+        <lastName>
+            <summary>
+                Last name of doctor.
+            </summary>
+        </lastName>
+    </members>
+
+    <members name="PatentModel">
+        <patentModel>
+            <summary>
+                Patent view model class.
+            </summary>
+        </patentModel>
+        <patentModelConstructor>
+            <summary>
+                Patent a new doctor model class.
+            </summary>
+        </patentModelConstructor>
+        <id>
+            <summary>
+                Id of patent.
+            </summary>
+        </id>
+        <firstName>
+            <summary>
+                First name of patent.
+            </summary>
+        </firstName>
+        <lastName>
+            <summary>
+                Last name of patent.
+            </summary>
+        </lastName>
+
+    </members>
+
+    <members name="ConsultationModel">
+        <consultationModel>
+            <summary>
+                Consultation view model class.
+            </summary>
+        </consultationModel>
+        <id>
+            <summary>
+                Id of Consultation.
+            </summary>
+        </id>
+        <date>
+            <summary>
+                Date of Consultation.
+            </summary>
+        </date>
+        <country>
+            <summary>
+                Country of Consultation.
+            </summary>
+        </country>
+        <state>
+            <summary>
+                State of Consultation.
+            </summary>
+        </state>
+        <city>
+            <summary>
+                City of Consultation.
+            </summary>
+        </city>
+        <pinCode>
+            <summary>
+                PinCode of Consultation.
+            </summary>
+        </pinCode>
+        <problem>
+            <summary>
+                Problem of Consultation.
+            </summary>
+        </problem>
+        <medicine>
+            <summary>
+                Medicine of Consultation.
+            </summary>
+        </medicine>
+        <doctorId>
+            <summary>
+                Doctor id of Consultation.
+            </summary>
+        </doctorId>
+        <doctor>
+            <summary>
+                Doctor navigation property.
+            </summary>
+        </doctor>
+        <patentId>
+            <summary>
+                Patent id of Consultation.
+            </summary>
+        </patentId>
+        <patent>
+            <summary>
+                Patent navigation property.
+            </summary>
+        </patent>
+        <doctors>
+            <summary>
+                Doctor collection.
+            </summary>
+        </doctors>
+        <patents>
+            <summary>
+                Patent collection.
+            </summary>
+        </patents>
+        <doctorSelectList>
+            <summary>
+                Doctor select list.
+            </summary>
+        </doctorSelectList>
+        <patentSelectList>
+            <summary>
+                Patent select list.
+            </summary>
+        </patentSelectList>
+    </members>
+    
     <members name="ConsultationOptions">
         <consultationOptions>
             <summary>
