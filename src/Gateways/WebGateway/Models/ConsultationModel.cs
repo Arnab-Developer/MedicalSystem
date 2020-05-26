@@ -18,17 +18,17 @@ namespace MedicalSystem.Gateways.WebGateway.Models
         /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/country/*'/>
         [JsonPropertyName("country")]
         public string? Country { get; set; }
-        [JsonPropertyName("state")]
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/state/*'/>
+        [JsonPropertyName("state")]
         public string? State { get; set; }
-        [JsonPropertyName("city")]
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/city/*'/>
+        [JsonPropertyName("city")]
         public string? City { get; set; }
-        [JsonPropertyName("pinCode")]
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/pinCode/*'/>
+        [JsonPropertyName("pinCode")]
         public string? PinCode { get; set; }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/problem/*'/>
