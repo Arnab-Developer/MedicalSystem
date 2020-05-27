@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
+    /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/consultationControllerTests/*'/>
     internal class ConsultationControllerTests
     {
         private Mock<IConsultationService>? _consultationServiceMock;
@@ -21,6 +22,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             _consultationController = new ConsultationController(_consultationServiceMock.Object);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenValidViewModels_ReturnsValidViewModels/*'/>
         [Test]
         public void GetAll_GivenValidViewModels_ReturnsValidViewModels()
         {
@@ -118,6 +120,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat2 las", consultationViewModelsFromController[1].Patent!.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenEmptyViewModels_ReturnsEmptyViewModels/*'/>
         [Test]
         public void GetAll_GivenEmptyViewModels_ReturnsEmptyViewModels()
         {
@@ -129,6 +132,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Zero(consultationViewModelsFromController.Count);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenNullViewModels_ExpectException/*'/>
         [Test]
         public void GetAll_GivenNullViewModels_ExpectException()
         {
@@ -138,6 +142,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Throws<NullReferenceException>(() => _consultationController!.GetAll());
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getById_GivenValidViewModel_ReturnsValidViewModel/*'/>
         [Test]
         public void GetById_GivenValidViewModel_ReturnsValidViewModel()
         {
@@ -188,6 +193,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat1last", consultationViewModelFromController.Patent.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getById_GivenNullViewModel_ReturnsNull/*'/>
         [Test]
         public void GetById_GivenNullViewModel_ReturnsNull()
         {
@@ -196,6 +202,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Null(consultationViewModelFromController);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/add_CanCallServiceAdd/*'/>
         [Test]
         public void Add_CanCallServiceAdd()
         {
@@ -230,6 +237,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             _consultationServiceMock.Verify();
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/update_CanCallServiceUpdate/*'/>
         [Test]
         public void Update_CanCallServiceUpdate()
         {
@@ -263,6 +271,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             _consultationServiceMock.Verify();
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/delete_CanCallServiceDelete/*'/>
         [Test]
         public void Delete_CanCallServiceDelete()
         {

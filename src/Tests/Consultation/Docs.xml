@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+
+    <members name="ConsultationControllerTests">
+        <consultationControllerTests>
+            <summary>
+                Tests for consultation controller.
+            </summary>
+        </consultationControllerTests>
+        <getAll_GivenValidViewModels_ReturnsValidViewModels>
+            <summary>
+                Given valid view models test that if GetAll can return valid view models.
+            </summary>
+        </getAll_GivenValidViewModels_ReturnsValidViewModels>
+        <getAll_GivenEmptyViewModels_ReturnsEmptyViewModels>
+            <summary>
+                Given empty view models test that if GetAll can return empty view models.
+            </summary>
+        </getAll_GivenEmptyViewModels_ReturnsEmptyViewModels>
+        <getAll_GivenNullViewModels_ExpectException>
+            <summary>
+                Given null view models test that if GetAll can throw exception.
+            </summary>
+        </getAll_GivenNullViewModels_ExpectException>
+        <getById_GivenValidViewModel_ReturnsValidViewModel>
+            <summary>
+                Given valid view model test that if GetById can return valid view model.
+            </summary>
+        </getById_GivenValidViewModel_ReturnsValidViewModel>
+        <getById_GivenNullViewModel_ReturnsNull>
+            <summary>
+                Given null view model test that if GetById can return null.
+            </summary>
+        </getById_GivenNullViewModel_ReturnsNull>
+        <add_CanCallServiceAdd>
+            <summary>
+                Test that add is working properly.
+            </summary>
+        </add_CanCallServiceAdd>
+        <update_CanCallServiceUpdate>
+            <summary>
+                Test that update is working properly.
+            </summary>
+        </update_CanCallServiceUpdate>
+        <delete_CanCallServiceDelete>
+            <summary>
+                Test that delete is working properly.
+            </summary>
+        </delete_CanCallServiceDelete>
+    </members>
+    
+</docs>
