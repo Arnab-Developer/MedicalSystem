@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -116,7 +117,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         public async Task<IActionResult> Create(ConsultationModel consultation)
         {
             var httpClient = _httpClientFactory.CreateClient();
-            var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), System.Text.Encoding.UTF8, "application/json");
+            var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), Encoding.UTF8, "application/json");
             var consultationApiResponseMessage = await httpClient.PostAsync(_consultationOptions.ConsultationGatewayUrl, consultationContent);
             if (consultationApiResponseMessage.IsSuccessStatusCode)
             {
@@ -188,7 +189,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         {
             var httpClient = _httpClientFactory.CreateClient();
             var consultationUpdateGatewayUrl = $"{_consultationOptions.ConsultationGatewayUrl}/{id}";
-            var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), System.Text.Encoding.UTF8, "application/json");
+            var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), Encoding.UTF8, "application/json");
             var consultationApiResponseMessage = await httpClient.PutAsync(consultationUpdateGatewayUrl, consultationContent);
             if (consultationApiResponseMessage.IsSuccessStatusCode)
             {

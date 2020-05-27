@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -77,7 +78,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         public async Task<IActionResult> Create(PatentModel patent)
         {
             var httpClient = _httpClientFactory.CreateClient();
-            var patentContent = new StringContent(JsonSerializer.Serialize(patent), System.Text.Encoding.UTF8, "application/json");
+            var patentContent = new StringContent(JsonSerializer.Serialize(patent), Encoding.UTF8, "application/json");
             var patentApiResponseMessage = await httpClient.PostAsync(_patentOptions.PatentGatewayUrl, patentContent);
             if (patentApiResponseMessage.IsSuccessStatusCode)
             {
@@ -112,7 +113,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         {
             var httpClient = _httpClientFactory.CreateClient();
             var patentUpdateGatewayUrl = $"{_patentOptions.PatentGatewayUrl}/{id}";
-            var patentContent = new StringContent(JsonSerializer.Serialize(patent), System.Text.Encoding.UTF8, "application/json");
+            var patentContent = new StringContent(JsonSerializer.Serialize(patent), Encoding.UTF8, "application/json");
             var patentApiResponseMessage = await httpClient.PutAsync(patentUpdateGatewayUrl, patentContent);
             if (patentApiResponseMessage.IsSuccessStatusCode)
             {
