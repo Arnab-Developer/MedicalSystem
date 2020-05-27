@@ -205,6 +205,180 @@
         </patentGatewayUrl>
     </members>
 
+    <members name="DoctorController">
+        <doctorController>
+            <summary>
+                Doctor controller class.
+            </summary>
+        </doctorController>
+        <doctorControllerConstructor>
+            <summary>
+                Doctor controller class.
+            </summary>
+            <param name="httpClientFactory">
+                Http client factory.
+            </param>
+            <param name="optionsAccessor">
+                Options accessor.
+            </param>
+        </doctorControllerConstructor>
+        <index>
+            <summary>
+                Show all doctor data.
+            </summary>
+            <returns>
+                View with all doctor data.
+            </returns>
+        </index>
+        <details>
+            <summary>
+                Show single doctor data by id.
+            </summary>
+            <param name="id">
+                Id of Doctor.
+            </param>
+            <returns>
+                View with single doctor data.
+            </returns>
+        </details>
+        <createGet>
+            <summary>
+                Go to create view for new doctor data.
+            </summary>
+            <returns>
+                Create view.
+            </returns>
+        </createGet>
+        <createPost>
+            <summary>
+                Create new doctor data.
+            </summary>
+            <param name="doctor">
+                New doctor data.
+            </param>
+            <returns>
+                Redirect to index action method on successful creation.
+            </returns>
+        </createPost>
+        <editGet>
+            <summary>
+                Go to edit view.
+            </summary>
+            <param name="id">
+                Id of doctor.
+            </param>
+            <returns>
+                Edit view.
+            </returns>
+        </editGet>
+        <editPost>
+            <summary>
+                Update doctor data.
+            </summary>
+            <param name="id">
+                Id of existing doctor data.
+            </param>
+            <param name="doctor">
+                Existing doctor data.
+            </param>
+        </editPost>
+        <delete>
+            <summary>
+                Delete doctor data.
+            </summary>
+            <param name="id">
+                Id of doctor.
+            </param>
+        </delete>
+    </members>
+
+    <members name="PatentController">
+        <patentController>
+            <summary>
+                Patent controller class.
+            </summary>
+        </patentController>
+        <patentControllerConstructor>
+            <summary>
+                Patent controller class.
+            </summary>
+            <param name="httpClientFactory">
+                Http client factory.
+            </param>
+            <param name="optionsAccessor">
+                Options accessor.
+            </param>
+        </patentControllerConstructor>
+        <index>
+            <summary>
+                Show all patent data.
+            </summary>
+            <returns>
+                View with all patent data.
+            </returns>
+        </index>
+        <details>
+            <summary>
+                Show single patent data by id.
+            </summary>
+            <param name="id">
+                Id of Patent.
+            </param>
+            <returns>
+                View with single patent data.
+            </returns>
+        </details>
+        <createGet>
+            <summary>
+                Go to create view for new patent data.
+            </summary>
+            <returns>
+                Create view.
+            </returns>
+        </createGet>
+        <createPost>
+            <summary>
+                Create new patent data.
+            </summary>
+            <param name="patent">
+                New patent data.
+            </param>
+            <returns>
+                Redirect to index action method on successful creation.
+            </returns>
+        </createPost>
+        <editGet>
+            <summary>
+                Go to edit view.
+            </summary>
+            <param name="id">
+                Id of patent.
+            </param>
+            <returns>
+                Edit view.
+            </returns>
+        </editGet>
+        <editPost>
+            <summary>
+                Update patent data.
+            </summary>
+            <param name="id">
+                Id of existing patent data.
+            </param>
+            <param name="patent">
+                Existing patent data.
+            </param>
+        </editPost>
+        <delete>
+            <summary>
+                Delete patent data.
+            </summary>
+            <param name="id">
+                Id of patent.
+            </param>
+        </delete>
+    </members>
+    
     <members name="ConsultationController">
         <consultationController>
             <summary>

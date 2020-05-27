@@ -10,11 +10,13 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.FrontEnds.WebMvc.Controllers
 {
+    /// <include file='docs.xml' path='docs/members[@name="PatentController"]/patentController/*'/>
     public class PatentController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly PatentOptions _patentOptions;
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/patentControllerConstructor/*'/>
         public PatentController(IHttpClientFactory httpClientFactory,
             IOptionsMonitor<PatentOptions> optionsAccessor)
         {
@@ -22,6 +24,8 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             _patentOptions = optionsAccessor.CurrentValue;
         }
 
+
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/index/*'/>
         public async Task<IActionResult> Index()
         {
             var httpClient = _httpClientFactory.CreateClient();
@@ -42,6 +46,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/details/*'/>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -60,11 +65,13 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/createGet/*'/>
         public IActionResult Create()
         {
             return View();
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/createPost/*'/>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PatentModel patent)
@@ -79,6 +86,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/editGet/*'/>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -97,6 +105,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/editPost/*'/>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, PatentModel patent)
@@ -112,6 +121,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             return StatusCode((int)patentApiResponseMessage.StatusCode);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentController"]/delete/*'/>
         public async Task<IActionResult> Delete(int? id)
         {
             var httpClient = _httpClientFactory.CreateClient();
