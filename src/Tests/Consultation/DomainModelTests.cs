@@ -4,8 +4,10 @@ using System;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
+    /// <include file='docs.xml' path='docs/members[@name="DomainModelTests"]/domainModelTests/*'/>
     internal class DomainModelTests
     {
+        /// <include file='docs.xml' path='docs/members[@name="DomainModelTests"]/consultationDomainModel_GivenValid_ReturnsValid/*'/>
         [Test]
         public void ConsultationDomainModel_GivenValid_ReturnsValid()
         {
@@ -34,6 +36,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat1last", consultationDomainModel.Patent!.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DomainModelTests"]/consultationDomainModel_GivenNullPlace_ExpectException/*'/>
         [Test]
         public void ConsultationDomainModel_GivenNullPlace_ExpectException()
         {
@@ -47,6 +50,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Throws<ArgumentException>(() => consultationDomainModel.Place = null);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DomainModelTests"]/consultationDomainModel_GivenNullProblem_ExpectException/*'/>
         [Test]
         public void ConsultationDomainModel_GivenNullProblem_ExpectException()
         {
@@ -60,6 +64,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Throws<ArgumentException>(() => consultationDomainModel.Problem = null);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DomainModelTests"]/consultationDomainModel_GivenBigLengthProblem_ExpectException/*'/>
         [Test]
         public void ConsultationDomainModel_GivenBigLengthProblem_ExpectException()
         {
@@ -74,6 +79,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 consultationDomainModel.Problem = "this is a very big text....");
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DomainModelTests"]/consultationDomainModel_GivenNullMedicine_ExpectException/*'/>
         [Test]
         public void ConsultationDomainModel_GivenNullMedicine_ExpectException()
         {
@@ -87,6 +93,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Throws<ArgumentException>(() => consultationDomainModel.Medicine = null);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DomainModelTests"]/consultationDomainModel_GivenBigLengthMedicine_ExpectException/*'/>
         [Test]
         public void ConsultationDomainModel_GivenBigLengthMedicine_ExpectException()
         {

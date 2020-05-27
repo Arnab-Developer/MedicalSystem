@@ -4,8 +4,10 @@ using System;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
+    /// <include file='docs.xml' path='docs/members[@name="ViewModelTests"]/viewModelTests/*'/>
     internal class ViewModelTests
     {
+        /// <include file='docs.xml' path='docs/members[@name="ViewModelTests"]/consultationViewModel_GivenValid_ReturnsValid/*'/>
         [Test]
         public void ConsultationViewModel_GivenValid_ReturnsValid()
         {

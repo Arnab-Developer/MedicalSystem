@@ -8,11 +8,13 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
+    /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/consultationDalTests/*'/>
     internal class ConsultationDalTests
     {
         private ConsultationDal? _consultationDal;
         private ConsultationContext? _consultationContext;
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -23,6 +25,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             _consultationDal = new ConsultationDal(_consultationContext);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/getAll_GivenValidDbData_ReturnsValidDomainModels/*'/>
         [Test]
         public void GetAll_GivenValidDbData_ReturnsValidDomainModels()
         {
@@ -69,6 +72,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat2last", consultationDomainModels[1].Patent!.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/getAll_GivenEmptyDbData_ReturnsEmptyDomainModels/*'/>
         [Test]
         public void GetAll_GivenEmptyDbData_ReturnsEmptyDomainModels()
         {
@@ -80,6 +84,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(0, consultationDomainModels.Count);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/getById_GivenValidDbData_ReturnsValidViewModel/*'/>
         [Test]
         public void GetById_GivenValidDbData_ReturnsValidViewModel()
         {
@@ -109,6 +114,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat1last", consultationDomainModel.Patent!.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/getById_GivenEmptyDbData_ReturnsNull/*'/>
         [Test]
         public void GetById_GivenEmptyDbData_ReturnsNull()
         {
@@ -120,6 +126,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Null(consultationDomainModel);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/add_CanInsertInDb/*'/>
         [Test]
         public void Add_CanInsertInDb()
         {
@@ -152,6 +159,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat1last", consultationDomainModelFromDb.Patent!.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/update_CanUpdateInDb/*'/>
         [Test]
         public void Update_CanUpdateInDb()
         {
@@ -186,6 +194,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat1last", consultationDomainModelFromDb.Patent!.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/delete_CanDeleteInDb/*'/>
         [Test]
         public void Delete_CanDeleteInDb()
         {
@@ -205,6 +214,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, _consultationContext.Consultations.Count());
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/cleanup/*'/>
         [TearDown]
         public void Cleanup()
         {

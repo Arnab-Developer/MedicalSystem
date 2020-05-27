@@ -10,11 +10,13 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
+    /// <include file='docs.xml' path='docs/members[@name="PatentServiceTests"]/patentServiceTests/*'/>
     internal class PatentServiceTests
     {
         private PatentService? _patentService;
         private Mock<IPatentDal>? _patentDalMock;
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentServiceTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -22,6 +24,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             _patentService = new PatentService(_patentDalMock.Object);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentServiceTests"]/getAll_GivenValidDomainModels_ReturnsValidViewModels/*'/>
         [Test]
         public void GetAll_GivenValidDomainModels_ReturnsValidViewModels()
         {
@@ -43,6 +46,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("doc2 l", patentViewModels[1].LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentServiceTests"]/getAll_GivenEmptyDomainModels_ReturnsEmptyViewModels/*'/>
         [Test]
         public void GetAll_GivenEmptyDomainModels_ReturnsEmptyViewModels()
         {
@@ -52,6 +56,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Zero(patentViewModels.Count);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentServiceTests"]/getAll_GivenNullDomainModels_ExpectException/*'/>
         [Test]
         public void GetAll_GivenNullDomainModels_ExpectException()
         {

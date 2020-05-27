@@ -10,11 +10,13 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
+    /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/consultationServiceTests/*'/>
     internal class ConsultationServiceTests
     {
         private ConsultationService? _consultationService;
         private Mock<IConsultationDal>? _consultationDalMock;
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -22,6 +24,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             _consultationService = new ConsultationService(_consultationDalMock.Object);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/getAll_GivenValidDomainModels_ReturnsValidViewModels/*'/>
         [Test]
         public void GetAll_GivenValidDomainModels_ReturnsValidViewModels()
         {
@@ -81,6 +84,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat2last", consultationViewModels[1].Patent!.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/getAll_GivenEmptyDomainModels_ReturnsEmptyViewModels/*'/>
         [Test]
         public void GetAll_GivenEmptyDomainModels_ReturnsEmptyViewModels()
         {
@@ -90,6 +94,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(0, consultationViewModels.Count);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/getAll_GivenNullDomainModels_ExpectException/*'/>
         [Test]
         public void GetAll_GivenNullDomainModels_ExpectException()
         {
@@ -97,6 +102,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Throws<NullReferenceException>(() => _consultationService!.GetAll());
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/getById_GivenValidDomainModel_ReturnsValidViewModel/*'/>
         [Test]
         public void GetById_GivenValidDomainModel_ReturnsValidViewModel()
         {
@@ -132,6 +138,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat1last", consultationViewModel!.Patent!.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/getById_GivenNullDomainModel_ReturnsNull/*'/>
         [Test]
         public void GetById_GivenNullDomainModel_ReturnsNull()
         {
@@ -140,6 +147,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Null(consultationViewModel);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/add_CanCallDalAdd/*'/>
         [Test]
         public void Add_CanCallDalAdd()
         {
@@ -174,6 +182,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             _consultationDalMock.Verify();
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/update_CanCallDalUpdate/*'/>
         [Test]
         public void Update_CanCallDalUpdate()
         {
@@ -214,6 +223,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             _consultationDalMock.Verify();
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/delete_CanCallDalDelete/*'/>
         [Test]
         public void Delete_CanCallDalDelete()
         {

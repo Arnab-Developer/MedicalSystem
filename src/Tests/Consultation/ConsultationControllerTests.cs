@@ -15,6 +15,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         private Mock<IConsultationService>? _consultationServiceMock;
         private ConsultationController? _consultationController;
 
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {

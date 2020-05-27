@@ -7,11 +7,13 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
+    /// <include file='docs.xml' path='docs/members[@name="DoctorDalTests"]/doctorDalTests/*'/>
     internal class DoctorDalTests
     {
         private DoctorDal? _doctorDal;
         private ConsultationContext? _consultationContext;
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorDalTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -22,6 +24,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             _doctorDal = new DoctorDal(_consultationContext);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorDalTests"]/getAll_GivenValidDbData_ReturnsValidDomainModels/*'/>
         [Test]
         public void GetAll_GivenValidDbData_ReturnsValidDomainModels()
         {
@@ -37,6 +40,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("doc2last", doctorDomainModels[1].LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorDalTests"]/getAll_GivenEmptyDbData_ReturnsEmptyDomainModels/*'/>
         [Test]
         public void GetAll_GivenEmptyDbData_ReturnsEmptyDomainModels()
         {
@@ -44,6 +48,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Zero(doctorDomainModels.Count);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorDalTests"]/cleanup/*'/>
         [TearDown]
         public void Cleanup()
         {

@@ -9,11 +9,13 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
+    /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/patentControllerTests/*'/>
     internal class PatentControllerTests
     {
         private PatentController? _patentController;
         private Mock<IPatentService>? _patentServiceMock;
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -21,6 +23,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             _patentController = new PatentController(_patentServiceMock.Object);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/getAll_GivenValidViewModels_ReturnsValidViewModels/*'/>
         [Test]
         public void GetAll_GivenValidViewModels_ReturnsValidViewModels()
         {
@@ -52,6 +55,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("doc2 l", patentViewModelsFromController[1].LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/getAll_GivenEmptyViewModels_ReturnsEmptyViewModels/*'/>
         [Test]
         public void GetAll_GivenEmptyViewModels_ReturnsEmptyViewModels()
         {
@@ -61,6 +65,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Zero(patentViewModelsFromController.Count());
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/getAll_GivenException_ExpectException/*'/>
         [Test]
         public void GetAll_GivenException_ExpectException()
         {
