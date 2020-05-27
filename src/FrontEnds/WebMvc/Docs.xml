@@ -204,5 +204,92 @@
             </summary>
         </patentGatewayUrl>
     </members>
+
+    <members name="ConsultationController">
+        <consultationController>
+            <summary>
+                Consultation controller class.
+            </summary>
+        </consultationController>
+        <consultationControllerConstructor>
+            <summary>
+                Consultation controller class.
+            </summary>
+            <param name="httpClientFactory">
+                Http client factory.
+            </param>
+            <param name="consultationOptionsAccessor">
+                Consultation options accessor.
+            </param>
+        </consultationControllerConstructor>
+        <index>
+            <summary>
+                Show all consultation data.
+            </summary>
+            <returns>
+                View with all consultation data.
+            </returns>
+        </index>
+        <details>
+            <summary>
+                Show single consultation data by id.
+            </summary>
+            <param name="id">
+                Id of Consultation.
+            </param>
+            <returns>
+                View with single consultation data.
+            </returns>
+        </details>
+        <createGet>
+            <summary>
+                Go to create view for new consultation data.
+            </summary>
+            <returns>
+                Create view.
+            </returns>
+        </createGet>
+        <createPost>
+            <summary>
+                Create new consultation data.
+            </summary>
+            <param name="consultation">
+                New consultation data.
+            </param>
+            <returns>
+                Redirect to index action method on successful creation.
+            </returns>
+        </createPost>
+        <editGet>
+            <summary>
+                Go to edit view.
+            </summary>
+            <param name="id">
+                Id of consultation.
+            </param>
+            <returns>
+                Edit view.
+            </returns>
+        </editGet>
+        <editPost>
+            <summary>
+                Update consultation data.
+            </summary>
+            <param name="id">
+                Id of existing consultation data.
+            </param>
+            <param name="consultation">
+                Existing consultation data.
+            </param>
+        </editPost>
+        <delete>
+            <summary>
+                Delete consultation data.
+            </summary>
+            <param name="id">
+                Id of consultation.
+            </param>
+        </delete>
+    </members>
     
 </docs>
