@@ -183,6 +183,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/editPost/*'/>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ConsultationModel consultation)
         {
             var httpClient = _httpClientFactory.CreateClient();

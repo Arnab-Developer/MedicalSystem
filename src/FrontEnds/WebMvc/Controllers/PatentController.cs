@@ -98,6 +98,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, PatentModel patent)
         {
             var httpClient = _httpClientFactory.CreateClient();

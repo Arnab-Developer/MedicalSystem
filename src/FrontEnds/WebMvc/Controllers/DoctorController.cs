@@ -98,6 +98,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, DoctorModel doctor)
         {
             var httpClient = _httpClientFactory.CreateClient();
