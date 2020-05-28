@@ -8,11 +8,13 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Patent
 {
+    /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/patentControllerTests/*'/>
     internal class PatentControllerTests
     {
         private PatentContext? _patentContext;
         private PatentController? _patentController;
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -23,6 +25,7 @@ namespace MedicalSystem.Tests.Services.Patent
             _patentController = new PatentController(_patentContext);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/getAll_GivenValidDbData_ReturnsValidModels/*'/>
         [Test]
         public void GetAll_GivenValidDbData_ReturnsValidModels()
         {
@@ -40,6 +43,7 @@ namespace MedicalSystem.Tests.Services.Patent
             Assert.AreEqual("pat2last", patentModels[1].LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/getAll_GivenEmptyDbData_ReturnsEmptyModels/*'/>
         [Test]
         public void GetAll_GivenEmptyDbData_ReturnsEmptyModels()
         {
@@ -47,6 +51,7 @@ namespace MedicalSystem.Tests.Services.Patent
             Assert.Zero(patentModels.Count);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/getById_GivenValidDbData_ReturnsValidModel/*'/>
         [Test]
         public void GetById_GivenValidDbData_ReturnsValidModel()
         {
@@ -58,6 +63,7 @@ namespace MedicalSystem.Tests.Services.Patent
             Assert.AreEqual("pat2last", patentModel.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/getById_GivenEmptyDbData_ReturnsNull/*'/>
         [Test]
         public void GetById_GivenEmptyDbData_ReturnsNull()
         {
@@ -65,6 +71,7 @@ namespace MedicalSystem.Tests.Services.Patent
             Assert.Null(patentModel);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/add_CanInsertInDb/*'/>
         [Test]
         public void Add_CanInsertInDb()
         {
@@ -83,8 +90,9 @@ namespace MedicalSystem.Tests.Services.Patent
             Assert.AreEqual("pat1last", patentModel.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/update_CanUpdateInDb/*'/>
         [Test]
-        public void Add_CanUpdateInDb()
+        public void Update_CanUpdateInDb()
         {
             AddPatents();
 
@@ -99,8 +107,9 @@ namespace MedicalSystem.Tests.Services.Patent
             Assert.AreEqual("pat2last", patentModelNew.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/delete_CanDeleteInDb/*'/>
         [Test]
-        public void Add_CanDeleteInDb()
+        public void Delete_CanDeleteInDb()
         {
             AddPatents();
             var patentModel = _patentContext!.Patents.FirstOrDefault(patent => patent.Id == 2);
@@ -108,6 +117,7 @@ namespace MedicalSystem.Tests.Services.Patent
             Assert.AreEqual(1, _patentContext.Patents.Count());
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentControllerTests"]/cleanup/*'/>
         [TearDown]
         public void Cleanup()
         {

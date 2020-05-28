@@ -8,11 +8,13 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Doctor
 {
+    /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/doctorControllerTests/*'/>
     internal class DoctorControllerTests
     {
         private DoctorContext? _doctorContext;
         private DoctorController? _doctorController;
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -23,6 +25,7 @@ namespace MedicalSystem.Tests.Services.Doctor
             _doctorController = new DoctorController(_doctorContext);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/getAll_GivenValidDbData_ReturnsValidModels/*'/>
         [Test]
         public void GetAll_GivenValidDbData_ReturnsValidModels()
         {
@@ -40,6 +43,7 @@ namespace MedicalSystem.Tests.Services.Doctor
             Assert.AreEqual("doc2last", doctorModels[1].LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/getAll_GivenEmptyDbData_ReturnsEmptyModels/*'/>
         [Test]
         public void GetAll_GivenEmptyDbData_ReturnsEmptyModels()
         {
@@ -47,6 +51,7 @@ namespace MedicalSystem.Tests.Services.Doctor
             Assert.Zero(doctorModels.Count);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/getById_GivenValidDbData_ReturnsValidModel/*'/>
         [Test]
         public void GetById_GivenValidDbData_ReturnsValidModel()
         {
@@ -58,6 +63,7 @@ namespace MedicalSystem.Tests.Services.Doctor
             Assert.AreEqual("doc2last", doctorModel.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/getById_GivenEmptyDbData_ReturnsNull/*'/>
         [Test]
         public void GetById_GivenEmptyDbData_ReturnsNull()
         {
@@ -65,6 +71,7 @@ namespace MedicalSystem.Tests.Services.Doctor
             Assert.Null(doctorModel);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/add_CanInsertInDb/*'/>
         [Test]
         public void Add_CanInsertInDb()
         {
@@ -83,8 +90,9 @@ namespace MedicalSystem.Tests.Services.Doctor
             Assert.AreEqual("doc1last", doctorModel.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/update_CanUpdateInDb/*'/>
         [Test]
-        public void Add_CanUpdateInDb()
+        public void Update_CanUpdateInDb()
         {
             AddDoctors();
 
@@ -99,8 +107,9 @@ namespace MedicalSystem.Tests.Services.Doctor
             Assert.AreEqual("doc2last", doctorModelNew.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/delete_CanDeleteInDb/*'/>
         [Test]
-        public void Add_CanDeleteInDb()
+        public void Delete_CanDeleteInDb()
         {
             AddDoctors();
             var doctorModel = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 2);
@@ -108,6 +117,7 @@ namespace MedicalSystem.Tests.Services.Doctor
             Assert.AreEqual(1, _doctorContext.Doctors.Count());
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/cleanup/*'/>
         [TearDown]
         public void Cleanup()
         {
