@@ -10,15 +10,18 @@ using System.Linq;
 
 namespace MedicalSystem.Jobs.DoctorSync
 {
+    /// <include file='docs.xml' path='docs/members[@name="DoctorSyncFunction"]/doctorSyncFunction/*'/>
     public class DoctorSyncFunction
     {
         private readonly IConfiguration _configuration;
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorSyncFunction"]/doctorSyncFunctionConstructor/*'/>
         public DoctorSyncFunction(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorSyncFunction"]/run/*'/>
         [FunctionName("DoctorSyncFunction")]
         public void Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer, ILogger log)
         {
