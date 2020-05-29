@@ -10,15 +10,18 @@ using System.Linq;
 
 namespace MedicalSystem.Jobs.PatentSync
 {
+    /// <include file='docs.xml' path='docs/members[@name="PatentSyncFunction"]/patentSyncFunction/*'/>
     public class PatentSyncFunction
     {
         private readonly IConfiguration _configuration;
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentSyncFunction"]/patentSyncFunctionConstructor/*'/>
         public PatentSyncFunction(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="PatentSyncFunction"]/run/*'/>
         [FunctionName("PatentSyncFunction")]
         public void Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer, ILogger log)
         {

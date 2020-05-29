@@ -3,20 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MedicalSystem.Jobs.PatentSync.Data
 {
+    /// <include file='docs.xml' path='docs/members[@name="PatentContext"]/patentContext/*'/>
     internal class PatentContext : DbContext
     {
-        /// <summary>
-        /// Creates a new DbContext object.
-        /// </summary>
-        /// <param name="options"></param>
+        /// <include file='docs.xml' path='docs/members[@name="PatentContext"]/patentContextConstructor/*'/>
         public PatentContext(DbContextOptions<PatentContext> options)
             : base(options)
         {
         }
 
-        /// <summary>
-        /// DbSet for patent.
-        /// </summary>
+        /// <include file='docs.xml' path='docs/members[@name="PatentContext"]/patents/*'/>
         public DbSet<PatentModel>? Patents { get; set; }
     }
 }

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+
+    <members name="PatentModel">
+        <patentModel>
+            <summary>
+                All the properties of docotor.
+            </summary>
+        </patentModel>
+        <id>
+            <summary>
+                Id of patent.
+            </summary>
+        </id>
+        <firstName>
+            <summary>
+                First name of patent.
+            </summary>
+        </firstName>
+        <lastName>
+            <summary>
+                Last name of patent.
+            </summary>
+        </lastName>
+        <patentModelConstructor>
+            <summary>
+                Creates new object of patent and initialize with default data.
+            </summary>
+        </patentModelConstructor>
+    </members>
+
+    <members name="PatentContext">
+        <patentContext>
+            <summary>
+                Data context of patent.
+            </summary>
+        </patentContext>
+        <patentContextConstructor>
+            <summary>
+                Creates a new DbContext object.
+            </summary>
+            <param name="options">
+                DbContext options.
+            </param>
+        </patentContextConstructor>
+        <patents>
+            <summary>
+                DbSet for patent.
+            </summary>
+        </patents>
+    </members>
+
+    <members name="PatentSyncFunction">
+        <patentSyncFunction>
+            <summary>
+                Sync patent data from patent api storage to consultation api storage.
+            </summary>
+        </patentSyncFunction>
+        <patentSyncFunctionConstructor>
+            <summary>
+                Creates a new object of patent sync function.
+            </summary>
+            <param name="configuration">
+                Configuration as a dependency to get the connection string.
+            </param>
+        </patentSyncFunctionConstructor>
+        <run>
+            <summary>
+                Sync patent data from patent api storage to consultation api storage.
+            </summary>
+        </run>
+    </members>
+
+</docs>
