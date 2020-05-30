@@ -17,6 +17,9 @@ User can store doctor, patent and consultation information in this application w
 | Database | SQL Server |
 | Unit test | NUnit |
 
+## Project structure
+![Project structure](https://github.com/Arnab-Developer/medical-system/blob/master/MedicalSystemProjectStructure.JPG)
+
 ## Contribution
 If you want to contribute then you can work on any todo issues or you can create a new issue. 
 Before starting your work please let me know on what issue you are going to work.
