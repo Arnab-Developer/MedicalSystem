@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Doctor", "Services\Doctor\MedicalSystem.Services.Doctor.csproj", "{56778B85-CCCB-4495-A596-76DE2FFCF866}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Patient", "Services\Patent\MedicalSystem.Services.Patient.csproj", "{7C3D2CDC-9338-4485-A399-2027A9507A67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Patient", "Services\patient\MedicalSystem.Services.Patient.csproj", "{7C3D2CDC-9338-4485-A399-2027A9507A67}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Consultation", "Services\Consultation\MedicalSystem.Services.Consultation.csproj", "{75606F3A-07D3-4542-B248-3137D74717BE}"
 EndProject
@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Tests.Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Tests.Services.Doctor", "Tests\Doctor\MedicalSystem.Tests.Services.Doctor.csproj", "{8FC74F4C-8E35-4A4F-B0C9-AC3213225C33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Tests.Services.Patient", "Tests\Patent\MedicalSystem.Tests.Services.Patient.csproj", "{A079278E-555F-45C2-BCDC-4AD610218F3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Tests.Services.Patient", "Tests\patient\MedicalSystem.Tests.Services.Patient.csproj", "{A079278E-555F-45C2-BCDC-4AD610218F3F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnds", "FrontEnds", "{A48AFBBA-21CE-4309-A53B-307F6EA3315E}"
 EndProject
@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jobs", "Jobs", "{F8BC2CD2-F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Jobs.DoctorSync", "Jobs\DoctorSync\MedicalSystem.Jobs.DoctorSync.csproj", "{ED47585E-32FF-4114-95D9-5CEB30D66CB7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Jobs.PatientSync", "Jobs\PatentSync\MedicalSystem.Jobs.PatientSync.csproj", "{6598CC3C-0AF2-499B-A1E3-C88257C3F7E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Jobs.PatientSync", "Jobs\patientSync\MedicalSystem.Jobs.PatientSync.csproj", "{6598CC3C-0AF2-499B-A1E3-C88257C3F7E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

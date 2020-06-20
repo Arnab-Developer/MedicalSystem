@@ -147,7 +147,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[Patents](
+CREATE TABLE [dbo].[Patients](
 	[Id] [int] NOT NULL,
 	[FirstName] [varchar](50) NOT NULL,
 	[LastName] [varchar](50) NOT NULL,
@@ -168,7 +168,7 @@ CREATE TABLE [dbo].[Consultations](
 	[Problem] [varchar](50) NOT NULL,
 	[Medicine] [varchar](50) NOT NULL,
 	[DoctorId] [int] NOT NULL,
-	[PatentId] [int] NOT NULL,
+	[PatientId] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
