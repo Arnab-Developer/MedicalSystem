@@ -41,12 +41,12 @@ namespace MedicalSystem.Services.Consultation.Services
                         FirstName = consultationDomainModel.Doctor.FirstName,
                         LastName = consultationDomainModel.Doctor.LastName
                     },
-                    PatentId = consultationDomainModel.PatentId,
-                    Patent = new PatentViewModel()
+                    PatientId = consultationDomainModel.PatientId,
+                    Patient = new PatientViewModel()
                     {
-                        Id = consultationDomainModel.Patent!.Id,
-                        FirstName = consultationDomainModel.Patent.FirstName,
-                        LastName = consultationDomainModel.Patent.LastName
+                        Id = consultationDomainModel.Patient!.Id,
+                        FirstName = consultationDomainModel.Patient.FirstName,
+                        LastName = consultationDomainModel.Patient.LastName
                     }
                 };
                 consultationViewModels.Add(consultationViewModel);
@@ -82,12 +82,12 @@ namespace MedicalSystem.Services.Consultation.Services
                     FirstName = consultationDomainModel.Doctor.FirstName,
                     LastName = consultationDomainModel.Doctor.LastName
                 },
-                PatentId = consultationDomainModel.PatentId,
-                Patent = new PatentViewModel()
+                PatientId = consultationDomainModel.PatientId,
+                Patient = new PatientViewModel()
                 {
-                    Id = consultationDomainModel.Patent!.Id,
-                    FirstName = consultationDomainModel.Patent.FirstName,
-                    LastName = consultationDomainModel.Patent.LastName
+                    Id = consultationDomainModel.Patient!.Id,
+                    FirstName = consultationDomainModel.Patient.FirstName,
+                    LastName = consultationDomainModel.Patient.LastName
                 }
             };
             return consultationViewModel;
@@ -99,7 +99,7 @@ namespace MedicalSystem.Services.Consultation.Services
             var consultationDomainModel = new ConsultationDomainModel(consultationViewModel.Id,
                 consultationViewModel.Date, consultationViewModel.Country, consultationViewModel.State,
                 consultationViewModel.City, consultationViewModel.PinCode, consultationViewModel.Problem,
-                consultationViewModel.Medicine, consultationViewModel.DoctorId, consultationViewModel.PatentId);
+                consultationViewModel.Medicine, consultationViewModel.DoctorId, consultationViewModel.PatientId);
 
             _consultationDal.Add(consultationDomainModel);
         }
@@ -120,7 +120,7 @@ namespace MedicalSystem.Services.Consultation.Services
             consultationDomainModel.Problem = consultationViewModel.Problem;
             consultationDomainModel.Medicine = consultationViewModel.Medicine;
             consultationDomainModel.DoctorId = consultationViewModel.DoctorId;
-            consultationDomainModel.PatentId = consultationViewModel.PatentId;
+            consultationDomainModel.PatientId = consultationViewModel.PatientId;
 
             _consultationDal.Update(consultationDomainModel);
         }

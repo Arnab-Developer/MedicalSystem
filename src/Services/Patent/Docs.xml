@@ -1,110 +1,110 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <docs>
 
-    <members name="PatentModel">
-        <patentModel>
+    <members name="PatientModel">
+        <patientModel>
             <summary>
                 All the properties of docotor.
             </summary>
-        </patentModel>
+        </patientModel>
         <id>
             <summary>
-                Id of patent.
+                Id of patient.
             </summary>
         </id>
         <firstName>
             <summary>
-                First name of patent.
+                First name of patient.
             </summary>
         </firstName>
         <lastName>
             <summary>
-                Last name of patent.
+                Last name of patient.
             </summary>
         </lastName>
-        <patentModelConstructor>
+        <patientModelConstructor>
             <summary>
-                Creates new object of patent and initialize with default data.
+                Creates new object of patient and initialize with default data.
             </summary>
-        </patentModelConstructor>
+        </patientModelConstructor>
     </members>
 
-    <members name="PatentContext">
-        <patentContext>
+    <members name="PatientContext">
+        <patientContext>
             <summary>
-                Data context of patent.
+                Data context of patient.
             </summary>
-        </patentContext>
-        <patentContextConstructor>
+        </patientContext>
+        <patientContextConstructor>
             <summary>
                 Creates a new DbContext object.
             </summary>
             <param name="options">
                 DbContext options.
             </param>
-        </patentContextConstructor>
-        <patents>
+        </patientContextConstructor>
+        <patients>
             <summary>
-                DbSet for patent.
+                DbSet for patient.
             </summary>
-        </patents>
+        </patients>
     </members>
 
-    <members name="PatentController">
-        <patentController>
+    <members name="PatientController">
+        <patientController>
             <summary>
-                Controller for patent.
+                Controller for patient.
             </summary>
-        </patentController>
-        <patentControllerConstructor>
+        </patientController>
+        <patientControllerConstructor>
             <summary>
-                Creates new patent controller object.
+                Creates new patient controller object.
             </summary>
-        </patentControllerConstructor>
+        </patientControllerConstructor>
         <getAll>
             <summary>
-                Get all patent data.
+                Get all patient data.
             </summary>
             <returns>
-                All patent data.
+                All patient data.
             </returns>
         </getAll>
         <getById>
             <summary>
-                Get patent data by id.
+                Get patient data by id.
             </summary>
             <param name="id">
-                Takes patent id to search.
+                Takes patient id to search.
             </param>
             <returns>
-                Return patent data.
+                Return patient data.
             </returns>
         </getById>
         <add>
             <summary>
-                Add new patent object.
+                Add new patient object.
             </summary>
-            <param name="patent">
-                Takes new patent object to add.
+            <param name="patient">
+                Takes new patient object to add.
             </param>
         </add>
         <update>
             <summary>
-                Update existing patent object.
+                Update existing patient object.
             </summary>
             <param name="id">
-                Takes patent id to locate the existing patent object.
+                Takes patient id to locate the existing patient object.
             </param>
-            <param name="patent">
-                Takes updated patent object to update.
+            <param name="patient">
+                Takes updated patient object to update.
             </param>
         </update>
         <delete>
             <summary>
-                Delete existing patent object.
+                Delete existing patient object.
             </summary>
             <param name="id">
-                Takes patent id to locate and delete the existing patent object.
+                Takes patient id to locate and delete the existing patient object.
             </param>
         </delete>
     </members>

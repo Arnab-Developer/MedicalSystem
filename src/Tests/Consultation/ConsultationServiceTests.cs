@@ -34,13 +34,13 @@ namespace MedicalSystem.Tests.Services.Consultation
                     "Preg", "Med1", 1, 1)
                 {
                     Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
-                    Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+                    Patient = new PatientDomainModel(1, "pat1first", "pat1last")
                 },
                 new ConsultationDomainModel(2, DateTime.Now, "UK", "Bihar", "Pune", "987654",
                     "Preg1", "Med2", 2, 2)
                 {
                     Doctor = new DoctorDomainModel(2, "doc2first", "doc2last"),
-                    Patent = new PatentDomainModel(2, "pat2first", "pat2last")
+                    Patient = new PatientDomainModel(2, "pat2first", "pat2last")
                 }
             };
             _consultationDalMock!.Setup(dal => dal.GetAll()).Returns(consultationDomainModels);
@@ -61,10 +61,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, consultationViewModels[0].Doctor!.Id);
             Assert.AreEqual("doc1first", consultationViewModels[0].Doctor!.FirstName);
             Assert.AreEqual("doc1last", consultationViewModels[0].Doctor!.LastName);
-            Assert.AreEqual(1, consultationViewModels[0].PatentId);
-            Assert.AreEqual(1, consultationViewModels[0].Patent!.Id);
-            Assert.AreEqual("pat1first", consultationViewModels[0].Patent!.FirstName);
-            Assert.AreEqual("pat1last", consultationViewModels[0].Patent!.LastName);
+            Assert.AreEqual(1, consultationViewModels[0].PatientId);
+            Assert.AreEqual(1, consultationViewModels[0].Patient!.Id);
+            Assert.AreEqual("pat1first", consultationViewModels[0].Patient!.FirstName);
+            Assert.AreEqual("pat1last", consultationViewModels[0].Patient!.LastName);
 
             Assert.AreEqual(2, consultationViewModels[1].Id);
             Assert.AreEqual(DateTime.Now.Date, consultationViewModels[1].Date.Date);
@@ -78,10 +78,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(2, consultationViewModels[1].Doctor!.Id);
             Assert.AreEqual("doc2first", consultationViewModels[1].Doctor!.FirstName);
             Assert.AreEqual("doc2last", consultationViewModels[1].Doctor!.LastName);
-            Assert.AreEqual(2, consultationViewModels[1].PatentId);
-            Assert.AreEqual(2, consultationViewModels[1].Patent!.Id);
-            Assert.AreEqual("pat2first", consultationViewModels[1].Patent!.FirstName);
-            Assert.AreEqual("pat2last", consultationViewModels[1].Patent!.LastName);
+            Assert.AreEqual(2, consultationViewModels[1].PatientId);
+            Assert.AreEqual(2, consultationViewModels[1].Patient!.Id);
+            Assert.AreEqual("pat2first", consultationViewModels[1].Patient!.FirstName);
+            Assert.AreEqual("pat2last", consultationViewModels[1].Patient!.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/getAll_GivenEmptyDomainModels_ReturnsEmptyViewModels/*'/>
@@ -110,7 +110,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1)
             {
                 Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
-                Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+                Patient = new PatientDomainModel(1, "pat1first", "pat1last")
             };
 
             _consultationDalMock!.Setup(dal => dal.GetById(It.IsAny<int>())).Returns(consultationDomainModel);
@@ -132,10 +132,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, consultationViewModel!.Doctor!.Id);
             Assert.AreEqual("doc1first", consultationViewModel!.Doctor!.FirstName);
             Assert.AreEqual("doc1last", consultationViewModel!.Doctor!.LastName);
-            Assert.AreEqual(1, consultationViewModel!.PatentId);
-            Assert.AreEqual(1, consultationViewModel!.Patent!.Id);
-            Assert.AreEqual("pat1first", consultationViewModel!.Patent!.FirstName);
-            Assert.AreEqual("pat1last", consultationViewModel!.Patent!.LastName);
+            Assert.AreEqual(1, consultationViewModel!.PatientId);
+            Assert.AreEqual(1, consultationViewModel!.Patient!.Id);
+            Assert.AreEqual("pat1first", consultationViewModel!.Patient!.FirstName);
+            Assert.AreEqual("pat1last", consultationViewModel!.Patient!.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationServiceTests"]/getById_GivenNullDomainModel_ReturnsNull/*'/>
@@ -168,8 +168,8 @@ namespace MedicalSystem.Tests.Services.Consultation
                     FirstName = "doc1first",
                     LastName = "doc1last",
                 },
-                PatentId = 1,
-                Patent = new PatentViewModel()
+                PatientId = 1,
+                Patient = new PatientViewModel()
                 {
                     Id = 1,
                     FirstName = "pat1first",
@@ -203,8 +203,8 @@ namespace MedicalSystem.Tests.Services.Consultation
                     FirstName = "doc1first",
                     LastName = "doc1last",
                 },
-                PatentId = 1,
-                Patent = new PatentViewModel()
+                PatientId = 1,
+                Patient = new PatientViewModel()
                 {
                     Id = 1,
                     FirstName = "pat1first",
@@ -215,7 +215,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1)
             {
                 Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
-                Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+                Patient = new PatientDomainModel(1, "pat1first", "pat1last")
             };
             _consultationDalMock!.Setup(dal => dal.GetById(It.IsAny<int>())).Returns(consultationDomainModel).Verifiable();
             _consultationDalMock!.Setup(dal => dal.Update(consultationDomainModel)).Verifiable();
@@ -231,7 +231,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1)
             {
                 Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
-                Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+                Patient = new PatientDomainModel(1, "pat1first", "pat1last")
             };
             _consultationDalMock!.Setup(dal => dal.GetById(It.IsAny<int>())).Returns(consultationDomainModel).Verifiable();
             _consultationDalMock!.Setup(dal => dal.Delete(consultationDomainModel)).Verifiable();

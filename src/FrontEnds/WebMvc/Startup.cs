@@ -22,7 +22,7 @@ namespace MedicalSystem.FrontEnds.WebMvc
             services.AddControllersWithViews();
             services.AddHttpClient();
             services.Configure<DoctorOptions>(Configuration);
-            services.Configure<PatentOptions>(Configuration);
+            services.Configure<PatientOptions>(Configuration);
             services.Configure<ConsultationOptions>(Configuration);
         }
 

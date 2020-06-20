@@ -47,18 +47,18 @@ namespace MedicalSystem.Gateways.WebGateway.Models
         [JsonPropertyName("doctor")]
         public DoctorModel? Doctor { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patentId/*'/>
-        [JsonPropertyName("patentId")]
-        public int PatentId { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patientId/*'/>
+        [JsonPropertyName("patientId")]
+        public int PatientId { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patent/*'/>
-        [JsonPropertyName("patent")]
-        public PatentModel? Patent { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patient/*'/>
+        [JsonPropertyName("patient")]
+        public PatientModel? Patient { get; set; }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/doctors/*'/>
         public IEnumerable<DoctorModel>? Doctors { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patents/*'/>
-        public IEnumerable<PatentModel>? Patents { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patients/*'/>
+        public IEnumerable<PatientModel>? Patients { get; set; }
     }
 }

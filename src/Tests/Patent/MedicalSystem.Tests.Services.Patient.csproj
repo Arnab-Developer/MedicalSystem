@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Services\Patent\MedicalSystem.Services.Patent.csproj" />
+    <ProjectReference Include="..\..\Services\Patent\MedicalSystem.Services.Patient.csproj" />
   </ItemGroup>
 
 </Project>

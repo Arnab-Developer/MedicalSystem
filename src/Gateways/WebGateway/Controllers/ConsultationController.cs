@@ -87,22 +87,22 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 return StatusCode((int)doctorApiResponseMessage.StatusCode);
             }
 
-            var patentApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationPatentApiUrl);
-            if (patentApiResponseMessage.StatusCode != HttpStatusCode.OK)
+            var patientApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationPatientApiUrl);
+            if (patientApiResponseMessage.StatusCode != HttpStatusCode.OK)
             {
-                return StatusCode((int)patentApiResponseMessage.StatusCode);
+                return StatusCode((int)patientApiResponseMessage.StatusCode);
             }
 
             using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
             doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
 
-            using var patentApiResponseStream = await patentApiResponseMessage.Content.ReadAsStreamAsync();
-            var patentModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatentModel>>(patentApiResponseStream);
+            using var patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
+            var patientModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatientModel>>(patientApiResponseStream);
 
             var consultationModel = new ConsultationModel()
             {
                 Doctors = doctorModels,
-                Patents = patentModels
+                Patients = patientModels
             };
             return Ok(consultationModel);
         }

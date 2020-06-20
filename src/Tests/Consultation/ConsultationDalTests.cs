@@ -30,7 +30,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetAll_GivenValidDbData_ReturnsValidDomainModels()
         {
             AddDoctors();
-            AddPatents();
+            AddPatients();
             AddConsultations();
 
             var consultationDomainModels = _consultationDal!.GetAll().ToList();
@@ -49,10 +49,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, consultationDomainModels[0].Doctor!.Id);
             Assert.AreEqual("doc1first", consultationDomainModels[0].Doctor!.FirstName);
             Assert.AreEqual("doc1last", consultationDomainModels[0].Doctor!.LastName);
-            Assert.AreEqual(1, consultationDomainModels[0].PatentId);
-            Assert.AreEqual(1, consultationDomainModels[0].Patent!.Id);
-            Assert.AreEqual("pat1first", consultationDomainModels[0].Patent!.FirstName);
-            Assert.AreEqual("pat1last", consultationDomainModels[0].Patent!.LastName);
+            Assert.AreEqual(1, consultationDomainModels[0].PatientId);
+            Assert.AreEqual(1, consultationDomainModels[0].Patient!.Id);
+            Assert.AreEqual("pat1first", consultationDomainModels[0].Patient!.FirstName);
+            Assert.AreEqual("pat1last", consultationDomainModels[0].Patient!.LastName);
 
             Assert.AreEqual(2, consultationDomainModels[1].Id);
             Assert.AreEqual(DateTime.Now.AddDays(-1).Date, consultationDomainModels[1].Date.Date);
@@ -66,10 +66,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(2, consultationDomainModels[1].Doctor!.Id);
             Assert.AreEqual("doc2first", consultationDomainModels[1].Doctor!.FirstName);
             Assert.AreEqual("doc2last", consultationDomainModels[1].Doctor!.LastName);
-            Assert.AreEqual(2, consultationDomainModels[1].PatentId);
-            Assert.AreEqual(2, consultationDomainModels[1].Patent!.Id);
-            Assert.AreEqual("pat2first", consultationDomainModels[1].Patent!.FirstName);
-            Assert.AreEqual("pat2last", consultationDomainModels[1].Patent!.LastName);
+            Assert.AreEqual(2, consultationDomainModels[1].PatientId);
+            Assert.AreEqual(2, consultationDomainModels[1].Patient!.Id);
+            Assert.AreEqual("pat2first", consultationDomainModels[1].Patient!.FirstName);
+            Assert.AreEqual("pat2last", consultationDomainModels[1].Patient!.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/getAll_GivenEmptyDbData_ReturnsEmptyDomainModels/*'/>
@@ -77,7 +77,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetAll_GivenEmptyDbData_ReturnsEmptyDomainModels()
         {
             AddDoctors();
-            AddPatents();
+            AddPatients();
 
             var consultationDomainModels = _consultationDal!.GetAll().ToList();
 
@@ -89,7 +89,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetById_GivenValidDbData_ReturnsValidViewModel()
         {
             AddDoctors();
-            AddPatents();
+            AddPatients();
             AddConsultation();
 
             var consultationDomainModel = _consultationDal!.GetById(1);
@@ -108,10 +108,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, consultationDomainModel.Doctor!.Id);
             Assert.AreEqual("doc1first", consultationDomainModel.Doctor!.FirstName);
             Assert.AreEqual("doc1last", consultationDomainModel.Doctor!.LastName);
-            Assert.AreEqual(1, consultationDomainModel.PatentId);
-            Assert.AreEqual(1, consultationDomainModel.Patent!.Id);
-            Assert.AreEqual("pat1first", consultationDomainModel.Patent!.FirstName);
-            Assert.AreEqual("pat1last", consultationDomainModel.Patent!.LastName);
+            Assert.AreEqual(1, consultationDomainModel.PatientId);
+            Assert.AreEqual(1, consultationDomainModel.Patient!.Id);
+            Assert.AreEqual("pat1first", consultationDomainModel.Patient!.FirstName);
+            Assert.AreEqual("pat1last", consultationDomainModel.Patient!.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/getById_GivenEmptyDbData_ReturnsNull/*'/>
@@ -119,7 +119,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetById_GivenEmptyDbData_ReturnsNull()
         {
             AddDoctors();
-            AddPatents();
+            AddPatients();
 
             var consultationDomainModel = _consultationDal!.GetById(1);
 
@@ -131,7 +131,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void Add_CanInsertInDb()
         {
             AddDoctors();
-            AddPatents();
+            AddPatients();
 
             var consultationDomainModel = new ConsultationDomainModel(1, DateTime.Now, "India",
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1);
@@ -153,10 +153,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, consultationDomainModelFromDb.Doctor!.Id);
             Assert.AreEqual("doc1first", consultationDomainModelFromDb.Doctor!.FirstName);
             Assert.AreEqual("doc1last", consultationDomainModelFromDb.Doctor!.LastName);
-            Assert.AreEqual(1, consultationDomainModelFromDb.PatentId);
-            Assert.AreEqual(1, consultationDomainModelFromDb.Patent!.Id);
-            Assert.AreEqual("pat1first", consultationDomainModelFromDb.Patent!.FirstName);
-            Assert.AreEqual("pat1last", consultationDomainModelFromDb.Patent!.LastName);
+            Assert.AreEqual(1, consultationDomainModelFromDb.PatientId);
+            Assert.AreEqual(1, consultationDomainModelFromDb.Patient!.Id);
+            Assert.AreEqual("pat1first", consultationDomainModelFromDb.Patient!.FirstName);
+            Assert.AreEqual("pat1last", consultationDomainModelFromDb.Patient!.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/update_CanUpdateInDb/*'/>
@@ -164,7 +164,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void Update_CanUpdateInDb()
         {
             AddDoctors();
-            AddPatents();
+            AddPatients();
             AddConsultations();
 
             var consultationDomainModelFromDb = _consultationContext!.Consultations
@@ -188,10 +188,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, consultationDomainModelFromDb.Doctor!.Id);
             Assert.AreEqual("doc1first", consultationDomainModelFromDb.Doctor!.FirstName);
             Assert.AreEqual("doc1last", consultationDomainModelFromDb.Doctor!.LastName);
-            Assert.AreEqual(1, consultationDomainModelFromDb.PatentId);
-            Assert.AreEqual(1, consultationDomainModelFromDb.Patent!.Id);
-            Assert.AreEqual("pat1first", consultationDomainModelFromDb.Patent!.FirstName);
-            Assert.AreEqual("pat1last", consultationDomainModelFromDb.Patent!.LastName);
+            Assert.AreEqual(1, consultationDomainModelFromDb.PatientId);
+            Assert.AreEqual(1, consultationDomainModelFromDb.Patient!.Id);
+            Assert.AreEqual("pat1first", consultationDomainModelFromDb.Patient!.FirstName);
+            Assert.AreEqual("pat1last", consultationDomainModelFromDb.Patient!.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDalTests"]/delete_CanDeleteInDb/*'/>
@@ -199,7 +199,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void Delete_CanDeleteInDb()
         {
             AddDoctors();
-            AddPatents();
+            AddPatients();
             AddConsultations();
 
             var consultationDomainModelFromDb = _consultationContext!.Consultations
@@ -210,7 +210,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 .FirstOrDefault(consultationDomainModel => consultationDomainModel.Id == 1);
             Assert.Null(consultationDomainModelFromDbNew);
             Assert.AreEqual(2, _consultationContext.Doctors.Count());
-            Assert.AreEqual(2, _consultationContext.Patents.Count());
+            Assert.AreEqual(2, _consultationContext.Patients.Count());
             Assert.AreEqual(1, _consultationContext.Consultations.Count());
         }
 
@@ -220,7 +220,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         {
             _consultationContext!.Consultations!.RemoveRange(_consultationContext.Consultations);
             _consultationContext.Doctors!.RemoveRange(_consultationContext.Doctors);
-            _consultationContext.Patents!.RemoveRange(_consultationContext.Patents);
+            _consultationContext.Patients!.RemoveRange(_consultationContext.Patients);
 
             _consultationContext.SaveChanges();
         }
@@ -236,14 +236,14 @@ namespace MedicalSystem.Tests.Services.Consultation
             _consultationContext.SaveChanges();
         }
 
-        private void AddPatents()
+        private void AddPatients()
         {
-            var patents = new List<PatentDomainModel>()
+            var patients = new List<PatientDomainModel>()
             {
-                new PatentDomainModel(1, "pat1first", "pat1last"),
-                new PatentDomainModel(2, "pat2first", "pat2last"),
+                new PatientDomainModel(1, "pat1first", "pat1last"),
+                new PatientDomainModel(2, "pat2first", "pat2last"),
             };
-            _consultationContext!.Patents!.AddRange(patents);
+            _consultationContext!.Patients!.AddRange(patients);
             _consultationContext.SaveChanges();
         }
 

@@ -1,18 +1,18 @@
-﻿using MedicalSystem.Jobs.PatentSync.Models;
+﻿using MedicalSystem.Jobs.PatientSync.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedicalSystem.Jobs.PatentSync.Data
+namespace MedicalSystem.Jobs.PatientSync.Data
 {
-    /// <include file='docs.xml' path='docs/members[@name="PatentContext"]/patentContext/*'/>
-    internal class PatentContext : DbContext
+    /// <include file='docs.xml' path='docs/members[@name="PatientContext"]/patientContext/*'/>
+    internal class PatientContext : DbContext
     {
-        /// <include file='docs.xml' path='docs/members[@name="PatentContext"]/patentContextConstructor/*'/>
-        public PatentContext(DbContextOptions<PatentContext> options)
+        /// <include file='docs.xml' path='docs/members[@name="PatientContext"]/patientContextConstructor/*'/>
+        public PatientContext(DbContextOptions<PatientContext> options)
             : base(options)
         {
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatentContext"]/patents/*'/>
-        public DbSet<PatentModel>? Patents { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="PatientContext"]/patients/*'/>
+        public DbSet<PatientModel>? Patients { get; set; }
     }
 }

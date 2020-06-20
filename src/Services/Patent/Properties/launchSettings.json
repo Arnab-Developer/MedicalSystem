@@ -12,15 +12,15 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "patent",
+      "launchUrl": "patient",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MedicalSystem.Services.Patent": {
+    "MedicalSystem.Services.Patient": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "patent",
+      "launchUrl": "patient",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

@@ -46,8 +46,8 @@ namespace MedicalSystem.Tests.Services.Consultation
                         FirstName = "doc1first",
                         LastName = "doc1last",
                     },
-                    PatentId = 1,
-                    Patent = new PatentViewModel()
+                    PatientId = 1,
+                    Patient = new PatientViewModel()
                     {
                         Id = 1,
                         FirstName = "pat1first",
@@ -71,8 +71,8 @@ namespace MedicalSystem.Tests.Services.Consultation
                         FirstName = "doc2 fir",
                         LastName = "doc2 las",
                     },
-                    PatentId = 2,
-                    Patent = new PatentViewModel()
+                    PatientId = 2,
+                    Patient = new PatientViewModel()
                     {
                         Id = 2,
                         FirstName = "pat2 fir",
@@ -98,10 +98,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, consultationViewModelsFromController[0].Doctor!.Id);
             Assert.AreEqual("doc1first", consultationViewModelsFromController[0].Doctor!.FirstName);
             Assert.AreEqual("doc1last", consultationViewModelsFromController[0].Doctor!.LastName);
-            Assert.AreEqual(1, consultationViewModelsFromController[0].PatentId);
-            Assert.AreEqual(1, consultationViewModelsFromController[0].Patent!.Id);
-            Assert.AreEqual("pat1first", consultationViewModelsFromController[0].Patent!.FirstName);
-            Assert.AreEqual("pat1last", consultationViewModelsFromController[0].Patent!.LastName);
+            Assert.AreEqual(1, consultationViewModelsFromController[0].PatientId);
+            Assert.AreEqual(1, consultationViewModelsFromController[0].Patient!.Id);
+            Assert.AreEqual("pat1first", consultationViewModelsFromController[0].Patient!.FirstName);
+            Assert.AreEqual("pat1last", consultationViewModelsFromController[0].Patient!.LastName);
 
             Assert.AreEqual(2, consultationViewModelsFromController[1].Id);
             Assert.AreEqual(DateTime.Now.Date, consultationViewModelsFromController[1].Date.Date);
@@ -115,10 +115,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(2, consultationViewModelsFromController[1].Doctor!.Id);
             Assert.AreEqual("doc2 fir", consultationViewModelsFromController[1].Doctor!.FirstName);
             Assert.AreEqual("doc2 las", consultationViewModelsFromController[1].Doctor!.LastName);
-            Assert.AreEqual(2, consultationViewModelsFromController[1].PatentId);
-            Assert.AreEqual(2, consultationViewModelsFromController[1].Patent!.Id);
-            Assert.AreEqual("pat2 fir", consultationViewModelsFromController[1].Patent!.FirstName);
-            Assert.AreEqual("pat2 las", consultationViewModelsFromController[1].Patent!.LastName);
+            Assert.AreEqual(2, consultationViewModelsFromController[1].PatientId);
+            Assert.AreEqual(2, consultationViewModelsFromController[1].Patient!.Id);
+            Assert.AreEqual("pat2 fir", consultationViewModelsFromController[1].Patient!.FirstName);
+            Assert.AreEqual("pat2 las", consultationViewModelsFromController[1].Patient!.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenEmptyViewModels_ReturnsEmptyViewModels/*'/>
@@ -164,8 +164,8 @@ namespace MedicalSystem.Tests.Services.Consultation
                     FirstName = "doc1first",
                     LastName = "doc1last",
                 },
-                PatentId = 1,
-                Patent = new PatentViewModel()
+                PatientId = 1,
+                Patient = new PatientViewModel()
                 {
                     Id = 1,
                     FirstName = "pat1first",
@@ -188,10 +188,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, consultationViewModelFromController.Doctor!.Id);
             Assert.AreEqual("doc1first", consultationViewModelFromController.Doctor.FirstName);
             Assert.AreEqual("doc1last", consultationViewModelFromController.Doctor.LastName);
-            Assert.AreEqual(1, consultationViewModelFromController.PatentId);
-            Assert.AreEqual(1, consultationViewModelFromController.Patent!.Id);
-            Assert.AreEqual("pat1first", consultationViewModelFromController.Patent.FirstName);
-            Assert.AreEqual("pat1last", consultationViewModelFromController.Patent.LastName);
+            Assert.AreEqual(1, consultationViewModelFromController.PatientId);
+            Assert.AreEqual(1, consultationViewModelFromController.Patient!.Id);
+            Assert.AreEqual("pat1first", consultationViewModelFromController.Patient.FirstName);
+            Assert.AreEqual("pat1last", consultationViewModelFromController.Patient.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getById_GivenNullViewModel_ReturnsNull/*'/>
@@ -224,8 +224,8 @@ namespace MedicalSystem.Tests.Services.Consultation
                     FirstName = "doc1first",
                     LastName = "doc1last",
                 },
-                PatentId = 1,
-                Patent = new PatentViewModel()
+                PatientId = 1,
+                Patient = new PatientViewModel()
                 {
                     Id = 1,
                     FirstName = "pat1first",
@@ -259,8 +259,8 @@ namespace MedicalSystem.Tests.Services.Consultation
                     FirstName = "doc1first",
                     LastName = "doc1last",
                 },
-                PatentId = 1,
-                Patent = new PatentViewModel()
+                PatientId = 1,
+                Patient = new PatientViewModel()
                 {
                     Id = 1,
                     FirstName = "pat1first",

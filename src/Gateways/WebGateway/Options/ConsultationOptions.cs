@@ -9,15 +9,15 @@
         /// <include file='docs.xml' path='docs/members[@name="ConsultationOptions"]/consultationDoctorApiUrl/*'/>
         public string ConsultationDoctorApiUrl { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationOptions"]/consultationPatentApiUrl/*'/>
-        public string ConsultationPatentApiUrl { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationOptions"]/consultationPatientApiUrl/*'/>
+        public string ConsultationPatientApiUrl { get; set; }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationOptions"]/consultationOptionsConstructor/*'/>
         public ConsultationOptions()
         {
             ConsultationApiUrl = string.Empty;
             ConsultationDoctorApiUrl = string.Empty;
-            ConsultationPatentApiUrl = string.Empty;
+            ConsultationPatientApiUrl = string.Empty;
         }
     }
 }

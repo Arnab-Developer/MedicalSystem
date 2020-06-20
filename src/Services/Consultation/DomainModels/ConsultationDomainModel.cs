@@ -70,11 +70,11 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/doctor/*'/>
         public DoctorDomainModel? Doctor { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/patentId/*'/>
-        public int PatentId { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/patientId/*'/>
+        public int PatientId { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/patent/*'/>
-        public PatentDomainModel? Patent { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/patient/*'/>
+        public PatientDomainModel? Patient { get; set; }
 
         private ConsultationDomainModel()
         {
@@ -84,12 +84,12 @@ namespace MedicalSystem.Services.Consultation.DomainModels
             _problem = string.Empty;
             _medicine = string.Empty;
             DoctorId = 0;
-            PatentId = 0;
+            PatientId = 0;
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/consultationDomainModelConstructor/*'/>
         public ConsultationDomainModel(int id, DateTime date, string? country, string? state, string? city,
-            string? pinCode, string? problem, string? medicine, int doctorId, int patentId)
+            string? pinCode, string? problem, string? medicine, int doctorId, int patientId)
             : this()
         {
             Id = id;
@@ -98,7 +98,7 @@ namespace MedicalSystem.Services.Consultation.DomainModels
             Problem = problem;
             Medicine = medicine;
             DoctorId = doctorId;
-            PatentId = patentId;
+            PatientId = patientId;
         }
     }
 }

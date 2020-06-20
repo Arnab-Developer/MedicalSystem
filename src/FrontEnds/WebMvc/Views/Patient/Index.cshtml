@@ -1,0 +1,42 @@
+﻿@using MedicalSystem.FrontEnds.WebMvc.Models
+@model IEnumerable<PatientModel>
+@{
+    ViewData["Title"] = "Patients";
+}
+
+<h1>Patients</h1>
+<p>
+    <a asp-controller="Patient" asp-action="Create">Create New</a>
+</p>
+@if (Model == null)
+{
+    @ViewData["ErrorReason"]
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var patient in Model)
+            {
+                <tr>
+                    <td>@patient.Id</td>
+                    <td>@patient.FirstName</td>
+                    <td>@patient.LastName</td>
+                    <td>
+                        <a asp-controller="Patient" asp-action="Details" asp-route-id="@patient.Id">Details</a>
+                        <a asp-controller="Patient" asp-action="Edit" asp-route-id="@patient.Id">Edit</a>
+                        <a asp-controller="Patient" asp-action="Delete" asp-route-id="@patient.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -31,8 +31,8 @@ namespace MedicalSystem.Services.Consultation
             services.AddTransient(typeof(IConsultationDal), typeof(ConsultationDal));
             services.AddTransient(typeof(IDoctorService), typeof(DoctorService));
             services.AddTransient(typeof(IDoctorDal), typeof(DoctorDal));
-            services.AddTransient(typeof(IPatentService), typeof(PatentService));
-            services.AddTransient(typeof(IPatentDal), typeof(PatentDal));
+            services.AddTransient(typeof(IPatientService), typeof(PatientService));
+            services.AddTransient(typeof(IPatientDal), typeof(PatientDal));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

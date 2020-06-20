@@ -15,7 +15,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1)
             {
                 Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
-                Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+                Patient = new PatientDomainModel(1, "pat1first", "pat1last")
             };
 
             Assert.AreEqual(1, consultationDomainModel.Id);
@@ -30,10 +30,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, consultationDomainModel.Doctor!.Id);
             Assert.AreEqual("doc1first", consultationDomainModel.Doctor!.FirstName);
             Assert.AreEqual("doc1last", consultationDomainModel.Doctor!.LastName);
-            Assert.AreEqual(1, consultationDomainModel.PatentId);
-            Assert.AreEqual(1, consultationDomainModel.Patent!.Id);
-            Assert.AreEqual("pat1first", consultationDomainModel.Patent!.FirstName);
-            Assert.AreEqual("pat1last", consultationDomainModel.Patent!.LastName);
+            Assert.AreEqual(1, consultationDomainModel.PatientId);
+            Assert.AreEqual(1, consultationDomainModel.Patient!.Id);
+            Assert.AreEqual("pat1first", consultationDomainModel.Patient!.FirstName);
+            Assert.AreEqual("pat1last", consultationDomainModel.Patient!.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="DomainModelTests"]/consultationDomainModel_GivenNullPlace_ExpectException/*'/>
@@ -44,7 +44,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1)
             {
                 Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
-                Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+                Patient = new PatientDomainModel(1, "pat1first", "pat1last")
             };
 
             Assert.Throws<ArgumentException>(() => consultationDomainModel.Place = null);
@@ -58,7 +58,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1)
             {
                 Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
-                Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+                Patient = new PatientDomainModel(1, "pat1first", "pat1last")
             };
 
             Assert.Throws<ArgumentException>(() => consultationDomainModel.Problem = null);
@@ -72,7 +72,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1)
             {
                 Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
-                Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+                Patient = new PatientDomainModel(1, "pat1first", "pat1last")
             };
 
             Assert.Throws<ArgumentException>(() =>
@@ -87,7 +87,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1)
             {
                 Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
-                Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+                Patient = new PatientDomainModel(1, "pat1first", "pat1last")
             };
 
             Assert.Throws<ArgumentException>(() => consultationDomainModel.Medicine = null);
@@ -101,7 +101,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1)
             {
                 Doctor = new DoctorDomainModel(1, "doc1first", "doc1last"),
-                Patent = new PatentDomainModel(1, "pat1first", "pat1last")
+                Patient = new PatientDomainModel(1, "pat1first", "pat1last")
             };
 
             Assert.Throws<ArgumentException>(() =>

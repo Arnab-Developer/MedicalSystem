@@ -1,4 +1,4 @@
-using MedicalSystem.Services.Patent.Data;
+using MedicalSystem.Services.Patient.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace MedicalSystem.Services.Patent
+namespace MedicalSystem.Services.Patient
 {
     public class Startup
     {
@@ -21,8 +21,8 @@ namespace MedicalSystem.Services.Patent
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var patentDbConnectionString = Configuration.GetConnectionString("PatentDbConnectionString");
-            services.AddDbContext<PatentContext>(option => option.UseSqlServer(patentDbConnectionString));
+            var patientDbConnectionString = Configuration.GetConnectionString("PatientDbConnectionString");
+            services.AddDbContext<PatientContext>(option => option.UseSqlServer(patientDbConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

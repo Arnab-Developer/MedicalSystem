@@ -48,26 +48,26 @@ namespace MedicalSystem.FrontEnds.WebMvc.Models
         [JsonPropertyName("doctor")]
         public DoctorModel? Doctor { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationModel"]/patentId/*'/>
-        [JsonPropertyName("patentId")]
-        public int PatentId { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationModel"]/patientId/*'/>
+        [JsonPropertyName("patientId")]
+        public int PatientId { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationModel"]/patent/*'/>
-        [JsonPropertyName("patent")]
-        public PatentModel? Patent { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationModel"]/patient/*'/>
+        [JsonPropertyName("patient")]
+        public PatientModel? Patient { get; set; }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationModel"]/doctors/*'/>
         [JsonPropertyName("doctors")]
         public IEnumerable<DoctorModel>? Doctors { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationModel"]/patents/*'/>
-        [JsonPropertyName("patents")]
-        public IEnumerable<PatentModel>? Patents { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationModel"]/patients/*'/>
+        [JsonPropertyName("patients")]
+        public IEnumerable<PatientModel>? Patients { get; set; }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationModel"]/doctorSelectList/*'/>
         public IEnumerable<SelectListItem>? DoctorSelectList { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationModel"]/patentSelectList/*'/>
-        public IEnumerable<SelectListItem>? PatentSelectList { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationModel"]/patientSelectList/*'/>
+        public IEnumerable<SelectListItem>? PatientSelectList { get; set; }
     }
 }

@@ -4,6 +4,9 @@
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="local.Designer.cs" />
+  </ItemGroup>
   <ItemGroup>    
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.7" />
@@ -11,6 +14,10 @@
   <ItemGroup>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>local.Designer.cs</LastGenOutput>
     </None>
     <None Update="local.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -21,7 +21,7 @@ namespace MedicalSystem.Services.Consultation.Dals
         {
             var consultationDomainModels = _consultationContext.Consultations
                 .Include(consultation => consultation.Doctor)
-                .Include(consultation => consultation.Patent)
+                .Include(consultation => consultation.Patient)
                 .OrderByDescending(consultation => consultation.Date);
 
             return consultationDomainModels;
@@ -32,7 +32,7 @@ namespace MedicalSystem.Services.Consultation.Dals
         {
             var consultationDomainModel = _consultationContext.Consultations
                 .Include(consultation => consultation.Doctor)
-                .Include(consultation => consultation.Patent)
+                .Include(consultation => consultation.Patient)
                 .FirstOrDefault(consultation => consultation.Id == id);
 
             return consultationDomainModel;

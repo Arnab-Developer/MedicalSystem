@@ -1,72 +1,72 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <docs>
 
-    <members name="PatentModel">
-        <patentModel>
+    <members name="PatientModel">
+        <patientModel>
             <summary>
                 All the properties of docotor.
             </summary>
-        </patentModel>
+        </patientModel>
         <id>
             <summary>
-                Id of patent.
+                Id of patient.
             </summary>
         </id>
         <firstName>
             <summary>
-                First name of patent.
+                First name of patient.
             </summary>
         </firstName>
         <lastName>
             <summary>
-                Last name of patent.
+                Last name of patient.
             </summary>
         </lastName>
-        <patentModelConstructor>
+        <patientModelConstructor>
             <summary>
-                Creates new object of patent and initialize with default data.
+                Creates new object of patient and initialize with default data.
             </summary>
-        </patentModelConstructor>
+        </patientModelConstructor>
     </members>
 
-    <members name="PatentContext">
-        <patentContext>
+    <members name="PatientContext">
+        <patientContext>
             <summary>
-                Data context of patent.
+                Data context of patient.
             </summary>
-        </patentContext>
-        <patentContextConstructor>
+        </patientContext>
+        <patientContextConstructor>
             <summary>
                 Creates a new DbContext object.
             </summary>
             <param name="options">
                 DbContext options.
             </param>
-        </patentContextConstructor>
-        <patents>
+        </patientContextConstructor>
+        <patients>
             <summary>
-                DbSet for patent.
+                DbSet for patient.
             </summary>
-        </patents>
+        </patients>
     </members>
 
-    <members name="PatentSyncFunction">
-        <patentSyncFunction>
+    <members name="PatientSyncFunction">
+        <patientSyncFunction>
             <summary>
-                Sync patent data from patent api storage to consultation api storage.
+                Sync patient data from patient api storage to consultation api storage.
             </summary>
-        </patentSyncFunction>
-        <patentSyncFunctionConstructor>
+        </patientSyncFunction>
+        <patientSyncFunctionConstructor>
             <summary>
-                Creates a new object of patent sync function.
+                Creates a new object of patient sync function.
             </summary>
             <param name="configuration">
                 Configuration as a dependency to get the connection string.
             </param>
-        </patentSyncFunctionConstructor>
+        </patientSyncFunctionConstructor>
         <run>
             <summary>
-                Sync patent data from patent api storage to consultation api storage.
+                Sync patient data from patient api storage to consultation api storage.
             </summary>
         </run>
     </members>

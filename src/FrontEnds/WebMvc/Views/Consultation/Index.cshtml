@@ -24,8 +24,8 @@ else
                 <th>@Html.DisplayNameFor(model => model.City)</th>
                 <th>@Html.DisplayNameFor(model => model.Doctor!.FirstName)</th>
                 <th>@Html.DisplayNameFor(model => model.Doctor!.LastName)</th>
-                <th>@Html.DisplayNameFor(model => model.Patent!.FirstName)</th>
-                <th>@Html.DisplayNameFor(model => model.Patent!.LastName)</th>
+                <th>@Html.DisplayNameFor(model => model.Patient!.FirstName)</th>
+                <th>@Html.DisplayNameFor(model => model.Patient!.LastName)</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -40,8 +40,8 @@ else
                     <td>@consultation.City</td>
                     <td>@consultation.Doctor!.FirstName</td>
                     <td>@consultation.Doctor!.LastName</td>
-                    <td>@consultation.Patent!.FirstName</td>
-                    <td>@consultation.Patent!.LastName</td>
+                    <td>@consultation.Patient!.FirstName</td>
+                    <td>@consultation.Patient!.LastName</td>
                     <td>
                         <a asp-controller="Consultation" asp-action="Details" asp-route-id="@consultation.Id">Details</a>
                         <a asp-controller="Consultation" asp-action="Edit" asp-route-id="@consultation.Id">Edit</a>

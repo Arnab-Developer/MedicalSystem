@@ -211,7 +211,7 @@
         </getAll_GivenEmptyDbData_ReturnsEmptyDomainModels>
         <cleanup>
             <summary>
-                Patent dal tests setup cleanup.
+                Patient dal tests setup cleanup.
             </summary>
         </cleanup>
     </members>
@@ -244,15 +244,15 @@
         </getAll_GivenNullDomainModels_ExpectException>
     </members>
 
-    <members name="PatentControllerTests">
-        <patentControllerTests>
+    <members name="PatientControllerTests">
+        <patientControllerTests>
             <summary>
-                Tests for patent controller.
+                Tests for patient controller.
             </summary>
-        </patentControllerTests>
+        </patientControllerTests>
         <setup>
             <summary>
-                Patent controller test setup.
+                Patient controller test setup.
             </summary>
         </setup>
         <getAll_GivenValidViewModels_ReturnsValidViewModels>
@@ -272,15 +272,15 @@
         </getAll_GivenException_ExpectException>
     </members>
 
-    <members name="PatentDalTests">
-        <patentDalTests>
+    <members name="PatientDalTests">
+        <patientDalTests>
             <summary>
-                Patent dal tests.
+                Patient dal tests.
             </summary>
-        </patentDalTests>
+        </patientDalTests>
         <setup>
             <summary>
-                Patent dal tests setup.
+                Patient dal tests setup.
             </summary>
         </setup>
         <getAll_GivenValidDbData_ReturnsValidDomainModels>
@@ -295,20 +295,20 @@
         </getAll_GivenEmptyDbData_ReturnsEmptyDomainModels>
         <cleanup>
             <summary>
-                Patent dal tests setup cleanup.
+                Patient dal tests setup cleanup.
             </summary>
         </cleanup>
     </members>
 
-    <members name="PatentServiceTests">
-        <patentServiceTests>
+    <members name="PatientServiceTests">
+        <patientServiceTests>
             <summary>
-                Patent service tests.
+                Patient service tests.
             </summary>
-        </patentServiceTests>
+        </patientServiceTests>
         <setup>
             <summary>
-                Patent service tests setup.
+                Patient service tests setup.
             </summary>
         </setup>
         <getAll_GivenValidDomainModels_ReturnsValidViewModels>

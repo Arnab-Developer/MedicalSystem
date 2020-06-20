@@ -38,41 +38,41 @@
         </doctorDomainModelConstructor>
     </members>
 
-    <members name="PatentDomainModel">
-        <patentDomainModel>
+    <members name="PatientDomainModel">
+        <patientDomainModel>
             <summary>
-                Patent domain model.
+                Patient domain model.
             </summary>
-        </patentDomainModel>
+        </patientDomainModel>
         <id>
             <summary>
-                Id of patent.
+                Id of patient.
             </summary>
         </id>
         <firstName>
             <summary>
-                First Name of patent.
+                First Name of patient.
             </summary>
         </firstName>
         <lastName>
             <summary>
-                Last Name of patent.
+                Last Name of patient.
             </summary>
         </lastName>
-        <patentDomainModelConstructor>
+        <patientDomainModelConstructor>
             <summary>
-                Create new patent object.
+                Create new patient object.
             </summary>
             <param name="id">
-                Id of patent.
+                Id of patient.
             </param>
             <param name="firstName">
-                First name of patent.
+                First name of patient.
             </param>
             <param name="lastName">
-                Last name of patent.
+                Last name of patient.
             </param>
-        </patentDomainModelConstructor>
+        </patientDomainModelConstructor>
     </members>
 
     <members name="ConsultationDomainModel">
@@ -116,16 +116,16 @@
                 Doctor navigation property.
             </summary>
         </doctor>
-        <patentId>
+        <patientId>
             <summary>
-                Id of patent.
+                Id of patient.
             </summary>
-        </patentId>
-        <patent>
+        </patientId>
+        <patient>
             <summary>
-                Patent navigation property.
+                Patient navigation property.
             </summary>
-        </patent>
+        </patient>
         <consultationDomainModelConstructor>
             <summary>
                 Create new Consultation object.
@@ -157,8 +157,8 @@
             <param name="doctorId">
                 Id of doctor for Consultation.
             </param>
-            <param name="patentId">
-                Id of patent for Consultation.
+            <param name="patientId">
+                Id of patient for Consultation.
             </param>
         </consultationDomainModelConstructor>
     </members>
@@ -236,25 +236,25 @@
         </lastName>
     </members>
 
-    <members name="PatentViewModel">
-        <patentViewModel>
+    <members name="PatientViewModel">
+        <patientViewModel>
             <summary>
-                Patent view model class.
+                Patient view model class.
             </summary>
-        </patentViewModel>
+        </patientViewModel>
         <id>
             <summary>
-                Id of patent.
+                Id of patient.
             </summary>
         </id>
         <firstName>
             <summary>
-                First name of patent.
+                First name of patient.
             </summary>
         </firstName>
         <lastName>
             <summary>
-                Last name of patent.
+                Last name of patient.
             </summary>
         </lastName>
     </members>
@@ -315,16 +315,16 @@
                 Doctor navigation property.
             </summary>
         </doctor>
-        <patentId>
+        <patientId>
             <summary>
-                Patent id of Consultation.
+                Patient id of Consultation.
             </summary>
-        </patentId>
-        <patent>
+        </patientId>
+        <patient>
             <summary>
-                Patent navigation property.
+                Patient navigation property.
             </summary>
-        </patent>
+        </patient>
     </members>
 
     <members name="IDoctorService">
@@ -367,42 +367,42 @@
         </getAll>
     </members>
 
-    <members name="IPatentService">
-        <iPatentService>
+    <members name="IPatientService">
+        <iPatientService>
             <summary>
-                Patent service interface.
+                Patient service interface.
             </summary>
-        </iPatentService>
+        </iPatientService>
         <getAll>
             <summary>
-                Get all patent data.
+                Get all patient data.
             </summary>
             <returns>
-                Collection of patent data.
+                Collection of patient data.
             </returns>
         </getAll>
     </members>
 
-    <members name="PatentService">
-        <patentService>
+    <members name="PatientService">
+        <patientService>
             <summary>
-                Patent service class.
+                Patient service class.
             </summary>
-        </patentService>
-        <patentServiceConstructor>
+        </patientService>
+        <patientServiceConstructor>
             <summary>
-                Create a new object of patent service.
+                Create a new object of patient service.
             </summary>
-            <param name="patentDal">
-                Patent dal object.
+            <param name="patientDal">
+                Patient dal object.
             </param>
-        </patentServiceConstructor>
+        </patientServiceConstructor>
         <getAll>
             <summary>
-                Get all patent data.
+                Get all patient data.
             </summary>
             <returns>
-                Collection of patent data.
+                Collection of patient data.
             </returns>
         </getAll>
     </members>
@@ -557,42 +557,42 @@
         </getAll>
     </members>
 
-    <members name="IPatentDal">
-        <iPatentDal>
+    <members name="IPatientDal">
+        <iPatientDal>
             <summary>
-                Patent dal interface.
+                Patient dal interface.
             </summary>
-        </iPatentDal>
+        </iPatientDal>
         <getAll>
             <summary>
-                Get all patent data.
+                Get all patient data.
             </summary>
             <returns>
-                Collection of patent data.
+                Collection of patient data.
             </returns>
         </getAll>
     </members>
 
-    <members name="PatentDal">
-        <patentDal>
+    <members name="PatientDal">
+        <patientDal>
             <summary>
-                Patent dal class.
+                Patient dal class.
             </summary>
-        </patentDal>
-        <patentDalConstructor>
+        </patientDal>
+        <patientDalConstructor>
             <summary>
-                Create a new object of patent dal.
+                Create a new object of patient dal.
             </summary>
             <param name="consultationContext">
                 Consultation context.
             </param>
-        </patentDalConstructor>
+        </patientDalConstructor>
         <getAll>
             <summary>
-                Get all patent data.
+                Get all patient data.
             </summary>
             <returns>
-                Collection of patent data.
+                Collection of patient data.
             </returns>
         </getAll>
     </members>
@@ -731,11 +731,11 @@
                 Doctors dbset.
             </summary>
         </doctors>
-        <patents>
+        <patients>
             <summary>
-                Patents dbset.
+                Patients dbset.
             </summary>
-        </patents>
+        </patients>
         <onModelCreating>
             <summary>
                 Overrides the OnModelCreating method.
@@ -767,26 +767,26 @@
         </getAll>
     </members>
 
-    <members name="PatentController">
-        <patentController>
+    <members name="PatientController">
+        <patientController>
             <summary>
-                Patent Controller class.
+                Patient Controller class.
             </summary>
-        </patentController>
-        <patentControllerConstructor>
+        </patientController>
+        <patientControllerConstructor>
             <summary>
-                Create a new object of patent Controller.
+                Create a new object of patient Controller.
             </summary>
-            <param name="patentService">
-                Patent service.
+            <param name="patientService">
+                Patient service.
             </param>
-        </patentControllerConstructor>
+        </patientControllerConstructor>
         <getAll>
             <summary>
-                Get all patent data.
+                Get all patient data.
             </summary>
             <returns>
-                Collection of patent data.
+                Collection of patient data.
             </returns>
         </getAll>
     </members>

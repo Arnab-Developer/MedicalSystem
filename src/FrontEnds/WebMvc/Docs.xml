@@ -29,30 +29,30 @@
         </lastName>
     </members>
 
-    <members name="PatentModel">
-        <patentModel>
+    <members name="PatientModel">
+        <patientModel>
             <summary>
-                Patent view model class.
+                Patient view model class.
             </summary>
-        </patentModel>
-        <patentModelConstructor>
+        </patientModel>
+        <patientModelConstructor>
             <summary>
-                Patent a new doctor model class.
+                Patient a new doctor model class.
             </summary>
-        </patentModelConstructor>
+        </patientModelConstructor>
         <id>
             <summary>
-                Id of patent.
+                Id of patient.
             </summary>
         </id>
         <firstName>
             <summary>
-                First name of patent.
+                First name of patient.
             </summary>
         </firstName>
         <lastName>
             <summary>
-                Last name of patent.
+                Last name of patient.
             </summary>
         </lastName>
 
@@ -114,36 +114,36 @@
                 Doctor navigation property.
             </summary>
         </doctor>
-        <patentId>
+        <patientId>
             <summary>
-                Patent id of Consultation.
+                Patient id of Consultation.
             </summary>
-        </patentId>
-        <patent>
+        </patientId>
+        <patient>
             <summary>
-                Patent navigation property.
+                Patient navigation property.
             </summary>
-        </patent>
+        </patient>
         <doctors>
             <summary>
                 Doctor collection.
             </summary>
         </doctors>
-        <patents>
+        <patients>
             <summary>
-                Patent collection.
+                Patient collection.
             </summary>
-        </patents>
+        </patients>
         <doctorSelectList>
             <summary>
                 Doctor select list.
             </summary>
         </doctorSelectList>
-        <patentSelectList>
+        <patientSelectList>
             <summary>
-                Patent select list.
+                Patient select list.
             </summary>
-        </patentSelectList>
+        </patientSelectList>
     </members>
     
     <members name="ConsultationOptions">
@@ -187,22 +187,22 @@
         </doctorGatewayUrl>
     </members>
 
-    <members name="PatentOptions">
-        <patentOptions>
+    <members name="PatientOptions">
+        <patientOptions>
             <summary>
-                Patent option class.
+                Patient option class.
             </summary>
-        </patentOptions>
-        <patentOptionsConstructor>
+        </patientOptions>
+        <patientOptionsConstructor>
             <summary>
-                Create a new patent option object.
+                Create a new patient option object.
             </summary>
-        </patentOptionsConstructor>
-        <patentGatewayUrl>
+        </patientOptionsConstructor>
+        <patientGatewayUrl>
             <summary>
-                Patent gateway URL
+                Patient gateway URL
             </summary>
-        </patentGatewayUrl>
+        </patientGatewayUrl>
     </members>
 
     <members name="DoctorController">
@@ -292,15 +292,15 @@
         </delete>
     </members>
 
-    <members name="PatentController">
-        <patentController>
+    <members name="PatientController">
+        <patientController>
             <summary>
-                Patent controller class.
+                Patient controller class.
             </summary>
-        </patentController>
-        <patentControllerConstructor>
+        </patientController>
+        <patientControllerConstructor>
             <summary>
-                Patent controller class.
+                Patient controller class.
             </summary>
             <param name="httpClientFactory">
                 Http client factory.
@@ -308,29 +308,29 @@
             <param name="optionsAccessor">
                 Options accessor.
             </param>
-        </patentControllerConstructor>
+        </patientControllerConstructor>
         <index>
             <summary>
-                Show all patent data.
+                Show all patient data.
             </summary>
             <returns>
-                View with all patent data.
+                View with all patient data.
             </returns>
         </index>
         <details>
             <summary>
-                Show single patent data by id.
+                Show single patient data by id.
             </summary>
             <param name="id">
-                Id of Patent.
+                Id of Patient.
             </param>
             <returns>
-                View with single patent data.
+                View with single patient data.
             </returns>
         </details>
         <createGet>
             <summary>
-                Go to create view for new patent data.
+                Go to create view for new patient data.
             </summary>
             <returns>
                 Create view.
@@ -338,10 +338,10 @@
         </createGet>
         <createPost>
             <summary>
-                Create new patent data.
+                Create new patient data.
             </summary>
-            <param name="patent">
-                New patent data.
+            <param name="patient">
+                New patient data.
             </param>
             <returns>
                 Redirect to index action method on successful creation.
@@ -352,7 +352,7 @@
                 Go to edit view.
             </summary>
             <param name="id">
-                Id of patent.
+                Id of patient.
             </param>
             <returns>
                 Edit view.
@@ -360,21 +360,21 @@
         </editGet>
         <editPost>
             <summary>
-                Update patent data.
+                Update patient data.
             </summary>
             <param name="id">
-                Id of existing patent data.
+                Id of existing patient data.
             </param>
-            <param name="patent">
-                Existing patent data.
+            <param name="patient">
+                Existing patient data.
             </param>
         </editPost>
         <delete>
             <summary>
-                Delete patent data.
+                Delete patient data.
             </summary>
             <param name="id">
-                Id of patent.
+                Id of patient.
             </param>
         </delete>
     </members>

@@ -28,8 +28,8 @@ namespace MedicalSystem.Tests.Services.Consultation
                     FirstName = "doc1first",
                     LastName = "doc1last",
                 },
-                PatentId = 1,
-                Patent = new PatentViewModel()
+                PatientId = 1,
+                Patient = new PatientViewModel()
                 {
                     Id = 1,
                     FirstName = "pat1first",
@@ -48,10 +48,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(1, consultationViewModel.Doctor!.Id);
             Assert.AreEqual("doc1first", consultationViewModel.Doctor.FirstName);
             Assert.AreEqual("doc1last", consultationViewModel.Doctor.LastName);
-            Assert.AreEqual(1, consultationViewModel.PatentId);
-            Assert.AreEqual(1, consultationViewModel.Patent!.Id);
-            Assert.AreEqual("pat1first", consultationViewModel.Patent.FirstName);
-            Assert.AreEqual("pat1last", consultationViewModel.Patent.LastName);
+            Assert.AreEqual(1, consultationViewModel.PatientId);
+            Assert.AreEqual(1, consultationViewModel.Patient!.Id);
+            Assert.AreEqual("pat1first", consultationViewModel.Patient.FirstName);
+            Assert.AreEqual("pat1last", consultationViewModel.Patient.LastName);
         }
     }
 }

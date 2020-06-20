@@ -35,10 +35,10 @@ namespace MedicalSystem.Services.Consultation.ViewModels
         /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/doctor/*'/>
         public DoctorViewModel? Doctor { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patentId/*'/>
-        public int PatentId { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patientId/*'/>
+        public int PatientId { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patent/*'/>
-        public PatentViewModel? Patent { get; set; }
+        /// <include file='docs.xml' path='docs/members[@name="ConsultationViewModel"]/patient/*'/>
+        public PatientViewModel? Patient { get; set; }
     }
 }

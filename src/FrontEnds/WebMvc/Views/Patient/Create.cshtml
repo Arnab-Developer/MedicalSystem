@@ -1,13 +1,13 @@
 ﻿@using MedicalSystem.FrontEnds.WebMvc.Models
-@model PatentModel
+@model PatientModel
 @{
-    ViewData["Title"] = "Create patent";
+    ViewData["Title"] = "Create patient";
 }
-<h1>Create patent</h1>
+<h1>Create patient</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="Patent" asp-action="Create" method="post">
+        <form asp-controller="Patient" asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>

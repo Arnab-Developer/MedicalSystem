@@ -83,7 +83,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                 await consultationAddEditInitResponseMessage.Content.ReadAsStreamAsync();
             var consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationAddEditInitResponseStream);
 
-            if (!(consultationModel.Doctors.Count() > 0 && consultationModel.Patents.Count() > 0))
+            if (!(consultationModel.Doctors.Count() > 0 && consultationModel.Patients.Count() > 0))
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -97,17 +97,17 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                 doctorListItems.Add(doctorListItem);
             }
 
-            var patentListItems = new List<SelectListItem>();
-            foreach (var patentModel in consultationModel.Patents!)
+            var patientListItems = new List<SelectListItem>();
+            foreach (var patientModel in consultationModel.Patients!)
             {
-                var patentListItem = new SelectListItem(
-                    $"{patentModel.FirstName} {patentModel.LastName}",
-                    patentModel.Id.ToString());
-                patentListItems.Add(patentListItem);
+                var patientListItem = new SelectListItem(
+                    $"{patientModel.FirstName} {patientModel.LastName}",
+                    patientModel.Id.ToString());
+                patientListItems.Add(patientListItem);
             }
 
             consultationModel.DoctorSelectList = doctorListItems;
-            consultationModel.PatentSelectList = patentListItems;
+            consultationModel.PatientSelectList = patientListItems;
             return View(consultationModel);
         }
 
@@ -152,7 +152,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                     await consultationAddEditInitResponseMessage.Content.ReadAsStreamAsync();
                 var consultationModelAddEditInit = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationAddEditInitResponseStream);
 
-                if (!(consultationModelAddEditInit.Doctors.Count() > 0 && consultationModelAddEditInit.Patents.Count() > 0))
+                if (!(consultationModelAddEditInit.Doctors.Count() > 0 && consultationModelAddEditInit.Patients.Count() > 0))
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -166,17 +166,17 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                     doctorListItems.Add(doctorListItem);
                 }
 
-                var patentListItems = new List<SelectListItem>();
-                foreach (var patentModel in consultationModelAddEditInit.Patents!)
+                var patientListItems = new List<SelectListItem>();
+                foreach (var patientModel in consultationModelAddEditInit.Patients!)
                 {
-                    var patentListItem = new SelectListItem(
-                        $"{patentModel.FirstName} {patentModel.LastName}",
-                        patentModel.Id.ToString());
-                    patentListItems.Add(patentListItem);
+                    var patientListItem = new SelectListItem(
+                        $"{patientModel.FirstName} {patientModel.LastName}",
+                        patientModel.Id.ToString());
+                    patientListItems.Add(patientListItem);
                 }
 
                 consultationModel.DoctorSelectList = doctorListItems;
-                consultationModel.PatentSelectList = patentListItems;
+                consultationModel.PatientSelectList = patientListItems;
                 return View(consultationModel);
             }
             return StatusCode((int)consultationApiResponseMessage.StatusCode);

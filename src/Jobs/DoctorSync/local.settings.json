@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  },
+  "ConnectionStrings": {
+    "DoctorDbConnectionString": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DoctorDb;Integrated Security=True",
+    "ConsultationDbConnectionString": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ConsultationDb;Integrated Security=True"
+  }
+}
