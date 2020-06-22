@@ -56,7 +56,7 @@ namespace MedicalSystem.Services.Consultation.Services
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/getById/*'/>
-        public ConsultationViewModel? GetById(int id)
+        ConsultationViewModel? IConsultationService.GetById(int id)
         {
             var consultationDomainModel = _consultationDal.GetById(id);
 
@@ -94,7 +94,7 @@ namespace MedicalSystem.Services.Consultation.Services
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/add/*'/>
-        public void Add(ConsultationViewModel consultationViewModel)
+        void IConsultationService.Add(ConsultationViewModel consultationViewModel)
         {
             var consultationDomainModel = new ConsultationDomainModel(consultationViewModel.Id,
                 consultationViewModel.Date, consultationViewModel.Country, consultationViewModel.State,
@@ -105,7 +105,7 @@ namespace MedicalSystem.Services.Consultation.Services
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/update/*'/>
-        public void Update(int id, ConsultationViewModel consultationViewModel)
+        void IConsultationService.Update(int id, ConsultationViewModel consultationViewModel)
         {
             var consultationDomainModel = _consultationDal.GetById(id);
 
@@ -126,7 +126,7 @@ namespace MedicalSystem.Services.Consultation.Services
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/delete/*'/>
-        public void Delete(int id)
+        void IConsultationService.Delete(int id)
         {
             var consultationDomainModel = _consultationDal.GetById(id);
             if (consultationDomainModel == null)

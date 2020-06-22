@@ -28,7 +28,7 @@ namespace MedicalSystem.Services.Consultation.Dals
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDal"]/getById/*'/>
-        public ConsultationDomainModel? GetById(int id)
+        ConsultationDomainModel? IConsultationDal.GetById(int id)
         {
             var consultationDomainModel = _consultationContext.Consultations
                 .Include(consultation => consultation.Doctor)
@@ -39,20 +39,20 @@ namespace MedicalSystem.Services.Consultation.Dals
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDal"]/add/*'/>
-        public void Add(ConsultationDomainModel consultationDomainModel)
+        void IConsultationDal.Add(ConsultationDomainModel consultationDomainModel)
         {
             _consultationContext.Consultations!.Add(consultationDomainModel);
             _consultationContext.SaveChanges();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDal"]/update/*'/>
-        public void Update(ConsultationDomainModel consultationDomainModel)
+        void IConsultationDal.Update(ConsultationDomainModel consultationDomainModel)
         {
             _consultationContext.SaveChanges();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDal"]/delete/*'/>
-        public void Delete(ConsultationDomainModel consultationDomainModel)
+        void IConsultationDal.Delete(ConsultationDomainModel consultationDomainModel)
         {
             _consultationContext.Consultations!.Remove(consultationDomainModel);
             _consultationContext.SaveChanges();
