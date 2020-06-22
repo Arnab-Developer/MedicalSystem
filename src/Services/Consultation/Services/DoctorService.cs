@@ -16,7 +16,7 @@ namespace MedicalSystem.Services.Consultation.Services
         }
 
         /// <include file='docs.xml' path='docs/members[@name="DoctorService"]/getAll/*'/>
-        public IEnumerable<DoctorViewModel> GetAll()
+        IEnumerable<DoctorViewModel> IDoctorService.GetAll()
         {
             var doctorDomainModels = _doctorDal.GetAll();
             var doctorViewModels = new List<DoctorViewModel>();

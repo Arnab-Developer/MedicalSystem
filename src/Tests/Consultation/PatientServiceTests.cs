@@ -13,7 +13,7 @@ namespace MedicalSystem.Tests.Services.Consultation
     /// <include file='docs.xml' path='docs/members[@name="PatientServiceTests"]/patientServiceTests/*'/>
     internal class PatientServiceTests
     {
-        private PatientService? _patientService;
+        private IPatientService? _patientService;
         private Mock<IPatientDal>? _patientDalMock;
 
         /// <include file='docs.xml' path='docs/members[@name="PatientServiceTests"]/setup/*'/>

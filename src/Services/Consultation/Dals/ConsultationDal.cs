@@ -17,7 +17,7 @@ namespace MedicalSystem.Services.Consultation.Dals
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDal"]/getAll/*'/>
-        public IEnumerable<ConsultationDomainModel> GetAll()
+        IEnumerable<ConsultationDomainModel> IConsultationDal.GetAll()
         {
             var consultationDomainModels = _consultationContext.Consultations
                 .Include(consultation => consultation.Doctor)

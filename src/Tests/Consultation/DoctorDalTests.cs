@@ -10,7 +10,7 @@ namespace MedicalSystem.Tests.Services.Consultation
     /// <include file='docs.xml' path='docs/members[@name="DoctorDalTests"]/doctorDalTests/*'/>
     internal class DoctorDalTests
     {
-        private DoctorDal? _doctorDal;
+        private IDoctorDal? _doctorDal;
         private ConsultationContext? _consultationContext;
 
         /// <include file='docs.xml' path='docs/members[@name="DoctorDalTests"]/setup/*'/>
