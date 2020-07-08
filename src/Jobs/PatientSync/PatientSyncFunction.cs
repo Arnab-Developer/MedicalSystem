@@ -2,6 +2,7 @@ using MedicalSystem.Jobs.PatientSync.Data;
 using MedicalSystem.Jobs.PatientSync.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,29 +28,29 @@ namespace MedicalSystem.Jobs.PatientSync
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
-            var patientModels = GetPatientsFromPatientDb();
+            IEnumerable<PatientModel> patientModels = GetPatientsFromPatientDb();
             SavePatientsToConsultationDb(patientModels);
         }
 
         private IEnumerable<PatientModel> GetPatientsFromPatientDb()
         {
-            var patientDbConnectionString = _configuration.GetConnectionString("PatientDbConnectionString");
+            string patientDbConnectionString = _configuration.GetConnectionString("PatientDbConnectionString");
             var options = new DbContextOptionsBuilder<PatientContext>()
                 .UseSqlServer(patientDbConnectionString)
                 .Options;
             var patientContext = new PatientContext(options);
-            var patientModels = patientContext.Patients.AsNoTracking().ToList();
+            List<PatientModel> patientModels = patientContext.Patients.AsNoTracking().ToList();
             return patientModels;
         }
 
         private void SavePatientsToConsultationDb(IEnumerable<PatientModel> patientModels)
         {
-            var consultationDbConnectionString = _configuration.GetConnectionString("ConsultationDbConnectionString");
+            string consultationDbConnectionString = _configuration.GetConnectionString("ConsultationDbConnectionString");
             var options = new DbContextOptionsBuilder<PatientContext>()
                 .UseSqlServer(consultationDbConnectionString)
                 .Options;
             var patientContext = new PatientContext(options);
-            using var transaction = patientContext.Database.BeginTransaction();
+            using IDbContextTransaction transaction = patientContext.Database.BeginTransaction();
             try
             {
                 patientContext.Patients!.RemoveRange(patientContext.Patients);

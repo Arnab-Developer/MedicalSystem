@@ -2,6 +2,7 @@ using MedicalSystem.Jobs.DoctorSync.Data;
 using MedicalSystem.Jobs.DoctorSync.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,29 +28,29 @@ namespace MedicalSystem.Jobs.DoctorSync
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
-            var doctorModels = GetDoctorsFromDoctorDb();
+            IEnumerable<DoctorModel> doctorModels = GetDoctorsFromDoctorDb();
             SaveDoctorsToConsultationDb(doctorModels);
         }
 
         private IEnumerable<DoctorModel> GetDoctorsFromDoctorDb()
         {
-            var doctorDbConnectionString = _configuration.GetConnectionString("DoctorDbConnectionString");
+            string doctorDbConnectionString = _configuration.GetConnectionString("DoctorDbConnectionString");
             var options = new DbContextOptionsBuilder<DoctorContext>()
                 .UseSqlServer(doctorDbConnectionString)
                 .Options;
             var doctorContext = new DoctorContext(options);
-            var doctorModels = doctorContext.Doctors.AsNoTracking().ToList();
+            List<DoctorModel> doctorModels = doctorContext.Doctors.AsNoTracking().ToList();
             return doctorModels;
         }
 
         private void SaveDoctorsToConsultationDb(IEnumerable<DoctorModel> doctorModels)
         {
-            var consultationDbConnectionString = _configuration.GetConnectionString("ConsultationDbConnectionString");
+            string consultationDbConnectionString = _configuration.GetConnectionString("ConsultationDbConnectionString");
             var options = new DbContextOptionsBuilder<DoctorContext>()
                 .UseSqlServer(consultationDbConnectionString)
                 .Options;
             var doctorContext = new DoctorContext(options);
-            using var transaction = doctorContext.Database.BeginTransaction();
+            using IDbContextTransaction transaction = doctorContext.Database.BeginTransaction();
             try
             {
                 doctorContext.Doctors!.RemoveRange(doctorContext.Doctors);
