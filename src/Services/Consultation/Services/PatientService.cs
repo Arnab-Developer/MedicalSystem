@@ -1,4 +1,5 @@
 ﻿using MedicalSystem.Services.Consultation.Dals;
+using MedicalSystem.Services.Consultation.DomainModels;
 using MedicalSystem.Services.Consultation.ViewModels;
 using System.Collections.Generic;
 
@@ -18,9 +19,9 @@ namespace MedicalSystem.Services.Consultation.Services
         /// <include file='docs.xml' path='docs/members[@name="PatientService"]/getAll/*'/>
         IEnumerable<PatientViewModel> IPatientService.GetAll()
         {
-            var patientDomainModels = _patientDal.GetAll();
+            IEnumerable<PatientDomainModel> patientDomainModels = _patientDal.GetAll();
             var patientViewModels = new List<PatientViewModel>();
-            foreach (var patientDomainModel in patientDomainModels)
+            foreach (PatientDomainModel patientDomainModel in patientDomainModels)
             {
                 var patientViewModel = new PatientViewModel()
                 {

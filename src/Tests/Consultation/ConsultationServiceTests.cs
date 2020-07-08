@@ -45,7 +45,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             };
             _consultationDalMock!.Setup(dal => dal.GetAll()).Returns(consultationDomainModels);
 
-            var consultationViewModels = _consultationService!.GetAll().ToList();
+            List<ConsultationViewModel> consultationViewModels = _consultationService!.GetAll().ToList();
 
             Assert.AreEqual(2, consultationViewModels.Count);
 
@@ -90,7 +90,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         {
             var consultationDomainModels = new List<ConsultationDomainModel>();
             _consultationDalMock!.Setup(dal => dal.GetAll()).Returns(consultationDomainModels);
-            var consultationViewModels = _consultationService!.GetAll().ToList();
+            List<ConsultationViewModel> consultationViewModels = _consultationService!.GetAll().ToList();
             Assert.AreEqual(0, consultationViewModels.Count);
         }
 
@@ -115,7 +115,7 @@ namespace MedicalSystem.Tests.Services.Consultation
 
             _consultationDalMock!.Setup(dal => dal.GetById(It.IsAny<int>())).Returns(consultationDomainModel);
 
-            var consultationViewModel = _consultationService!.GetById(It.IsAny<int>());
+            ConsultationViewModel? consultationViewModel = _consultationService!.GetById(It.IsAny<int>());
 
             Assert.NotNull(consultationViewModel);
             Assert.IsInstanceOf<ConsultationViewModel>(consultationViewModel);
@@ -143,7 +143,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetById_GivenNullDomainModel_ReturnsNull()
         {
             _consultationDalMock!.Setup(dal => dal.GetById(It.IsAny<int>())).Returns<ConsultationDomainModel>(null);
-            var consultationViewModel = _consultationService!.GetById(It.IsAny<int>());
+            ConsultationViewModel? consultationViewModel = _consultationService!.GetById(It.IsAny<int>());
             Assert.Null(consultationViewModel);
         }
 

@@ -30,7 +30,7 @@ namespace MedicalSystem.Tests.Services.Doctor
         public void GetAll_GivenValidDbData_ReturnsValidModels()
         {
             AddDoctors();
-            var doctorModels = _doctorController!.GetAll().ToList();
+            List<DoctorModel> doctorModels = _doctorController!.GetAll().ToList();
 
             Assert.AreEqual(2, doctorModels.Count);
 
@@ -47,7 +47,7 @@ namespace MedicalSystem.Tests.Services.Doctor
         [Test]
         public void GetAll_GivenEmptyDbData_ReturnsEmptyModels()
         {
-            var doctorModels = _doctorController!.GetAll().ToList();
+            List<DoctorModel> doctorModels = _doctorController!.GetAll().ToList();
             Assert.Zero(doctorModels.Count);
         }
 
@@ -56,7 +56,7 @@ namespace MedicalSystem.Tests.Services.Doctor
         public void GetById_GivenValidDbData_ReturnsValidModel()
         {
             AddDoctors();
-            var doctorModel = _doctorController!.GetById(2);
+            DoctorModel doctorModel = _doctorController!.GetById(2);
 
             Assert.AreEqual(2, doctorModel.Id);
             Assert.AreEqual("doc2first", doctorModel.FirstName);
@@ -67,7 +67,7 @@ namespace MedicalSystem.Tests.Services.Doctor
         [Test]
         public void GetById_GivenEmptyDbData_ReturnsNull()
         {
-            var doctorModel = _doctorController!.GetById(2);
+            DoctorModel doctorModel = _doctorController!.GetById(2);
             Assert.Null(doctorModel);
         }
 
@@ -83,7 +83,7 @@ namespace MedicalSystem.Tests.Services.Doctor
             };
             _doctorController!.Add(doctor);
 
-            var doctorModel = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 1);
+            DoctorModel doctorModel = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 1);
 
             Assert.AreEqual(1, doctorModel.Id);
             Assert.AreEqual("doc1first", doctorModel.FirstName);
@@ -96,11 +96,11 @@ namespace MedicalSystem.Tests.Services.Doctor
         {
             AddDoctors();
 
-            var doctorModel = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 2);
+            DoctorModel doctorModel = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 2);
             doctorModel.FirstName = "update";
             _doctorController!.Update(2, doctorModel);
 
-            var doctorModelNew = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 2);
+            DoctorModel doctorModelNew = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 2);
 
             Assert.AreEqual(2, doctorModelNew.Id);
             Assert.AreEqual("update", doctorModelNew.FirstName);
@@ -112,7 +112,7 @@ namespace MedicalSystem.Tests.Services.Doctor
         public void Delete_CanDeleteInDb()
         {
             AddDoctors();
-            var doctorModel = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 2);
+            DoctorModel doctorModel = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 2);
             _doctorController!.Delete(2);
             Assert.AreEqual(1, _doctorContext.Doctors.Count());
         }

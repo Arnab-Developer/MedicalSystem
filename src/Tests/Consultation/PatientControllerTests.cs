@@ -44,7 +44,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             };
             _patientServiceMock!.Setup(service => service.GetAll()).Returns(patientViewModels);
 
-            var patientViewModelsFromController = _patientController!.GetAll().ToList();
+            List<PatientViewModel> patientViewModelsFromController = _patientController!.GetAll().ToList();
 
             Assert.AreEqual(1, patientViewModelsFromController[0].Id);
             Assert.AreEqual("doc1 f", patientViewModelsFromController[0].FirstName);
@@ -61,7 +61,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         {
             var patientViewModels = new List<PatientViewModel>();
             _patientServiceMock!.Setup(service => service.GetAll()).Returns(patientViewModels);
-            var patientViewModelsFromController = _patientController!.GetAll();
+            IEnumerable<PatientViewModel> patientViewModelsFromController = _patientController!.GetAll();
             Assert.Zero(patientViewModelsFromController.Count());
         }
 

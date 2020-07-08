@@ -33,7 +33,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             AddPatients();
             AddConsultations();
 
-            var consultationDomainModels = _consultationDal!.GetAll().ToList();
+            List<ConsultationDomainModel> consultationDomainModels = _consultationDal!.GetAll().ToList();
 
             Assert.AreEqual(2, consultationDomainModels.Count);
 
@@ -92,7 +92,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             AddPatients();
             AddConsultation();
 
-            var consultationDomainModel = _consultationDal!.GetById(1);
+            ConsultationDomainModel? consultationDomainModel = _consultationDal!.GetById(1);
 
             Assert.NotNull(consultationDomainModel);
 
@@ -121,7 +121,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             AddDoctors();
             AddPatients();
 
-            var consultationDomainModel = _consultationDal!.GetById(1);
+            ConsultationDomainModel? consultationDomainModel = _consultationDal!.GetById(1);
 
             Assert.Null(consultationDomainModel);
         }
@@ -137,7 +137,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 "Maharashtra", "Mumbai", "123456", "Preg", "Med1", 1, 1);
             _consultationDal!.Add(consultationDomainModel);
 
-            var consultationDomainModelFromDb = _consultationContext!.Consultations.SingleOrDefault();
+            ConsultationDomainModel consultationDomainModelFromDb = _consultationContext!.Consultations.SingleOrDefault();
 
             Assert.NotNull(consultationDomainModelFromDb);
 
@@ -167,11 +167,11 @@ namespace MedicalSystem.Tests.Services.Consultation
             AddPatients();
             AddConsultations();
 
-            var consultationDomainModelFromDb = _consultationContext!.Consultations
+            ConsultationDomainModel consultationDomainModelFromDb = _consultationContext!.Consultations
                 .FirstOrDefault(consultationDomainModel => consultationDomainModel.Id == 1);
             consultationDomainModelFromDb.Medicine = "updated1";
             _consultationDal!.Update(consultationDomainModelFromDb);
-            var consultationDomainModelFromDbNew = _consultationContext!.Consultations
+            ConsultationDomainModel consultationDomainModelFromDbNew = _consultationContext!.Consultations
                 .FirstOrDefault(consultationDomainModel => consultationDomainModel.Id == 1);
 
             Assert.NotNull(consultationDomainModelFromDbNew);
@@ -202,11 +202,11 @@ namespace MedicalSystem.Tests.Services.Consultation
             AddPatients();
             AddConsultations();
 
-            var consultationDomainModelFromDb = _consultationContext!.Consultations
+            ConsultationDomainModel consultationDomainModelFromDb = _consultationContext!.Consultations
                 .FirstOrDefault(consultationDomainModel => consultationDomainModel.Id == 1);
             _consultationDal!.Delete(consultationDomainModelFromDb);
 
-            var consultationDomainModelFromDbNew = _consultationContext!.Consultations
+            ConsultationDomainModel consultationDomainModelFromDbNew = _consultationContext!.Consultations
                 .FirstOrDefault(consultationDomainModel => consultationDomainModel.Id == 1);
             Assert.Null(consultationDomainModelFromDbNew);
             Assert.AreEqual(2, _consultationContext.Doctors.Count());

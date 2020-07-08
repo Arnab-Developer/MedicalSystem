@@ -19,10 +19,10 @@ namespace MedicalSystem.Services.Consultation.Services
         /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/getAll/*'/>
         IEnumerable<ConsultationViewModel> IConsultationService.GetAll()
         {
-            var consultationDomainModels = _consultationDal.GetAll();
+            IEnumerable<ConsultationDomainModel> consultationDomainModels = _consultationDal.GetAll();
 
             var consultationViewModels = new List<ConsultationViewModel>();
-            foreach (var consultationDomainModel in consultationDomainModels)
+            foreach (ConsultationDomainModel consultationDomainModel in consultationDomainModels)
             {
                 var consultationViewModel = new ConsultationViewModel()
                 {
@@ -58,7 +58,7 @@ namespace MedicalSystem.Services.Consultation.Services
         /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/getById/*'/>
         ConsultationViewModel? IConsultationService.GetById(int id)
         {
-            var consultationDomainModel = _consultationDal.GetById(id);
+            ConsultationDomainModel? consultationDomainModel = _consultationDal.GetById(id);
 
             if (consultationDomainModel == null)
             {
@@ -107,7 +107,7 @@ namespace MedicalSystem.Services.Consultation.Services
         /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/update/*'/>
         void IConsultationService.Update(int id, ConsultationViewModel consultationViewModel)
         {
-            var consultationDomainModel = _consultationDal.GetById(id);
+            ConsultationDomainModel? consultationDomainModel = _consultationDal.GetById(id);
 
             if (consultationDomainModel == null)
             {
@@ -128,7 +128,7 @@ namespace MedicalSystem.Services.Consultation.Services
         /// <include file='docs.xml' path='docs/members[@name="ConsultationService"]/delete/*'/>
         void IConsultationService.Delete(int id)
         {
-            var consultationDomainModel = _consultationDal.GetById(id);
+            ConsultationDomainModel? consultationDomainModel = _consultationDal.GetById(id);
             if (consultationDomainModel == null)
             {
                 return;
