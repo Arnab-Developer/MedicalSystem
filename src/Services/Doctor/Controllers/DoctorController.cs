@@ -23,7 +23,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
         [HttpGet]
         public IEnumerable<DoctorModel> GetAll()
         {
-            var doctors = _doctorContext.Doctors.OrderBy(doctor => doctor.FirstName);
+            IOrderedQueryable<DoctorModel> doctors = _doctorContext.Doctors.OrderBy(doctor => doctor.FirstName);
             return doctors;
         }
 
@@ -32,7 +32,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
         [Route("{id:int}")]
         public DoctorModel GetById(int id)
         {
-            var doctor = _doctorContext.Doctors.FirstOrDefault(doctor => doctor.Id == id);
+            DoctorModel doctor = _doctorContext.Doctors.FirstOrDefault(doctor => doctor.Id == id);
             return doctor;
         }
 
@@ -49,7 +49,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
         [Route("{id:int}")]
         public void Update(int id, DoctorModel doctor)
         {
-            var d = _doctorContext.Doctors.FirstOrDefault(doctor => doctor.Id == id);
+            DoctorModel d = _doctorContext.Doctors.FirstOrDefault(doctor => doctor.Id == id);
 
             d.FirstName = doctor.FirstName;
             d.LastName = doctor.LastName;
@@ -62,7 +62,7 @@ namespace MedicalSystem.Services.Doctor.Controllers
         [Route("{id:int}")]
         public void Delete(int id)
         {
-            var doctor = _doctorContext.Doctors.FirstOrDefault(doctor => doctor.Id == id);
+            DoctorModel doctor = _doctorContext.Doctors.FirstOrDefault(doctor => doctor.Id == id);
             _doctorContext.Doctors!.Remove(doctor);
             _doctorContext.SaveChanges();
         }

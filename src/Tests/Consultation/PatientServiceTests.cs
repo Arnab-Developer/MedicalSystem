@@ -35,7 +35,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             };
             _patientDalMock!.Setup(dal => dal.GetAll()).Returns(patientDomainModels);
 
-            var patientViewModels = _patientService!.GetAll().ToList();
+            List<PatientViewModel> patientViewModels = _patientService!.GetAll().ToList();
 
             Assert.AreEqual(1, patientViewModels[0].Id);
             Assert.AreEqual("doc1 f", patientViewModels[0].FirstName);
@@ -52,7 +52,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         {
             var patientDomainModels = new List<PatientDomainModel>();
             _patientDalMock!.Setup(dal => dal.GetAll()).Returns(patientDomainModels);
-            var patientViewModels = _patientService!.GetAll().ToList();
+            List<PatientViewModel> patientViewModels = _patientService!.GetAll().ToList();
             Assert.Zero(patientViewModels.Count);
         }
 

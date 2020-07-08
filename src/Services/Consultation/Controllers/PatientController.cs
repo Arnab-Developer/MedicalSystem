@@ -21,7 +21,7 @@ namespace MedicalSystem.Services.Consultation.Controllers
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/getAll/*'/>
         public IEnumerable<PatientViewModel> GetAll()
         {
-            var patientViewModels = _patientService.GetAll();
+            IEnumerable<PatientViewModel> patientViewModels = _patientService.GetAll();
             return patientViewModels;
         }
     }

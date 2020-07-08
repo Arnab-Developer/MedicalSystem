@@ -3,6 +3,7 @@ using MedicalSystem.Gateways.WebGateway.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -32,12 +33,12 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DoctorModel>>> GetAll()
         {
-            var httpClient = _httpClientFactory.CreateClient();
-            var doctorApiResponseMessage = await httpClient.GetAsync(_doctorOptions.DoctorApiUrl);
+            HttpClient httpClient = _httpClientFactory.CreateClient();
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.GetAsync(_doctorOptions.DoctorApiUrl);
             if (doctorApiResponseMessage.IsSuccessStatusCode)
             {
-                using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                var doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
+                using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
+                IEnumerable<DoctorModel> doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
                 if (doctorModels == null || doctorModels.Count() == 0)
                 {
                     var error = new ErrorModel("No doctor record found.");
@@ -58,13 +59,13 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 var error = new ErrorModel("Id is null");
                 return NotFound(error);
             }
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var doctorGetByIdUrl = $"{_doctorOptions.DoctorApiUrl}/{id}";
-            var doctorApiResponseMessage = await httpClient.GetAsync(doctorGetByIdUrl);
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.GetAsync(doctorGetByIdUrl);
             if (doctorApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
-                using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                var doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
+                using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
+                DoctorModel doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
                 return Ok(doctorModel);
             }
             else
@@ -77,9 +78,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(DoctorModel doctor)
         {
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), Encoding.UTF8, "application/json");
-            var doctorApiResponseMessage = await httpClient.PostAsync(_doctorOptions.DoctorApiUrl, doctorContent);
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.PostAsync(_doctorOptions.DoctorApiUrl, doctorContent);
             if (doctorApiResponseMessage.IsSuccessStatusCode)
             {
                 return Ok();
@@ -92,10 +93,10 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> Update(int id, DoctorModel doctor)
         {
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var doctorUpdateUrl = $"{_doctorOptions.DoctorApiUrl}/{id}";
             var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), Encoding.UTF8, "application/json");
-            var doctorApiResponseMessage = await httpClient.PutAsync(doctorUpdateUrl, doctorContent);
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.PutAsync(doctorUpdateUrl, doctorContent);
             if (doctorApiResponseMessage.IsSuccessStatusCode)
             {
                 return Ok();
@@ -112,9 +113,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             {
                 return NotFound();
             }
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var doctorDeleteUrl = $"{_doctorOptions.DoctorApiUrl}/{id}";
-            var doctorApiResponseMessage = await httpClient.DeleteAsync(doctorDeleteUrl);
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.DeleteAsync(doctorDeleteUrl);
             if (doctorApiResponseMessage.IsSuccessStatusCode)
             {
                 return Ok();

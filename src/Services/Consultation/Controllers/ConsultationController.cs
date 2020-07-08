@@ -22,7 +22,7 @@ namespace MedicalSystem.Services.Consultation.Controllers
         [HttpGet]
         public IEnumerable<ConsultationViewModel> GetAll()
         {
-            var consultationViewModels = _consultationService.GetAll();
+            IEnumerable<ConsultationViewModel> consultationViewModels = _consultationService.GetAll();
             return consultationViewModels;
         }
 
@@ -31,7 +31,7 @@ namespace MedicalSystem.Services.Consultation.Controllers
         [Route("{id:int}")]
         public ConsultationViewModel? GetById(int id)
         {
-            var consultationViewModel = _consultationService.GetById(id);
+            ConsultationViewModel? consultationViewModel = _consultationService.GetById(id);
             return consultationViewModel;
         }
 

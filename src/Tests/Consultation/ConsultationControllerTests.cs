@@ -82,7 +82,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             };
             _consultationServiceMock!.Setup(service => service.GetAll()).Returns(consultationViewModels);
 
-            var consultationViewModelsFromController = _consultationController!.GetAll().ToList();
+            List<ConsultationViewModel> consultationViewModelsFromController = _consultationController!.GetAll().ToList();
 
             Assert.AreEqual(2, consultationViewModelsFromController.Count);
 
@@ -128,7 +128,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             var consultationViewModels = new List<ConsultationViewModel>();
             _consultationServiceMock!.Setup(service => service.GetAll()).Returns(consultationViewModels);
 
-            var consultationViewModelsFromController = _consultationController!.GetAll().ToList();
+            List<ConsultationViewModel> consultationViewModelsFromController = _consultationController!.GetAll().ToList();
 
             Assert.Zero(consultationViewModelsFromController.Count);
         }
@@ -174,7 +174,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             };
             _consultationServiceMock!.Setup(service => service.GetById(It.IsAny<int>())).Returns(consultationViewModel);
 
-            var consultationViewModelFromController = _consultationController!.GetById(It.IsAny<int>());
+            ConsultationViewModel? consultationViewModelFromController = _consultationController!.GetById(It.IsAny<int>());
 
             Assert.AreEqual(1, consultationViewModelFromController!.Id);
             Assert.AreEqual(DateTime.Now.Date, consultationViewModelFromController.Date.Date);
@@ -199,7 +199,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetById_GivenNullViewModel_ReturnsNull()
         {
             _consultationServiceMock!.Setup(service => service.GetById(It.IsAny<int>())).Returns<ConsultationViewModel>(null);
-            var consultationViewModelFromController = _consultationController!.GetById(It.IsAny<int>());
+            ConsultationViewModel? consultationViewModelFromController = _consultationController!.GetById(It.IsAny<int>());
             Assert.Null(consultationViewModelFromController);
         }
 

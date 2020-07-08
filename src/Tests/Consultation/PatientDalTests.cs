@@ -29,7 +29,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetAll_GivenValidDbData_ReturnsValidDomainModels()
         {
             AddPatients();
-            var patientDomainModels = _patientDal!.GetAll().ToList();
+            List<PatientDomainModel> patientDomainModels = _patientDal!.GetAll().ToList();
 
             Assert.AreEqual(1, patientDomainModels[0].Id);
             Assert.AreEqual("doc1first", patientDomainModels[0].FirstName);
@@ -44,7 +44,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         [Test]
         public void GetAll_GivenEmptyDbData_ReturnsEmptyDomainModels()
         {
-            var patientDomainModels = _patientDal!.GetAll().ToList();
+            List<PatientDomainModel> patientDomainModels = _patientDal!.GetAll().ToList();
             Assert.Zero(patientDomainModels.Count);
         }
 

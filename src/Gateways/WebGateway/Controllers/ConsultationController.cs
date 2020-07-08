@@ -3,6 +3,7 @@ using MedicalSystem.Gateways.WebGateway.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -32,12 +33,12 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ConsultationModel>>> GetAll()
         {
-            var httpClient = _httpClientFactory.CreateClient();
-            var consultationApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationApiUrl);
+            HttpClient httpClient = _httpClientFactory.CreateClient();
+            HttpResponseMessage consultationApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationApiUrl);
             if (consultationApiResponseMessage.IsSuccessStatusCode)
             {
-                using var consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
-                var consultationModels = await JsonSerializer.DeserializeAsync<IEnumerable<ConsultationModel>>(consultationApiResponseStream);
+                using Stream consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
+                IEnumerable<ConsultationModel> consultationModels = await JsonSerializer.DeserializeAsync<IEnumerable<ConsultationModel>>(consultationApiResponseStream);
                 if (consultationModels == null || consultationModels.Count() == 0)
                 {
                     var error = new ErrorModel("No doctor record found.");
@@ -58,13 +59,13 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 var error = new ErrorModel("Id is null");
                 return NotFound(error);
             }
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var consultationGetByIdUrl = $"{_consultationOptions.ConsultationApiUrl}/{id}";
-            var consultationApiResponseMessage = await httpClient.GetAsync(consultationGetByIdUrl);
+            HttpResponseMessage consultationApiResponseMessage = await httpClient.GetAsync(consultationGetByIdUrl);
             if (consultationApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
-                using var consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
-                var consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationApiResponseStream);
+                using Stream consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
+                ConsultationModel consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationApiResponseStream);
                 return Ok(consultationModel);
             }
             else
@@ -78,26 +79,26 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [Route("AddEditInitData")]
         public async Task<ActionResult<ConsultationModel>> GetAddEditInitData()
         {
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
 
-            var doctorApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationDoctorApiUrl);
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationDoctorApiUrl);
             IEnumerable<DoctorModel>? doctorModels;
             if (doctorApiResponseMessage.StatusCode != HttpStatusCode.OK)
             {
                 return StatusCode((int)doctorApiResponseMessage.StatusCode);
             }
 
-            var patientApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationPatientApiUrl);
+            HttpResponseMessage patientApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationPatientApiUrl);
             if (patientApiResponseMessage.StatusCode != HttpStatusCode.OK)
             {
                 return StatusCode((int)patientApiResponseMessage.StatusCode);
             }
 
-            using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
+            using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
             doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
 
-            using var patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
-            var patientModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatientModel>>(patientApiResponseStream);
+            using Stream patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
+            IEnumerable<PatientModel> patientModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatientModel>>(patientApiResponseStream);
 
             var consultationModel = new ConsultationModel()
             {
@@ -111,9 +112,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ConsultationModel consultation)
         {
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), Encoding.UTF8, "application/json");
-            var consultationApiResponseMessage = await httpClient.PostAsync(_consultationOptions.ConsultationApiUrl, consultationContent);
+            HttpResponseMessage consultationApiResponseMessage = await httpClient.PostAsync(_consultationOptions.ConsultationApiUrl, consultationContent);
             if (consultationApiResponseMessage.IsSuccessStatusCode)
             {
                 return Ok();
@@ -126,10 +127,10 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> Update(int id, ConsultationModel consultation)
         {
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var consultationUpdateUrl = $"{_consultationOptions.ConsultationApiUrl}/{id}";
             var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), Encoding.UTF8, "application/json");
-            var consultationApiResponseMessage = await httpClient.PutAsync(consultationUpdateUrl, consultationContent);
+            HttpResponseMessage consultationApiResponseMessage = await httpClient.PutAsync(consultationUpdateUrl, consultationContent);
             if (consultationApiResponseMessage.IsSuccessStatusCode)
             {
                 return Ok();
@@ -146,9 +147,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             {
                 return NotFound();
             }
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var consultationDeleteUrl = $"{_consultationOptions.ConsultationApiUrl}/{id}";
-            var consultationApiResponseMessage = await httpClient.DeleteAsync(consultationDeleteUrl);
+            HttpResponseMessage consultationApiResponseMessage = await httpClient.DeleteAsync(consultationDeleteUrl);
             if (consultationApiResponseMessage.IsSuccessStatusCode)
             {
                 return Ok();

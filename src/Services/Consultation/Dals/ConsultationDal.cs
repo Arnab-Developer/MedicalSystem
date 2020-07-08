@@ -19,7 +19,7 @@ namespace MedicalSystem.Services.Consultation.Dals
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDal"]/getAll/*'/>
         IEnumerable<ConsultationDomainModel> IConsultationDal.GetAll()
         {
-            var consultationDomainModels = _consultationContext.Consultations
+            IOrderedQueryable<ConsultationDomainModel> consultationDomainModels = _consultationContext.Consultations
                 .Include(consultation => consultation.Doctor)
                 .Include(consultation => consultation.Patient)
                 .OrderByDescending(consultation => consultation.Date);
@@ -30,7 +30,7 @@ namespace MedicalSystem.Services.Consultation.Dals
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDal"]/getById/*'/>
         ConsultationDomainModel? IConsultationDal.GetById(int id)
         {
-            var consultationDomainModel = _consultationContext.Consultations
+            ConsultationDomainModel consultationDomainModel = _consultationContext.Consultations
                 .Include(consultation => consultation.Doctor)
                 .Include(consultation => consultation.Patient)
                 .FirstOrDefault(consultation => consultation.Id == id);

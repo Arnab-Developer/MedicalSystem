@@ -21,7 +21,7 @@ namespace MedicalSystem.Services.Patient
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var patientDbConnectionString = Configuration.GetConnectionString("PatientDbConnectionString");
+            string patientDbConnectionString = Configuration.GetConnectionString("PatientDbConnectionString");
             services.AddDbContext<PatientContext>(option => option.UseSqlServer(patientDbConnectionString));
         }
 

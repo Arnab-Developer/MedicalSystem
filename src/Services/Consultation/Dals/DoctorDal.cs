@@ -18,7 +18,7 @@ namespace MedicalSystem.Services.Consultation.Dals
         /// <include file='docs.xml' path='docs/members[@name="DoctorDal"]/getAll/*'/>
         IEnumerable<DoctorDomainModel> IDoctorDal.GetAll()
         {
-            var doctorDomainModels = _consultationContext.Doctors.OrderBy(doctor => doctor.FirstName);
+            IOrderedQueryable<DoctorDomainModel> doctorDomainModels = _consultationContext.Doctors.OrderBy(doctor => doctor.FirstName);
             return doctorDomainModels;
         }
     }

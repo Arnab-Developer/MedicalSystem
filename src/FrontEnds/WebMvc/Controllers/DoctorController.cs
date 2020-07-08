@@ -3,6 +3,7 @@ using MedicalSystem.FrontEnds.WebMvc.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -28,18 +29,18 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/index/*'/>
         public async Task<IActionResult> Index()
         {
-            var httpClient = _httpClientFactory.CreateClient();
-            var doctorApiResponseMessage = await httpClient.GetAsync(_doctorOptions.DoctorGatewayUrl);
+            HttpClient httpClient = _httpClientFactory.CreateClient();
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.GetAsync(_doctorOptions.DoctorGatewayUrl);
             if (doctorApiResponseMessage.IsSuccessStatusCode)
             {
-                using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                var doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
+                using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
+                IEnumerable<DoctorModel> doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
                 return View(doctorModels);
             }
             if (doctorApiResponseMessage.StatusCode == HttpStatusCode.NotFound)
             {
-                using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                var errorModel = await JsonSerializer.DeserializeAsync<ErrorModel>(doctorApiResponseStream);
+                using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
+                ErrorModel errorModel = await JsonSerializer.DeserializeAsync<ErrorModel>(doctorApiResponseStream);
                 ViewData["ErrorReason"] = errorModel.Reason;
                 return View();
             }
@@ -53,13 +54,13 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var doctorGetByIdGatewayUrl = $"{_doctorOptions.DoctorGatewayUrl}/{id}";
-            var doctorApiResponseMessage = await httpClient.GetAsync(doctorGetByIdGatewayUrl);
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.GetAsync(doctorGetByIdGatewayUrl);
             if (doctorApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
-                using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                var doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
+                using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
+                DoctorModel doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
                 return View(doctorModel);
             }
             return StatusCode((int)doctorApiResponseMessage.StatusCode);
@@ -76,9 +77,9 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DoctorModel doctor)
         {
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), Encoding.UTF8, "application/json");
-            var doctorApiResponseMessage = await httpClient.PostAsync(_doctorOptions.DoctorGatewayUrl, doctorContent);
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.PostAsync(_doctorOptions.DoctorGatewayUrl, doctorContent);
             if (doctorApiResponseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
@@ -93,13 +94,13 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var doctorGetByIdGatewayUrl = $"{_doctorOptions.DoctorGatewayUrl}/{id}";
-            var doctorApiResponseMessage = await httpClient.GetAsync(doctorGetByIdGatewayUrl);
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.GetAsync(doctorGetByIdGatewayUrl);
             if (doctorApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
-                using var doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                var doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
+                using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
+                DoctorModel doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
                 return View(doctorModel);
             }
             return StatusCode((int)doctorApiResponseMessage.StatusCode);
@@ -110,10 +111,10 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, DoctorModel doctor)
         {
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var doctorUpdateGatewayUrl = $"{_doctorOptions.DoctorGatewayUrl}/{id}";
             var doctorContent = new StringContent(JsonSerializer.Serialize(doctor), Encoding.UTF8, "application/json");
-            var doctorApiResponseMessage = await httpClient.PutAsync(doctorUpdateGatewayUrl, doctorContent);
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.PutAsync(doctorUpdateGatewayUrl, doctorContent);
             if (doctorApiResponseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Details), new { id });
@@ -124,9 +125,9 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/delete/*'/>
         public async Task<IActionResult> Delete(int? id)
         {
-            var httpClient = _httpClientFactory.CreateClient();
+            HttpClient httpClient = _httpClientFactory.CreateClient();
             var doctorDeleteGatewayUrl = $"{_doctorOptions.DoctorGatewayUrl}/{id}";
-            var doctorApiResponseMessage = await httpClient.DeleteAsync(doctorDeleteGatewayUrl);
+            HttpResponseMessage doctorApiResponseMessage = await httpClient.DeleteAsync(doctorDeleteGatewayUrl);
             if (doctorApiResponseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
