@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 
 namespace MedicalSystem.Services.Doctor
@@ -12,9 +13,15 @@ namespace MedicalSystem.Services.Doctor
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.ConfigureKestrel(options =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    // Setup a HTTP/2 endpoint without TLS.
+                    options.ListenLocalhost(5000, o => o.Protocols =
+                        HttpProtocols.Http2);
                 });
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

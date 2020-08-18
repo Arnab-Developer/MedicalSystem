@@ -743,20 +743,20 @@
     </onModelCreating>
   </members>
 
-  <members name="DoctorController">
-    <doctorController>
+  <members name="DoctorGrpcService">
+    <doctorGrpcService>
       <summary>
-        Doctor Controller class.
+        Doctor gRPC service class.
       </summary>
-    </doctorController>
-    <doctorControllerConstructor>
+    </doctorGrpcService>
+    <doctorGrpcServiceConstructor>
       <summary>
-        Create a new object of doctor Controller.
+        Create a new object of doctor gRPC service.
       </summary>
       <param name="doctorService">
         Doctor service.
       </param>
-    </doctorControllerConstructor>
+    </doctorGrpcServiceConstructor>
     <getAll>
       <summary>
         Get all doctor data.
@@ -767,20 +767,20 @@
     </getAll>
   </members>
 
-  <members name="PatientController">
-    <patientController>
+  <members name="PatientGrpcService">
+    <patientGrpcService>
       <summary>
-        Patient Controller class.
+        Patient gRPC service class.
       </summary>
-    </patientController>
-    <patientControllerConstructor>
+    </patientGrpcService>
+    <patientGrpcServiceConstructor>
       <summary>
-        Create a new object of patient Controller.
+        Create a new object of patient gRPC service.
       </summary>
       <param name="patientService">
         Patient service.
       </param>
-    </patientControllerConstructor>
+    </patientGrpcServiceConstructor>
     <getAll>
       <summary>
         Get all patient data.
@@ -791,20 +791,20 @@
     </getAll>
   </members>
 
-  <members name="ConsultationController">
-    <consultationController>
+  <members name="ConsultationGrpcService">
+    <consultationGrpcService>
       <summary>
-        Consultation controller class.
+        Consultation gRPC service class.
       </summary>
-    </consultationController>
-    <consultationControllerConstructor>
+    </consultationGrpcService>
+    <consultationGrpcServiceConstructor>
       <summary>
-        Consultation controller class.
+        Consultation gRPC service class.
       </summary>
       <param name="consultationService">
         Consultation service.
       </param>
-    </consultationControllerConstructor>
+    </consultationGrpcServiceConstructor>
     <getAll>
       <summary>
         Get all consultation data.

@@ -9,7 +9,7 @@ User can store doctor, patient and consultation information in this application 
 ## Tech stack
 | Module | Tech |
 |--------|------|
-| Backend apis | ASP.NET Core Web Api |
+| Backend apis | ASP.NET Core gRPC service |
 | Gateway | ASP.NET Core Web Api |
 | Frontend web application | ASP.NET Core MVC |
 | Jobs | Azure function |

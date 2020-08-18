@@ -1,7 +1,10 @@
-using MedicalSystem.Services.Patient.Controllers;
+using Grpc.Core;
 using MedicalSystem.Services.Patient.Data;
+using MedicalSystem.Services.Patient.GrpcServices;
 using MedicalSystem.Services.Patient.Models;
+using MedicalSystem.Services.Patient.Protos;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +12,11 @@ using System.Linq;
 namespace MedicalSystem.Tests.Services.Patient
 {
     /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/patientControllerTests/*'/>
-    internal class PatientControllerTests
+    internal class PatientGrpcServicesTests
     {
         private PatientContext? _patientContext;
-        private PatientController? _patientController;
+        private PatientService? _patientController;
+        private Mock<ServerCallContext>? _serverCallContextMock;
 
         /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/setup/*'/>
         [SetUp]
@@ -22,7 +26,8 @@ namespace MedicalSystem.Tests.Services.Patient
                 .UseInMemoryDatabase("PatientTestDb")
                 .Options;
             _patientContext = new PatientContext(options);
-            _patientController = new PatientController(_patientContext);
+            _patientController = new PatientService(_patientContext);
+            _serverCallContextMock = new Mock<ServerCallContext>();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getAll_GivenValidDbData_ReturnsValidModels/*'/>
@@ -30,7 +35,18 @@ namespace MedicalSystem.Tests.Services.Patient
         public void GetAll_GivenValidDbData_ReturnsValidModels()
         {
             AddPatients();
-            List<PatientModel> patientModels = _patientController!.GetAll().ToList();
+            PatientModelsMessage patientModelsMessage = _patientController!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
+            var patientModels = new List<PatientModel>();
+            foreach (PatientModelMessage patientModelMessage in patientModelsMessage.Patients)
+            {
+                var patientModel = new PatientModel
+                {
+                    Id = patientModelMessage.Id,
+                    FirstName = patientModelMessage.FirstName,
+                    LastName = patientModelMessage.LastName
+                };
+                patientModels.Add(patientModel);
+            }
 
             Assert.AreEqual(2, patientModels.Count);
 
@@ -47,8 +63,8 @@ namespace MedicalSystem.Tests.Services.Patient
         [Test]
         public void GetAll_GivenEmptyDbData_ReturnsEmptyModels()
         {
-            List<PatientModel> patientModels = _patientController!.GetAll().ToList();
-            Assert.Zero(patientModels.Count);
+            PatientModelsMessage patientModelsMessage = _patientController!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
+            Assert.Zero(patientModelsMessage.Patients.Count);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getById_GivenValidDbData_ReturnsValidModel/*'/>
@@ -56,7 +72,13 @@ namespace MedicalSystem.Tests.Services.Patient
         public void GetById_GivenValidDbData_ReturnsValidModel()
         {
             AddPatients();
-            PatientModel patientModel = _patientController!.GetById(2);
+            PatientModelMessage patientModelMessage = _patientController!.GetById(new IdMessage { Id = 2 }, _serverCallContextMock!.Object).Result;
+            var patientModel = new PatientModel
+            {
+                Id = patientModelMessage.Id,
+                FirstName = patientModelMessage.FirstName,
+                LastName = patientModelMessage.LastName
+            };
 
             Assert.AreEqual(2, patientModel.Id);
             Assert.AreEqual("pat2first", patientModel.FirstName);
@@ -67,8 +89,10 @@ namespace MedicalSystem.Tests.Services.Patient
         [Test]
         public void GetById_GivenEmptyDbData_ReturnsNull()
         {
-            PatientModel patientModel = _patientController!.GetById(2);
-            Assert.Null(patientModel);
+            PatientModelMessage patientModelMessage = _patientController!.GetById(new IdMessage { Id = 2 }, _serverCallContextMock!.Object).Result;
+            Assert.Zero(patientModelMessage.Id);
+            Assert.AreEqual(string.Empty, patientModelMessage.FirstName);
+            Assert.AreEqual(string.Empty, patientModelMessage.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/add_CanInsertInDb/*'/>
@@ -81,7 +105,8 @@ namespace MedicalSystem.Tests.Services.Patient
                 FirstName = "pat1first",
                 LastName = "pat1last"
             };
-            _patientController!.Add(patient);
+            _patientController!.Add(new PatientModelMessage { Id = patient.Id, FirstName = patient.FirstName, LastName = patient.LastName },
+                _serverCallContextMock!.Object);
 
             PatientModel patientModel = _patientContext!.Patients.FirstOrDefault(patient => patient.Id == 1);
 
@@ -98,7 +123,18 @@ namespace MedicalSystem.Tests.Services.Patient
 
             PatientModel patientModel = _patientContext!.Patients.FirstOrDefault(patient => patient.Id == 2);
             patientModel.FirstName = "update";
-            _patientController!.Update(2, patientModel);
+            _patientController!.Update(
+                new UpdateMessage
+                {
+                    Id = 2,
+                    Patient = new PatientModelMessage
+                    {
+                        Id = patientModel.Id,
+                        FirstName = patientModel.FirstName,
+                        LastName = patientModel.LastName
+                    }
+                },
+                _serverCallContextMock!.Object);
 
             PatientModel patientModelNew = _patientContext!.Patients.FirstOrDefault(patient => patient.Id == 2);
 
@@ -113,7 +149,7 @@ namespace MedicalSystem.Tests.Services.Patient
         {
             AddPatients();
             PatientModel patientModel = _patientContext!.Patients.FirstOrDefault(patient => patient.Id == 2);
-            _patientController!.Delete(2);
+            _patientController!.Delete(new IdMessage { Id = 2 }, _serverCallContextMock!.Object);
             Assert.AreEqual(1, _patientContext.Patients.Count());
         }
 

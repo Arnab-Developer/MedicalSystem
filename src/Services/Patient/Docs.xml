@@ -50,17 +50,17 @@
     </patients>
   </members>
 
-  <members name="PatientController">
-    <patientController>
+  <members name="PatientGrpcService">
+    <patientGrpcService>
       <summary>
-        Controller for patient.
+        gRPC service for patient.
       </summary>
-    </patientController>
-    <patientControllerConstructor>
+    </patientGrpcService>
+    <patientGrpcServiceConstructor>
       <summary>
-        Creates new patient controller object.
+        Creates new patient gRPC service object.
       </summary>
-    </patientControllerConstructor>
+    </patientGrpcServiceConstructor>
     <getAll>
       <summary>
         Get all patient data.
@@ -107,6 +107,7 @@
         Takes patient id to locate and delete the existing patient object.
       </param>
     </delete>
-  </members>
+  
+</members>
 
 </docs>
