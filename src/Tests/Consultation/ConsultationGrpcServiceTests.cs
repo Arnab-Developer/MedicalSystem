@@ -1,26 +1,30 @@
-﻿using MedicalSystem.Services.Consultation.Controllers;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
+using MedicalSystem.Services.Consultation.Protos;
 using MedicalSystem.Services.Consultation.Services;
 using MedicalSystem.Services.Consultation.ViewModels;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using GrpcServices = MedicalSystem.Services.Consultation.GrpcServices;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
     /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/consultationControllerTests/*'/>
-    internal class ConsultationControllerTests
+    internal class ConsultationGrpcServiceTests
     {
+        private GrpcServices::ConsultationService? _consultationGrpcService;
         private Mock<IConsultationService>? _consultationServiceMock;
-        private ConsultationController? _consultationController;
+        private Mock<ServerCallContext>? _serverCallContextMock;
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
             _consultationServiceMock = new Mock<IConsultationService>();
-            _consultationController = new ConsultationController(_consultationServiceMock.Object);
+            _consultationGrpcService = new GrpcServices::ConsultationService(_consultationServiceMock.Object);
+            _serverCallContextMock = new Mock<ServerCallContext>();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenValidViewModels_ReturnsValidViewModels/*'/>
@@ -82,43 +86,44 @@ namespace MedicalSystem.Tests.Services.Consultation
             };
             _consultationServiceMock!.Setup(service => service.GetAll()).Returns(consultationViewModels);
 
-            List<ConsultationViewModel> consultationViewModelsFromController = _consultationController!.GetAll().ToList();
+            ConsultationModelsMessage consultationModelsMessage
+                = _consultationGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
 
-            Assert.AreEqual(2, consultationViewModelsFromController.Count);
+            Assert.AreEqual(2, consultationModelsMessage.Consultations.Count);
 
-            Assert.AreEqual(1, consultationViewModelsFromController[0].Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationViewModelsFromController[0].Date.Date);
-            Assert.AreEqual("India", consultationViewModelsFromController[0].Country);
-            Assert.AreEqual("WB", consultationViewModelsFromController[0].State);
-            Assert.AreEqual("Kol", consultationViewModelsFromController[0].City);
-            Assert.AreEqual("1234", consultationViewModelsFromController[0].PinCode);
-            Assert.AreEqual("P1", consultationViewModelsFromController[0].Problem);
-            Assert.AreEqual("M1", consultationViewModelsFromController[0].Medicine);
-            Assert.AreEqual(1, consultationViewModelsFromController[0].DoctorId);
-            Assert.AreEqual(1, consultationViewModelsFromController[0].Doctor!.Id);
-            Assert.AreEqual("doc1first", consultationViewModelsFromController[0].Doctor!.FirstName);
-            Assert.AreEqual("doc1last", consultationViewModelsFromController[0].Doctor!.LastName);
-            Assert.AreEqual(1, consultationViewModelsFromController[0].PatientId);
-            Assert.AreEqual(1, consultationViewModelsFromController[0].Patient!.Id);
-            Assert.AreEqual("pat1first", consultationViewModelsFromController[0].Patient!.FirstName);
-            Assert.AreEqual("pat1last", consultationViewModelsFromController[0].Patient!.LastName);
+            Assert.AreEqual(1, consultationModelsMessage.Consultations[0].Id);
+            Assert.AreEqual(DateTime.Now.Date, consultationModelsMessage.Consultations[0].Date.ToDateTime().Date);
+            Assert.AreEqual("India", consultationModelsMessage.Consultations[0].Country);
+            Assert.AreEqual("WB", consultationModelsMessage.Consultations[0].State);
+            Assert.AreEqual("Kol", consultationModelsMessage.Consultations[0].City);
+            Assert.AreEqual("1234", consultationModelsMessage.Consultations[0].PinCode);
+            Assert.AreEqual("P1", consultationModelsMessage.Consultations[0].Problem);
+            Assert.AreEqual("M1", consultationModelsMessage.Consultations[0].Medicine);
+            Assert.AreEqual(1, consultationModelsMessage.Consultations[0].DoctorId);
+            Assert.AreEqual(1, consultationModelsMessage.Consultations[0].Doctor!.Id);
+            Assert.AreEqual("doc1first", consultationModelsMessage.Consultations[0].Doctor!.FirstName);
+            Assert.AreEqual("doc1last", consultationModelsMessage.Consultations[0].Doctor!.LastName);
+            Assert.AreEqual(1, consultationModelsMessage.Consultations[0].PatientId);
+            Assert.AreEqual(1, consultationModelsMessage.Consultations[0].Patient!.Id);
+            Assert.AreEqual("pat1first", consultationModelsMessage.Consultations[0].Patient!.FirstName);
+            Assert.AreEqual("pat1last", consultationModelsMessage.Consultations[0].Patient!.LastName);
 
-            Assert.AreEqual(2, consultationViewModelsFromController[1].Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationViewModelsFromController[1].Date.Date);
-            Assert.AreEqual("UK", consultationViewModelsFromController[1].Country);
-            Assert.AreEqual("st1", consultationViewModelsFromController[1].State);
-            Assert.AreEqual("c1", consultationViewModelsFromController[1].City);
-            Assert.AreEqual("4567", consultationViewModelsFromController[1].PinCode);
-            Assert.AreEqual("p2", consultationViewModelsFromController[1].Problem);
-            Assert.AreEqual("m2", consultationViewModelsFromController[1].Medicine);
-            Assert.AreEqual(2, consultationViewModelsFromController[1].DoctorId);
-            Assert.AreEqual(2, consultationViewModelsFromController[1].Doctor!.Id);
-            Assert.AreEqual("doc2 fir", consultationViewModelsFromController[1].Doctor!.FirstName);
-            Assert.AreEqual("doc2 las", consultationViewModelsFromController[1].Doctor!.LastName);
-            Assert.AreEqual(2, consultationViewModelsFromController[1].PatientId);
-            Assert.AreEqual(2, consultationViewModelsFromController[1].Patient!.Id);
-            Assert.AreEqual("pat2 fir", consultationViewModelsFromController[1].Patient!.FirstName);
-            Assert.AreEqual("pat2 las", consultationViewModelsFromController[1].Patient!.LastName);
+            Assert.AreEqual(2, consultationModelsMessage.Consultations[1].Id);
+            Assert.AreEqual(DateTime.Now.Date, consultationModelsMessage.Consultations[1].Date.ToDateTime().Date);
+            Assert.AreEqual("UK", consultationModelsMessage.Consultations[1].Country);
+            Assert.AreEqual("st1", consultationModelsMessage.Consultations[1].State);
+            Assert.AreEqual("c1", consultationModelsMessage.Consultations[1].City);
+            Assert.AreEqual("4567", consultationModelsMessage.Consultations[1].PinCode);
+            Assert.AreEqual("p2", consultationModelsMessage.Consultations[1].Problem);
+            Assert.AreEqual("m2", consultationModelsMessage.Consultations[1].Medicine);
+            Assert.AreEqual(2, consultationModelsMessage.Consultations[1].DoctorId);
+            Assert.AreEqual(2, consultationModelsMessage.Consultations[1].Doctor!.Id);
+            Assert.AreEqual("doc2 fir", consultationModelsMessage.Consultations[1].Doctor!.FirstName);
+            Assert.AreEqual("doc2 las", consultationModelsMessage.Consultations[1].Doctor!.LastName);
+            Assert.AreEqual(2, consultationModelsMessage.Consultations[1].PatientId);
+            Assert.AreEqual(2, consultationModelsMessage.Consultations[1].Patient!.Id);
+            Assert.AreEqual("pat2 fir", consultationModelsMessage.Consultations[1].Patient!.FirstName);
+            Assert.AreEqual("pat2 las", consultationModelsMessage.Consultations[1].Patient!.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenEmptyViewModels_ReturnsEmptyViewModels/*'/>
@@ -128,9 +133,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             var consultationViewModels = new List<ConsultationViewModel>();
             _consultationServiceMock!.Setup(service => service.GetAll()).Returns(consultationViewModels);
 
-            List<ConsultationViewModel> consultationViewModelsFromController = _consultationController!.GetAll().ToList();
+            ConsultationModelsMessage consultationModelsMessage
+                = _consultationGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
 
-            Assert.Zero(consultationViewModelsFromController.Count);
+            Assert.Zero(consultationModelsMessage.Consultations.Count);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenNullViewModels_ExpectException/*'/>
@@ -140,7 +146,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             var consultationViewModels = new List<ConsultationViewModel>();
             _consultationServiceMock!.Setup(service => service.GetAll()).Throws<NullReferenceException>();
 
-            Assert.Throws<NullReferenceException>(() => _consultationController!.GetAll());
+            Assert.Throws<NullReferenceException>(() => _consultationGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object));
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getById_GivenValidViewModel_ReturnsValidViewModel/*'/>
@@ -174,24 +180,25 @@ namespace MedicalSystem.Tests.Services.Consultation
             };
             _consultationServiceMock!.Setup(service => service.GetById(It.IsAny<int>())).Returns(consultationViewModel);
 
-            ConsultationViewModel? consultationViewModelFromController = _consultationController!.GetById(It.IsAny<int>());
+            ConsultationModelMessage? consultationModelMessage
+                = _consultationGrpcService!.GetById(new IdMessage { Id = It.IsAny<int>() }, _serverCallContextMock!.Object)!.Result;
 
-            Assert.AreEqual(1, consultationViewModelFromController!.Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationViewModelFromController.Date.Date);
-            Assert.AreEqual("India", consultationViewModelFromController.Country);
-            Assert.AreEqual("WB", consultationViewModelFromController.State);
-            Assert.AreEqual("Kol", consultationViewModelFromController.City);
-            Assert.AreEqual("1234", consultationViewModelFromController.PinCode);
-            Assert.AreEqual("P1", consultationViewModelFromController.Problem);
-            Assert.AreEqual("M1", consultationViewModelFromController.Medicine);
-            Assert.AreEqual(1, consultationViewModelFromController.DoctorId);
-            Assert.AreEqual(1, consultationViewModelFromController.Doctor!.Id);
-            Assert.AreEqual("doc1first", consultationViewModelFromController.Doctor.FirstName);
-            Assert.AreEqual("doc1last", consultationViewModelFromController.Doctor.LastName);
-            Assert.AreEqual(1, consultationViewModelFromController.PatientId);
-            Assert.AreEqual(1, consultationViewModelFromController.Patient!.Id);
-            Assert.AreEqual("pat1first", consultationViewModelFromController.Patient.FirstName);
-            Assert.AreEqual("pat1last", consultationViewModelFromController.Patient.LastName);
+            Assert.AreEqual(1, consultationModelMessage!.Id);
+            Assert.AreEqual(DateTime.Now.Date, consultationModelMessage.Date.ToDateTime().Date);
+            Assert.AreEqual("India", consultationModelMessage.Country);
+            Assert.AreEqual("WB", consultationModelMessage.State);
+            Assert.AreEqual("Kol", consultationModelMessage.City);
+            Assert.AreEqual("1234", consultationModelMessage.PinCode);
+            Assert.AreEqual("P1", consultationModelMessage.Problem);
+            Assert.AreEqual("M1", consultationModelMessage.Medicine);
+            Assert.AreEqual(1, consultationModelMessage.DoctorId);
+            Assert.AreEqual(1, consultationModelMessage.Doctor!.Id);
+            Assert.AreEqual("doc1first", consultationModelMessage.Doctor.FirstName);
+            Assert.AreEqual("doc1last", consultationModelMessage.Doctor.LastName);
+            Assert.AreEqual(1, consultationModelMessage.PatientId);
+            Assert.AreEqual(1, consultationModelMessage.Patient!.Id);
+            Assert.AreEqual("pat1first", consultationModelMessage.Patient.FirstName);
+            Assert.AreEqual("pat1last", consultationModelMessage.Patient.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getById_GivenNullViewModel_ReturnsNull/*'/>
@@ -199,18 +206,17 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetById_GivenNullViewModel_ReturnsNull()
         {
             _consultationServiceMock!.Setup(service => service.GetById(It.IsAny<int>())).Returns<ConsultationViewModel>(null);
-            ConsultationViewModel? consultationViewModelFromController = _consultationController!.GetById(It.IsAny<int>());
-            Assert.Null(consultationViewModelFromController);
+            Assert.Null(_consultationGrpcService!.GetById(new IdMessage { Id = It.IsAny<int>() }, _serverCallContextMock!.Object));
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/add_CanCallServiceAdd/*'/>
         [Test]
         public void Add_CanCallServiceAdd()
         {
-            var consultationViewModel = new ConsultationViewModel()
+            var consultationModelMessage = new ConsultationModelMessage
             {
                 Id = 1,
-                Date = DateTime.Now,
+                Date = DateTime.Now.ToUniversalTime().ToTimestamp(),
                 Country = "India",
                 State = "WB",
                 City = "Kol",
@@ -218,14 +224,14 @@ namespace MedicalSystem.Tests.Services.Consultation
                 Problem = "P1",
                 Medicine = "M1",
                 DoctorId = 1,
-                Doctor = new DoctorViewModel()
+                Doctor = new DoctorModelMessage()
                 {
                     Id = 1,
                     FirstName = "doc1first",
                     LastName = "doc1last",
                 },
                 PatientId = 1,
-                Patient = new PatientViewModel()
+                Patient = new PatientModelMessage()
                 {
                     Id = 1,
                     FirstName = "pat1first",
@@ -233,8 +239,8 @@ namespace MedicalSystem.Tests.Services.Consultation
                 }
             };
 
-            _consultationServiceMock!.Setup(service => service.Add(consultationViewModel)).Verifiable();
-            _consultationController!.Add(consultationViewModel);
+            _consultationServiceMock!.Setup(service => service.Add(It.IsAny<ConsultationViewModel>())).Verifiable();
+            _consultationGrpcService!.Add(consultationModelMessage, _serverCallContextMock!.Object);
             _consultationServiceMock.Verify();
         }
 
@@ -242,10 +248,10 @@ namespace MedicalSystem.Tests.Services.Consultation
         [Test]
         public void Update_CanCallServiceUpdate()
         {
-            var consultationViewModel = new ConsultationViewModel()
+            var consultationModelMessage = new ConsultationModelMessage
             {
                 Id = 1,
-                Date = DateTime.Now,
+                Date = DateTime.Now.ToUniversalTime().ToTimestamp(),
                 Country = "India",
                 State = "WB",
                 City = "Kol",
@@ -253,22 +259,23 @@ namespace MedicalSystem.Tests.Services.Consultation
                 Problem = "P1",
                 Medicine = "M1",
                 DoctorId = 1,
-                Doctor = new DoctorViewModel()
+                Doctor = new DoctorModelMessage()
                 {
                     Id = 1,
                     FirstName = "doc1first",
                     LastName = "doc1last",
                 },
                 PatientId = 1,
-                Patient = new PatientViewModel()
+                Patient = new PatientModelMessage()
                 {
                     Id = 1,
                     FirstName = "pat1first",
                     LastName = "pat1last"
                 }
             };
-            _consultationServiceMock!.Setup(service => service.Update(It.IsAny<int>(), consultationViewModel)).Verifiable();
-            _consultationController!.Update(It.IsAny<int>(), consultationViewModel);
+            _consultationServiceMock!.Setup(service => service.Update(It.IsAny<int>(), It.IsAny<ConsultationViewModel>())).Verifiable();
+            _consultationGrpcService!.Update(new UpdateMessage { Id = It.IsAny<int>(), Consultation = consultationModelMessage },
+                _serverCallContextMock!.Object);
             _consultationServiceMock.Verify();
         }
 
@@ -277,7 +284,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void Delete_CanCallServiceDelete()
         {
             _consultationServiceMock!.Setup(service => service.Delete(It.IsAny<int>())).Verifiable();
-            _consultationController!.Delete(It.IsAny<int>());
+            _consultationGrpcService!.Delete(new IdMessage { Id = It.IsAny<int>() }, _serverCallContextMock!.Object);
             _consultationServiceMock.Verify();
         }
     }

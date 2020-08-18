@@ -50,17 +50,17 @@
     </doctors>
   </members>
 
-  <members name="DoctorController">
-    <doctorController>
+  <members name="DoctorGrpcService">
+    <doctorGrpcService>
       <summary>
-        Controller for doctor.
+        gRPC service for doctor.
       </summary>
-    </doctorController>
-    <doctorControllerConstructor>
+    </doctorGrpcService>
+    <doctorGrpcServiceConstructor>
       <summary>
-        Creates new doctor controller object.
+        Creates new doctor gRPC service object.
       </summary>
-    </doctorControllerConstructor>
+    </doctorGrpcServiceConstructor>
     <getAll>
       <summary>
         Get all doctor data.

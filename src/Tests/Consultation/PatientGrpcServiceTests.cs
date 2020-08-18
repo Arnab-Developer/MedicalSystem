@@ -1,4 +1,5 @@
-﻿using MedicalSystem.Services.Consultation.Controllers;
+﻿using Grpc.Core;
+using MedicalSystem.Services.Consultation.Protos;
 using MedicalSystem.Services.Consultation.Services;
 using MedicalSystem.Services.Consultation.ViewModels;
 using Moq;
@@ -6,21 +7,24 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GrpcServices = MedicalSystem.Services.Consultation.GrpcServices;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
     /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/patientControllerTests/*'/>
-    internal class PatientControllerTests
+    internal class PatientGrpcServiceTests
     {
-        private PatientController? _patientController;
+        private GrpcServices::PatientService? _patientGrpcService;
         private Mock<IPatientService>? _patientServiceMock;
+        private Mock<ServerCallContext>? _serverCallContextMock;
 
         /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
             _patientServiceMock = new Mock<IPatientService>();
-            _patientController = new PatientController(_patientServiceMock.Object);
+            _patientGrpcService = new GrpcServices::PatientService(_patientServiceMock.Object);
+            _serverCallContextMock = new Mock<ServerCallContext>();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getAll_GivenValidViewModels_ReturnsValidViewModels/*'/>
@@ -44,15 +48,15 @@ namespace MedicalSystem.Tests.Services.Consultation
             };
             _patientServiceMock!.Setup(service => service.GetAll()).Returns(patientViewModels);
 
-            List<PatientViewModel> patientViewModelsFromController = _patientController!.GetAll().ToList();
+            PatientModelsMessage patientModelsMessage = _patientGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
 
-            Assert.AreEqual(1, patientViewModelsFromController[0].Id);
-            Assert.AreEqual("doc1 f", patientViewModelsFromController[0].FirstName);
-            Assert.AreEqual("doc1 l", patientViewModelsFromController[0].LastName);
+            Assert.AreEqual(1, patientModelsMessage.Patients[0].Id);
+            Assert.AreEqual("doc1 f", patientModelsMessage.Patients[0].FirstName);
+            Assert.AreEqual("doc1 l", patientModelsMessage.Patients[0].LastName);
 
-            Assert.AreEqual(2, patientViewModelsFromController[1].Id);
-            Assert.AreEqual("doc2 f", patientViewModelsFromController[1].FirstName);
-            Assert.AreEqual("doc2 l", patientViewModelsFromController[1].LastName);
+            Assert.AreEqual(2, patientModelsMessage.Patients[1].Id);
+            Assert.AreEqual("doc2 f", patientModelsMessage.Patients[1].FirstName);
+            Assert.AreEqual("doc2 l", patientModelsMessage.Patients[1].LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getAll_GivenEmptyViewModels_ReturnsEmptyViewModels/*'/>
@@ -61,8 +65,8 @@ namespace MedicalSystem.Tests.Services.Consultation
         {
             var patientViewModels = new List<PatientViewModel>();
             _patientServiceMock!.Setup(service => service.GetAll()).Returns(patientViewModels);
-            IEnumerable<PatientViewModel> patientViewModelsFromController = _patientController!.GetAll();
-            Assert.Zero(patientViewModelsFromController.Count());
+            PatientModelsMessage patientModelsMessage = _patientGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
+            Assert.Zero(patientModelsMessage.Patients.Count());
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getAll_GivenException_ExpectException/*'/>
@@ -70,7 +74,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetAll_GivenException_ExpectException()
         {
             _patientServiceMock!.Setup(service => service.GetAll()).Throws<NullReferenceException>(); ;
-            Assert.Throws<NullReferenceException>(() => _patientController!.GetAll());
+            Assert.Throws<NullReferenceException>(() => _patientGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object));
         }
     }
 }

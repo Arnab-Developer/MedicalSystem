@@ -1,14 +1,13 @@
-﻿using MedicalSystem.Gateways.WebGateway.Models;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Net.Client;
+using MedicalSystem.Gateways.WebGateway.Models;
 using MedicalSystem.Gateways.WebGateway.Options;
+using MedicalSystem.Gateways.WebGateway.Protos.Consultation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.Controllers
@@ -18,35 +17,73 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
     [Route("[controller]")]
     public class ConsultationController : ControllerBase
     {
-        private readonly IHttpClientFactory _httpClientFactory;
         private readonly ConsultationOptions _consultationOptions;
+        private readonly Doctor.DoctorClient _doctorClient;
+        private readonly Patient.PatientClient _patientClient;
+        private readonly Consultation.ConsultationClient _consultationClient;
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/consultationControllerConstructor/*'/>
-        public ConsultationController(IHttpClientFactory httpClientFactory,
-            IOptionsMonitor<ConsultationOptions> optionsAccessor)
+        public ConsultationController(IOptionsMonitor<ConsultationOptions> optionsAccessor)
         {
-            _httpClientFactory = httpClientFactory;
             _consultationOptions = optionsAccessor.CurrentValue;
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            GrpcChannel channel = GrpcChannel.ForAddress(_consultationOptions.ConsultationApiUrl);
+            _doctorClient = new Doctor.DoctorClient(channel);
+            _patientClient = new Patient.PatientClient(channel);
+            _consultationClient = new Consultation.ConsultationClient(channel);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getAll/*'/>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ConsultationModel>>> GetAll()
         {
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-            HttpResponseMessage consultationApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationApiUrl);
-            if (consultationApiResponseMessage.IsSuccessStatusCode)
+            ConsultationModelsMessage consultationModelsMessage;
+            try
             {
-                using Stream consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
-                IEnumerable<ConsultationModel> consultationModels = await JsonSerializer.DeserializeAsync<IEnumerable<ConsultationModel>>(consultationApiResponseStream);
-                if (consultationModels == null || consultationModels.Count() == 0)
-                {
-                    var error = new ErrorModel("No doctor record found.");
-                    return NotFound(error);
-                }
-                return Ok(consultationModels);
+                consultationModelsMessage = await _consultationClient.GetAllAsync(new EmptyMessage());
             }
-            return NotFound();
+            catch
+            {
+                return StatusCode(500);
+            }
+            if (consultationModelsMessage == null ||
+                consultationModelsMessage.Consultations == null ||
+                consultationModelsMessage.Consultations.Count() == 0)
+            {
+                var error = new ErrorModel("No Consultation record found.");
+                return NotFound(error);
+            }
+            var consultationModels = new List<ConsultationModel>();
+            foreach (ConsultationModelMessage consultationModelMessage in consultationModelsMessage.Consultations)
+            {
+                var consultationModel = new ConsultationModel
+                {
+                    Id = consultationModelMessage.Id,
+                    Date = consultationModelMessage.Date.ToDateTime(),
+                    Country = consultationModelMessage.Country,
+                    State = consultationModelMessage.State,
+                    City = consultationModelMessage.City,
+                    PinCode = consultationModelMessage.PinCode,
+                    Problem = consultationModelMessage.Problem,
+                    Medicine = consultationModelMessage.Medicine,
+                    DoctorId = consultationModelMessage.DoctorId,
+                    Doctor = new DoctorModel
+                    {
+                        Id = consultationModelMessage.Doctor!.Id,
+                        FirstName = consultationModelMessage.Doctor!.FirstName,
+                        LastName = consultationModelMessage.Doctor!.LastName
+                    },
+                    PatientId = consultationModelMessage.PatientId,
+                    Patient = new PatientModel
+                    {
+                        Id = consultationModelMessage.Patient!.Id,
+                        FirstName = consultationModelMessage.Patient!.FirstName,
+                        LastName = consultationModelMessage.Patient!.LastName
+                    }
+                };
+                consultationModels.Add(consultationModel);
+            }
+            return Ok(consultationModels);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getById/*'/>
@@ -59,19 +96,49 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 var error = new ErrorModel("Id is null");
                 return NotFound(error);
             }
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-            var consultationGetByIdUrl = $"{_consultationOptions.ConsultationApiUrl}/{id}";
-            HttpResponseMessage consultationApiResponseMessage = await httpClient.GetAsync(consultationGetByIdUrl);
-            if (consultationApiResponseMessage.StatusCode == HttpStatusCode.OK)
+            ConsultationModelMessage consultationModelMessage;
+            try
             {
-                using Stream consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
-                ConsultationModel consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationApiResponseStream);
-                return Ok(consultationModel);
+                var idMessage = new IdMessage { Id = id.Value };
+                consultationModelMessage = await _consultationClient.GetByIdAsync(idMessage);
             }
-            else
+            catch
             {
-                return StatusCode((int)consultationApiResponseMessage.StatusCode);
+                return StatusCode(500);
             }
+            if (consultationModelMessage == null ||
+                (consultationModelMessage.Id == 0 &&
+                string.IsNullOrEmpty(consultationModelMessage.Country)))
+            {
+                var error = new ErrorModel("No consultation record found.");
+                return NotFound(error);
+            }
+            var consultationModel = new ConsultationModel
+            {
+                Id = consultationModelMessage.Id,
+                Date = consultationModelMessage.Date.ToDateTime(),
+                Country = consultationModelMessage.Country,
+                State = consultationModelMessage.State,
+                City = consultationModelMessage.City,
+                PinCode = consultationModelMessage.PinCode,
+                Problem = consultationModelMessage.Problem,
+                Medicine = consultationModelMessage.Medicine,
+                DoctorId = consultationModelMessage.DoctorId,
+                Doctor = new DoctorModel
+                {
+                    Id = consultationModelMessage.Doctor!.Id,
+                    FirstName = consultationModelMessage.Doctor!.FirstName,
+                    LastName = consultationModelMessage.Doctor!.LastName
+                },
+                PatientId = consultationModelMessage.PatientId,
+                Patient = new PatientModel
+                {
+                    Id = consultationModelMessage.Patient!.Id,
+                    FirstName = consultationModelMessage.Patient!.FirstName,
+                    LastName = consultationModelMessage.Patient!.LastName
+                }
+            };
+            return Ok(consultationModel);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getAddEditInitData/*'/>
@@ -79,26 +146,45 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [Route("AddEditInitData")]
         public async Task<ActionResult<ConsultationModel>> GetAddEditInitData()
         {
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-
-            HttpResponseMessage doctorApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationDoctorApiUrl);
-            IEnumerable<DoctorModel>? doctorModels;
-            if (doctorApiResponseMessage.StatusCode != HttpStatusCode.OK)
+            DoctorModelsMessage doctorModelsMessage = await _doctorClient.GetAllAsync(new EmptyMessage());
+            if (doctorModelsMessage == null ||
+                doctorModelsMessage.Doctors == null ||
+                doctorModelsMessage.Doctors.Count() == 0)
             {
-                return StatusCode((int)doctorApiResponseMessage.StatusCode);
+                var error = new ErrorModel("No doctor record found.");
+                return NotFound(error);
+            }
+            var doctorModels = new List<DoctorModel>();
+            foreach (DoctorModelMessage doctorModelMessage in doctorModelsMessage.Doctors)
+            {
+                var doctorModel = new DoctorModel
+                {
+                    Id = doctorModelMessage.Id,
+                    FirstName = doctorModelMessage.FirstName,
+                    LastName = doctorModelMessage.LastName
+                };
+                doctorModels.Add(doctorModel);
             }
 
-            HttpResponseMessage patientApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationPatientApiUrl);
-            if (patientApiResponseMessage.StatusCode != HttpStatusCode.OK)
+            PatientModelsMessage patientModelsMessage = await _patientClient.GetAllAsync(new EmptyMessage());
+            if (patientModelsMessage == null ||
+                patientModelsMessage.Patients == null ||
+                patientModelsMessage.Patients.Count() == 0)
             {
-                return StatusCode((int)patientApiResponseMessage.StatusCode);
+                var error = new ErrorModel("No patient record found.");
+                return NotFound(error);
             }
-
-            using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-            doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
-
-            using Stream patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
-            IEnumerable<PatientModel> patientModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatientModel>>(patientApiResponseStream);
+            var patientModels = new List<PatientModel>();
+            foreach (PatientModelMessage patientModelMessage in patientModelsMessage.Patients)
+            {
+                var PatientModel = new PatientModel
+                {
+                    Id = patientModelMessage.Id,
+                    FirstName = patientModelMessage.FirstName,
+                    LastName = patientModelMessage.LastName
+                };
+                patientModels.Add(PatientModel);
+            }
 
             var consultationModel = new ConsultationModel()
             {
@@ -112,14 +198,28 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ConsultationModel consultation)
         {
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-            var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), Encoding.UTF8, "application/json");
-            HttpResponseMessage consultationApiResponseMessage = await httpClient.PostAsync(_consultationOptions.ConsultationApiUrl, consultationContent);
-            if (consultationApiResponseMessage.IsSuccessStatusCode)
+            var consultationModelMessage = new ConsultationModelMessage
             {
-                return Ok();
+                Id = consultation.Id,
+                Date = consultation.Date.ToUniversalTime().ToTimestamp(),
+                Country = consultation.Country,
+                State = consultation.State,
+                City = consultation.City,
+                PinCode = consultation.PinCode,
+                Problem = consultation.Problem,
+                Medicine = consultation.Medicine,
+                DoctorId = consultation.DoctorId,
+                PatientId = consultation.PatientId
+            };
+            try
+            {
+                await _consultationClient.AddAsync(consultationModelMessage);
             }
-            return StatusCode(500);
+            catch
+            {
+                return StatusCode(500);
+            }
+            return Ok();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/update/*'/>
@@ -127,15 +227,32 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> Update(int id, ConsultationModel consultation)
         {
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-            var consultationUpdateUrl = $"{_consultationOptions.ConsultationApiUrl}/{id}";
-            var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), Encoding.UTF8, "application/json");
-            HttpResponseMessage consultationApiResponseMessage = await httpClient.PutAsync(consultationUpdateUrl, consultationContent);
-            if (consultationApiResponseMessage.IsSuccessStatusCode)
+            var updateMessage = new UpdateMessage
             {
-                return Ok();
+                Id = id,
+                Consultation = new ConsultationModelMessage
+                {
+                    Id = consultation.Id,
+                    Date = consultation.Date.ToUniversalTime().ToTimestamp(),
+                    Country = consultation.Country,
+                    State = consultation.State,
+                    City = consultation.City,
+                    PinCode = consultation.PinCode,
+                    Problem = consultation.Problem,
+                    Medicine = consultation.Medicine,
+                    DoctorId = consultation.DoctorId,
+                    PatientId = consultation.PatientId
+                }
+            };
+            try
+            {
+                await _consultationClient.UpdateAsync(updateMessage);
             }
-            return StatusCode(500);
+            catch
+            {
+                return StatusCode(500);
+            }
+            return Ok();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/delete/*'/>
@@ -147,14 +264,16 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             {
                 return NotFound();
             }
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-            var consultationDeleteUrl = $"{_consultationOptions.ConsultationApiUrl}/{id}";
-            HttpResponseMessage consultationApiResponseMessage = await httpClient.DeleteAsync(consultationDeleteUrl);
-            if (consultationApiResponseMessage.IsSuccessStatusCode)
+            try
             {
-                return Ok();
+                var idMessage = new IdMessage { Id = id.Value };
+                await _consultationClient.DeleteAsync(idMessage);
             }
-            return StatusCode(500);
+            catch
+            {
+                return StatusCode(500);
+            }
+            return Ok();
         }
     }
 }

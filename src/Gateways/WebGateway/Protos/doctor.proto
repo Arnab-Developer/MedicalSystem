@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "MedicalSystem.Gateways.WebGateway.Protos.Doctors";
+
+package doctor;
+
+service Doctor {
+  rpc GetAll (EmptyMessage) returns (DoctorModelsMessage);
+  rpc GetById (IdMessage) returns (DoctorModelMessage);
+  rpc Add (DoctorModelMessage) returns (EmptyMessage);
+  rpc Update (UpdateMessage) returns (EmptyMessage);
+  rpc Delete (IdMessage) returns (EmptyMessage);
+}
+
+message EmptyMessage {
+
+}
+
+message DoctorModelsMessage {
+  repeated DoctorModelMessage doctors = 1;
+}
+
+message DoctorModelMessage {
+  int32 Id = 1;
+  string FirstName = 2;
+  string LastName = 3;
+}
+
+message IdMessage{
+  int32 Id = 1;
+}
+
+message UpdateMessage {
+  int32 Id = 1;
+  DoctorModelMessage doctor = 2;
+}

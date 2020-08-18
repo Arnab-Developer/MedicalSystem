@@ -1,14 +1,12 @@
-﻿using MedicalSystem.Gateways.WebGateway.Models;
+﻿using Grpc.Net.Client;
+using MedicalSystem.Gateways.WebGateway.Models;
 using MedicalSystem.Gateways.WebGateway.Options;
+using MedicalSystem.Gateways.WebGateway.Protos.Patients;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.Controllers
@@ -18,35 +16,50 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
     [Route("[controller]")]
     public class PatientController : ControllerBase
     {
-        private readonly IHttpClientFactory _httpClientFactory;
         private readonly PatientOptions _patientOptions;
+        private readonly Patient.PatientClient _client;
 
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/patientControllerConstructor/*'/>
-        public PatientController(IHttpClientFactory httpClientFactory,
-            IOptionsMonitor<PatientOptions> optionsAccessor)
+        public PatientController(IOptionsMonitor<PatientOptions> optionsAccessor)
         {
-            _httpClientFactory = httpClientFactory;
             _patientOptions = optionsAccessor.CurrentValue;
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            GrpcChannel channel = GrpcChannel.ForAddress(_patientOptions.PatientApiUrl);
+            _client = new Patient.PatientClient(channel);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/getAll/*'/>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PatientModel>>> GetAll()
         {
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-            HttpResponseMessage patientApiResponseMessage = await httpClient.GetAsync(_patientOptions.PatientApiUrl);
-            if (patientApiResponseMessage.IsSuccessStatusCode)
+            PatientModelsMessage patientModelsMessage;
+            try
             {
-                using Stream patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
-                IEnumerable<PatientModel> patientModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatientModel>>(patientApiResponseStream);
-                if (patientModels == null || patientModels.Count() == 0)
-                {
-                    var error = new ErrorModel("No doctor record found.");
-                    return NotFound(error);
-                }
-                return Ok(patientModels);
+                patientModelsMessage = await _client.GetAllAsync(new EmptyMessage());
             }
-            return NotFound();
+            catch
+            {
+                return StatusCode(500);
+            }
+            if (patientModelsMessage == null ||
+                patientModelsMessage.Patients == null ||
+                patientModelsMessage.Patients.Count() == 0)
+            {
+                var error = new ErrorModel("No Patient record found.");
+                return NotFound(error);
+            }
+            var patientModels = new List<PatientModel>();
+            foreach (PatientModelMessage patientModelMessage in patientModelsMessage.Patients)
+            {
+                var PatientModel = new PatientModel
+                {
+                    Id = patientModelMessage.Id,
+                    FirstName = patientModelMessage.FirstName,
+                    LastName = patientModelMessage.LastName
+                };
+                patientModels.Add(PatientModel);
+            }
+            return Ok(patientModels);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/getById/*'/>
@@ -59,33 +72,52 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 var error = new ErrorModel("Id is null");
                 return NotFound(error);
             }
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-            var patientGetByIdUrl = $"{_patientOptions.PatientApiUrl}/{id}";
-            HttpResponseMessage patientApiResponseMessage = await httpClient.GetAsync(patientGetByIdUrl);
-            if (patientApiResponseMessage.StatusCode == HttpStatusCode.OK)
+            PatientModelMessage patientModelMessage;
+            try
             {
-                using Stream patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
-                PatientModel patientModel = await JsonSerializer.DeserializeAsync<PatientModel>(patientApiResponseStream);
-                return Ok(patientModel);
+                var idMessage = new IdMessage { Id = id.Value };
+                patientModelMessage = await _client.GetByIdAsync(idMessage);
             }
-            else
+            catch
             {
-                return StatusCode((int)patientApiResponseMessage.StatusCode);
+                return StatusCode(500);
             }
+            if (patientModelMessage == null ||
+                (patientModelMessage.Id == 0 &&
+                string.IsNullOrEmpty(patientModelMessage.FirstName) &&
+                string.IsNullOrEmpty(patientModelMessage.LastName)))
+            {
+                var error = new ErrorModel("No patient record found.");
+                return NotFound(error);
+            }
+            var patientModel = new PatientModel
+            {
+                Id = patientModelMessage.Id,
+                FirstName = patientModelMessage.FirstName,
+                LastName = patientModelMessage.LastName
+            };
+            return Ok(patientModel);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/add/*'/>
         [HttpPost]
         public async Task<IActionResult> Add(PatientModel patient)
         {
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-            var patientContent = new StringContent(JsonSerializer.Serialize(patient), Encoding.UTF8, "application/json");
-            HttpResponseMessage patientApiResponseMessage = await httpClient.PostAsync(_patientOptions.PatientApiUrl, patientContent);
-            if (patientApiResponseMessage.IsSuccessStatusCode)
+            var patientModelMessage = new PatientModelMessage
             {
-                return Ok();
+                Id = patient.Id,
+                FirstName = patient.FirstName,
+                LastName = patient.LastName
+            };
+            try
+            {
+                await _client.AddAsync(patientModelMessage);
             }
-            return StatusCode(500);
+            catch
+            {
+                return StatusCode(500);
+            }
+            return Ok();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/update/*'/>
@@ -93,15 +125,25 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> Update(int id, PatientModel patient)
         {
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-            var patientUpdateUrl = $"{_patientOptions.PatientApiUrl}/{id}";
-            var patientContent = new StringContent(JsonSerializer.Serialize(patient), Encoding.UTF8, "application/json");
-            HttpResponseMessage patientApiResponseMessage = await httpClient.PutAsync(patientUpdateUrl, patientContent);
-            if (patientApiResponseMessage.IsSuccessStatusCode)
+            var updateMessage = new UpdateMessage
             {
-                return Ok();
+                Id = id,
+                Patient = new PatientModelMessage
+                {
+                    Id = patient.Id,
+                    FirstName = patient.FirstName,
+                    LastName = patient.LastName
+                }
+            };
+            try
+            {
+                await _client.UpdateAsync(updateMessage);
             }
-            return StatusCode(500);
+            catch
+            {
+                return StatusCode(500);
+            }
+            return Ok();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/delete/*'/>
@@ -113,14 +155,16 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             {
                 return NotFound();
             }
-            HttpClient httpClient = _httpClientFactory.CreateClient();
-            var patientDeleteUrl = $"{_patientOptions.PatientApiUrl}/{id}";
-            HttpResponseMessage patientApiResponseMessage = await httpClient.DeleteAsync(patientDeleteUrl);
-            if (patientApiResponseMessage.IsSuccessStatusCode)
+            try
             {
-                return Ok();
+                var idMessage = new IdMessage { Id = id.Value };
+                await _client.DeleteAsync(idMessage);
             }
-            return StatusCode(500);
+            catch
+            {
+                return StatusCode(500);
+            }
+            return Ok();
         }
     }
 }

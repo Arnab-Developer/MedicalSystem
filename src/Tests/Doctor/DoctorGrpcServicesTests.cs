@@ -1,7 +1,10 @@
-using MedicalSystem.Services.Doctor.Controllers;
+using Grpc.Core;
 using MedicalSystem.Services.Doctor.Data;
+using MedicalSystem.Services.Doctor.GrpcServices;
 using MedicalSystem.Services.Doctor.Models;
+using MedicalSystem.Services.Doctor.Protos;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +12,11 @@ using System.Linq;
 namespace MedicalSystem.Tests.Services.Doctor
 {
     /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/doctorControllerTests/*'/>
-    internal class DoctorControllerTests
+    internal class DoctorGrpcServicesTests
     {
         private DoctorContext? _doctorContext;
-        private DoctorController? _doctorController;
+        private DoctorService? _doctorController;
+        private Mock<ServerCallContext>? _serverCallContextMock;
 
         /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/setup/*'/>
         [SetUp]
@@ -22,7 +26,8 @@ namespace MedicalSystem.Tests.Services.Doctor
                 .UseInMemoryDatabase("DoctorTestDb")
                 .Options;
             _doctorContext = new DoctorContext(options);
-            _doctorController = new DoctorController(_doctorContext);
+            _doctorController = new DoctorService(_doctorContext);
+            _serverCallContextMock = new Mock<ServerCallContext>();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/getAll_GivenValidDbData_ReturnsValidModels/*'/>
@@ -30,7 +35,18 @@ namespace MedicalSystem.Tests.Services.Doctor
         public void GetAll_GivenValidDbData_ReturnsValidModels()
         {
             AddDoctors();
-            List<DoctorModel> doctorModels = _doctorController!.GetAll().ToList();
+            DoctorModelsMessage doctorModelsMessage = _doctorController!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
+            var doctorModels = new List<DoctorModel>();
+            foreach (DoctorModelMessage doctorModelMessage in doctorModelsMessage.Doctors)
+            {
+                var doctorModel = new DoctorModel
+                {
+                    Id = doctorModelMessage.Id,
+                    FirstName = doctorModelMessage.FirstName,
+                    LastName = doctorModelMessage.LastName
+                };
+                doctorModels.Add(doctorModel);
+            }
 
             Assert.AreEqual(2, doctorModels.Count);
 
@@ -47,8 +63,8 @@ namespace MedicalSystem.Tests.Services.Doctor
         [Test]
         public void GetAll_GivenEmptyDbData_ReturnsEmptyModels()
         {
-            List<DoctorModel> doctorModels = _doctorController!.GetAll().ToList();
-            Assert.Zero(doctorModels.Count);
+            DoctorModelsMessage doctorModelsMessage = _doctorController!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
+            Assert.Zero(doctorModelsMessage.Doctors.Count);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/getById_GivenValidDbData_ReturnsValidModel/*'/>
@@ -56,7 +72,13 @@ namespace MedicalSystem.Tests.Services.Doctor
         public void GetById_GivenValidDbData_ReturnsValidModel()
         {
             AddDoctors();
-            DoctorModel doctorModel = _doctorController!.GetById(2);
+            DoctorModelMessage doctorModelMessage = _doctorController!.GetById(new IdMessage { Id = 2 }, _serverCallContextMock!.Object).Result;
+            var doctorModel = new DoctorModel
+            {
+                Id = doctorModelMessage.Id,
+                FirstName = doctorModelMessage.FirstName,
+                LastName = doctorModelMessage.LastName
+            };
 
             Assert.AreEqual(2, doctorModel.Id);
             Assert.AreEqual("doc2first", doctorModel.FirstName);
@@ -67,8 +89,10 @@ namespace MedicalSystem.Tests.Services.Doctor
         [Test]
         public void GetById_GivenEmptyDbData_ReturnsNull()
         {
-            DoctorModel doctorModel = _doctorController!.GetById(2);
-            Assert.Null(doctorModel);
+            DoctorModelMessage doctorModelMessage = _doctorController!.GetById(new IdMessage { Id = 2 }, _serverCallContextMock!.Object).Result;
+            Assert.Zero(doctorModelMessage.Id);
+            Assert.AreEqual(string.Empty, doctorModelMessage.FirstName);
+            Assert.AreEqual(string.Empty, doctorModelMessage.LastName);
         }
 
         /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/add_CanInsertInDb/*'/>
@@ -81,7 +105,8 @@ namespace MedicalSystem.Tests.Services.Doctor
                 FirstName = "doc1first",
                 LastName = "doc1last"
             };
-            _doctorController!.Add(doctor);
+            _doctorController!.Add(new DoctorModelMessage { Id = doctor.Id, FirstName = doctor.FirstName, LastName = doctor.LastName },
+                _serverCallContextMock!.Object);
 
             DoctorModel doctorModel = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 1);
 
@@ -98,7 +123,18 @@ namespace MedicalSystem.Tests.Services.Doctor
 
             DoctorModel doctorModel = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 2);
             doctorModel.FirstName = "update";
-            _doctorController!.Update(2, doctorModel);
+            _doctorController!.Update(
+                new UpdateMessage
+                {
+                    Id = 2,
+                    Doctor = new DoctorModelMessage
+                    {
+                        Id = doctorModel.Id,
+                        FirstName = doctorModel.FirstName,
+                        LastName = doctorModel.LastName
+                    }
+                },
+                _serverCallContextMock!.Object);
 
             DoctorModel doctorModelNew = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 2);
 
@@ -113,7 +149,7 @@ namespace MedicalSystem.Tests.Services.Doctor
         {
             AddDoctors();
             DoctorModel doctorModel = _doctorContext!.Doctors.FirstOrDefault(doctor => doctor.Id == 2);
-            _doctorController!.Delete(2);
+            _doctorController!.Delete(new IdMessage { Id = 2 }, _serverCallContextMock!.Object);
             Assert.AreEqual(1, _doctorContext.Doctors.Count());
         }
 
