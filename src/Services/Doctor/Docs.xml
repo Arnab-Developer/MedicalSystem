@@ -53,7 +53,7 @@
     <members name="DoctorController">
         <doctorController>
             <summary>
-                Controller for doctor.
+                Grpc service for doctor.
             </summary>
         </doctorController>
         <doctorControllerConstructor>
