@@ -8,8 +8,8 @@
         <Compile Remove="local.Designer.cs" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
-        <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+        <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.9" />
     </ItemGroup>
     <ItemGroup>
         <None Update="host.json">
