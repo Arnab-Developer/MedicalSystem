@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "MedicalSystem.Gateways.WebGateway.Protos";
+option csharp_namespace = "MedicalSystem.Gateways.WebGateway.Protos.Doctors";
 
 package doctor;
 

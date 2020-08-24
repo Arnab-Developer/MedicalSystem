@@ -1,7 +1,7 @@
 ﻿using Grpc.Net.Client;
 using MedicalSystem.Gateways.WebGateway.Models;
 using MedicalSystem.Gateways.WebGateway.Options;
-using MedicalSystem.Gateways.WebGateway.Protos;
+using MedicalSystem.Gateways.WebGateway.Protos.Doctors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
