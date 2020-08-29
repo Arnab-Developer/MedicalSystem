@@ -1,74 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <docs>
 
-    <members name="PatientModel">
-        <patientModel>
-            <summary>
-                All the properties of docotor.
-            </summary>
-        </patientModel>
-        <id>
-            <summary>
-                Id of patient.
-            </summary>
-        </id>
-        <firstName>
-            <summary>
-                First name of patient.
-            </summary>
-        </firstName>
-        <lastName>
-            <summary>
-                Last name of patient.
-            </summary>
-        </lastName>
-        <patientModelConstructor>
-            <summary>
-                Creates new object of patient and initialize with default data.
-            </summary>
-        </patientModelConstructor>
-    </members>
+  <members name="PatientModel">
+    <patientModel>
+      <summary>
+        All the properties of docotor.
+      </summary>
+    </patientModel>
+    <id>
+      <summary>
+        Id of patient.
+      </summary>
+    </id>
+    <firstName>
+      <summary>
+        First name of patient.
+      </summary>
+    </firstName>
+    <lastName>
+      <summary>
+        Last name of patient.
+      </summary>
+    </lastName>
+    <patientModelConstructor>
+      <summary>
+        Creates new object of patient and initialize with default data.
+      </summary>
+    </patientModelConstructor>
+  </members>
 
-    <members name="PatientContext">
-        <patientContext>
-            <summary>
-                Data context of patient.
-            </summary>
-        </patientContext>
-        <patientContextConstructor>
-            <summary>
-                Creates a new DbContext object.
-            </summary>
-            <param name="options">
-                DbContext options.
-            </param>
-        </patientContextConstructor>
-        <patients>
-            <summary>
-                DbSet for patient.
-            </summary>
-        </patients>
-    </members>
+  <members name="PatientContext">
+    <patientContext>
+      <summary>
+        Data context of patient.
+      </summary>
+    </patientContext>
+    <patientContextConstructor>
+      <summary>
+        Creates a new DbContext object.
+      </summary>
+      <param name="options">
+        DbContext options.
+      </param>
+    </patientContextConstructor>
+    <patients>
+      <summary>
+        DbSet for patient.
+      </summary>
+    </patients>
+  </members>
 
-    <members name="PatientSyncFunction">
-        <patientSyncFunction>
-            <summary>
-                Sync patient data from patient api storage to consultation api storage.
-            </summary>
-        </patientSyncFunction>
-        <patientSyncFunctionConstructor>
-            <summary>
-                Creates a new object of patient sync function.
-            </summary>
-            <param name="configuration">
-                Configuration as a dependency to get the connection string.
-            </param>
-        </patientSyncFunctionConstructor>
-        <run>
-            <summary>
-                Sync patient data from patient api storage to consultation api storage.
-            </summary>
-        </run>
-    </members>
+  <members name="PatientSyncFunction">
+    <patientSyncFunction>
+      <summary>
+        Sync patient data from patient api storage to consultation api storage.
+      </summary>
+    </patientSyncFunction>
+    <patientSyncFunctionConstructor>
+      <summary>
+        Creates a new object of patient sync function.
+      </summary>
+      <param name="configuration">
+        Configuration as a dependency to get the connection string.
+      </param>
+    </patientSyncFunctionConstructor>
+    <run>
+      <summary>
+        Sync patient data from patient api storage to consultation api storage.
+      </summary>
+    </run>
+  </members>
 
 </docs>
