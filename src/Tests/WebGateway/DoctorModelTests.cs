@@ -10,7 +10,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
         [Test]
         public void DoctorModel_GivenValid_ReturnsValid()
         {
-            DoctorModel doctorModel = new DoctorModel
+            var doctorModel = new DoctorModel
             {
                 Id = 1,
                 FirstName = "f1",
