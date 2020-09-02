@@ -104,7 +104,9 @@
       </summary>
     </doctorModelTests>
     <doctorModel_GivenValid_ReturnsValid>
-      Test that doctor model returns valid data if we push valid data in it.
+      <summary>
+        Test that doctor model returns valid data if we push valid data in it.
+      </summary>
     </doctorModel_GivenValid_ReturnsValid>
   </members>
   
