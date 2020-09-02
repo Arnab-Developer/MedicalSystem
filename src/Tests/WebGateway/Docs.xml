@@ -97,6 +97,19 @@
     </delete_CanCallGrpcServiceDelete>
   </members>
 
+  <members name="DoctorModelTests">
+    <doctorModelTests>
+      <summary>
+        Doctor model tests.
+      </summary>
+    </doctorModelTests>
+    <doctorModel_GivenValid_ReturnsValid>
+      <summary>
+        Test that doctor model returns valid data if we push valid data in it.
+      </summary>
+    </doctorModel_GivenValid_ReturnsValid>
+  </members>
+  
   <members name="PatientModelTests">
     <patientModelTests>
       <summary>
