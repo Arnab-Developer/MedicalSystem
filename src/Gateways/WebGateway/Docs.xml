@@ -509,5 +509,121 @@
       </param>
     </deleteAsync>
   </members>
+
+  <members name="PatientGrpcClient">
+    <patientGrpcClient>
+      <summary>
+        Patient gRPC client class.
+      </summary>
+    </patientGrpcClient>
+    <patientGrpcClientConstructor>
+      <summary>
+        Create a new object of patient gRPC client.
+      </summary>
+      <param name="optionsAccessor">
+        Options accessor.
+      </param>
+    </patientGrpcClientConstructor>
+    <getAllAsync>
+      <summary>
+        Get all patient data.
+      </summary>
+      <returns>
+        Collection of patient data.
+      </returns>
+    </getAllAsync>
+    <getByIdAsync>
+      <summary>
+        Get patient data by id.
+      </summary>
+      <param name="id">
+        Takes patient id to search.
+      </param>
+      <returns>
+        Return patient data.
+      </returns>
+    </getByIdAsync>
+    <addAsync>
+      <summary>
+        Add new patient object.
+      </summary>
+      <param name="patient">
+        Takes new patient object to add.
+      </param>
+    </addAsync>
+    <updateAsync>
+      <summary>
+        Update existing patient object.
+      </summary>
+      <param name="id">
+        Takes patient id to locate the existing patient object.
+      </param>
+      <param name="patient">
+        Takes updated patient object to update.
+      </param>
+    </updateAsync>
+    <deleteAsync>
+      <summary>
+        Delete existing patient object.
+      </summary>
+      <param name="id">
+        Takes patient id to locate and delete the existing patient object.
+      </param>
+    </deleteAsync>
+  </members>
+
+  <members name="IPatientGrpcClient">
+    <patientGrpcClient>
+      <summary>
+        Patient gRPC client interface.
+      </summary>
+    </patientGrpcClient>
+    <getAllAsync>
+      <summary>
+        Get all patient data.
+      </summary>
+      <returns>
+        Collection of patient data.
+      </returns>
+    </getAllAsync>
+    <getByIdAsync>
+      <summary>
+        Get patient data by id.
+      </summary>
+      <param name="id">
+        Takes patient id to search.
+      </param>
+      <returns>
+        Return patient data.
+      </returns>
+    </getByIdAsync>
+    <addAsync>
+      <summary>
+        Add new patient object.
+      </summary>
+      <param name="patient">
+        Takes new patient object to add.
+      </param>
+    </addAsync>
+    <updateAsync>
+      <summary>
+        Update existing patient object.
+      </summary>
+      <param name="id">
+        Takes patient id to locate the existing patient object.
+      </param>
+      <param name="patient">
+        Takes updated patient object to update.
+      </param>
+    </updateAsync>
+    <deleteAsync>
+      <summary>
+        Delete existing patient object.
+      </summary>
+      <param name="id">
+        Takes patient id to locate and delete the existing patient object.
+      </param>
+    </deleteAsync>
+  </members>
   
 </docs>
