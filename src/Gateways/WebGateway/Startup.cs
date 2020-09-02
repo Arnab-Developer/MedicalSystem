@@ -1,3 +1,4 @@
+using MedicalSystem.Gateways.WebGateway.GrpcClients.Doctors;
 using MedicalSystem.Gateways.WebGateway.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +25,7 @@ namespace MedicalSystem.Gateways.WebGateway
             services.Configure<DoctorOptions>(Configuration);
             services.Configure<PatientOptions>(Configuration);
             services.Configure<ConsultationOptions>(Configuration);
+            services.AddTransient(typeof(IDoctorGrpcClient), typeof(DoctorGrpcClient));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
