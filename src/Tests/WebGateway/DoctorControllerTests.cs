@@ -11,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Tests.Gateways.WebGateway
 {
+    /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/doctorControllerTests/*'/>
     internal class DoctorControllerTests
     {
         private Mock<IDoctorGrpcClient>? _doctorGrpcClientMock;
         private DoctorController? _doctorController;
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -23,8 +25,9 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             _doctorController = new DoctorController(_doctorGrpcClientMock.Object);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/getAll_GivenValidModelsMessage_ReturnsValidModels/*'/>
         [Test]
-        public void GetAll_GivenValidDbData_ReturnsValidModels()
+        public void GetAll_GivenValidModelsMessage_ReturnsValidModels()
         {
             var doctorModelsMessage = new DoctorModelsMessage();
             doctorModelsMessage.Doctors.Add(new DoctorModelMessage
@@ -45,8 +48,9 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             Assert.AreEqual(doctorModelsMessage.Doctors[0].LastName, doctorModels[0].LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/getAll_GivenValidModelsMessage_ReturnsValidModels/*'/>
         [Test]
-        public void GetAll_GivenEmptyModels_ReturnsErrorModels()
+        public void GetAll_GivenEmptyModelsMessage_ReturnsErrorModels()
         {
             var doctorModelsMessage = new DoctorModelsMessage();
             _doctorGrpcClientMock!
@@ -59,8 +63,9 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             Assert.AreEqual("No doctor record found.", error.Reason);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/getById_GivenValidModelMessage_ReturnsValidModel/*'/>
         [Test]
-        public void GetById_GivenValidDbData_ReturnsValidModel()
+        public void GetById_GivenValidModelMessage_ReturnsValidModel()
         {
             var doctorModelMessage = new DoctorModelMessage
             {
@@ -80,8 +85,9 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             Assert.AreEqual(doctorModelMessage.LastName, doctorModel.LastName);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/getById_GivenEmptyModelsMessage_ReturnsErrorModels/*'/>
         [Test]
-        public void GetById_GivenEmptyModels_ReturnsErrorModels()
+        public void GetById_GivenEmptyModelsMessage_ReturnsErrorModels()
         {
             _doctorGrpcClientMock!
                 .Setup(m => m.GetByIdAsync(It.IsAny<IdMessage>()))
@@ -93,6 +99,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             Assert.AreEqual("No doctor record found.", error.Reason);
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/add_CanCallGrpcServiceAdd/*'/>
         [Test]
         public void Add_CanCallGrpcServiceAdd()
         {
@@ -108,6 +115,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             _doctorGrpcClientMock.Verify();
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/update_CanCallGrpcServiceUpdate/*'/>
         [Test]
         public void Update_CanCallGrpcServiceUpdate()
         {
@@ -123,6 +131,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             _doctorGrpcClientMock.Verify();
         }
 
+        /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/delete_CanCallGrpcServiceDelete/*'/>
         [Test]
         public void Delete_CanCallGrpcServiceDelete()
         {
