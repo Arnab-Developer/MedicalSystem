@@ -210,11 +210,8 @@
       <summary>
         Create a new object of doctor Controller.
       </summary>
-      <param name="httpClientFactory">
-        Http client factory.
-      </param>
-      <param name="optionsAccessor">
-        Options accessor.
+      <param name="doctorGrpcClient">
+        Doctor gRPC client.
       </param>
     </doctorControllerConstructor>
     <getAll>
@@ -397,4 +394,120 @@
     </delete>
   </members>
 
+  <members name="DoctorGrpcClient">
+    <doctorGrpcClient>
+      <summary>
+        Doctor gRPC client class.
+      </summary>
+    </doctorGrpcClient>
+    <doctorGrpcClientConstructor>
+      <summary>
+        Create a new object of doctor gRPC client.
+      </summary>
+      <param name="optionsAccessor">
+        Options accessor.
+      </param>
+    </doctorGrpcClientConstructor>
+    <getAllAsync>
+      <summary>
+        Get all doctor data.
+      </summary>
+      <returns>
+        Collection of doctor data.
+      </returns>
+    </getAllAsync>
+    <getByIdAsync>
+      <summary>
+        Get doctor data by id.
+      </summary>
+      <param name="id">
+        Takes doctor id to search.
+      </param>
+      <returns>
+        Return doctor data.
+      </returns>
+    </getByIdAsync>
+    <addAsync>
+      <summary>
+        Add new doctor object.
+      </summary>
+      <param name="doctor">
+        Takes new doctor object to add.
+      </param>
+    </addAsync>
+    <updateAsync>
+      <summary>
+        Update existing doctor object.
+      </summary>
+      <param name="id">
+        Takes doctor id to locate the existing doctor object.
+      </param>
+      <param name="doctor">
+        Takes updated doctor object to update.
+      </param>
+    </updateAsync>
+    <deleteAsync>
+      <summary>
+        Delete existing doctor object.
+      </summary>
+      <param name="id">
+        Takes doctor id to locate and delete the existing doctor object.
+      </param>
+    </deleteAsync>
+  </members>
+
+  <members name="IDoctorGrpcClient">
+    <doctorGrpcClient>
+      <summary>
+        Doctor gRPC client interface.
+      </summary>
+    </doctorGrpcClient>
+    <getAllAsync>
+      <summary>
+        Get all doctor data.
+      </summary>
+      <returns>
+        Collection of doctor data.
+      </returns>
+    </getAllAsync>
+    <getByIdAsync>
+      <summary>
+        Get doctor data by id.
+      </summary>
+      <param name="id">
+        Takes doctor id to search.
+      </param>
+      <returns>
+        Return doctor data.
+      </returns>
+    </getByIdAsync>
+    <addAsync>
+      <summary>
+        Add new doctor object.
+      </summary>
+      <param name="doctor">
+        Takes new doctor object to add.
+      </param>
+    </addAsync>
+    <updateAsync>
+      <summary>
+        Update existing doctor object.
+      </summary>
+      <param name="id">
+        Takes doctor id to locate the existing doctor object.
+      </param>
+      <param name="doctor">
+        Takes updated doctor object to update.
+      </param>
+    </updateAsync>
+    <deleteAsync>
+      <summary>
+        Delete existing doctor object.
+      </summary>
+      <param name="id">
+        Takes doctor id to locate and delete the existing doctor object.
+      </param>
+    </deleteAsync>
+  </members>
+  
 </docs>
