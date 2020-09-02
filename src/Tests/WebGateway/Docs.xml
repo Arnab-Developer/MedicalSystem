@@ -104,7 +104,9 @@
       </summary>
     </patientModelTests>
     <patientModel_GivenValid_ReturnsValid>
-      Test that patient model returns valid data if we push valid data in it.
+      <summary>
+        Test that patient model returns valid data if we push valid data in it.
+      </summary>
     </patientModel_GivenValid_ReturnsValid>
   </members>
   
