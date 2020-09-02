@@ -1,4 +1,5 @@
 ﻿using Grpc.Net.Client;
+using MedicalSystem.Gateways.WebGateway.GrpcClients.Patients;
 using MedicalSystem.Gateways.WebGateway.Models;
 using MedicalSystem.Gateways.WebGateway.Options;
 using MedicalSystem.Gateways.WebGateway.Protos.Patients;
@@ -16,16 +17,12 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
     [Route("[controller]")]
     public class PatientController : ControllerBase
     {
-        private readonly PatientOptions _patientOptions;
-        private readonly Patient.PatientClient _client;
+        private readonly IPatientGrpcClient _patientGrpcClient;
 
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/patientControllerConstructor/*'/>
-        public PatientController(IOptionsMonitor<PatientOptions> optionsAccessor)
+        public PatientController(IPatientGrpcClient doctorGrpcClient)
         {
-            _patientOptions = optionsAccessor.CurrentValue;
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            GrpcChannel channel = GrpcChannel.ForAddress(_patientOptions.PatientApiUrl);
-            _client = new Patient.PatientClient(channel);
+            _patientGrpcClient = doctorGrpcClient;
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/getAll/*'/>
@@ -35,7 +32,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             PatientModelsMessage patientModelsMessage;
             try
             {
-                patientModelsMessage = await _client.GetAllAsync(new EmptyMessage());
+                patientModelsMessage = await _patientGrpcClient.GetAllAsync(new EmptyMessage());
             }
             catch
             {
@@ -76,7 +73,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             try
             {
                 var idMessage = new IdMessage { Id = id.Value };
-                patientModelMessage = await _client.GetByIdAsync(idMessage);
+                patientModelMessage = await _patientGrpcClient.GetByIdAsync(idMessage);
             }
             catch
             {
@@ -111,7 +108,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             };
             try
             {
-                await _client.AddAsync(patientModelMessage);
+                await _patientGrpcClient.AddAsync(patientModelMessage);
             }
             catch
             {
@@ -137,7 +134,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             };
             try
             {
-                await _client.UpdateAsync(updateMessage);
+                await _patientGrpcClient.UpdateAsync(updateMessage);
             }
             catch
             {
@@ -158,7 +155,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             try
             {
                 var idMessage = new IdMessage { Id = id.Value };
-                await _client.DeleteAsync(idMessage);
+                await _patientGrpcClient.DeleteAsync(idMessage);
             }
             catch
             {
