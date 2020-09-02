@@ -97,4 +97,17 @@
     </delete_CanCallGrpcServiceDelete>
   </members>
 
+  <members name="ConsultationModelTests">
+    <consultationModelTests>
+      <summary>
+        Consultation model tests.
+      </summary>
+    </consultationModelTests>
+    <consultationModel_GivenValid_ReturnsValid>
+      <summary>
+        Test that consultation model returns valid data if we push valid data in it.
+      </summary>
+    </consultationModel_GivenValid_ReturnsValid>
+  </members>
+
 </docs>
