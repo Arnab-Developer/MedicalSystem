@@ -1,11 +1,7 @@
-﻿using Grpc.Net.Client;
-using MedicalSystem.Gateways.WebGateway.GrpcClients.Patients;
+﻿using MedicalSystem.Gateways.WebGateway.GrpcClients.Patients;
 using MedicalSystem.Gateways.WebGateway.Models;
-using MedicalSystem.Gateways.WebGateway.Options;
 using MedicalSystem.Gateways.WebGateway.Protos.Patients;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,7 +38,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 patientModelsMessage.Patients == null ||
                 patientModelsMessage.Patients.Count() == 0)
             {
-                var error = new ErrorModel("No Patient record found.");
+                var error = new ErrorModel("No patient record found.");
                 return NotFound(error);
             }
             var patientModels = new List<PatientModel>();
