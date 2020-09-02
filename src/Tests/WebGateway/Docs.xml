@@ -110,4 +110,17 @@
     </doctorModel_GivenValid_ReturnsValid>
   </members>
   
+  <members name="PatientModelTests">
+    <patientModelTests>
+      <summary>
+        Patient model tests.
+      </summary>
+    </patientModelTests>
+    <patientModel_GivenValid_ReturnsValid>
+      <summary>
+        Test that patient model returns valid data if we push valid data in it.
+      </summary>
+    </patientModel_GivenValid_ReturnsValid>
+  </members>
+  
 </docs>
