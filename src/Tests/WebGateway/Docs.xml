@@ -136,4 +136,17 @@
     </consultationModel_GivenValid_ReturnsValid>
   </members>
 
+  <members name="DoctorOptionsTests">
+    <doctorOptionsTests>
+      <summary>
+        Doctor options tests.
+      </summary>
+    </doctorOptionsTests>
+    <doctorOptions_GivenValid_ReturnsValid>
+      <summary>
+        Test that doctor options returns valid data if we push valid data in it.
+      </summary>
+    </doctorOptions_GivenValid_ReturnsValid>
+  </members>
+  
 </docs>
