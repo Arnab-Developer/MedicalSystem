@@ -149,6 +149,19 @@
     </doctorOptions_GivenValid_ReturnsValid>
   </members>
 
+  <members name="PatientOptionsTests">
+    <patientOptionsTests>
+      <summary>
+        Patient options tests.
+      </summary>
+    </patientOptionsTests>
+    <patientOptions_GivenValid_ReturnsValid>
+      <summary>
+        Test that patient options returns valid data if we push valid data in it.
+      </summary>
+    </patientOptions_GivenValid_ReturnsValid>
+  </members>
+  
   <members name="ConsultationOptionsTests">
     <consultationOptionsTests>
       <summary>
