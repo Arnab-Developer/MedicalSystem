@@ -162,4 +162,17 @@
     </patientOptions_GivenValid_ReturnsValid>
   </members>
   
+  <members name="ConsultationOptionsTests">
+    <consultationOptionsTests>
+      <summary>
+        Consultation options tests.
+      </summary>
+    </consultationOptionsTests>
+    <consultationOptions_GivenValid_ReturnsValid>
+      <summary>
+        Test that consultation options returns valid data if we push valid data in it.
+      </summary>
+    </consultationOptions_GivenValid_ReturnsValid>
+  </members>
+  
 </docs>
