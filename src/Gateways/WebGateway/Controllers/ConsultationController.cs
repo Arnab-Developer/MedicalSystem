@@ -46,7 +46,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 consultationModelsMessage.Consultations == null ||
                 consultationModelsMessage.Consultations.Count() == 0)
             {
-                var error = new ErrorModel("No Consultation record found.");
+                var error = new ErrorModel("No consultation record found.");
                 return NotFound(error);
             }
             var consultationModels = new List<ConsultationModel>();
