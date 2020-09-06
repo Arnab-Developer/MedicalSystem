@@ -97,7 +97,7 @@
     </delete_CanCallGrpcServiceDelete>
   </members>
 
-  <member name="ConsultationControllerTests">
+  <members name="ConsultationControllerTests">
     <consultationControllerTests>
       <summary>
         Consultation controller tests.
@@ -143,7 +143,7 @@
         Test that delete is working properly.
       </summary>
     </delete_CanCallGrpcServiceDelete>
-  </member>
+  </members>
     
   <members name="DoctorModelTests">
     <doctorModelTests>
