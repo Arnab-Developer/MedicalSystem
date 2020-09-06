@@ -625,5 +625,121 @@
       </param>
     </deleteAsync>
   </members>
+
+  <members name="ConsultationGrpcClient">
+    <consultationGrpcClient>
+      <summary>
+        Consultation gRPC client class.
+      </summary>
+    </consultationGrpcClient>
+    <consultationGrpcClientConstructor>
+      <summary>
+        Create a new object of consultation gRPC client.
+      </summary>
+      <param name="optionsAccessor">
+        Options accessor.
+      </param>
+    </consultationGrpcClientConstructor>
+    <getAllAsync>
+      <summary>
+        Get all consultation data.
+      </summary>
+      <returns>
+        Collection of consultation data.
+      </returns>
+    </getAllAsync>
+    <getByIdAsync>
+      <summary>
+        Get consultation data by id.
+      </summary>
+      <param name="id">
+        Takes consultation id to search.
+      </param>
+      <returns>
+        Return consultation data.
+      </returns>
+    </getByIdAsync>
+    <addAsync>
+      <summary>
+        Add new consultation object.
+      </summary>
+      <param name="consultation">
+        Takes new consultation object to add.
+      </param>
+    </addAsync>
+    <updateAsync>
+      <summary>
+        Update existing consultation object.
+      </summary>
+      <param name="id">
+        Takes consultation id to locate the existing consultation object.
+      </param>
+      <param name="consultation">
+        Takes updated consultation object to update.
+      </param>
+    </updateAsync>
+    <deleteAsync>
+      <summary>
+        Delete existing consultation object.
+      </summary>
+      <param name="id">
+        Takes consultation id to locate and delete the existing consultation object.
+      </param>
+    </deleteAsync>
+  </members>
+  
+  <members name="IConsultationGrpcClient">
+    <consultationGrpcClient>
+      <summary>
+        Consultation gRPC client interface.
+      </summary>
+    </consultationGrpcClient>
+    <getAllAsync>
+      <summary>
+        Get all consultation data.
+      </summary>
+      <returns>
+        Collection of consultation data.
+      </returns>
+    </getAllAsync>
+    <getByIdAsync>
+      <summary>
+        Get consultation data by id.
+      </summary>
+      <param name="id">
+        Takes consultation id to search.
+      </param>
+      <returns>
+        Return consultation data.
+      </returns>
+    </getByIdAsync>
+    <addAsync>
+      <summary>
+        Add new consultation object.
+      </summary>
+      <param name="consultation">
+        Takes new consultation object to add.
+      </param>
+    </addAsync>
+    <updateAsync>
+      <summary>
+        Update existing consultation object.
+      </summary>
+      <param name="id">
+        Takes consultation id to locate the existing consultation object.
+      </param>
+      <param name="consultation">
+        Takes updated consultation object to update.
+      </param>
+    </updateAsync>
+    <deleteAsync>
+      <summary>
+        Delete existing consultation object.
+      </summary>
+      <param name="id">
+        Takes consultation id to locate and delete the existing consultation object.
+      </param>
+    </deleteAsync>
+  </members>
   
 </docs>
