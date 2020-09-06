@@ -97,6 +97,54 @@
     </delete_CanCallGrpcServiceDelete>
   </members>
 
+  <member name="ConsultationControllerTests">
+    <consultationControllerTests>
+      <summary>
+        Consultation controller tests.
+      </summary>
+    </consultationControllerTests>
+    <setup>
+      <summary>
+        Consultation controller tests setup.
+      </summary>
+    </setup>
+    <getAll_GivenValidModelsMessage_ReturnsValidModels>
+      <summary>
+        Given valid models message test that if GetAll can return valid models.
+      </summary>
+    </getAll_GivenValidModelsMessage_ReturnsValidModels>
+    <getAll_GivenEmptyModelsMessage_ReturnsErrorModels>
+      <summary>
+        Given empty models message test that if GetAll can return empty models.
+      </summary>
+    </getAll_GivenEmptyModelsMessage_ReturnsErrorModels>
+    <getById_GivenValidModelMessage_ReturnsValidModel>
+      <summary>
+        Given valid models message test that if GetById can return valid model.
+      </summary>
+    </getById_GivenValidModelMessage_ReturnsValidModel>
+    <getById_GivenEmptyModelsMessage_ReturnsErrorModels>
+      <summary>
+        Given empty models message test that if GetById can return null.
+      </summary>
+    </getById_GivenEmptyModelsMessage_ReturnsErrorModels>
+    <add_CanCallGrpcServiceAdd>
+      <summary>
+        Test that add is working properly.
+      </summary>
+    </add_CanCallGrpcServiceAdd>
+    <update_CanCallGrpcServiceUpdate>
+      <summary>
+        Test that update is working properly.
+      </summary>
+    </update_CanCallGrpcServiceUpdate>
+    <delete_CanCallGrpcServiceDelete>
+      <summary>
+        Test that delete is working properly.
+      </summary>
+    </delete_CanCallGrpcServiceDelete>
+  </member>
+    
   <members name="DoctorModelTests">
     <doctorModelTests>
       <summary>
@@ -174,5 +222,5 @@
       </summary>
     </consultationOptions_GivenValid_ReturnsValid>
   </members>
-  
+
 </docs>
