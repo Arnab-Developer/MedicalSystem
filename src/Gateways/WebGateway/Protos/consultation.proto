@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-option csharp_namespace = "MedicalSystem.Gateways.WebGateway.Protos.Consultation";
+option csharp_namespace = "MedicalSystem.Gateways.WebGateway.Protos.Consultations";
 
 package consultation;
 

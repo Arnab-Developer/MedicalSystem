@@ -1,11 +1,8 @@
 ﻿using Google.Protobuf.WellKnownTypes;
-using Grpc.Net.Client;
+using MedicalSystem.Gateways.WebGateway.GrpcClients.Consultations;
 using MedicalSystem.Gateways.WebGateway.Models;
-using MedicalSystem.Gateways.WebGateway.Options;
-using MedicalSystem.Gateways.WebGateway.Protos.Consultation;
+using MedicalSystem.Gateways.WebGateway.Protos.Consultations;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,20 +14,19 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
     [Route("[controller]")]
     public class ConsultationController : ControllerBase
     {
-        private readonly ConsultationOptions _consultationOptions;
-        private readonly Doctor.DoctorClient _doctorClient;
-        private readonly Patient.PatientClient _patientClient;
-        private readonly Consultation.ConsultationClient _consultationClient;
+        private readonly IDoctorGrpcClient _doctorGrpcClient;
+        private readonly IPatientGrpcClient _patientGrpcClient;
+        private readonly IConsultationGrpcClient _consultationGrpcClient;
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/consultationControllerConstructor/*'/>
-        public ConsultationController(IOptionsMonitor<ConsultationOptions> optionsAccessor)
+        public ConsultationController(
+            IDoctorGrpcClient doctorGrpcClient,
+            IPatientGrpcClient patientGrpcClient,
+            IConsultationGrpcClient consultationGrpcClient)
         {
-            _consultationOptions = optionsAccessor.CurrentValue;
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            GrpcChannel channel = GrpcChannel.ForAddress(_consultationOptions.ConsultationApiUrl);
-            _doctorClient = new Doctor.DoctorClient(channel);
-            _patientClient = new Patient.PatientClient(channel);
-            _consultationClient = new Consultation.ConsultationClient(channel);
+            _doctorGrpcClient = doctorGrpcClient;
+            _patientGrpcClient = patientGrpcClient;
+            _consultationGrpcClient = consultationGrpcClient;
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getAll/*'/>
@@ -40,7 +36,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             ConsultationModelsMessage consultationModelsMessage;
             try
             {
-                consultationModelsMessage = await _consultationClient.GetAllAsync(new EmptyMessage());
+                consultationModelsMessage = await _consultationGrpcClient.GetAllAsync(new EmptyMessage());
             }
             catch
             {
@@ -50,7 +46,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 consultationModelsMessage.Consultations == null ||
                 consultationModelsMessage.Consultations.Count() == 0)
             {
-                var error = new ErrorModel("No Consultation record found.");
+                var error = new ErrorModel("No consultation record found.");
                 return NotFound(error);
             }
             var consultationModels = new List<ConsultationModel>();
@@ -100,7 +96,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             try
             {
                 var idMessage = new IdMessage { Id = id.Value };
-                consultationModelMessage = await _consultationClient.GetByIdAsync(idMessage);
+                consultationModelMessage = await _consultationGrpcClient.GetByIdAsync(idMessage);
             }
             catch
             {
@@ -146,7 +142,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         [Route("AddEditInitData")]
         public async Task<ActionResult<ConsultationModel>> GetAddEditInitData()
         {
-            DoctorModelsMessage doctorModelsMessage = await _doctorClient.GetAllAsync(new EmptyMessage());
+            DoctorModelsMessage doctorModelsMessage = await _doctorGrpcClient.GetAllAsync(new EmptyMessage());
             if (doctorModelsMessage == null ||
                 doctorModelsMessage.Doctors == null ||
                 doctorModelsMessage.Doctors.Count() == 0)
@@ -166,7 +162,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
                 doctorModels.Add(doctorModel);
             }
 
-            PatientModelsMessage patientModelsMessage = await _patientClient.GetAllAsync(new EmptyMessage());
+            PatientModelsMessage patientModelsMessage = await _patientGrpcClient.GetAllAsync(new EmptyMessage());
             if (patientModelsMessage == null ||
                 patientModelsMessage.Patients == null ||
                 patientModelsMessage.Patients.Count() == 0)
@@ -213,7 +209,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             };
             try
             {
-                await _consultationClient.AddAsync(consultationModelMessage);
+                await _consultationGrpcClient.AddAsync(consultationModelMessage);
             }
             catch
             {
@@ -246,7 +242,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             };
             try
             {
-                await _consultationClient.UpdateAsync(updateMessage);
+                await _consultationGrpcClient.UpdateAsync(updateMessage);
             }
             catch
             {
@@ -267,7 +263,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             try
             {
                 var idMessage = new IdMessage { Id = id.Value };
-                await _consultationClient.DeleteAsync(idMessage);
+                await _consultationGrpcClient.DeleteAsync(idMessage);
             }
             catch
             {

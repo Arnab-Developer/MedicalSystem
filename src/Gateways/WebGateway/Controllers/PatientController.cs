@@ -16,9 +16,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         private readonly IPatientGrpcClient _patientGrpcClient;
 
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/patientControllerConstructor/*'/>
-        public PatientController(IPatientGrpcClient doctorGrpcClient)
+        public PatientController(IPatientGrpcClient patientGrpcClient)
         {
-            _patientGrpcClient = doctorGrpcClient;
+            _patientGrpcClient = patientGrpcClient;
         }
 
         /// <include file='docs.xml' path='docs/members[@name="PatientController"]/getAll/*'/>
