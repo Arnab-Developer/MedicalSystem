@@ -1,10 +1,10 @@
 # Medical system
 
+![build-test](https://github.com/Arnab-Developer/medical-system/workflows/build-test/badge.svg?branch=master)
+
 Medical system is a small application build with ASP.NET Core and EF Core to document medical records. 
 User can store doctor, patient and consultation information in this application with their web browser.
-
-## CI CD status
-![build-test](https://github.com/Arnab-Developer/medical-system/workflows/build-test/badge.svg?branch=master)
+This is a proof of concept of how we can use microservice with ASP.NET Core.
 
 ## Tech stack
 | Module | Tech |
@@ -16,6 +16,3 @@ User can store doctor, patient and consultation information in this application 
 | Database access | EF Core |
 | Database | SQL Server |
 | Unit test | NUnit |
-
-## Project structure
-![Project structure](https://github.com/Arnab-Developer/medical-system/blob/master/MedicalSystemProjectStructure.JPG)
