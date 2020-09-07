@@ -4,6 +4,7 @@
 
 Medical system is a small application build with ASP.NET Core and EF Core to document medical records. 
 User can store doctor, patient and consultation information in this application with their web browser.
+This is a proof of concept of how we can use microservice with ASP.NET Core.
 
 ## Tech stack
 | Module | Tech |
