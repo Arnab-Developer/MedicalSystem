@@ -4,7 +4,7 @@ using System;
 
 namespace MedicalSystem.Tests.FrontEnds.WebMvc
 {
-    public class ConsultationModelTests
+    internal class ConsultationModelTests
     {
         [Test]
         public void ConsultationModel_GivenValid_ReturnsValid()
