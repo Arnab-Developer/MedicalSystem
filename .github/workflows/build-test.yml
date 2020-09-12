@@ -10,7 +10,6 @@ jobs:
   build-server-shutdown:
     runs-on: windows-latest
     steps:
-    - uses: DotNetCoreCLI@2
     - run: 'build-server shutdown'
   
   build-test:
