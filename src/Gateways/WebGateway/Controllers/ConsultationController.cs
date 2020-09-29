@@ -2,6 +2,7 @@
 using MedicalSystem.Gateways.WebGateway.GrpcClients.Consultations;
 using MedicalSystem.Gateways.WebGateway.Models;
 using MedicalSystem.Gateways.WebGateway.Protos.Consultations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
     /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/consultationController/*'/>
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class ConsultationController : ControllerBase
     {
         private readonly IDoctorGrpcClient _doctorGrpcClient;
@@ -31,6 +33,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getAll/*'/>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<ConsultationModel>>> GetAll()
         {
             ConsultationModelsMessage consultationModelsMessage;
@@ -85,6 +90,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getById/*'/>
         [HttpGet]
         [Route("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ConsultationModel>> GetById(int? id)
         {
             if (id == null)
@@ -140,6 +148,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getAddEditInitData/*'/>
         [HttpGet]
         [Route("AddEditInitData")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ConsultationModel>> GetAddEditInitData()
         {
             DoctorModelsMessage doctorModelsMessage = await _doctorGrpcClient.GetAllAsync(new EmptyMessage());
@@ -192,6 +203,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/add/*'/>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Add(ConsultationModel consultation)
         {
             var consultationModelMessage = new ConsultationModelMessage
@@ -221,6 +235,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/update/*'/>
         [HttpPut]
         [Route("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update(int id, ConsultationModel consultation)
         {
             var updateMessage = new UpdateMessage
@@ -254,6 +271,9 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/delete/*'/>
         [HttpDelete]
         [Route("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
