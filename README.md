@@ -16,3 +16,7 @@ This is a proof of concept of how we can use microservice with ASP.NET Core.
 | Database access | EF Core |
 | Database | SQL Server |
 | Unit test | NUnit |
+
+## Architecture diagram
+
+![Medical system architecture](https://github.com/Arnab-Developer/medical-system/blob/architecture-diagram/Medical%20system%20architecture.jpg)
