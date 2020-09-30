@@ -140,6 +140,9 @@ _TeamCity*
 *.coverage
 *.coveragexml
 
+# coverlet.msbuild test coverage file
+coverage.json
+
 # NCrunch
 _NCrunch_*
 .*crunch*.local.xml
