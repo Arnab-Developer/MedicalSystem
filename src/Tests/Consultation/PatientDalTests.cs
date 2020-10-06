@@ -1,5 +1,4 @@
-﻿using MedicalSystem.Services.Consultation.Dals;
-using MedicalSystem.Services.Consultation.DomainModels;
+﻿using MedicalSystem.Services.Consultation.DomainModels;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System.Collections.Generic;

@@ -1,9 +1,7 @@
 using MediatR;
-using MedicalSystem.Services.Consultation.Dals;
 using MedicalSystem.Services.Consultation.DomainModels;
 using MedicalSystem.Services.Consultation.Queries;
 using MedicalSystem.Services.Consultation.Repositories;
-using MedicalSystem.Services.Consultation.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,14 +32,14 @@ namespace MedicalSystem.Services.Consultation
         {
             services.AddGrpc();
             string consultationDbConnectionString = Configuration.GetConnectionString("ConsultationDbConnectionString");
-            services.AddDbContext<Dals.ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
+            //services.AddDbContext<Dals.ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
             services.AddDbContext<ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
-            services.AddTransient(typeof(IConsultationService), typeof(ConsultationService));
-            services.AddTransient(typeof(IConsultationDal), typeof(ConsultationDal));
-            services.AddTransient(typeof(IDoctorService), typeof(DoctorService));
-            services.AddTransient(typeof(IDoctorDal), typeof(DoctorDal));
-            services.AddTransient(typeof(IPatientService), typeof(PatientService));
-            services.AddTransient(typeof(IPatientDal), typeof(PatientDal));
+            //services.AddTransient(typeof(IConsultationService), typeof(ConsultationService));
+            //services.AddTransient(typeof(IConsultationDal), typeof(ConsultationDal));
+            //services.AddTransient(typeof(IDoctorService), typeof(DoctorService));
+            //services.AddTransient(typeof(IDoctorDal), typeof(DoctorDal));
+            //services.AddTransient(typeof(IPatientService), typeof(PatientService));
+            //services.AddTransient(typeof(IPatientDal), typeof(PatientDal));
 
             services.AddTransient(typeof(IConsultationQueries), typeof(ConsultationQueries));
             services.AddTransient(typeof(IDoctorQueries), typeof(DoctorQueries));

@@ -1,6 +1,5 @@
 ﻿using Grpc.Core;
 using MedicalSystem.Services.Consultation.Protos;
-using MedicalSystem.Services.Consultation.Services;
 using MedicalSystem.Services.Consultation.ViewModels;
 using Moq;
 using NUnit.Framework;

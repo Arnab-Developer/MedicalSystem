@@ -1,6 +1,4 @@
-﻿using MedicalSystem.Services.Consultation.Dals;
-using MedicalSystem.Services.Consultation.DomainModels;
-using MedicalSystem.Services.Consultation.Services;
+﻿using MedicalSystem.Services.Consultation.DomainModels;
 using MedicalSystem.Services.Consultation.ViewModels;
 using Moq;
 using NUnit.Framework;
