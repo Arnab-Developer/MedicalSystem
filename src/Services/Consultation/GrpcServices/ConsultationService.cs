@@ -1,7 +1,9 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using MediatR;
+using MedicalSystem.Services.Consultation.Commands;
 using MedicalSystem.Services.Consultation.Protos;
-using MedicalSystem.Services.Consultation.Services;
+using MedicalSystem.Services.Consultation.Queries;
 using MedicalSystem.Services.Consultation.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,18 +13,20 @@ namespace MedicalSystem.Services.Consultation.GrpcServices
     /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/consultationGrpcService/*'/>
     public class ConsultationService : Protos.Consultation.ConsultationBase
     {
-        private readonly IConsultationService _consultationService;
+        private readonly IConsultationQueries _consultationQueries;
+        private readonly IMediator _mediator;
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/consultationGrpcServiceConstructor/*'/>
-        public ConsultationService(IConsultationService consultationService)
+        public ConsultationService(IConsultationQueries consultationQueries, IMediator mediator)
         {
-            _consultationService = consultationService;
+            _consultationQueries = consultationQueries;
+            _mediator = mediator;
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/getAll/*'/>
         public override Task<ConsultationModelsMessage> GetAll(EmptyMessage request, ServerCallContext context)
         {
-            IEnumerable<ConsultationViewModel> consultationViewModels = _consultationService.GetAll();
+            IEnumerable<ConsultationViewModel> consultationViewModels = _consultationQueries.GetAll();
             var consultationModelsMessage = new ConsultationModelsMessage();
             foreach (ConsultationViewModel consultation in consultationViewModels)
             {
@@ -60,7 +64,7 @@ namespace MedicalSystem.Services.Consultation.GrpcServices
         /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/getById/*'/>
         public override Task<ConsultationModelMessage>? GetById(IdMessage request, ServerCallContext context)
         {
-            ConsultationViewModel? consultationViewModel = _consultationService.GetById(request.Id);
+            ConsultationViewModel? consultationViewModel = _consultationQueries.GetById(request.Id);
             if (consultationViewModel == null)
             {
                 return null;
@@ -109,7 +113,11 @@ namespace MedicalSystem.Services.Consultation.GrpcServices
                 DoctorId = request.DoctorId,
                 PatientId = request.PatientId
             };
-            _consultationService.Add(consultationViewModel);
+            var addConsultationCommand = new AddConsultationCommand
+            {
+                ConsultationViewModel = consultationViewModel
+            };
+            _mediator.Send(addConsultationCommand);
             return Task.FromResult(new EmptyMessage());
         }
 
@@ -129,14 +137,22 @@ namespace MedicalSystem.Services.Consultation.GrpcServices
                 DoctorId = request.Consultation.DoctorId,
                 PatientId = request.Consultation.PatientId
             };
-            _consultationService.Update(request.Id, consultationViewModel);
+            var updateConsultationCommand = new UpdateConsultationCommand
+            {
+                ConsultationViewModel = consultationViewModel
+            };
+            _mediator.Send(updateConsultationCommand);
             return Task.FromResult(new EmptyMessage());
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/delete/*'/>
         public override Task<EmptyMessage> Delete(IdMessage request, ServerCallContext context)
         {
-            _consultationService.Delete(request.Id);
+            var deleteConsultationCommand = new DeleteConsultationCommand
+            {
+                Id = request.Id
+            };
+            _mediator.Send(deleteConsultationCommand);
             return Task.FromResult(new EmptyMessage());
         }
     }

@@ -1,4 +1,6 @@
+using MediatR;
 using MedicalSystem.Services.Consultation.Dals;
+using MedicalSystem.Services.Consultation.Queries;
 using MedicalSystem.Services.Consultation.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +39,9 @@ namespace MedicalSystem.Services.Consultation
             services.AddTransient(typeof(IDoctorDal), typeof(DoctorDal));
             services.AddTransient(typeof(IPatientService), typeof(PatientService));
             services.AddTransient(typeof(IPatientDal), typeof(PatientDal));
+
+            services.AddTransient(typeof(IConsultationQueries), typeof(ConsultationQueries));
+            services.AddMediatR(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
