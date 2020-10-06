@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Services.Consultation.Commands
 {
-    public class DeleteConsultationCommandHandler : IRequestHandler<DeleteConsultationCommand, bool>
+    internal class DeleteConsultationCommandHandler : IRequestHandler<DeleteConsultationCommand, bool>
     {
         private readonly IConsultationRepository _consultationRepository;
 

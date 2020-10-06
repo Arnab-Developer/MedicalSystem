@@ -31,16 +31,7 @@ namespace MedicalSystem.Services.Consultation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
-            string consultationDbConnectionString = Configuration.GetConnectionString("ConsultationDbConnectionString");
-            //services.AddDbContext<Dals.ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
-            services.AddDbContext<ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
-            //services.AddTransient(typeof(IConsultationService), typeof(ConsultationService));
-            //services.AddTransient(typeof(IConsultationDal), typeof(ConsultationDal));
-            //services.AddTransient(typeof(IDoctorService), typeof(DoctorService));
-            //services.AddTransient(typeof(IDoctorDal), typeof(DoctorDal));
-            //services.AddTransient(typeof(IPatientService), typeof(PatientService));
-            //services.AddTransient(typeof(IPatientDal), typeof(PatientDal));
-
+            AddDbContext(services);
             services.AddTransient(typeof(IConsultationQueries), typeof(ConsultationQueries));
             services.AddTransient(typeof(IDoctorQueries), typeof(DoctorQueries));
             services.AddTransient(typeof(IPatientQueries), typeof(PatientQueries));
@@ -69,6 +60,12 @@ namespace MedicalSystem.Services.Consultation
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
                 });
             });
+        }
+
+        private void AddDbContext(IServiceCollection services)
+        {
+            string consultationDbConnectionString = Configuration.GetConnectionString("ConsultationDbConnectionString");
+            services.AddDbContext<ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
         }
     }
 }

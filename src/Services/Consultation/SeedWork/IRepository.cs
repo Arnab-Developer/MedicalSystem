@@ -1,6 +1,6 @@
 ﻿namespace MedicalSystem.Services.Consultation.SeedWork
 {
-    public interface IRepository<T>
+    internal interface IRepository<T>
     {
         IUnitOfWork UnitOfWork { get; }
     }

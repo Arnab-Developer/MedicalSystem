@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Services.Consultation.Commands
 {
-    public class AddConsultationCommandHandler : IRequestHandler<AddConsultationCommand, bool>
+    internal class AddConsultationCommandHandler : IRequestHandler<AddConsultationCommand, bool>
     {
         private readonly IConsultationRepository _consultationRepository;
 

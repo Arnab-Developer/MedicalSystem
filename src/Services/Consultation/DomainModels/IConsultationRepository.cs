@@ -2,7 +2,7 @@
 
 namespace MedicalSystem.Services.Consultation.DomainModels
 {
-    public interface IConsultationRepository : IRepository<ConsultationDomainModel>
+    internal interface IConsultationRepository : IRepository<ConsultationDomainModel>
     {
         ConsultationDomainModel GetById(int id);
         void Add(ConsultationDomainModel consultation);

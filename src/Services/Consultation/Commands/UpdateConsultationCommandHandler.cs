@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Services.Consultation.Commands
 {
-    public class UpdateConsultationCommandHandler : IRequestHandler<UpdateConsultationCommand, bool>
+    internal class UpdateConsultationCommandHandler : IRequestHandler<UpdateConsultationCommand, bool>
     {
         private readonly IConsultationRepository _consultationRepository;
 
@@ -16,22 +16,6 @@ namespace MedicalSystem.Services.Consultation.Commands
 
         Task<bool> IRequestHandler<UpdateConsultationCommand, bool>.Handle(UpdateConsultationCommand request, CancellationToken cancellationToken)
         {
-            //var consultationDomainModel = new ConsultationDomainModel(
-            //    request.ConsultationViewModel.Id,
-            //    request.ConsultationViewModel.Date,
-            //    request.ConsultationViewModel.Country,
-            //    request.ConsultationViewModel.State,
-            //    request.ConsultationViewModel.City,
-            //    request.ConsultationViewModel.PinCode,
-            //    request.ConsultationViewModel.Problem,
-            //    request.ConsultationViewModel.Medicine,
-            //    request.ConsultationViewModel.DoctorId,
-            //    request.ConsultationViewModel.PatientId);
-            //_consultationRepository.Add(consultationDomainModel);
-            //_consultationRepository.UnitOfWork.SaveChanges();
-            //return Task.FromResult(true);
-
-
             ConsultationDomainModel consultationDomainModel = _consultationRepository.GetById(request.ConsultationViewModel.Id);
 
             if (consultationDomainModel == null)

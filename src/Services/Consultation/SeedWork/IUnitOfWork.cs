@@ -2,7 +2,7 @@
 
 namespace MedicalSystem.Services.Consultation.SeedWork
 {
-    public interface IUnitOfWork : IDisposable
+    internal interface IUnitOfWork : IDisposable
     {
         void SaveChanges();
     }
