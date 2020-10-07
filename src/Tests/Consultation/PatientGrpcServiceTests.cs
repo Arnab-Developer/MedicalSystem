@@ -11,14 +11,12 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
-    /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/patientControllerTests/*'/>
     internal class PatientGrpcServiceTests
     {
         private PatientService? _patientGrpcService;
         private Mock<IPatientQueries>? _patientQueriesMock;
         private Mock<ServerCallContext>? _serverCallContextMock;
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -27,7 +25,6 @@ namespace MedicalSystem.Tests.Services.Consultation
             _serverCallContextMock = new Mock<ServerCallContext>();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getAll_GivenValidViewModels_ReturnsValidViewModels/*'/>
         [Test]
         public void GetAll_GivenValidViewModels_ReturnsValidViewModels()
         {
@@ -59,7 +56,6 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat2 l", patientModelsMessage.Patients[1].LastName);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getAll_GivenEmptyViewModels_ReturnsEmptyViewModels/*'/>
         [Test]
         public void GetAll_GivenEmptyViewModels_ReturnsEmptyViewModels()
         {
@@ -69,7 +65,6 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Zero(patientModelsMessage.Patients.Count());
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getAll_GivenException_ExpectException/*'/>
         [Test]
         public void GetAll_GivenException_ExpectException()
         {

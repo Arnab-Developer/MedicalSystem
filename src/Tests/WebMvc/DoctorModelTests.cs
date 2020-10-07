@@ -3,10 +3,8 @@ using NUnit.Framework;
 
 namespace MedicalSystem.Tests.FrontEnds.WebMvc
 {
-    /// <include file='docs.xml' path='docs/members[@name="DoctorModelTests"]/doctorModelTests/*'/>
     internal class DoctorModelTests
     {
-        /// <include file='docs.xml' path='docs/members[@name="DoctorModelTests"]/doctorModel_GivenValid_ReturnsValid/*'/>
         [Test]
         public void DoctorModel_GivenValid_ReturnsValid()
         {

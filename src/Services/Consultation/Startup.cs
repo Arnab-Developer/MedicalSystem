@@ -1,5 +1,6 @@
 using MediatR;
 using MedicalSystem.Services.Consultation.DomainModels;
+using MedicalSystem.Services.Consultation.Options;
 using MedicalSystem.Services.Consultation.Queries;
 using MedicalSystem.Services.Consultation.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +33,7 @@ namespace MedicalSystem.Services.Consultation
         {
             services.AddGrpc();
             AddDbContext(services);
+            services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.CONNECTION_STRINGS));
             services.AddTransient(typeof(IConsultationQueries), typeof(ConsultationQueries));
             services.AddTransient(typeof(IDoctorQueries), typeof(DoctorQueries));
             services.AddTransient(typeof(IPatientQueries), typeof(PatientQueries));

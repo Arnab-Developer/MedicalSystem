@@ -14,7 +14,6 @@ using System.Threading;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
-    /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/consultationControllerTests/*'/>
     internal class ConsultationGrpcServiceTests
     {
         private ConsultationService? _consultationGrpcService;
@@ -22,7 +21,6 @@ namespace MedicalSystem.Tests.Services.Consultation
         private Mock<IMediator>? _mediatorMock;
         private Mock<ServerCallContext>? _serverCallContextMock;
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -32,7 +30,6 @@ namespace MedicalSystem.Tests.Services.Consultation
             _serverCallContextMock = new Mock<ServerCallContext>();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenValidViewModels_ReturnsValidViewModels/*'/>
         [Test]
         public void GetAll_GivenValidViewModels_ReturnsValidViewModels()
         {
@@ -41,7 +38,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 new ConsultationViewModel()
                 {
                     Id = 1,
-                    Date = DateTime.Now,
+                    Date = DateTime.UtcNow,
                     Country = "India",
                     State = "WB",
                     City = "Kol",
@@ -66,7 +63,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 new ConsultationViewModel()
                 {
                     Id = 2,
-                    Date = DateTime.Now,
+                    Date = DateTime.UtcNow,
                     Country = "UK",
                     State = "st1",
                     City = "c1",
@@ -97,7 +94,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(2, consultationModelsMessage.Consultations.Count);
 
             Assert.AreEqual(1, consultationModelsMessage.Consultations[0].Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationModelsMessage.Consultations[0].Date.ToDateTime().Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, consultationModelsMessage.Consultations[0].Date.ToDateTime().Date);
             Assert.AreEqual("India", consultationModelsMessage.Consultations[0].Country);
             Assert.AreEqual("WB", consultationModelsMessage.Consultations[0].State);
             Assert.AreEqual("Kol", consultationModelsMessage.Consultations[0].City);
@@ -114,7 +111,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat1last", consultationModelsMessage.Consultations[0].Patient!.LastName);
 
             Assert.AreEqual(2, consultationModelsMessage.Consultations[1].Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationModelsMessage.Consultations[1].Date.ToDateTime().Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, consultationModelsMessage.Consultations[1].Date.ToDateTime().Date);
             Assert.AreEqual("UK", consultationModelsMessage.Consultations[1].Country);
             Assert.AreEqual("st1", consultationModelsMessage.Consultations[1].State);
             Assert.AreEqual("c1", consultationModelsMessage.Consultations[1].City);
@@ -131,7 +128,6 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat2 las", consultationModelsMessage.Consultations[1].Patient!.LastName);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenEmptyViewModels_ReturnsEmptyViewModels/*'/>
         [Test]
         public void GetAll_GivenEmptyViewModels_ReturnsEmptyViewModels()
         {
@@ -144,7 +140,6 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Zero(consultationModelsMessage.Consultations.Count);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenNullViewModels_ExpectException/*'/>
         [Test]
         public void GetAll_GivenNullViewModels_ExpectException()
         {
@@ -154,14 +149,13 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Throws<NullReferenceException>(() => _consultationGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object));
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getById_GivenValidViewModel_ReturnsValidViewModel/*'/>
         [Test]
         public void GetById_GivenValidViewModel_ReturnsValidViewModel()
         {
             var consultationViewModel = new ConsultationViewModel()
             {
                 Id = 1,
-                Date = DateTime.Now,
+                Date = DateTime.UtcNow,
                 Country = "India",
                 State = "WB",
                 City = "Kol",
@@ -189,7 +183,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 = _consultationGrpcService!.GetById(new IdMessage { Id = It.IsAny<int>() }, _serverCallContextMock!.Object)!.Result;
 
             Assert.AreEqual(1, consultationModelMessage!.Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationModelMessage.Date.ToDateTime().Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, consultationModelMessage.Date.ToDateTime().Date);
             Assert.AreEqual("India", consultationModelMessage.Country);
             Assert.AreEqual("WB", consultationModelMessage.State);
             Assert.AreEqual("Kol", consultationModelMessage.City);
@@ -206,7 +200,6 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat1last", consultationModelMessage.Patient.LastName);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getById_GivenNullViewModel_ReturnsNull/*'/>
         [Test]
         public void GetById_GivenNullViewModel_ReturnsNull()
         {
@@ -214,7 +207,6 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.Null(_consultationGrpcService!.GetById(new IdMessage { Id = It.IsAny<int>() }, _serverCallContextMock!.Object));
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/add_CanCallServiceAdd/*'/>
         [Test]
         public void Add_CanCallServiceAdd()
         {
@@ -249,7 +241,6 @@ namespace MedicalSystem.Tests.Services.Consultation
             _mediatorMock.Verify();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/update_CanCallServiceUpdate/*'/>
         [Test]
         public void Update_CanCallServiceUpdate()
         {
@@ -284,7 +275,6 @@ namespace MedicalSystem.Tests.Services.Consultation
             _mediatorMock.Verify();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/delete_CanCallServiceDelete/*'/>
         [Test]
         public void Delete_CanCallServiceDelete()
         {

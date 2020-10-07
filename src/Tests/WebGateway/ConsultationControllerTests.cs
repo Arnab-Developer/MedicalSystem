@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Tests.Gateways.WebGateway
 {
-    /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/consultationControllerTests/*'/>
     internal class ConsultationControllerTests
     {
         private Mock<IDoctorGrpcClient>? _doctorGrpcClientMock;
@@ -21,7 +20,6 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
         private Mock<IConsultationGrpcClient>? _consultationGrpcClientMock;
         private ConsultationController? _consultationController;
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -34,7 +32,6 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
                 _consultationGrpcClientMock.Object);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenValidModelsMessage_ReturnsValidModels/*'/>
         [Test]
         public void GetAll_GivenValidModelsMessage_ReturnsValidModels()
         {
@@ -42,7 +39,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             consultationModelsMessage.Consultations.Add(new ConsultationModelMessage
             {
                 Id = 1,
-                Date = DateTime.Now.ToUniversalTime().ToTimestamp(),
+                Date = DateTime.UtcNow.ToTimestamp(),
                 Country = "India",
                 State = "WB",
                 City = "Kol",
@@ -73,7 +70,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
                 = ((IEnumerable<ConsultationModel>)((OkObjectResult)_consultationController!.GetAll().Result.Result).Value).ToList();
 
             Assert.AreEqual(1, consultationModels[0].Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationModels[0].Date.Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, consultationModels[0].Date.Date);
             Assert.AreEqual("India", consultationModels[0].Country);
             Assert.AreEqual("WB", consultationModels[0].State);
             Assert.AreEqual("Kol", consultationModels[0].City);
@@ -90,7 +87,6 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             Assert.AreEqual("pat1last", consultationModels[0].Patient!.LastName);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getAll_GivenValidModelsMessage_ReturnsValidModels/*'/>
         [Test]
         public void GetAll_GivenEmptyModelsMessage_ReturnsErrorModels()
         {
@@ -104,14 +100,13 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             Assert.AreEqual("No consultation record found.", error.Reason);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getById_GivenValidModelMessage_ReturnsValidModel/*'/>
         [Test]
         public void GetById_GivenValidModelMessage_ReturnsValidModel()
         {
             var consultationModelMessage = new ConsultationModelMessage
             {
                 Id = 1,
-                Date = DateTime.Now.ToUniversalTime().ToTimestamp(),
+                Date = DateTime.UtcNow.ToTimestamp(),
                 Country = "India",
                 State = "WB",
                 City = "Kol",
@@ -142,7 +137,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
                 = (ConsultationModel)((OkObjectResult)_consultationController!.GetById(It.IsAny<int>()).Result.Result).Value;
 
             Assert.AreEqual(1, consultationModel.Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationModel.Date.Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, consultationModel.Date.Date);
             Assert.AreEqual("India", consultationModel.Country);
             Assert.AreEqual("WB", consultationModel.State);
             Assert.AreEqual("Kol", consultationModel.City);
@@ -159,7 +154,6 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             Assert.AreEqual("pat1last", consultationModel.Patient!.LastName);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/getById_GivenEmptyModelsMessage_ReturnsErrorModels/*'/>
         [Test]
         public void GetById_GivenEmptyModelsMessage_ReturnsErrorModels()
         {
@@ -173,7 +167,6 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             Assert.AreEqual("No consultation record found.", error.Reason);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/add_CanCallGrpcServiceAdd/*'/>
         [Test]
         public void Add_CanCallGrpcServiceAdd()
         {
@@ -209,7 +202,6 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             _consultationGrpcClientMock.Verify();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/update_CanCallGrpcServiceUpdate/*'/>
         [Test]
         public void Update_CanCallGrpcServiceUpdate()
         {
@@ -245,7 +237,6 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             _consultationGrpcClientMock.Verify();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/delete_CanCallGrpcServiceDelete/*'/>
         [Test]
         public void Delete_CanCallGrpcServiceDelete()
         {

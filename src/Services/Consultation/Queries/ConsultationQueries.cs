@@ -1,52 +1,65 @@
-﻿using MedicalSystem.Services.Consultation.DomainModels;
+﻿using Dapper;
+using MedicalSystem.Services.Consultation.Options;
 using MedicalSystem.Services.Consultation.ViewModels;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MedicalSystem.Services.Consultation.Queries
 {
     public class ConsultationQueries : IConsultationQueries
     {
-        private readonly ConsultationContext _consultationContext;
+        private readonly DatabaseOptions _databaseOptions;
 
-        public ConsultationQueries(ConsultationContext consultationContext)
+        public ConsultationQueries(IOptionsMonitor<DatabaseOptions> optionsAccessor)
         {
-            _consultationContext = consultationContext;
+            _databaseOptions = optionsAccessor.CurrentValue;
         }
 
         IEnumerable<ConsultationViewModel> IConsultationQueries.GetAll()
         {
-            IOrderedQueryable<ConsultationDomainModel> consultationDomainModels = _consultationContext.Consultations
-                .Include(consultation => consultation.Doctor)
-                .Include(consultation => consultation.Patient)
-                .OrderByDescending(consultation => consultation.Date);
+            dynamic dbResultModels;
+            using (var con = new SqlConnection(_databaseOptions.ConsultationDbConnectionString))
+            {
+                dbResultModels = con.Query<dynamic>(
+                    @"SELECT c.Id, c.Date, c.Place_Country, c.Place_State, c.Place_City, c.Place_PinCode,
+                    c.Problem, c.Medicine, c.DoctorId, d.Id DoctorId, d.FirstName DoctorFirstName, d.LastName DoctorLastName, c.PatientId, p.Id PatientId,
+                    p.FirstName PatientFirstName, p.LastName PatientLastName
+                    FROM Consultations c
+                    INNER JOIN Doctors d ON d.Id = c.DoctorId
+                    INNER JOIN Patients p ON p.Id = c.PatientId
+                    ORDER BY c.Date DESC");
+            }
+            if (dbResultModels == null || dbResultModels!.Count == 0)
+            {
+                return new List<ConsultationViewModel>();
+            }
             var consultationViewModels = new List<ConsultationViewModel>();
-            foreach (ConsultationDomainModel consultationDomainModel in consultationDomainModels)
+            foreach (dynamic? dbResultModel in dbResultModels!)
             {
                 var consultationViewModel = new ConsultationViewModel()
                 {
-                    Id = consultationDomainModel.Id,
-                    Date = consultationDomainModel.Date,
-                    Country = consultationDomainModel.Place!.Country,
-                    State = consultationDomainModel.Place!.State,
-                    City = consultationDomainModel.Place!.City,
-                    PinCode = consultationDomainModel.Place!.PinCode,
-                    Problem = consultationDomainModel.Problem,
-                    Medicine = consultationDomainModel.Medicine,
-                    DoctorId = consultationDomainModel.DoctorId,
+                    Id = dbResultModel!.Id,
+                    Date = dbResultModel.Date,
+                    Country = dbResultModel.Place_Country,
+                    State = dbResultModel.Place_State,
+                    City = dbResultModel.Place_City,
+                    PinCode = dbResultModel.Place_PinCode,
+                    Problem = dbResultModel.Problem,
+                    Medicine = dbResultModel.Medicine,
+                    DoctorId = dbResultModel.DoctorId,
                     Doctor = new DoctorViewModel()
                     {
-                        Id = consultationDomainModel.Doctor!.Id,
-                        FirstName = consultationDomainModel.Doctor.FirstName,
-                        LastName = consultationDomainModel.Doctor.LastName
+                        Id = dbResultModel.DoctorId,
+                        FirstName = dbResultModel.DoctorFirstName,
+                        LastName = dbResultModel.DoctorLastName
                     },
-                    PatientId = consultationDomainModel.PatientId,
+                    PatientId = dbResultModel.PatientId,
                     Patient = new PatientViewModel()
                     {
-                        Id = consultationDomainModel.Patient!.Id,
-                        FirstName = consultationDomainModel.Patient.FirstName,
-                        LastName = consultationDomainModel.Patient.LastName
+                        Id = dbResultModel.PatientId,
+                        FirstName = dbResultModel.PatientFirstName,
+                        LastName = dbResultModel.PatientLastName
                     }
                 };
                 consultationViewModels.Add(consultationViewModel);
@@ -56,37 +69,46 @@ namespace MedicalSystem.Services.Consultation.Queries
 
         ConsultationViewModel? IConsultationQueries.GetById(int id)
         {
-            ConsultationDomainModel consultationDomainModel = _consultationContext.Consultations
-                .Include(consultation => consultation.Doctor)
-                .Include(consultation => consultation.Patient)
-                .FirstOrDefault(consultation => consultation.Id == id);
-            if (consultationDomainModel == null)
+            dynamic dbResultModel;
+            using (var con = new SqlConnection(_databaseOptions.ConsultationDbConnectionString))
+            {
+                dbResultModel = con.QuerySingle<dynamic>(
+                    @"SELECT c.Id, c.Date, c.Place_Country, c.Place_State, c.Place_City, c.Place_PinCode,
+                    c.Problem, c.Medicine, c.DoctorId, d.Id DoctorId, d.FirstName DoctorFirstName, d.LastName DoctorLastName, c.PatientId, p.Id PatientId,
+                    p.FirstName PatientFirstName, p.LastName PatientLastName
+                    FROM Consultations c
+                    INNER JOIN Doctors d ON d.Id = c.DoctorId
+                    INNER JOIN Patients p ON p.Id = c.PatientId
+                    WHERE c.Id = @Id
+                    ORDER BY c.Date DESC", new { Id = id });
+            }
+            if (dbResultModel == null)
             {
                 return null;
             }
             var consultationViewModel = new ConsultationViewModel()
             {
-                Id = consultationDomainModel.Id,
-                Date = consultationDomainModel.Date,
-                Country = consultationDomainModel.Place!.Country,
-                State = consultationDomainModel.Place!.State,
-                City = consultationDomainModel.Place!.City,
-                PinCode = consultationDomainModel.Place!.PinCode,
-                Problem = consultationDomainModel.Problem,
-                Medicine = consultationDomainModel.Medicine,
-                DoctorId = consultationDomainModel.DoctorId,
+                Id = dbResultModel!.Id,
+                Date = dbResultModel.Date,
+                Country = dbResultModel.Place_Country,
+                State = dbResultModel.Place_State,
+                City = dbResultModel.Place_City,
+                PinCode = dbResultModel.Place_PinCode,
+                Problem = dbResultModel.Problem,
+                Medicine = dbResultModel.Medicine,
+                DoctorId = dbResultModel.DoctorId,
                 Doctor = new DoctorViewModel()
                 {
-                    Id = consultationDomainModel.Doctor!.Id,
-                    FirstName = consultationDomainModel.Doctor.FirstName,
-                    LastName = consultationDomainModel.Doctor.LastName
+                    Id = dbResultModel.DoctorId,
+                    FirstName = dbResultModel.DoctorFirstName,
+                    LastName = dbResultModel.DoctorLastName
                 },
-                PatientId = consultationDomainModel.PatientId,
+                PatientId = dbResultModel.PatientId,
                 Patient = new PatientViewModel()
                 {
-                    Id = consultationDomainModel.Patient!.Id,
-                    FirstName = consultationDomainModel.Patient.FirstName,
-                    LastName = consultationDomainModel.Patient.LastName
+                    Id = dbResultModel.PatientId,
+                    FirstName = dbResultModel.PatientFirstName,
+                    LastName = dbResultModel.PatientLastName
                 }
             };
             return consultationViewModel;
