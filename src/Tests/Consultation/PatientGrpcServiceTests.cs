@@ -1,13 +1,13 @@
 ﻿using Grpc.Core;
+using MedicalSystem.Services.Consultation.GrpcServices;
 using MedicalSystem.Services.Consultation.Protos;
+using MedicalSystem.Services.Consultation.Queries;
 using MedicalSystem.Services.Consultation.ViewModels;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MedicalSystem.Services.Consultation.GrpcServices;
-using MedicalSystem.Services.Consultation.Queries;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
@@ -73,7 +73,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         [Test]
         public void GetAll_GivenException_ExpectException()
         {
-            _patientQueriesMock!.Setup(service => service.GetAll()).Throws<NullReferenceException>(); 
+            _patientQueriesMock!.Setup(service => service.GetAll()).Throws<NullReferenceException>();
             Assert.Throws<NullReferenceException>(() => _patientGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object));
         }
     }

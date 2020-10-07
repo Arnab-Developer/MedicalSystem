@@ -73,7 +73,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         [Test]
         public void GetAll_GivenException_ExpectException()
         {
-            _doctorQueriesMock!.Setup(service => service.GetAll()).Throws<NullReferenceException>(); 
+            _doctorQueriesMock!.Setup(service => service.GetAll()).Throws<NullReferenceException>();
             Assert.Throws<NullReferenceException>(() => _doctorGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object));
         }
     }
