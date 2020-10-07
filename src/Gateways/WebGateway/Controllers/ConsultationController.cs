@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.Controllers
 {
-    /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/consultationController/*'/>
     [ApiController]
     [Route("[controller]")]
     [Produces("application/json")]
@@ -20,7 +19,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
         private readonly IPatientGrpcClient _patientGrpcClient;
         private readonly IConsultationGrpcClient _consultationGrpcClient;
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/consultationControllerConstructor/*'/>
         public ConsultationController(
             IDoctorGrpcClient doctorGrpcClient,
             IPatientGrpcClient patientGrpcClient,
@@ -31,7 +29,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             _consultationGrpcClient = consultationGrpcClient;
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getAll/*'/>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -87,7 +84,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return Ok(consultationModels);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getById/*'/>
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -145,7 +141,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return Ok(consultationModel);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/getAddEditInitData/*'/>
         [HttpGet]
         [Route("AddEditInitData")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -201,7 +196,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return Ok(consultationModel);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/add/*'/>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -232,7 +226,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return Ok();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/update/*'/>
         [HttpPut]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -268,7 +261,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return Ok();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationController"]/delete/*'/>
         [HttpDelete]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

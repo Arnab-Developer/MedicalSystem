@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Doctors
 {
-    /// <include file='docs.xml' path='docs/members[@name="DoctorGrpcClient"]/doctorGrpcClient/*'/>
     public class DoctorGrpcClient : IDoctorGrpcClient
     {
         private readonly DoctorOptions _doctorOptions;
         private readonly Doctor.DoctorClient _client;
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorGrpcClient"]/doctorGrpcClientConstructor/*'/>
         public DoctorGrpcClient(IOptionsMonitor<DoctorOptions> optionsAccessor)
         {
             _doctorOptions = optionsAccessor.CurrentValue;
@@ -22,31 +20,26 @@ namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Doctors
             _client = new Doctor.DoctorClient(channel);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorGrpcClient"]/getAllAsync/*'/>
         async Task<DoctorModelsMessage> IDoctorGrpcClient.GetAllAsync(EmptyMessage request)
         {
             return await _client.GetAllAsync(request);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorGrpcClient"]/getByIdAsync/*'/>
         async Task<DoctorModelMessage> IDoctorGrpcClient.GetByIdAsync(IdMessage request)
         {
             return await _client.GetByIdAsync(request);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorGrpcClient"]/addAsync/*'/>
         async Task IDoctorGrpcClient.AddAsync(DoctorModelMessage request)
         {
             await _client.AddAsync(request);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorGrpcClient"]/updateAsync/*'/>
         async Task IDoctorGrpcClient.UpdateAsync(UpdateMessage request)
         {
             await _client.UpdateAsync(request);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorGrpcClient"]/deleteAsync/*'/>
         async Task IDoctorGrpcClient.DeleteAsync(IdMessage request)
         {
             await _client.DeleteAsync(request);
