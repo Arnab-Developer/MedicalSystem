@@ -11,14 +11,12 @@ using System.Linq;
 
 namespace MedicalSystem.Tests.Services.Patient
 {
-    /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/patientControllerTests/*'/>
     internal class PatientGrpcServicesTests
     {
         private PatientContext? _patientContext;
         private PatientService? _patientController;
         private Mock<ServerCallContext>? _serverCallContextMock;
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
@@ -30,7 +28,6 @@ namespace MedicalSystem.Tests.Services.Patient
             _serverCallContextMock = new Mock<ServerCallContext>();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getAll_GivenValidDbData_ReturnsValidModels/*'/>
         [Test]
         public void GetAll_GivenValidDbData_ReturnsValidModels()
         {
@@ -59,7 +56,6 @@ namespace MedicalSystem.Tests.Services.Patient
             Assert.AreEqual("pat2last", patientModels[1].LastName);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getAll_GivenEmptyDbData_ReturnsEmptyModels/*'/>
         [Test]
         public void GetAll_GivenEmptyDbData_ReturnsEmptyModels()
         {
@@ -67,7 +63,6 @@ namespace MedicalSystem.Tests.Services.Patient
             Assert.Zero(patientModelsMessage.Patients.Count);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getById_GivenValidDbData_ReturnsValidModel/*'/>
         [Test]
         public void GetById_GivenValidDbData_ReturnsValidModel()
         {
@@ -85,7 +80,6 @@ namespace MedicalSystem.Tests.Services.Patient
             Assert.AreEqual("pat2last", patientModel.LastName);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/getById_GivenEmptyDbData_ReturnsNull/*'/>
         [Test]
         public void GetById_GivenEmptyDbData_ReturnsNull()
         {
@@ -95,7 +89,6 @@ namespace MedicalSystem.Tests.Services.Patient
             Assert.AreEqual(string.Empty, patientModelMessage.LastName);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/add_CanInsertInDb/*'/>
         [Test]
         public void Add_CanInsertInDb()
         {
@@ -115,7 +108,6 @@ namespace MedicalSystem.Tests.Services.Patient
             Assert.AreEqual("pat1last", patientModel.LastName);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/update_CanUpdateInDb/*'/>
         [Test]
         public void Update_CanUpdateInDb()
         {
@@ -143,7 +135,6 @@ namespace MedicalSystem.Tests.Services.Patient
             Assert.AreEqual("pat2last", patientModelNew.LastName);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/delete_CanDeleteInDb/*'/>
         [Test]
         public void Delete_CanDeleteInDb()
         {
@@ -153,7 +144,6 @@ namespace MedicalSystem.Tests.Services.Patient
             Assert.AreEqual(1, _patientContext.Patients.Count());
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientControllerTests"]/cleanup/*'/>
         [TearDown]
         public void Cleanup()
         {

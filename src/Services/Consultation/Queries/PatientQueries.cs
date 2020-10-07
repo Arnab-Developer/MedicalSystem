@@ -1,30 +1,43 @@
-﻿using MedicalSystem.Services.Consultation.DomainModels;
+﻿using Dapper;
+using MedicalSystem.Services.Consultation.Options;
 using MedicalSystem.Services.Consultation.ViewModels;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MedicalSystem.Services.Consultation.Queries
 {
     public class PatientQueries : IPatientQueries
     {
-        private readonly ConsultationContext _consultationContext;
+        private readonly DatabaseOptions _databaseOptions;
 
-        public PatientQueries(ConsultationContext consultationContext)
+        public PatientQueries(IOptionsMonitor<DatabaseOptions> optionsAccessor)
         {
-            _consultationContext = consultationContext;
+            _databaseOptions = optionsAccessor.CurrentValue;
         }
 
         IEnumerable<PatientViewModel> IPatientQueries.GetAll()
         {
-            IOrderedQueryable<PatientDomainModel> patientDomainModels = _consultationContext.Patients.OrderBy(doctor => doctor.FirstName);
+            dynamic dbResultModels;
+            using (var con = new SqlConnection(_databaseOptions.ConsultationDbConnectionString))
+            {
+                dbResultModels = con.Query<dynamic>(
+                    @"SELECT d.Id DoctorId, d.FirstName DoctorFirstName
+                    FROM Doctors d
+                    ORDER BY d.FirstName DESC");
+            }
+            if (dbResultModels == null || dbResultModels!.Count == 0)
+            {
+                return new List<PatientViewModel>();
+            }
             var patientViewModels = new List<PatientViewModel>();
-            foreach (PatientDomainModel patientDomainModel in patientDomainModels)
+            foreach (dynamic? dbResultModel in dbResultModels!)
             {
                 var patientViewModel = new PatientViewModel()
                 {
-                    Id = patientDomainModel.Id,
-                    FirstName = patientDomainModel.FirstName,
-                    LastName = patientDomainModel.LastName
+                    Id = dbResultModel!.Id,
+                    FirstName = dbResultModel.FirstName,
+                    LastName = dbResultModel.LastName
                 };
                 patientViewModels.Add(patientViewModel);
             }

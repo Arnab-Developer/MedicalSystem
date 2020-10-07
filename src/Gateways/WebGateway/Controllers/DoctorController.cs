@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.Controllers
-{ 
+{
     [ApiController]
     [Route("[controller]")]
     [Produces("application/json")]
