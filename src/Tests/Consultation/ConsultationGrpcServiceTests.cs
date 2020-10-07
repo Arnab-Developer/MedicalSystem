@@ -1,28 +1,34 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using MediatR;
+using MedicalSystem.Services.Consultation.Commands;
+using MedicalSystem.Services.Consultation.GrpcServices;
 using MedicalSystem.Services.Consultation.Protos;
+using MedicalSystem.Services.Consultation.Queries;
 using MedicalSystem.Services.Consultation.ViewModels;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using GrpcServices = MedicalSystem.Services.Consultation.GrpcServices;
+using System.Threading;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
     /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/consultationControllerTests/*'/>
     internal class ConsultationGrpcServiceTests
     {
-        private GrpcServices::ConsultationService? _consultationGrpcService;
-        private Mock<IConsultationService>? _consultationServiceMock;
+        private ConsultationService? _consultationGrpcService;
+        private Mock<IConsultationQueries>? _consultationQueriesMock;
+        private Mock<IMediator>? _mediatorMock;
         private Mock<ServerCallContext>? _serverCallContextMock;
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
-            _consultationServiceMock = new Mock<IConsultationService>();
-            _consultationGrpcService = new GrpcServices::ConsultationService(_consultationServiceMock.Object);
+            _consultationQueriesMock = new Mock<IConsultationQueries>();
+            _mediatorMock = new Mock<IMediator>();
+            _consultationGrpcService = new ConsultationService(_consultationQueriesMock.Object, _mediatorMock.Object);
             _serverCallContextMock = new Mock<ServerCallContext>();
         }
 
@@ -83,7 +89,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                     }
                 }
             };
-            _consultationServiceMock!.Setup(service => service.GetAll()).Returns(consultationViewModels);
+            _consultationQueriesMock!.Setup(service => service.GetAll()).Returns(consultationViewModels);
 
             ConsultationModelsMessage consultationModelsMessage
                 = _consultationGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
@@ -130,7 +136,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetAll_GivenEmptyViewModels_ReturnsEmptyViewModels()
         {
             var consultationViewModels = new List<ConsultationViewModel>();
-            _consultationServiceMock!.Setup(service => service.GetAll()).Returns(consultationViewModels);
+            _consultationQueriesMock!.Setup(service => service.GetAll()).Returns(consultationViewModels);
 
             ConsultationModelsMessage consultationModelsMessage
                 = _consultationGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
@@ -143,7 +149,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetAll_GivenNullViewModels_ExpectException()
         {
             var consultationViewModels = new List<ConsultationViewModel>();
-            _consultationServiceMock!.Setup(service => service.GetAll()).Throws<NullReferenceException>();
+            _consultationQueriesMock!.Setup(service => service.GetAll()).Throws<NullReferenceException>();
 
             Assert.Throws<NullReferenceException>(() => _consultationGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object));
         }
@@ -177,7 +183,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                     LastName = "pat1last"
                 }
             };
-            _consultationServiceMock!.Setup(service => service.GetById(It.IsAny<int>())).Returns(consultationViewModel);
+            _consultationQueriesMock!.Setup(service => service.GetById(It.IsAny<int>())).Returns(consultationViewModel);
 
             ConsultationModelMessage? consultationModelMessage
                 = _consultationGrpcService!.GetById(new IdMessage { Id = It.IsAny<int>() }, _serverCallContextMock!.Object)!.Result;
@@ -204,7 +210,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         [Test]
         public void GetById_GivenNullViewModel_ReturnsNull()
         {
-            _consultationServiceMock!.Setup(service => service.GetById(It.IsAny<int>())).Returns<ConsultationViewModel>(null);
+            _consultationQueriesMock!.Setup(service => service.GetById(It.IsAny<int>())).Returns<ConsultationViewModel>(null);
             Assert.Null(_consultationGrpcService!.GetById(new IdMessage { Id = It.IsAny<int>() }, _serverCallContextMock!.Object));
         }
 
@@ -238,9 +244,9 @@ namespace MedicalSystem.Tests.Services.Consultation
                 }
             };
 
-            _consultationServiceMock!.Setup(service => service.Add(It.IsAny<ConsultationViewModel>())).Verifiable();
+            _mediatorMock!.Setup(mediator => mediator.Send(It.IsAny<AddConsultationCommand>(), It.IsAny<CancellationToken>())).Verifiable();
             _consultationGrpcService!.Add(consultationModelMessage, _serverCallContextMock!.Object);
-            _consultationServiceMock.Verify();
+            _mediatorMock.Verify();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/update_CanCallServiceUpdate/*'/>
@@ -272,19 +278,19 @@ namespace MedicalSystem.Tests.Services.Consultation
                     LastName = "pat1last"
                 }
             };
-            _consultationServiceMock!.Setup(service => service.Update(It.IsAny<int>(), It.IsAny<ConsultationViewModel>())).Verifiable();
+            _mediatorMock!.Setup(mediator => mediator.Send(It.IsAny<UpdateConsultationCommand>(), It.IsAny<CancellationToken>())).Verifiable();
             _consultationGrpcService!.Update(new UpdateMessage { Id = It.IsAny<int>(), Consultation = consultationModelMessage },
                 _serverCallContextMock!.Object);
-            _consultationServiceMock.Verify();
+            _mediatorMock.Verify();
         }
 
         /// <include file='docs.xml' path='docs/members[@name="ConsultationControllerTests"]/delete_CanCallServiceDelete/*'/>
         [Test]
         public void Delete_CanCallServiceDelete()
         {
-            _consultationServiceMock!.Setup(service => service.Delete(It.IsAny<int>())).Verifiable();
+            _mediatorMock!.Setup(mediator => mediator.Send(It.IsAny<DeleteConsultationCommand>(), It.IsAny<CancellationToken>())).Verifiable();
             _consultationGrpcService!.Delete(new IdMessage { Id = It.IsAny<int>() }, _serverCallContextMock!.Object);
-            _consultationServiceMock.Verify();
+            _mediatorMock.Verify();
         }
     }
 }
