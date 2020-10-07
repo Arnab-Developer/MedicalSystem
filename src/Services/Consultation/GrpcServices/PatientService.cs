@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Services.Consultation.GrpcServices
 {
-    /// <include file='docs.xml' path='docs/members[@name="PatientGrpcService"]/patientGrpcService/*'/>
     public class PatientService : Patient.PatientBase
     {
         private readonly IPatientQueries _patientQueries;
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientGrpcService"]/patientGrpcServiceConstructor/*'/>
         public PatientService(IPatientQueries patientQueries)
         {
             _patientQueries = patientQueries;
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientGrpcService"]/getAll/*'/>
         public override Task<PatientModelsMessage> GetAll(EmptyMessage request, ServerCallContext context)
         {
             IEnumerable<PatientViewModel> patientViewModels = _patientQueries.GetAll();

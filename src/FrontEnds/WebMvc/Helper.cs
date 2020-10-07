@@ -20,6 +20,7 @@ namespace MedicalSystem.FrontEnds.WebMvc
         }
 
         public static string ApplicationVersionNumber { get; }
+
         public static int CurrentYear { get; }
     }
 }

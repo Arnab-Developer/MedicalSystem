@@ -1,18 +1,13 @@
 ﻿namespace MedicalSystem.Jobs.DoctorSync.Models
 {
-    /// <include file='docs.xml' path='docs/members[@name="DoctorModel"]/doctorModel/*'/>
     internal class DoctorModel
     {
-        /// <include file='docs.xml' path='docs/members[@name="DoctorModel"]/id/*'/>
         public int Id { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorModel"]/firstName/*'/>
         public string FirstName { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorModel"]/lastName/*'/>
         public string LastName { get; set; }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorModel"]/doctorModelConstructor/*'/>
         public DoctorModel()
         {
             Id = 0;

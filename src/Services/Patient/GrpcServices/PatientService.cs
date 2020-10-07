@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Services.Patient.GrpcServices
 {
-    /// <include file='docs.xml' path='docs/members[@name="PatientGrpcService"]/patientGrpcService/*'/>
     public class PatientService : Protos.Patient.PatientBase
     {
         private readonly PatientContext _patientContext;
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientGrpcService"]/patientGrpcServiceConstructor/*'/>
         public PatientService(PatientContext patientContext)
         {
             _patientContext = patientContext;
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientGrpcService"]/getAll/*'/>
         public override Task<Protos.PatientModelsMessage> GetAll(Protos.EmptyMessage request, ServerCallContext context)
         {
             IOrderedQueryable<PatientModel> patients = _patientContext.Patients.OrderBy(patient => patient.FirstName);
@@ -36,7 +33,6 @@ namespace MedicalSystem.Services.Patient.GrpcServices
             return Task.FromResult(patientModelsMessage);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientGrpcService"]/getById/*'/>
         public override Task<Protos.PatientModelMessage> GetById(Protos.IdMessage request, ServerCallContext context)
         {
             PatientModel patient = _patientContext.Patients.FirstOrDefault(patient => patient.Id == request.Id);
@@ -54,7 +50,6 @@ namespace MedicalSystem.Services.Patient.GrpcServices
             return Task.FromResult(patientModelMessage);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientGrpcService"]/add/*'/>
         public override Task<Protos.EmptyMessage> Add(Protos.PatientModelMessage request, ServerCallContext context)
         {
             var patient = new PatientModel
@@ -69,7 +64,6 @@ namespace MedicalSystem.Services.Patient.GrpcServices
             return Task.FromResult(new Protos.EmptyMessage());
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientGrpcService"]/update/*'/>
         public override Task<Protos.EmptyMessage> Update(Protos.UpdateMessage request, ServerCallContext context)
         {
             PatientModel d = _patientContext.Patients.FirstOrDefault(patient => patient.Id == request.Id);
@@ -85,7 +79,6 @@ namespace MedicalSystem.Services.Patient.GrpcServices
             return Task.FromResult(new Protos.EmptyMessage());
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientGrpcService"]/delete/*'/>
         public override Task<Protos.EmptyMessage> Delete(Protos.IdMessage request, ServerCallContext context)
         {
             PatientModel patient = _patientContext.Patients.FirstOrDefault(patient => patient.Id == request.Id);

@@ -10,20 +10,17 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Services.Consultation.GrpcServices
 {
-    /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/consultationGrpcService/*'/>
     public class ConsultationService : Protos.Consultation.ConsultationBase
     {
         private readonly IConsultationQueries _consultationQueries;
         private readonly IMediator _mediator;
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/consultationGrpcServiceConstructor/*'/>
         public ConsultationService(IConsultationQueries consultationQueries, IMediator mediator)
         {
             _consultationQueries = consultationQueries;
             _mediator = mediator;
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/getAll/*'/>
         public override Task<ConsultationModelsMessage> GetAll(EmptyMessage request, ServerCallContext context)
         {
             IEnumerable<ConsultationViewModel> consultationViewModels = _consultationQueries.GetAll();
@@ -61,7 +58,6 @@ namespace MedicalSystem.Services.Consultation.GrpcServices
             return Task.FromResult(consultationModelsMessage);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/getById/*'/>
         public override Task<ConsultationModelMessage>? GetById(IdMessage request, ServerCallContext context)
         {
             ConsultationViewModel? consultationViewModel = _consultationQueries.GetById(request.Id);
@@ -97,7 +93,6 @@ namespace MedicalSystem.Services.Consultation.GrpcServices
             return Task.FromResult(consultationModelMessage);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/add/*'/>
         public override Task<EmptyMessage> Add(ConsultationModelMessage request, ServerCallContext context)
         {
             var consultationViewModel = new ConsultationViewModel
@@ -121,7 +116,6 @@ namespace MedicalSystem.Services.Consultation.GrpcServices
             return Task.FromResult(new EmptyMessage());
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/update/*'/>
         public override Task<EmptyMessage> Update(UpdateMessage request, ServerCallContext context)
         {
             var consultationViewModel = new ConsultationViewModel
@@ -145,7 +139,6 @@ namespace MedicalSystem.Services.Consultation.GrpcServices
             return Task.FromResult(new EmptyMessage());
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="ConsultationGrpcService"]/delete/*'/>
         public override Task<EmptyMessage> Delete(IdMessage request, ServerCallContext context)
         {
             var deleteConsultationCommand = new DeleteConsultationCommand

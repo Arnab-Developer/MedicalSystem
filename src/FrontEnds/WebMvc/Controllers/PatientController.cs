@@ -12,13 +12,11 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.FrontEnds.WebMvc.Controllers
 {
-    /// <include file='docs.xml' path='docs/members[@name="PatientController"]/patientController/*'/>
     public class PatientController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly PatientOptions _patientOptions;
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientController"]/patientControllerConstructor/*'/>
         public PatientController(IHttpClientFactory httpClientFactory,
             IOptionsMonitor<PatientOptions> optionsAccessor)
         {
@@ -26,8 +24,6 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             _patientOptions = optionsAccessor.CurrentValue;
         }
 
-
-        /// <include file='docs.xml' path='docs/members[@name="PatientController"]/index/*'/>
         public async Task<IActionResult> Index()
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
@@ -48,7 +44,6 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             return StatusCode((int)patientApiResponseMessage.StatusCode);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientController"]/details/*'/>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -67,13 +62,11 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             return StatusCode((int)patientApiResponseMessage.StatusCode);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientController"]/createGet/*'/>
         public IActionResult Create()
         {
             return View();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientController"]/createPost/*'/>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PatientModel patient)
@@ -88,7 +81,6 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             return StatusCode((int)patientApiResponseMessage.StatusCode);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientController"]/editGet/*'/>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -107,7 +99,6 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             return StatusCode((int)patientApiResponseMessage.StatusCode);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientController"]/editPost/*'/>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, PatientModel patient)
@@ -123,7 +114,6 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             return StatusCode((int)patientApiResponseMessage.StatusCode);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientController"]/delete/*'/>
         public async Task<IActionResult> Delete(int? id)
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();

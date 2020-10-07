@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Consultations
 {
-    /// <include file='docs.xml' path='docs/members[@name="PatientGrpcClient"]/patientGrpcClient/*'/>
     public class PatientGrpcClient : IPatientGrpcClient
     {
         private readonly ConsultationOptions _consultationOptions;
         private readonly Patient.PatientClient _client;
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientGrpcClient"]/patientGrpcClientConstructor/*'/>
         public PatientGrpcClient(IOptionsMonitor<ConsultationOptions> optionsAccessor)
         {
             _consultationOptions = optionsAccessor.CurrentValue;
@@ -22,7 +20,6 @@ namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Consultations
             _client = new Patient.PatientClient(channel);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="PatientGrpcClient"]/getAllAsync/*'/>
         async Task<PatientModelsMessage> IPatientGrpcClient.GetAllAsync(EmptyMessage request)
         {
             return await _client.GetAllAsync(request);

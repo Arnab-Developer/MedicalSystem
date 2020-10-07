@@ -2,11 +2,9 @@
 
 namespace MedicalSystem.Services.Consultation.DomainModels
 {
-    /// <include file='docs.xml' path='docs/members[@name="Place"]/place/*'/>
     public class Place
     {
         private string _country;
-        /// <include file='docs.xml' path='docs/members[@name="Place"]/country/*'/>
         public string? Country
         {
             get { return _country; }
@@ -21,7 +19,6 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         }
 
         private string _state;
-        /// <include file='docs.xml' path='docs/members[@name="Place"]/state/*'/>
         public string? State
         {
             get { return _state; }
@@ -36,7 +33,6 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         }
 
         private string _city;
-        /// <include file='docs.xml' path='docs/members[@name="Place"]/city/*'/>
         public string? City
         {
             get { return _city; }
@@ -51,7 +47,6 @@ namespace MedicalSystem.Services.Consultation.DomainModels
         }
 
         private string _pinCode;
-        /// <include file='docs.xml' path='docs/members[@name="Place"]/pinCode/*'/>
         public string? PinCode
         {
             get { return _pinCode; }
@@ -65,7 +60,6 @@ namespace MedicalSystem.Services.Consultation.DomainModels
             }
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="Place"]/placeDefaultConstructor/*'/>
         public Place()
         {
             _country = string.Empty;
@@ -74,7 +68,6 @@ namespace MedicalSystem.Services.Consultation.DomainModels
             _pinCode = string.Empty;
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="Place"]/placeParameterConstructor/*'/>
         public Place(string? country, string? state, string? city, string? pinCode)
             : this()
         {

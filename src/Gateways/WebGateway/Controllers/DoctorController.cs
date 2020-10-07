@@ -8,8 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.Controllers
-{
-    /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/doctorController/*'/>    
+{ 
     [ApiController]
     [Route("[controller]")]
     [Produces("application/json")]
@@ -17,13 +16,11 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
     {
         private readonly IDoctorGrpcClient _doctorGrpcClient;
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/doctorControllerConstructor/*'/>
         public DoctorController(IDoctorGrpcClient doctorGrpcClient)
         {
             _doctorGrpcClient = doctorGrpcClient;
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/getAll/*'/>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -60,7 +57,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return Ok(doctorModels);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/getById/*'/>
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -100,7 +96,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return Ok(doctorModel);
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/add/*'/>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -124,7 +119,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return Ok();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/update/*'/>
         [HttpPut]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -153,7 +147,6 @@ namespace MedicalSystem.Gateways.WebGateway.Controllers
             return Ok();
         }
 
-        /// <include file='docs.xml' path='docs/members[@name="DoctorController"]/delete/*'/>
         [HttpDelete]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
