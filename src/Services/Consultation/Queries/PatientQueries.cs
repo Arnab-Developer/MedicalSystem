@@ -22,9 +22,9 @@ namespace MedicalSystem.Services.Consultation.Queries
             using (var con = new SqlConnection(_databaseOptions.ConsultationDbConnectionString))
             {
                 dbResultModels = con.Query<dynamic>(
-                    @"SELECT d.Id DoctorId, d.FirstName DoctorFirstName
-                    FROM Doctors d
-                    ORDER BY d.FirstName DESC");
+                    @"SELECT p.Id, p.FirstName, p.LastName
+                    FROM Patients p
+                    ORDER BY p.FirstName DESC");
             }
             if (dbResultModels == null || dbResultModels!.Count == 0)
             {

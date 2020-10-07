@@ -38,7 +38,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 new ConsultationViewModel()
                 {
                     Id = 1,
-                    Date = DateTime.Now,
+                    Date = DateTime.UtcNow,
                     Country = "India",
                     State = "WB",
                     City = "Kol",
@@ -63,7 +63,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 new ConsultationViewModel()
                 {
                     Id = 2,
-                    Date = DateTime.Now,
+                    Date = DateTime.UtcNow,
                     Country = "UK",
                     State = "st1",
                     City = "c1",
@@ -94,7 +94,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual(2, consultationModelsMessage.Consultations.Count);
 
             Assert.AreEqual(1, consultationModelsMessage.Consultations[0].Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationModelsMessage.Consultations[0].Date.ToDateTime().Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, consultationModelsMessage.Consultations[0].Date.ToDateTime().Date);
             Assert.AreEqual("India", consultationModelsMessage.Consultations[0].Country);
             Assert.AreEqual("WB", consultationModelsMessage.Consultations[0].State);
             Assert.AreEqual("Kol", consultationModelsMessage.Consultations[0].City);
@@ -111,7 +111,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             Assert.AreEqual("pat1last", consultationModelsMessage.Consultations[0].Patient!.LastName);
 
             Assert.AreEqual(2, consultationModelsMessage.Consultations[1].Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationModelsMessage.Consultations[1].Date.ToDateTime().Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, consultationModelsMessage.Consultations[1].Date.ToDateTime().Date);
             Assert.AreEqual("UK", consultationModelsMessage.Consultations[1].Country);
             Assert.AreEqual("st1", consultationModelsMessage.Consultations[1].State);
             Assert.AreEqual("c1", consultationModelsMessage.Consultations[1].City);
@@ -155,7 +155,7 @@ namespace MedicalSystem.Tests.Services.Consultation
             var consultationViewModel = new ConsultationViewModel()
             {
                 Id = 1,
-                Date = DateTime.Now,
+                Date = DateTime.UtcNow,
                 Country = "India",
                 State = "WB",
                 City = "Kol",
@@ -183,7 +183,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                 = _consultationGrpcService!.GetById(new IdMessage { Id = It.IsAny<int>() }, _serverCallContextMock!.Object)!.Result;
 
             Assert.AreEqual(1, consultationModelMessage!.Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationModelMessage.Date.ToDateTime().Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, consultationModelMessage.Date.ToDateTime().Date);
             Assert.AreEqual("India", consultationModelMessage.Country);
             Assert.AreEqual("WB", consultationModelMessage.State);
             Assert.AreEqual("Kol", consultationModelMessage.City);

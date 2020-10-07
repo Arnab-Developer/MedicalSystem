@@ -39,7 +39,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             consultationModelsMessage.Consultations.Add(new ConsultationModelMessage
             {
                 Id = 1,
-                Date = DateTime.Now.ToUniversalTime().ToTimestamp(),
+                Date = DateTime.UtcNow.ToTimestamp(),
                 Country = "India",
                 State = "WB",
                 City = "Kol",
@@ -70,7 +70,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
                 = ((IEnumerable<ConsultationModel>)((OkObjectResult)_consultationController!.GetAll().Result.Result).Value).ToList();
 
             Assert.AreEqual(1, consultationModels[0].Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationModels[0].Date.Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, consultationModels[0].Date.Date);
             Assert.AreEqual("India", consultationModels[0].Country);
             Assert.AreEqual("WB", consultationModels[0].State);
             Assert.AreEqual("Kol", consultationModels[0].City);
@@ -106,7 +106,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
             var consultationModelMessage = new ConsultationModelMessage
             {
                 Id = 1,
-                Date = DateTime.Now.ToUniversalTime().ToTimestamp(),
+                Date = DateTime.UtcNow.ToTimestamp(),
                 Country = "India",
                 State = "WB",
                 City = "Kol",
@@ -137,7 +137,7 @@ namespace MedicalSystem.Tests.Gateways.WebGateway
                 = (ConsultationModel)((OkObjectResult)_consultationController!.GetById(It.IsAny<int>()).Result.Result).Value;
 
             Assert.AreEqual(1, consultationModel.Id);
-            Assert.AreEqual(DateTime.Now.Date, consultationModel.Date.Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, consultationModel.Date.Date);
             Assert.AreEqual("India", consultationModel.Country);
             Assert.AreEqual("WB", consultationModel.State);
             Assert.AreEqual("Kol", consultationModel.City);

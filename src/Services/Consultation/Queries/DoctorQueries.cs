@@ -22,7 +22,7 @@ namespace MedicalSystem.Services.Consultation.Queries
             using (var con = new SqlConnection(_databaseOptions.ConsultationDbConnectionString))
             {
                 dbResultModels = con.Query<dynamic>(
-                    @"SELECT d.Id DoctorId, d.FirstName DoctorFirstName
+                    @"SELECT d.Id, d.FirstName, d.LastName
                     FROM Doctors d
                     ORDER BY d.FirstName DESC");
             }
