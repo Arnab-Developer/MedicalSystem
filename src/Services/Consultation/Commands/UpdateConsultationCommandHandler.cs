@@ -14,7 +14,7 @@ namespace MedicalSystem.Services.Consultation.Commands
             _consultationRepository = consultationRepository;
         }
 
-        Task<bool> IRequestHandler<UpdateConsultationCommand, bool>.Handle(UpdateConsultationCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(UpdateConsultationCommand request, CancellationToken cancellationToken)
         {
             ConsultationDomainModel consultationDomainModel = _consultationRepository.GetById(request.ConsultationViewModel.Id);
 
