@@ -1,4 +1,5 @@
-﻿using MedicalSystem.Services.Consultation.Commands;
+﻿using MediatR;
+using MedicalSystem.Services.Consultation.Commands;
 using MedicalSystem.Services.Consultation.DomainModels;
 using Moq;
 using NUnit.Framework;
@@ -10,7 +11,7 @@ namespace MedicalSystem.Tests.Services.Consultation
     internal class DeleteConsultationCommandHandlerTests
     {
         private Mock<IConsultationRepository>? _consultationRepositoryMock;
-        private DeleteConsultationCommandHandler? _deleteConsultationCommandHandler;
+        private IRequestHandler<DeleteConsultationCommand, bool>? _deleteConsultationCommandHandler;
 
         [SetUp]
         public void Setup()

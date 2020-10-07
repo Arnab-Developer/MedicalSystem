@@ -14,7 +14,7 @@ namespace MedicalSystem.Services.Consultation.Commands
             _consultationRepository = consultationRepository;
         }
 
-        public Task<bool> Handle(AddConsultationCommand request, CancellationToken cancellationToken)
+        Task<bool> IRequestHandler<AddConsultationCommand, bool>.Handle(AddConsultationCommand request, CancellationToken cancellationToken)
         {
             var consultationDomainModel = new ConsultationDomainModel(request.ConsultationViewModel.Id, request.ConsultationViewModel.Date,
                 request.ConsultationViewModel.Country, request.ConsultationViewModel.State, request.ConsultationViewModel.City,

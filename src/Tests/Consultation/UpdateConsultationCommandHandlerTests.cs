@@ -1,4 +1,5 @@
-﻿using MedicalSystem.Services.Consultation.Commands;
+﻿using MediatR;
+using MedicalSystem.Services.Consultation.Commands;
 using MedicalSystem.Services.Consultation.DomainModels;
 using MedicalSystem.Services.Consultation.ViewModels;
 using Moq;
@@ -11,7 +12,7 @@ namespace MedicalSystem.Tests.Services.Consultation
     internal class UpdateConsultationCommandHandlerTests
     {
         private Mock<IConsultationRepository>? _consultationRepositoryMock;
-        private UpdateConsultationCommandHandler? _updateConsultationCommandHandler;
+        private IRequestHandler<UpdateConsultationCommand, bool>? _updateConsultationCommandHandler;
 
         [SetUp]
         public void Setup()

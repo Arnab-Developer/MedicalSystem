@@ -15,7 +15,7 @@ namespace MedicalSystem.Services.Consultation.Queries
             _consultationContext = consultationContext;
         }
 
-        public IEnumerable<ConsultationViewModel> GetAll()
+        IEnumerable<ConsultationViewModel> IConsultationQueries.GetAll()
         {
             IOrderedQueryable<ConsultationDomainModel> consultationDomainModels = _consultationContext.Consultations
                 .Include(consultation => consultation.Doctor)
@@ -54,7 +54,7 @@ namespace MedicalSystem.Services.Consultation.Queries
             return consultationViewModels;
         }
 
-        public ConsultationViewModel? GetById(int id)
+        ConsultationViewModel? IConsultationQueries.GetById(int id)
         {
             ConsultationDomainModel consultationDomainModel = _consultationContext.Consultations
                 .Include(consultation => consultation.Doctor)

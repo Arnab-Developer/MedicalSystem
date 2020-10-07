@@ -14,7 +14,7 @@ namespace MedicalSystem.Services.Consultation.Queries
             _consultationContext = consultationContext;
         }
 
-        public IEnumerable<PatientViewModel> GetAll()
+        IEnumerable<PatientViewModel> IPatientQueries.GetAll()
         {
             IOrderedQueryable<PatientDomainModel> patientDomainModels = _consultationContext.Patients.OrderBy(doctor => doctor.FirstName);
             var patientViewModels = new List<PatientViewModel>();

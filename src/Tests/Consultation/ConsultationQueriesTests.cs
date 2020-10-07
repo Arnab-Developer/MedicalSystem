@@ -12,7 +12,7 @@ namespace MedicalSystem.Tests.Services.Consultation
 {
     internal class ConsultationQueriesTests
     {
-        private ConsultationQueries? _consultationQueries;
+        private IConsultationQueries? _consultationQueries;
         private ConsultationContext? _consultationContext;
 
         [SetUp]
