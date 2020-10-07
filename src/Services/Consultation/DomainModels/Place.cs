@@ -3,7 +3,7 @@
 namespace MedicalSystem.Services.Consultation.DomainModels
 {
     /// <include file='docs.xml' path='docs/members[@name="Place"]/place/*'/>
-    internal class Place
+    public class Place
     {
         private string _country;
         /// <include file='docs.xml' path='docs/members[@name="Place"]/country/*'/>

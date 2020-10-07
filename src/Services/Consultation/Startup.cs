@@ -1,5 +1,7 @@
-using MedicalSystem.Services.Consultation.Dals;
-using MedicalSystem.Services.Consultation.Services;
+using MediatR;
+using MedicalSystem.Services.Consultation.DomainModels;
+using MedicalSystem.Services.Consultation.Queries;
+using MedicalSystem.Services.Consultation.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,14 +31,12 @@ namespace MedicalSystem.Services.Consultation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
-            string consultationDbConnectionString = Configuration.GetConnectionString("ConsultationDbConnectionString");
-            services.AddDbContext<ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
-            services.AddTransient(typeof(IConsultationService), typeof(ConsultationService));
-            services.AddTransient(typeof(IConsultationDal), typeof(ConsultationDal));
-            services.AddTransient(typeof(IDoctorService), typeof(DoctorService));
-            services.AddTransient(typeof(IDoctorDal), typeof(DoctorDal));
-            services.AddTransient(typeof(IPatientService), typeof(PatientService));
-            services.AddTransient(typeof(IPatientDal), typeof(PatientDal));
+            AddDbContext(services);
+            services.AddTransient(typeof(IConsultationQueries), typeof(ConsultationQueries));
+            services.AddTransient(typeof(IDoctorQueries), typeof(DoctorQueries));
+            services.AddTransient(typeof(IPatientQueries), typeof(PatientQueries));
+            services.AddTransient(typeof(IConsultationRepository), typeof(ConsultationRepository));
+            services.AddMediatR(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +60,12 @@ namespace MedicalSystem.Services.Consultation
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
                 });
             });
+        }
+
+        private void AddDbContext(IServiceCollection services)
+        {
+            string consultationDbConnectionString = Configuration.GetConnectionString("ConsultationDbConnectionString");
+            services.AddDbContext<ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
         }
     }
 }

@@ -1,29 +1,29 @@
 ﻿using Grpc.Core;
+using MedicalSystem.Services.Consultation.GrpcServices;
 using MedicalSystem.Services.Consultation.Protos;
-using MedicalSystem.Services.Consultation.Services;
+using MedicalSystem.Services.Consultation.Queries;
 using MedicalSystem.Services.Consultation.ViewModels;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GrpcServices = MedicalSystem.Services.Consultation.GrpcServices;
 
 namespace MedicalSystem.Tests.Services.Consultation
 {
     /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/doctorControllerTests/*'/>
     internal class DoctorGrpcServiceTests
     {
-        private GrpcServices::DoctorService? _doctorGrpcService;
-        private Mock<IDoctorService>? _doctorServiceMock;
+        private DoctorService? _doctorGrpcService;
+        private Mock<IDoctorQueries>? _doctorQueriesMock;
         private Mock<ServerCallContext>? _serverCallContextMock;
 
         /// <include file='docs.xml' path='docs/members[@name="DoctorControllerTests"]/setup/*'/>
         [SetUp]
         public void Setup()
         {
-            _doctorServiceMock = new Mock<IDoctorService>();
-            _doctorGrpcService = new GrpcServices::DoctorService(_doctorServiceMock.Object);
+            _doctorQueriesMock = new Mock<IDoctorQueries>();
+            _doctorGrpcService = new DoctorService(_doctorQueriesMock.Object);
             _serverCallContextMock = new Mock<ServerCallContext>();
         }
 
@@ -46,7 +46,7 @@ namespace MedicalSystem.Tests.Services.Consultation
                     LastName = "doc2 l"
                 }
             };
-            _doctorServiceMock!.Setup(service => service.GetAll()).Returns(doctorViewModels);
+            _doctorQueriesMock!.Setup(service => service.GetAll()).Returns(doctorViewModels);
 
             DoctorModelsMessage doctorModelsMessage = _doctorGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
 
@@ -64,7 +64,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         public void GetAll_GivenEmptyViewModels_ReturnsEmptyViewModels()
         {
             var doctorViewModels = new List<DoctorViewModel>();
-            _doctorServiceMock!.Setup(service => service.GetAll()).Returns(doctorViewModels);
+            _doctorQueriesMock!.Setup(service => service.GetAll()).Returns(doctorViewModels);
             DoctorModelsMessage doctorModelsMessage = _doctorGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object).Result;
             Assert.Zero(doctorModelsMessage.Doctors.Count());
         }
@@ -73,7 +73,7 @@ namespace MedicalSystem.Tests.Services.Consultation
         [Test]
         public void GetAll_GivenException_ExpectException()
         {
-            _doctorServiceMock!.Setup(service => service.GetAll()).Throws<NullReferenceException>(); ;
+            _doctorQueriesMock!.Setup(service => service.GetAll()).Throws<NullReferenceException>();
             Assert.Throws<NullReferenceException>(() => _doctorGrpcService!.GetAll(new EmptyMessage(), _serverCallContextMock!.Object));
         }
     }

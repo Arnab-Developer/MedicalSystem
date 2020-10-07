@@ -3,7 +3,7 @@
 namespace MedicalSystem.Services.Consultation.DomainModels
 {
     /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/consultationDomainModel/*'/>
-    internal class ConsultationDomainModel
+    public class ConsultationDomainModel
     {
         /// <include file='docs.xml' path='docs/members[@name="ConsultationDomainModel"]/id/*'/>
         public int Id { get; set; }

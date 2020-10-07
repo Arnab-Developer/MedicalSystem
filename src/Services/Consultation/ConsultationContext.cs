@@ -1,10 +1,11 @@
 ﻿using MedicalSystem.Services.Consultation.DomainModels;
+using MedicalSystem.Services.Consultation.SeedWork;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedicalSystem.Services.Consultation.Dals
+namespace MedicalSystem.Services.Consultation
 {
     /// <include file='docs.xml' path='docs/members[@name="ConsultationContext"]/consultationContext/*'/>
-    internal class ConsultationContext : DbContext
+    public class ConsultationContext : DbContext, IUnitOfWork
     {
         /// <include file='docs.xml' path='docs/members[@name="ConsultationContext"]/consultationContextConstructor/*'/>
         public ConsultationContext(DbContextOptions<ConsultationContext> options)
@@ -26,6 +27,11 @@ namespace MedicalSystem.Services.Consultation.Dals
         {
             modelBuilder.Entity<ConsultationDomainModel>()
                 .OwnsOne(consultation => consultation.Place);
+        }
+
+        void IUnitOfWork.SaveChanges()
+        {
+            SaveChanges();
         }
     }
 }
