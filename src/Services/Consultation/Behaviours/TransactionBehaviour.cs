@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Services.Consultation.Behaviours
 {
-    public class TransactionBehaviour<TRequest, TResponse> 
+    public class TransactionBehaviour<TRequest, TResponse>
         : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
     {
         private readonly ConsultationContext _consultationContext;
@@ -16,7 +16,7 @@ namespace MedicalSystem.Services.Consultation.Behaviours
             _consultationContext = consultationContext;
         }
 
-        async Task<TResponse> IPipelineBehavior<TRequest, TResponse>.Handle(TRequest request, 
+        async Task<TResponse> IPipelineBehavior<TRequest, TResponse>.Handle(TRequest request,
             CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             using var transaction = _consultationContext.Database.BeginTransaction(IsolationLevel.ReadCommitted);
