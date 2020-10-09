@@ -1,4 +1,5 @@
 using MediatR;
+using MedicalSystem.Services.Consultation.Behaviours;
 using MedicalSystem.Services.Consultation.DomainModels;
 using MedicalSystem.Services.Consultation.Options;
 using MedicalSystem.Services.Consultation.Queries;
@@ -39,6 +40,7 @@ namespace MedicalSystem.Services.Consultation
             services.AddTransient(typeof(IPatientQueries), typeof(PatientQueries));
             services.AddTransient(typeof(IConsultationRepository), typeof(ConsultationRepository));
             services.AddMediatR(typeof(Startup));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehaviour<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
