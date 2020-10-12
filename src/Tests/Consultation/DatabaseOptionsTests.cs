@@ -1,4 +1,4 @@
-﻿using MedicalSystem.Services.Consultation.Options;
+﻿using MedicalSystem.Services.Consultation.Api.Options;
 using NUnit.Framework;
 
 namespace MedicalSystem.Tests.Services.Consultation

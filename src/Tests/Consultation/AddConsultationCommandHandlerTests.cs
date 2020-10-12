@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using MedicalSystem.Services.Consultation.Commands;
+using MedicalSystem.Services.Consultation.Api.Commands;
+using MedicalSystem.Services.Consultation.Api.ViewModels;
 using MedicalSystem.Services.Consultation.Domain;
-using MedicalSystem.Services.Consultation.ViewModels;
 using Moq;
 using NUnit.Framework;
 using System;

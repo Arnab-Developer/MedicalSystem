@@ -1,4 +1,4 @@
-﻿using MedicalSystem.Services.Consultation.DomainModels;
+﻿using MedicalSystem.Services.Consultation.Domain;
 using NUnit.Framework;
 using System;
 

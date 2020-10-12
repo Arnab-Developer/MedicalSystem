@@ -1,6 +1,5 @@
-﻿using MedicalSystem.Services.Consultation;
-using MedicalSystem.Services.Consultation.DomainModels;
-using MedicalSystem.Services.Consultation.Repositories;
+﻿using MedicalSystem.Services.Consultation.Domain;
+using MedicalSystem.Services.Consultation.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System;
