@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Jobs.DoctorSy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Jobs.PatientSync", "Jobs\patientSync\MedicalSystem.Jobs.PatientSync.csproj", "{6598CC3C-0AF2-499B-A1E3-C88257C3F7E8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Doctor.Api", "Services\Doctor\MedicalSystem.Services.Doctor.Api.csproj", "{9E554F92-38AC-43B2-94DB-50A57C9D1CE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Doctor.Api", "Services\Doctor\Api\MedicalSystem.Services.Doctor.Api.csproj", "{9E554F92-38AC-43B2-94DB-50A57C9D1CE7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Patient", "Services\Patient\MedicalSystem.Services.Patient.csproj", "{85403BB9-5CEB-4F7C-A17E-7EFF5A8887E1}"
 EndProject
