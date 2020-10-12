@@ -1,4 +1,4 @@
-﻿namespace MedicalSystem.Services.Doctor.Models
+﻿namespace MedicalSystem.Services.Doctor.Api.Models
 {
     public class DoctorModel
     {

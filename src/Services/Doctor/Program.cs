@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics.CodeAnalysis;
 
-namespace MedicalSystem.Services.Doctor
+namespace MedicalSystem.Services.Doctor.Api
 {
     [ExcludeFromCodeCoverage]
     public class Program
