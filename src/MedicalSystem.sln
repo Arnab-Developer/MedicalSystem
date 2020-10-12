@@ -35,13 +35,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Doct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Patient", "Services\Patient\MedicalSystem.Services.Patient.csproj", "{85403BB9-5CEB-4F7C-A17E-7EFF5A8887E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Consultation.GrpcService", "Services\Consultation\MedicalSystem.Services.Consultation.GrpcService.csproj", "{6895E738-02E4-4D81-98C9-BDCF924A55D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Consultation.Api", "Services\Consultation\Api\MedicalSystem.Services.Consultation.Api.csproj", "{6895E738-02E4-4D81-98C9-BDCF924A55D6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consultation", "Consultation", "{AE06F326-63A2-4F0A-B204-B12D96B00EB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Services.Consultation.Domain", "Services\MedicalSystem.Services.Consultation.Domain\MedicalSystem.Services.Consultation.Domain.csproj", "{ABC084E3-E0B0-491E-9FC0-556800BDA7DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Consultation.Domain", "Services\Consultation\Domain\MedicalSystem.Services.Consultation.Domain.csproj", "{ABC084E3-E0B0-491E-9FC0-556800BDA7DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Services.Consultation.Infrastructure", "Services\MedicalSystem.Services.Consultation.Infrastructure\MedicalSystem.Services.Consultation.Infrastructure.csproj", "{A6347025-83B6-4125-BC9C-A71560845556}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Consultation.Infrastructure", "Services\Consultation\Infrastructure\MedicalSystem.Services.Consultation.Infrastructure.csproj", "{A6347025-83B6-4125-BC9C-A71560845556}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
