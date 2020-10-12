@@ -1,7 +1,7 @@
-﻿using MedicalSystem.Services.Doctor.Models;
+﻿using MedicalSystem.Services.Doctor.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedicalSystem.Services.Doctor.Data
+namespace MedicalSystem.Services.Doctor.Api.Data
 {
     public class DoctorContext : DbContext
     {

@@ -1,5 +1,5 @@
-using MedicalSystem.Services.Patient.Data;
-using MedicalSystem.Services.Patient.GrpcServices;
+using MedicalSystem.Services.Patient.Api.Data;
+using MedicalSystem.Services.Patient.Api.GrpcServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics.CodeAnalysis;
 
-namespace MedicalSystem.Services.Patient
+namespace MedicalSystem.Services.Patient.Api
 {
     [ExcludeFromCodeCoverage]
     public class Startup

@@ -1,10 +1,10 @@
 ﻿using Grpc.Core;
-using MedicalSystem.Services.Doctor.Data;
-using MedicalSystem.Services.Doctor.Models;
+using MedicalSystem.Services.Doctor.Api.Data;
+using MedicalSystem.Services.Doctor.Api.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MedicalSystem.Services.Doctor.GrpcServices
+namespace MedicalSystem.Services.Doctor.Api.GrpcServices
 {
     public class DoctorService : Protos.Doctor.DoctorBase
     {

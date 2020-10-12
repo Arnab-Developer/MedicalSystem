@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Services\Doctor\MedicalSystem.Services.Doctor.csproj" />
+    <ProjectReference Include="..\..\Services\Doctor\Api\MedicalSystem.Services.Doctor.Api.csproj" />
   </ItemGroup>
 
 </Project>

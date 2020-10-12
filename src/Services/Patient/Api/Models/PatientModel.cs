@@ -1,6 +1,6 @@
-﻿namespace MedicalSystem.Services.Doctor.Models
+﻿namespace MedicalSystem.Services.Patient.Api.Models
 {
-    public class DoctorModel
+    public class PatientModel
     {
         public int Id { get; set; }
 
@@ -8,7 +8,7 @@
 
         public string LastName { get; set; }
 
-        public DoctorModel()
+        public PatientModel()
         {
             Id = 0;
             FirstName = string.Empty;

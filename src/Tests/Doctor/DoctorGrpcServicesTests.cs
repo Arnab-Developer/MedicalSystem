@@ -1,8 +1,8 @@
 using Grpc.Core;
-using MedicalSystem.Services.Doctor.Data;
-using MedicalSystem.Services.Doctor.GrpcServices;
-using MedicalSystem.Services.Doctor.Models;
-using MedicalSystem.Services.Doctor.Protos;
+using MedicalSystem.Services.Doctor.Api.Data;
+using MedicalSystem.Services.Doctor.Api.GrpcServices;
+using MedicalSystem.Services.Doctor.Api.Models;
+using MedicalSystem.Services.Doctor.Api.Protos;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
