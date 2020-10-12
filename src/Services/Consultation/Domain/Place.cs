@@ -14,7 +14,7 @@ namespace MedicalSystem.Services.Consultation.Domain
                 {
                     throw new ArgumentException();
                 }
-                _country = value;
+                _country = value!;
             }
         }
 
@@ -28,7 +28,7 @@ namespace MedicalSystem.Services.Consultation.Domain
                 {
                     throw new ArgumentException();
                 }
-                _state = value;
+                _state = value!;
             }
         }
 
@@ -42,7 +42,7 @@ namespace MedicalSystem.Services.Consultation.Domain
                 {
                     throw new ArgumentException();
                 }
-                _city = value;
+                _city = value!;
             }
         }
 
@@ -56,7 +56,7 @@ namespace MedicalSystem.Services.Consultation.Domain
                 {
                     throw new ArgumentException();
                 }
-                _pinCode = value;
+                _pinCode = value!;
             }
         }
 

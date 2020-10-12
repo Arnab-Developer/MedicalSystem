@@ -32,7 +32,7 @@ namespace MedicalSystem.Services.Consultation.Domain
                 {
                     throw new ArgumentException();
                 }
-                if (value.Length > 10)
+                if (value!.Length > 10)
                 {
                     throw new ArgumentException();
                 }
@@ -50,7 +50,7 @@ namespace MedicalSystem.Services.Consultation.Domain
                 {
                     throw new ArgumentException();
                 }
-                if (value.Length > 10)
+                if (value!.Length > 10)
                 {
                     throw new ArgumentException();
                 }
