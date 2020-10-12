@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\MedicalSystem.Services.Consultation.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\MedicalSystem.Services.Consultation.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
