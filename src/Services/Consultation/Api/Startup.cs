@@ -3,7 +3,6 @@ using MedicalSystem.Services.Consultation.Api.Behaviours;
 using MedicalSystem.Services.Consultation.Domain;
 using MedicalSystem.Services.Consultation.Api.Options;
 using MedicalSystem.Services.Consultation.Api.Queries;
-using MedicalSystem.Services.Consultation.Api.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using MedicalSystem.Services.Consultation.Infrastructure;
 
 [assembly: InternalsVisibleTo("MedicalSystem.Tests.Services.Consultation")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
