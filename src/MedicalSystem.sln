@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Jobs.PatientS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Doctor.Api", "Services\Doctor\Api\MedicalSystem.Services.Doctor.Api.csproj", "{9E554F92-38AC-43B2-94DB-50A57C9D1CE7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Patient.Api", "Services\Patient\MedicalSystem.Services.Patient.Api.csproj", "{85403BB9-5CEB-4F7C-A17E-7EFF5A8887E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Patient.Api", "Services\Patient\Api\MedicalSystem.Services.Patient.Api.csproj", "{85403BB9-5CEB-4F7C-A17E-7EFF5A8887E1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSystem.Services.Consultation.Api", "Services\Consultation\Api\MedicalSystem.Services.Consultation.Api.csproj", "{6895E738-02E4-4D81-98C9-BDCF924A55D6}"
 EndProject
