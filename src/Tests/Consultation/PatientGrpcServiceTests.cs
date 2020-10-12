@@ -1,8 +1,8 @@
 ﻿using Grpc.Core;
-using MedicalSystem.Services.Consultation.GrpcServices;
-using MedicalSystem.Services.Consultation.Protos;
-using MedicalSystem.Services.Consultation.Queries;
-using MedicalSystem.Services.Consultation.ViewModels;
+using MedicalSystem.Services.Consultation.Api.GrpcServices;
+using MedicalSystem.Services.Consultation.Api.Protos;
+using MedicalSystem.Services.Consultation.Api.Queries;
+using MedicalSystem.Services.Consultation.Api.ViewModels;
 using Moq;
 using NUnit.Framework;
 using System;

@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "MedicalSystem.Services.Consultation.Api.Protos";
+
+package consultation;
+
+service Doctor {
+  rpc GetAll (EmptyMessage) returns (DoctorModelsMessage);
+}
+
+service Patient {
+  rpc GetAll (EmptyMessage) returns (PatientModelsMessage);
+}
+
+service Consultation {
+  rpc GetAll (EmptyMessage) returns (ConsultationModelsMessage);
+  rpc GetById (IdMessage) returns (ConsultationModelMessage);
+  rpc Add (ConsultationModelMessage) returns (EmptyMessage);
+  rpc Update (UpdateMessage) returns (EmptyMessage);
+  rpc Delete (IdMessage) returns (EmptyMessage);
+}
+
+message DoctorModelMessage {
+  int32 Id = 1;
+  string FirstName = 2;
+  string LastName = 3;
+}
+
+message PatientModelMessage {
+  int32 Id = 1;
+  string FirstName = 2;
+  string LastName = 3;
+}
+
+message ConsultationModelMessage {
+  int32 Id = 1;
+  google.protobuf.Timestamp Date = 2;
+  string Country = 3;
+  string State = 4;
+  string City = 5;
+  string PinCode = 6;
+  string Problem = 7;
+  string Medicine = 8;
+  int32 DoctorId = 9;
+  DoctorModelMessage Doctor = 10;
+  int32 PatientId = 11;
+  PatientModelMessage patient = 12;
+}
+
+message DoctorModelsMessage {
+  repeated DoctorModelMessage doctors = 1;
+}
+
+message PatientModelsMessage {
+  repeated PatientModelMessage patients = 1;
+}
+
+message ConsultationModelsMessage {
+  repeated ConsultationModelMessage consultations = 1;
+}
+
+message EmptyMessage {
+
+}
+
+message IdMessage{
+  int32 Id = 1;
+}
+
+message UpdateMessage {
+  int32 Id = 1;
+  ConsultationModelMessage consultation = 2;
+}

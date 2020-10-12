@@ -22,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Services\Consultation\MedicalSystem.Services.Consultation.csproj" />
+    <ProjectReference Include="..\..\Services\Consultation\Domain\MedicalSystem.Services.Consultation.Domain.csproj" />
+    <ProjectReference Include="..\..\Services\Consultation\Infrastructure\MedicalSystem.Services.Consultation.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Services\Consultation\Api\MedicalSystem.Services.Consultation.Api.csproj" />
   </ItemGroup>
 
 </Project>

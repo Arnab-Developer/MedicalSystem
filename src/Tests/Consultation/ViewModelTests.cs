@@ -1,4 +1,4 @@
-﻿using MedicalSystem.Services.Consultation.ViewModels;
+﻿using MedicalSystem.Services.Consultation.Api.ViewModels;
 using NUnit.Framework;
 using System;
 
