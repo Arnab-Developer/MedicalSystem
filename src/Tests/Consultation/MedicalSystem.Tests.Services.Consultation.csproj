@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Services\Consultation\MedicalSystem.Services.Consultation.csproj" />
+    <ProjectReference Include="..\..\Services\Consultation\MedicalSystem.Services.Consultation.GrpcService.csproj" />
   </ItemGroup>
 
 </Project>
