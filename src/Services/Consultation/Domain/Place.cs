@@ -1,8 +1,9 @@
-﻿using System;
+﻿using MedicalSystem.Services.Consultation.Domain.SeedWork;
+using System;
 
 namespace MedicalSystem.Services.Consultation.Domain
 {
-    public class Place
+    public class Place : ValueObject
     {
         private string _country;
         public string? Country

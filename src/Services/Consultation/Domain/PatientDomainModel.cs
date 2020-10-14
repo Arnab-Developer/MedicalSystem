@@ -1,6 +1,8 @@
-﻿namespace MedicalSystem.Services.Consultation.Domain
+﻿using MedicalSystem.Services.Consultation.Domain.SeedWork;
+
+namespace MedicalSystem.Services.Consultation.Domain
 {
-    public class PatientDomainModel
+    public class PatientDomainModel : Entity
     {
         public int Id { get; set; }
 

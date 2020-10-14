@@ -1,8 +1,9 @@
-﻿using System;
+﻿using MedicalSystem.Services.Consultation.Domain.SeedWork;
+using System;
 
 namespace MedicalSystem.Services.Consultation.Domain
 {
-    public class ConsultationDomainModel
+    public class ConsultationDomainModel : Entity, IAggregateRoot
     {
         public int Id { get; set; }
 
