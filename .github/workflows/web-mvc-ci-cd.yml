@@ -1,4 +1,4 @@
-name: Doctor service CI
+name: Web mvc CI CD
 on:
   push:
     branches: [ master ]
@@ -16,6 +16,6 @@ jobs:
       with:
         dotnet-version: 5.0.101    
     - name: Build
-      run: dotnet build 'src/Tests/Doctor/MedicalSystem.Tests.Services.Doctor.csproj' --configuration Release
+      run: dotnet build 'src/Tests/WebMvc/MedicalSystem.Tests.FrontEnds.WebMvc.csproj' --configuration Release
     - name: Test
-      run: dotnet test 'src/Tests/Doctor/MedicalSystem.Tests.Services.Doctor.csproj' --no-restore --configuration Release
+      run: dotnet test 'src/Tests/WebMvc/MedicalSystem.Tests.FrontEnds.WebMvc.csproj' --no-restore --configuration Release

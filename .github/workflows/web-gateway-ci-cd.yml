@@ -1,4 +1,4 @@
-name: Web gateway CI
+name: Web gateway CI CD
 on:
   push:
     branches: [ master ]
