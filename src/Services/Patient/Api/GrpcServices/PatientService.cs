@@ -17,7 +17,7 @@ namespace MedicalSystem.Services.Patient.Api.GrpcServices
 
         public override Task<Protos.PatientModelsMessage> GetAll(Protos.EmptyMessage request, ServerCallContext context)
         {
-            IOrderedQueryable<PatientModel> patients = _patientContext.Patients.OrderBy(patient => patient.FirstName);
+            IOrderedQueryable<PatientModel> patients = _patientContext.Patients!.OrderBy(patient => patient.FirstName);
             var patientModelsMessage = new Protos.PatientModelsMessage();
             foreach (PatientModel patient in patients)
             {
@@ -35,7 +35,7 @@ namespace MedicalSystem.Services.Patient.Api.GrpcServices
 
         public override Task<Protos.PatientModelMessage> GetById(Protos.IdMessage request, ServerCallContext context)
         {
-            PatientModel patient = _patientContext.Patients.FirstOrDefault(patient => patient.Id == request.Id);
+            PatientModel? patient = _patientContext!.Patients!.FirstOrDefault(patient => patient.Id == request.Id);
             if (patient == null)
             {
                 var emptyPatientModelMessage = new Protos.PatientModelMessage();
@@ -66,7 +66,7 @@ namespace MedicalSystem.Services.Patient.Api.GrpcServices
 
         public override Task<Protos.EmptyMessage> Update(Protos.UpdateMessage request, ServerCallContext context)
         {
-            PatientModel d = _patientContext.Patients.FirstOrDefault(patient => patient.Id == request.Id);
+            PatientModel? d = _patientContext!.Patients!.FirstOrDefault(patient => patient.Id == request.Id);
 
             if (d != null)
             {
@@ -81,7 +81,7 @@ namespace MedicalSystem.Services.Patient.Api.GrpcServices
 
         public override Task<Protos.EmptyMessage> Delete(Protos.IdMessage request, ServerCallContext context)
         {
-            PatientModel patient = _patientContext.Patients.FirstOrDefault(patient => patient.Id == request.Id);
+            PatientModel? patient = _patientContext!.Patients!.FirstOrDefault(patient => patient.Id == request.Id);
             if (patient != null)
             {
                 _patientContext.Patients!.Remove(patient);

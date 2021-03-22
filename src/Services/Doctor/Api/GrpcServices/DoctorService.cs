@@ -17,7 +17,7 @@ namespace MedicalSystem.Services.Doctor.Api.GrpcServices
 
         public override Task<Protos.DoctorModelsMessage> GetAll(Protos.EmptyMessage request, ServerCallContext context)
         {
-            IOrderedQueryable<DoctorModel> doctors = _doctorContext.Doctors.OrderBy(doctor => doctor.FirstName);
+            IOrderedQueryable<DoctorModel>? doctors = _doctorContext.Doctors!.OrderBy(doctor => doctor.FirstName);
             var doctorModelsMessage = new Protos.DoctorModelsMessage();
             foreach (DoctorModel doctor in doctors)
             {
@@ -35,7 +35,7 @@ namespace MedicalSystem.Services.Doctor.Api.GrpcServices
 
         public override Task<Protos.DoctorModelMessage> GetById(Protos.IdMessage request, ServerCallContext context)
         {
-            DoctorModel doctor = _doctorContext.Doctors.FirstOrDefault(doctor => doctor.Id == request.Id);
+            DoctorModel? doctor = _doctorContext!.Doctors!.FirstOrDefault(doctor => doctor.Id == request.Id);
             if (doctor == null)
             {
                 var emptyDoctorModelMessage = new Protos.DoctorModelMessage();
@@ -66,7 +66,7 @@ namespace MedicalSystem.Services.Doctor.Api.GrpcServices
 
         public override Task<Protos.EmptyMessage> Update(Protos.UpdateMessage request, ServerCallContext context)
         {
-            DoctorModel d = _doctorContext.Doctors.FirstOrDefault(doctor => doctor.Id == request.Id);
+            DoctorModel? d = _doctorContext!.Doctors!.FirstOrDefault(doctor => doctor.Id == request.Id);
 
             if (d != null)
             {
@@ -81,7 +81,7 @@ namespace MedicalSystem.Services.Doctor.Api.GrpcServices
 
         public override Task<Protos.EmptyMessage> Delete(Protos.IdMessage request, ServerCallContext context)
         {
-            DoctorModel doctor = _doctorContext.Doctors.FirstOrDefault(doctor => doctor.Id == request.Id);
+            DoctorModel? doctor = _doctorContext!.Doctors!.FirstOrDefault(doctor => doctor.Id == request.Id);
             if (doctor != null)
             {
                 _doctorContext.Doctors!.Remove(doctor);

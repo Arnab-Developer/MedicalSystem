@@ -31,14 +31,14 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             if (patientApiResponseMessage.IsSuccessStatusCode)
             {
                 using Stream patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
-                IEnumerable<PatientModel> patientModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatientModel>>(patientApiResponseStream);
+                IEnumerable<PatientModel>? patientModels = await JsonSerializer.DeserializeAsync<IEnumerable<PatientModel>>(patientApiResponseStream);
                 return View(patientModels);
             }
             if (patientApiResponseMessage.StatusCode == HttpStatusCode.NotFound)
             {
                 using Stream patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
-                ErrorModel errorModel = await JsonSerializer.DeserializeAsync<ErrorModel>(patientApiResponseStream);
-                ViewData["ErrorReason"] = errorModel.Reason;
+                ErrorModel? errorModel = await JsonSerializer.DeserializeAsync<ErrorModel>(patientApiResponseStream);
+                ViewData["ErrorReason"] = errorModel!.Reason;
                 return View();
             }
             return StatusCode((int)patientApiResponseMessage.StatusCode);
@@ -56,7 +56,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             if (patientApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using Stream patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
-                PatientModel patientModel = await JsonSerializer.DeserializeAsync<PatientModel>(patientApiResponseStream);
+                PatientModel? patientModel = await JsonSerializer.DeserializeAsync<PatientModel>(patientApiResponseStream);
                 return View(patientModel);
             }
             return StatusCode((int)patientApiResponseMessage.StatusCode);
@@ -93,7 +93,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             if (patientApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using Stream patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
-                PatientModel patientModel = await JsonSerializer.DeserializeAsync<PatientModel>(patientApiResponseStream);
+                PatientModel? patientModel = await JsonSerializer.DeserializeAsync<PatientModel>(patientApiResponseStream);
                 return View(patientModel);
             }
             return StatusCode((int)patientApiResponseMessage.StatusCode);
