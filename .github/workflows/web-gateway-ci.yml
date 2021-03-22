@@ -1,4 +1,4 @@
-name: Web gateway service CI
+name: Web gateway CI
 on:
   push:
     branches: [ master ]
