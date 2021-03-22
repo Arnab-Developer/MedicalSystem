@@ -79,6 +79,13 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                 await consultationAddEditInitResponseMessage.Content.ReadAsStreamAsync();
             ConsultationModel? consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationAddEditInitResponseStream);
 
+            if (consultationModel == null ||
+                consultationModel.Doctors == null ||
+                consultationModel.Patient == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (!(consultationModel!.Doctors!.Any() && consultationModel!.Patients!.Any()))
             {
                 return RedirectToAction(nameof(Index));
