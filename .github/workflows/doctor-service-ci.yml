@@ -1,4 +1,4 @@
-name: Doctor CI
+name: Doctor service CI
 on:
   push:
     branches: [ master ]
