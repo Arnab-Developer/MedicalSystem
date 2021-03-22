@@ -19,3 +19,23 @@ jobs:
       run: dotnet build 'src/Tests/WebMvc/MedicalSystem.Tests.FrontEnds.WebMvc.csproj' --configuration Release
     - name: Test
       run: dotnet test 'src/Tests/WebMvc/MedicalSystem.Tests.FrontEnds.WebMvc.csproj' --no-restore --configuration Release
+  github-docker-package-deploy:
+    #if: ${{ github.event_name == 'push' }}
+    name: GitHub docker package deploy
+    runs-on: ubuntu-latest
+    needs: build-test
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101    
+    - name: Publish
+      run: dotnet publish 'src/FrontEnds/WebMvc/MedicalSystem.FrontEnds.WebMvc.csproj' --configuration Release -o 'publish/app'
+    - name: Docker build
+      run: docker build -f 'src/FrontEnds/WebMvc/Dockerfile' -t docker.pkg.github.com/arnab-developer/medical-system/webmvc:1.0.0 .
+    - name: Docker push
+      run: |
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://docker.pkg.github.com -u Arnab-Developer --password-stdin
+        docker push docker.pkg.github.com/arnab-developer/medical-system/webmvc:1.0.0
