@@ -38,7 +38,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             {
                 using Stream patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
                 ErrorModel? errorModel = await JsonSerializer.DeserializeAsync<ErrorModel>(patientApiResponseStream);
-                ViewData["ErrorReason"] = errorModel!.Reason;
+                ViewData["ErrorReason"] = errorModel != null ? errorModel!.Reason : string.Empty;
                 return View();
             }
             return StatusCode((int)patientApiResponseMessage.StatusCode);
