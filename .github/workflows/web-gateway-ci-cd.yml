@@ -22,7 +22,7 @@ jobs:
     - name: Test
       run: dotnet test 'src/Tests/WebGateway/MedicalSystem.Tests.Gateways.WebGateway.csproj' --no-restore --configuration Release
   github-docker-push:
-    #if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' }}
     name: GitHub docker push
     runs-on: ubuntu-latest
     needs: build-test
@@ -42,7 +42,7 @@ jobs:
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://docker.pkg.github.com -u Arnab-Developer --password-stdin
         docker push docker.pkg.github.com/arnab-developer/medical-system/webgateway:1.0.0
   dockerhub-push:
-    #if: ${{ github.event_name == 'release' }}
+    if: ${{ github.event_name == 'release' }}
     name: Dockerhub push
     runs-on: ubuntu-latest
     needs: build-test
