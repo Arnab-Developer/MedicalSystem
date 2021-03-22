@@ -155,7 +155,8 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
 
                 if (consultationModelAddEditInit == null ||
                     consultationModelAddEditInit.Doctors == null ||
-                    consultationModelAddEditInit.Patients == null)
+                    consultationModelAddEditInit.Patients == null ||
+                    consultationModel == null)
                 {
                     return RedirectToAction(nameof(Index));
                 }
