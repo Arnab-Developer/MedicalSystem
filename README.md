@@ -2,6 +2,7 @@
 
 [![Doctor service CI](https://github.com/Arnab-Developer/medical-system/actions/workflows/doctor-ci.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/doctor-ci.yml)
 [![Patient service CI](https://github.com/Arnab-Developer/medical-system/actions/workflows/patient-service-ci.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/patient-service-ci.yml)
+[![Consultation service CI](https://github.com/Arnab-Developer/medical-system/actions/workflows/consultation-service-ci.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/consultation-service-ci.yml)
 
 Medical system is a small application build with ASP.NET Core and EF Core to document medical records. 
 User can store doctor, patient and consultation information in this application with their web browser.
