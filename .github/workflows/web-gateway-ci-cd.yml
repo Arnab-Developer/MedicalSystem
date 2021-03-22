@@ -1,0 +1,21 @@
+name: Web gateway CI CD
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101    
+    - name: Build
+      run: dotnet build 'src/Tests/WebGateway/MedicalSystem.Tests.Gateways.WebGateway.csproj' --configuration Release
+    - name: Test
+      run: dotnet test 'src/Tests/WebGateway/MedicalSystem.Tests.Gateways.WebGateway.csproj' --no-restore --configuration Release

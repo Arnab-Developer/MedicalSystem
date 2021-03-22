@@ -31,14 +31,14 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             if (doctorApiResponseMessage.IsSuccessStatusCode)
             {
                 using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                IEnumerable<DoctorModel> doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
+                IEnumerable<DoctorModel>? doctorModels = await JsonSerializer.DeserializeAsync<IEnumerable<DoctorModel>>(doctorApiResponseStream);
                 return View(doctorModels);
             }
             if (doctorApiResponseMessage.StatusCode == HttpStatusCode.NotFound)
             {
                 using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                ErrorModel errorModel = await JsonSerializer.DeserializeAsync<ErrorModel>(doctorApiResponseStream);
-                ViewData["ErrorReason"] = errorModel.Reason;
+                ErrorModel? errorModel = await JsonSerializer.DeserializeAsync<ErrorModel>(doctorApiResponseStream);
+                ViewData["ErrorReason"] = errorModel!.Reason;
                 return View();
             }
             return StatusCode((int)doctorApiResponseMessage.StatusCode);
@@ -56,7 +56,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             if (doctorApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                DoctorModel doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
+                DoctorModel? doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
                 return View(doctorModel);
             }
             return StatusCode((int)doctorApiResponseMessage.StatusCode);
@@ -93,7 +93,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             if (doctorApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
                 using Stream doctorApiResponseStream = await doctorApiResponseMessage.Content.ReadAsStreamAsync();
-                DoctorModel doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
+                DoctorModel? doctorModel = await JsonSerializer.DeserializeAsync<DoctorModel>(doctorApiResponseStream);
                 return View(doctorModel);
             }
             return StatusCode((int)doctorApiResponseMessage.StatusCode);

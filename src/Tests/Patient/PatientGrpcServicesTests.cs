@@ -101,9 +101,9 @@ namespace MedicalSystem.Tests.Services.Patient
             _patientController!.Add(new PatientModelMessage { Id = patient.Id, FirstName = patient.FirstName, LastName = patient.LastName },
                 _serverCallContextMock!.Object);
 
-            PatientModel patientModel = _patientContext!.Patients.FirstOrDefault(patient => patient.Id == 1);
+            PatientModel? patientModel = _patientContext!.Patients!.FirstOrDefault(patient => patient.Id == 1);
 
-            Assert.AreEqual(1, patientModel.Id);
+            Assert.AreEqual(1, patientModel!.Id);
             Assert.AreEqual("pat1first", patientModel.FirstName);
             Assert.AreEqual("pat1last", patientModel.LastName);
         }
@@ -113,8 +113,8 @@ namespace MedicalSystem.Tests.Services.Patient
         {
             AddPatients();
 
-            PatientModel patientModel = _patientContext!.Patients.FirstOrDefault(patient => patient.Id == 2);
-            patientModel.FirstName = "update";
+            PatientModel? patientModel = _patientContext!.Patients!.FirstOrDefault(patient => patient.Id == 2);
+            patientModel!.FirstName = "update";
             _patientController!.Update(
                 new UpdateMessage
                 {
@@ -128,9 +128,9 @@ namespace MedicalSystem.Tests.Services.Patient
                 },
                 _serverCallContextMock!.Object);
 
-            PatientModel patientModelNew = _patientContext!.Patients.FirstOrDefault(patient => patient.Id == 2);
+            PatientModel? patientModelNew = _patientContext!.Patients!.FirstOrDefault(patient => patient.Id == 2);
 
-            Assert.AreEqual(2, patientModelNew.Id);
+            Assert.AreEqual(2, patientModelNew!.Id);
             Assert.AreEqual("update", patientModelNew.FirstName);
             Assert.AreEqual("pat2last", patientModelNew.LastName);
         }
@@ -139,9 +139,9 @@ namespace MedicalSystem.Tests.Services.Patient
         public void Delete_CanDeleteInDb()
         {
             AddPatients();
-            PatientModel patientModel = _patientContext!.Patients.FirstOrDefault(patient => patient.Id == 2);
+            PatientModel? patientModel = _patientContext!.Patients!.FirstOrDefault(patient => patient.Id == 2);
             _patientController!.Delete(new IdMessage { Id = 2 }, _serverCallContextMock!.Object);
-            Assert.AreEqual(1, _patientContext.Patients.Count());
+            Assert.AreEqual(1, _patientContext.Patients!.Count());
         }
 
         [TearDown]
