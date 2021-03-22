@@ -20,7 +20,7 @@ jobs:
     - name: Test
       run: dotnet test 'src/Tests/Consultation/MedicalSystem.Tests.Services.Consultation.csproj' --no-restore --configuration Release
   github-docker-package-deploy:
-    #if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' }}
     name: GitHub docker package deploy
     runs-on: ubuntu-latest
     needs: build-test
