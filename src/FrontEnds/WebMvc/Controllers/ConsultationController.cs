@@ -81,7 +81,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
 
             if (consultationModel == null ||
                 consultationModel.Doctors == null ||
-                consultationModel.Patient == null)
+                consultationModel.Patients == null)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -155,12 +155,12 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
 
                 if (consultationModelAddEditInit == null ||
                     consultationModelAddEditInit.Doctors == null ||
-                    consultationModelAddEditInit.Patient == null)
+                    consultationModelAddEditInit.Patients == null)
                 {
                     return RedirectToAction(nameof(Index));
                 }
 
-                if (!(consultationModelAddEditInit.Doctors.Any() && consultationModelAddEditInit.Patients!.Any()))
+                if (!(consultationModelAddEditInit.Doctors.Any() && consultationModelAddEditInit.Patients.Any()))
                 {
                     return RedirectToAction(nameof(Index));
                 }
