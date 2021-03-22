@@ -4,6 +4,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  release:
+    types: [created]
 jobs:
   build-test:
     name: Build and test
@@ -19,3 +21,45 @@ jobs:
       run: dotnet build 'src/Tests/Consultation/MedicalSystem.Tests.Services.Consultation.csproj' --configuration Release
     - name: Test
       run: dotnet test 'src/Tests/Consultation/MedicalSystem.Tests.Services.Consultation.csproj' --no-restore --configuration Release
+  github-docker-push:
+    if: ${{ github.event_name == 'push' }}
+    name: GitHub docker push
+    runs-on: ubuntu-latest
+    needs: build-test
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101    
+    - name: Publish
+      run: dotnet publish 'src/Services/Consultation/Api/MedicalSystem.Services.Consultation.Api.csproj' --configuration Release -o 'publish/app'
+    - name: Docker build
+      run: docker build -f 'src/Services/Consultation/Api/Dockerfile' -t docker.pkg.github.com/arnab-developer/medical-system/consultationservice:1.0.0 .
+    - name: Docker push
+      run: |
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://docker.pkg.github.com -u Arnab-Developer --password-stdin
+        docker push docker.pkg.github.com/arnab-developer/medical-system/consultationservice:1.0.0
+  dockerhub-push:
+    if: ${{ github.event_name == 'release' }}
+    name: Dockerhub push
+    runs-on: ubuntu-latest
+    needs: build-test
+    environment:
+      name: Dockerhub
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101    
+    - name: Publish
+      run: dotnet publish 'src/Services/Consultation/Api/MedicalSystem.Services.Consultation.Api.csproj' --configuration Release -o 'publish/app'
+    - name: Docker build
+      run: docker build -f 'src/Services/Consultation/Api/Dockerfile' -t 45862391/consultationservice:1.0.0 .
+    - name: Docker push
+      run: |
+        echo "${{ secrets.DOCKERHUB_PWD }}" | docker login -u 45862391 --password-stdin
+        docker push 45862391/consultationservice:1.0.0 
