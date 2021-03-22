@@ -14,8 +14,8 @@ jobs:
       with:
         dotnet-version: 5.0.101
     - name: Install dependencies
-      run: dotnet restore src\MedicalSystem.sln
+      run: dotnet restore src/MedicalSystem.sln
     - name: Build
-      run: dotnet build src\MedicalSystem.sln --configuration Release --no-restore
+      run: dotnet build src/MedicalSystem.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test src\MedicalSystem.sln --no-restore --configuration Release
+      run: dotnet test src/MedicalSystem.sln --no-restore --configuration Release
