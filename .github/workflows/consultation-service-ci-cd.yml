@@ -62,4 +62,4 @@ jobs:
     - name: Docker push
       run: |
         echo "${{ secrets.DOCKERHUB_PWD }}" | docker login -u 45862391 --password-stdin
-        docker push 45862391/consultationservice:1.0.0
+        docker push 45862391/consultationservice:1.0.0 
