@@ -11,6 +11,8 @@ This is a proof of concept of how we can use microservice with ASP.NET 5.
 | Consultation service | [![Consultation service CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/consultation-service-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/consultation-service-ci-cd.yml) |
 | Web gateway | [![Web gateway CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/web-gateway-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/web-gateway-ci-cd.yml) |
 | Web mvc | [![Web mvc CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/web-mvc-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/web-mvc-ci-cd.yml) |
+| Doctor sync job | [![Doctor sync job CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/doctor-sync-job-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/doctor-sync-job-ci-cd.yml) |
+| Patient sync job | [![Patient sync job CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/patient-sync-job-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/patient-sync-job-ci-cd.yml) |
 
 ## Tech stack
 | Module | Tech |
