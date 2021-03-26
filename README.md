@@ -27,7 +27,7 @@ This is a proof of concept of how we can use microservice with ASP.NET 5.
 
 ## Architecture diagram
 
-![Medical system architecture](https://github.com/Arnab-Developer/medical-system/blob/master/Medical%20system%20architecture.jpg)
+![Medical system architecture](https://github.com/Arnab-Developer/medical-system/blob/main/Medical%20system%20architecture.jpg)
 
 ## Docker images
 | Images | Dockerhub | Version |
@@ -39,4 +39,4 @@ This is a proof of concept of how we can use microservice with ASP.NET 5.
 | Web mvc | https://hub.docker.com/r/45862391/webmvc | ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/45862391/webmvc) |
 
 ## Contributing
-Please read the contribution related things [here](https://github.com/Arnab-Developer/medical-system/blob/master/Contributing.md).
+Please read the contribution related things [here](https://github.com/Arnab-Developer/medical-system/blob/main/Contributing.md).
