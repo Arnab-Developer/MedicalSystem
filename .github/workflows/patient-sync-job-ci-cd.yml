@@ -1,9 +1,9 @@
 name: Patient sync job CI CD
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 jobs:
   build-test:
     name: Build and test

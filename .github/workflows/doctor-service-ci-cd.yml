@@ -1,9 +1,9 @@
 name: Doctor service CI CD
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
   release:
     types: [created]
 jobs:
