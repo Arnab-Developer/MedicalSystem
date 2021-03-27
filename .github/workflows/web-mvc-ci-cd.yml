@@ -66,6 +66,7 @@ jobs:
     needs: [build-test, analyze]
     environment:
       name: Dockerhub
+      url: https://hub.docker.com/r/45862391/webmvc
     steps:
     - name: Checkout code
       uses: actions/checkout@v2      
