@@ -21,11 +21,29 @@ jobs:
       run: dotnet build 'src/Tests/Doctor/MedicalSystem.Tests.Services.Doctor.csproj' --configuration Release
     - name: Test
       run: dotnet test 'src/Tests/Doctor/MedicalSystem.Tests.Services.Doctor.csproj' --no-restore --configuration Release
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp' ]
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: ${{ matrix.language }}
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v1
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
   github-docker-push:
     if: ${{ github.event_name == 'push' }}
     name: GitHub docker push
     runs-on: ubuntu-latest
-    needs: build-test
+    needs: [build-test, analyze]
     steps:
     - name: Checkout code
       uses: actions/checkout@v2      
@@ -45,7 +63,7 @@ jobs:
     if: ${{ github.event_name == 'release' }}
     name: Dockerhub push
     runs-on: ubuntu-latest
-    needs: build-test
+    needs: [build-test, analyze]
     environment:
       name: Dockerhub
     steps:
