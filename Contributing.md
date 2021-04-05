@@ -12,7 +12,7 @@ on something else then create a new issue to let me know the details.
 - Open the solution in Visual Studio 2019 and start working.
 - Work on the issue and commit the code on the new branch.
 - Create a pull request from the new branch to upstream `main` branch.
-- Your pull request will be reviewed and need further changes.
+- Your pull request will be reviewed.
 - After the review, if everything is fine then it will be merged.
 
 > Note: pull request can be rejected if the project don't need the proposed changes anymore.
