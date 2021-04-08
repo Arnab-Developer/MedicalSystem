@@ -34,6 +34,8 @@ This is influenced by [.NET Microservices Sample Reference Application](https://
 ![Medical system architecture](https://github.com/Arnab-Developer/MedicalSystem/blob/main/Medical%20system%20architecture.jpg)
 
 ## Docker images
+This app is in docker images and stored in dockerhub.
+
 | Images | Dockerhub | Version |
 |--------|---------|-----------|
 | Doctor service | https://hub.docker.com/r/45862391/doctorservice | ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/45862391/doctorservice) |
