@@ -38,5 +38,23 @@ This is a proof of concept of how we can use microservice with ASP.NET 5.
 | Web gateway | https://hub.docker.com/r/45862391/webgateway | ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/45862391/webgateway) |
 | Web mvc | https://hub.docker.com/r/45862391/webmvc | ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/45862391/webmvc) |
 
+## Hosting
+When a new release is created then this app is stored inside a docker image and push to docker hub 
+through CI CD. Hosting in Azure is not done as a part of CI CD. That needs to be done manually.
+
+- Create a new resource group in Azure
+- In that resource group create the following resources
+  - App Service Plan for Linux
+  - Web App for Doctor service, Patient service, Consultation service, Web Gateway and Web Mvc
+  - SQL Server
+  - Database for Doctor service, Patient service and Consultation service
+- Create tables in the databases for Doctor service, Patient service and Consultation service
+- Update the connection strings in the web app configuration for Doctor service, Patient service and Consultation service
+- Update api endpoint urls in Web Gateway and Web Mvc
+
+Now open the Web App URL in web browser for Web Mvc and you should access the app.
+
+The future plan is to deploy the services in AKS.
+
 ## Contributing
 Please read the contribution related things [here](https://github.com/Arnab-Developer/medical-system/blob/main/Contributing.md).
