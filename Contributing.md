@@ -15,7 +15,7 @@ on something else then create a new issue to let me know the details.
 - If your issue is approved then fork the repo and create a new branch from `main`.
 - Clone the forked repo and set the upstream to the original repo `main` branch.
 - Create the databases and tables with the 
-[script provided](https://github.com/Arnab-Developer/medical-system/tree/main/DatabaseScripts) in the repo.
+[script provided](https://github.com/Arnab-Developer/MedicalSystem/tree/main/DatabaseScripts) in the repo.
 - Open the solution in Visual Studio 2019 and start working.
 - Work on the issue and commit the code on the new branch.
 - Create a pull request from the new branch to upstream `main` branch.

@@ -10,13 +10,13 @@ This is influenced by [.NET Microservices Sample Reference Application](https://
 ## CI CD status
 | Module | Status |
 |--------|-----------|
-| Doctor service | [![Doctor service CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/doctor-service-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/doctor-service-ci-cd.yml) |
-| Patient service | [![Patient service CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/patient-service-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/patient-service-ci-cd.yml) |
-| Consultation service | [![Consultation service CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/consultation-service-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/consultation-service-ci-cd.yml) |
-| Web gateway | [![Web gateway CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/web-gateway-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/web-gateway-ci-cd.yml) |
-| Web mvc | [![Web mvc CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/web-mvc-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/web-mvc-ci-cd.yml) |
-| Doctor sync job | [![Doctor sync job CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/doctor-sync-job-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/doctor-sync-job-ci-cd.yml) |
-| Patient sync job | [![Patient sync job CI CD](https://github.com/Arnab-Developer/medical-system/actions/workflows/patient-sync-job-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/medical-system/actions/workflows/patient-sync-job-ci-cd.yml) |
+| Doctor service | [![Doctor service CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/doctor-service-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/doctor-service-ci-cd.yml) |
+| Patient service | [![Patient service CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/patient-service-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/patient-service-ci-cd.yml) |
+| Consultation service | [![Consultation service CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/consultation-service-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/consultation-service-ci-cd.yml) |
+| Web gateway | [![Web gateway CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/web-gateway-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/web-gateway-ci-cd.yml) |
+| Web mvc | [![Web mvc CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/web-mvc-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/web-mvc-ci-cd.yml) |
+| Doctor sync job | [![Doctor sync job CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/doctor-sync-job-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/doctor-sync-job-ci-cd.yml) |
+| Patient sync job | [![Patient sync job CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/patient-sync-job-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/patient-sync-job-ci-cd.yml) |
 
 ## Tech stack
 | Module | Tech |
@@ -31,7 +31,7 @@ This is influenced by [.NET Microservices Sample Reference Application](https://
 
 ## Architecture diagram
 
-![Medical system architecture](https://github.com/Arnab-Developer/medical-system/blob/main/Medical%20system%20architecture.jpg)
+![Medical system architecture](https://github.com/Arnab-Developer/MedicalSystem/blob/main/Medical%20system%20architecture.jpg)
 
 ## Docker images
 | Images | Dockerhub | Version |
@@ -61,4 +61,4 @@ Now open the Web App URL in web browser for Web Mvc and you should access the ap
 The future plan is to deploy the services in AKS.
 
 ## Contributing
-Please read the contribution related things [here](https://github.com/Arnab-Developer/medical-system/blob/main/Contributing.md).
+Please read the contribution related things [here](https://github.com/Arnab-Developer/MedicalSystem/blob/main/Contributing.md).
