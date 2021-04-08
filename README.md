@@ -3,6 +3,8 @@ Medical system is a small application build with ASP.NET 5 and EF to document me
 User can store doctor, patient and consultation information in this application with their web browser.
 This is a proof of concept of how we can use microservice with ASP.NET 5. 
 
+![image](https://user-images.githubusercontent.com/3396447/113992852-7cf3a200-9871-11eb-8088-5063df947bc7.png)
+
 This is influence by [.NET Microservices Sample Reference Application](https://github.com/dotnet-architecture/eShopOnContainers)
 
 ## CI CD status
