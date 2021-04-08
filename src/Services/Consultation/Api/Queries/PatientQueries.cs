@@ -9,17 +9,17 @@ namespace MedicalSystem.Services.Consultation.Api.Queries
 {
     public class PatientQueries : IPatientQueries
     {
-        private readonly DatabaseOptions _databaseOptions;
+        private readonly IOptionsMonitor<DatabaseOptions> _optionsAccessor;
 
         public PatientQueries(IOptionsMonitor<DatabaseOptions> optionsAccessor)
         {
-            _databaseOptions = optionsAccessor.CurrentValue;
+            _optionsAccessor = optionsAccessor;
         }
 
         IEnumerable<PatientViewModel> IPatientQueries.GetAll()
         {
             dynamic dbResultModels;
-            using (var con = new SqlConnection(_databaseOptions.ConsultationDbConnectionString))
+            using (var con = new SqlConnection(_optionsAccessor.CurrentValue.ConsultationDbConnectionString))
             {
                 dbResultModels = con.Query<dynamic>(
                     @"SELECT p.Id, p.FirstName, p.LastName

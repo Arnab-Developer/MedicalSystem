@@ -17,19 +17,19 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
     public class ConsultationController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly ConsultationOptions _consultationOptions;
+        private readonly IOptionsMonitor<ConsultationOptions> _consultationOptionsAccessor;
 
         public ConsultationController(IHttpClientFactory httpClientFactory,
             IOptionsMonitor<ConsultationOptions> consultationOptionsAccessor)
         {
             _httpClientFactory = httpClientFactory;
-            _consultationOptions = consultationOptionsAccessor.CurrentValue;
+            _consultationOptionsAccessor = consultationOptionsAccessor;
         }
 
         public async Task<IActionResult> Index()
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
-            HttpResponseMessage consultationApiResponseMessage = await httpClient.GetAsync(_consultationOptions.ConsultationGatewayUrl);
+            HttpResponseMessage consultationApiResponseMessage = await httpClient.GetAsync(_consultationOptionsAccessor.CurrentValue.ConsultationGatewayUrl);
             if (consultationApiResponseMessage.IsSuccessStatusCode)
             {
                 using Stream consultationApiResponseStream = await consultationApiResponseMessage.Content.ReadAsStreamAsync();
@@ -53,7 +53,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                 return RedirectToAction(nameof(Index));
             }
             HttpClient httpClient = _httpClientFactory.CreateClient();
-            var consultationGetByIdGatewayUrl = $"{_consultationOptions.ConsultationGatewayUrl}/{id}";
+            var consultationGetByIdGatewayUrl = $"{_consultationOptionsAccessor.CurrentValue.ConsultationGatewayUrl}/{id}";
             HttpResponseMessage consultationApiResponseMessage = await httpClient.GetAsync(consultationGetByIdGatewayUrl);
             if (consultationApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
@@ -69,7 +69,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
             HttpClient httpClient = _httpClientFactory.CreateClient();
 
             HttpResponseMessage consultationAddEditInitResponseMessage =
-                await httpClient.GetAsync(_consultationOptions.ConsultationGatewayAddEditInitDataUrl);
+                await httpClient.GetAsync(_consultationOptionsAccessor.CurrentValue.ConsultationGatewayAddEditInitDataUrl);
             if (consultationAddEditInitResponseMessage.StatusCode != HttpStatusCode.OK)
             {
                 return StatusCode((int)consultationAddEditInitResponseMessage.StatusCode);
@@ -120,7 +120,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
             var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), Encoding.UTF8, "application/json");
-            HttpResponseMessage consultationApiResponseMessage = await httpClient.PostAsync(_consultationOptions.ConsultationGatewayUrl, consultationContent);
+            HttpResponseMessage consultationApiResponseMessage = await httpClient.PostAsync(_consultationOptionsAccessor.CurrentValue.ConsultationGatewayUrl, consultationContent);
             if (consultationApiResponseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
@@ -135,7 +135,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                 return RedirectToAction(nameof(Index));
             }
             HttpClient httpClient = _httpClientFactory.CreateClient();
-            var consultationGetByIdGatewayUrl = $"{_consultationOptions.ConsultationGatewayUrl}/{id}";
+            var consultationGetByIdGatewayUrl = $"{_consultationOptionsAccessor.CurrentValue.ConsultationGatewayUrl}/{id}";
             HttpResponseMessage consultationApiResponseMessage = await httpClient.GetAsync(consultationGetByIdGatewayUrl);
             if (consultationApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
@@ -143,7 +143,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                 ConsultationModel? consultationModel = await JsonSerializer.DeserializeAsync<ConsultationModel>(consultationApiResponseStream);
 
                 HttpResponseMessage consultationAddEditInitResponseMessage =
-                    await httpClient.GetAsync(_consultationOptions.ConsultationGatewayAddEditInitDataUrl);
+                    await httpClient.GetAsync(_consultationOptionsAccessor.CurrentValue.ConsultationGatewayAddEditInitDataUrl);
                 if (consultationAddEditInitResponseMessage.StatusCode != HttpStatusCode.OK)
                 {
                     return StatusCode((int)consultationAddEditInitResponseMessage.StatusCode);
@@ -196,7 +196,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         public async Task<IActionResult> Edit(int id, ConsultationModel consultation)
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
-            var consultationUpdateGatewayUrl = $"{_consultationOptions.ConsultationGatewayUrl}/{id}";
+            var consultationUpdateGatewayUrl = $"{_consultationOptionsAccessor.CurrentValue.ConsultationGatewayUrl}/{id}";
             var consultationContent = new StringContent(JsonSerializer.Serialize(consultation), Encoding.UTF8, "application/json");
             HttpResponseMessage consultationApiResponseMessage = await httpClient.PutAsync(consultationUpdateGatewayUrl, consultationContent);
             if (consultationApiResponseMessage.IsSuccessStatusCode)
@@ -209,7 +209,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
-            var consultationDeleteGatewayUrl = $"{_consultationOptions.ConsultationGatewayUrl}/{id}";
+            var consultationDeleteGatewayUrl = $"{_consultationOptionsAccessor.CurrentValue.ConsultationGatewayUrl}/{id}";
             HttpResponseMessage consultationApiResponseMessage = await httpClient.DeleteAsync(consultationDeleteGatewayUrl);
             if (consultationApiResponseMessage.IsSuccessStatusCode)
             {
