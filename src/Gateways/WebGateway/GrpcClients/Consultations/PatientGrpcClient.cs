@@ -9,14 +9,14 @@ namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Consultations
 {
     public class PatientGrpcClient : IPatientGrpcClient
     {
-        private readonly ConsultationOptions _consultationOptions;
+        private readonly IOptionsMonitor<ConsultationOptions> _optionsAccessor;
         private readonly Patient.PatientClient _client;
 
         public PatientGrpcClient(IOptionsMonitor<ConsultationOptions> optionsAccessor)
         {
-            _consultationOptions = optionsAccessor.CurrentValue;
+            _optionsAccessor = optionsAccessor;
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            GrpcChannel channel = GrpcChannel.ForAddress(_consultationOptions.ConsultationApiUrl);
+            GrpcChannel channel = GrpcChannel.ForAddress(_optionsAccessor.CurrentValue.ConsultationApiUrl);
             _client = new Patient.PatientClient(channel);
         }
 
