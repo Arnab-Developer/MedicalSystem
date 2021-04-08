@@ -5,7 +5,7 @@ This is a proof of concept of how we can use microservice with ASP.NET 5.
 
 ![image](https://user-images.githubusercontent.com/3396447/113992852-7cf3a200-9871-11eb-8088-5063df947bc7.png)
 
-This is influence by [.NET Microservices Sample Reference Application](https://github.com/dotnet-architecture/eShopOnContainers)
+This is influenced by [.NET Microservices Sample Reference Application](https://github.com/dotnet-architecture/eShopOnContainers)
 
 ## CI CD status
 | Module | Status |
