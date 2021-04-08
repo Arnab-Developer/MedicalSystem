@@ -54,11 +54,11 @@ jobs:
     - name: Publish
       run: dotnet publish 'src/Services/Consultation/Api/MedicalSystem.Services.Consultation.Api.csproj' --configuration Release -o 'publish/app'
     - name: Docker build
-      run: docker build -f 'src/Services/Consultation/Api/Dockerfile' -t docker.pkg.github.com/arnab-developer/medical-system/consultationservice:1.0.1 .
+      run: docker build -f 'src/Services/Consultation/Api/Dockerfile' -t docker.pkg.github.com/arnab-developer/MedicalSystem/consultationservice:1.0.1 .
     - name: Docker push
       run: |
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://docker.pkg.github.com -u Arnab-Developer --password-stdin
-        docker push docker.pkg.github.com/arnab-developer/medical-system/consultationservice:1.0.1
+        docker push docker.pkg.github.com/arnab-developer/MedicalSystem/consultationservice:1.0.1
   dockerhub-push:
     if: ${{ github.event_name == 'release' }}
     name: Dockerhub push
