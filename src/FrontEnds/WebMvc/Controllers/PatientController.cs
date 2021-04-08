@@ -15,19 +15,19 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
     public class PatientController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly PatientOptions _patientOptions;
+        private readonly IOptionsMonitor<PatientOptions> _optionsAccessor;
 
         public PatientController(IHttpClientFactory httpClientFactory,
             IOptionsMonitor<PatientOptions> optionsAccessor)
         {
             _httpClientFactory = httpClientFactory;
-            _patientOptions = optionsAccessor.CurrentValue;
+            _optionsAccessor = optionsAccessor;
         }
 
         public async Task<IActionResult> Index()
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
-            HttpResponseMessage patientApiResponseMessage = await httpClient.GetAsync(_patientOptions.PatientGatewayUrl);
+            HttpResponseMessage patientApiResponseMessage = await httpClient.GetAsync(_optionsAccessor.CurrentValue.PatientGatewayUrl);
             if (patientApiResponseMessage.IsSuccessStatusCode)
             {
                 using Stream patientApiResponseStream = await patientApiResponseMessage.Content.ReadAsStreamAsync();
@@ -51,7 +51,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                 return RedirectToAction(nameof(Index));
             }
             HttpClient httpClient = _httpClientFactory.CreateClient();
-            var patientGetByIdGatewayUrl = $"{_patientOptions.PatientGatewayUrl}/{id}";
+            var patientGetByIdGatewayUrl = $"{_optionsAccessor.CurrentValue.PatientGatewayUrl}/{id}";
             HttpResponseMessage patientApiResponseMessage = await httpClient.GetAsync(patientGetByIdGatewayUrl);
             if (patientApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
@@ -73,7 +73,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
             var patientContent = new StringContent(JsonSerializer.Serialize(patient), Encoding.UTF8, "application/json");
-            HttpResponseMessage patientApiResponseMessage = await httpClient.PostAsync(_patientOptions.PatientGatewayUrl, patientContent);
+            HttpResponseMessage patientApiResponseMessage = await httpClient.PostAsync(_optionsAccessor.CurrentValue.PatientGatewayUrl, patientContent);
             if (patientApiResponseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
@@ -88,7 +88,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
                 return RedirectToAction(nameof(Index));
             }
             HttpClient httpClient = _httpClientFactory.CreateClient();
-            var patientGetByIdGatewayUrl = $"{_patientOptions.PatientGatewayUrl}/{id}";
+            var patientGetByIdGatewayUrl = $"{_optionsAccessor.CurrentValue.PatientGatewayUrl}/{id}";
             HttpResponseMessage patientApiResponseMessage = await httpClient.GetAsync(patientGetByIdGatewayUrl);
             if (patientApiResponseMessage.StatusCode == HttpStatusCode.OK)
             {
@@ -104,7 +104,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         public async Task<IActionResult> Edit(int id, PatientModel patient)
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
-            var patientUpdateGatewayUrl = $"{_patientOptions.PatientGatewayUrl}/{id}";
+            var patientUpdateGatewayUrl = $"{_optionsAccessor.CurrentValue.PatientGatewayUrl}/{id}";
             var patientContent = new StringContent(JsonSerializer.Serialize(patient), Encoding.UTF8, "application/json");
             HttpResponseMessage patientApiResponseMessage = await httpClient.PutAsync(patientUpdateGatewayUrl, patientContent);
             if (patientApiResponseMessage.IsSuccessStatusCode)
@@ -117,7 +117,7 @@ namespace MedicalSystem.FrontEnds.WebMvc.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
-            var patientDeleteGatewayUrl = $"{_patientOptions.PatientGatewayUrl}/{id}";
+            var patientDeleteGatewayUrl = $"{_optionsAccessor.CurrentValue.PatientGatewayUrl}/{id}";
             HttpResponseMessage patientApiResponseMessage = await httpClient.DeleteAsync(patientDeleteGatewayUrl);
             if (patientApiResponseMessage.IsSuccessStatusCode)
             {
