@@ -25,7 +25,7 @@ This is influenced by [.NET Microservices Sample Reference Application](https://
 | Gateway | ASP.NET 5 Web Api |
 | Frontend web application | ASP.NET 5 MVC |
 | Jobs | Azure function |
-| Database access | EF |
+| Database access | Entity Framework |
 | Database | SQL Server |
 | Unit test | NUnit |
 
