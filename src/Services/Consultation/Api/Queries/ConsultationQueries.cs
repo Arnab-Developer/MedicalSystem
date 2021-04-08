@@ -9,17 +9,17 @@ namespace MedicalSystem.Services.Consultation.Api.Queries
 {
     public class ConsultationQueries : IConsultationQueries
     {
-        private readonly DatabaseOptions _databaseOptions;
+        private readonly IOptionsMonitor<DatabaseOptions> _optionsAccessor;
 
         public ConsultationQueries(IOptionsMonitor<DatabaseOptions> optionsAccessor)
         {
-            _databaseOptions = optionsAccessor.CurrentValue;
+            _optionsAccessor = optionsAccessor;
         }
 
         IEnumerable<ConsultationViewModel> IConsultationQueries.GetAll()
         {
             dynamic dbResultModels;
-            using (var con = new SqlConnection(_databaseOptions.ConsultationDbConnectionString))
+            using (var con = new SqlConnection(_optionsAccessor.CurrentValue.ConsultationDbConnectionString))
             {
                 dbResultModels = con.Query<dynamic>(
                     @"SELECT c.Id, c.Date, c.Place_Country, c.Place_State, c.Place_City, c.Place_PinCode,
@@ -70,7 +70,7 @@ namespace MedicalSystem.Services.Consultation.Api.Queries
         ConsultationViewModel? IConsultationQueries.GetById(int id)
         {
             dynamic dbResultModel;
-            using (var con = new SqlConnection(_databaseOptions.ConsultationDbConnectionString))
+            using (var con = new SqlConnection(_optionsAccessor.CurrentValue.ConsultationDbConnectionString))
             {
                 dbResultModel = con.QuerySingle<dynamic>(
                     @"SELECT c.Id, c.Date, c.Place_Country, c.Place_State, c.Place_City, c.Place_PinCode,
