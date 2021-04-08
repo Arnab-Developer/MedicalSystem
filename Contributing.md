@@ -2,7 +2,7 @@
 Contributions are welcome. Please create a new issue or pick an existing issue to work on. Let me 
 know on which issue you are going to work before raising a pull request.
 
-You need Visual Studio 2019, ASP.NET 5, Entity Framework, Azure tool for Visual Studio 2019 and 
+You need Visual Studio 2019, ASP.NET 5, Entity Framework, Azure tools for Visual Studio 2019 and 
 SQL Server 2016 to work on this project locally.
 
 - If you find an issue then comment on that to let me know. Or if you want to work
