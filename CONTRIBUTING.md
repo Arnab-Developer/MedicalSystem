@@ -12,8 +12,9 @@ SQL Server 2016 to work on this project locally.
 
 - If you find an issue then comment on that to let me know. Or if you want to work
 on something else then create a new issue to let me know the details.
-- If your issue is approved then fork the repo and create a new branch from `main`.
-- Clone the forked repo and set the upstream to the original repo `main` branch.
+- If your issue is approved then fork the repo.
+- Clone the forked repo and and create a new branch from `main`.
+- Set the upstream to the original repo `main` branch.
 - Create the databases and tables with the 
 [script provided](https://github.com/Arnab-Developer/MedicalSystem/tree/main/DatabaseScripts) in the repo.
 - Open the solution in Visual Studio 2019 and start working.
