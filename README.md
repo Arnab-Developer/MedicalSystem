@@ -1,4 +1,5 @@
 # Medical system
+
 Medical system is a small application build with ASP.NET 5 and EF to document medical records. 
 User can store doctor, patient and consultation information in this application with their web browser.
 This is a proof of concept of how we can use microservice with ASP.NET 5. 
@@ -8,6 +9,7 @@ This is a proof of concept of how we can use microservice with ASP.NET 5.
 This is influenced by [.NET Microservices Sample Reference Application](https://github.com/dotnet-architecture/eShopOnContainers)
 
 ## CI CD status
+
 | Module | Status |
 |--------|-----------|
 | Doctor service | [![Doctor service CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/doctor-service-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/doctor-service-ci-cd.yml) |
@@ -19,6 +21,7 @@ This is influenced by [.NET Microservices Sample Reference Application](https://
 | Patient sync job | [![Patient sync job CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/patient-sync-job-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/patient-sync-job-ci-cd.yml) |
 
 ## Tech stack
+
 | Module | Tech |
 |--------|------|
 | Backend apis | ASP.NET 5 gRPC service |
@@ -34,6 +37,7 @@ This is influenced by [.NET Microservices Sample Reference Application](https://
 ![Medical system architecture](https://github.com/Arnab-Developer/MedicalSystem/blob/main/Medical%20system%20architecture.jpg)
 
 ## Docker images
+
 This app is in docker images and stored in dockerhub.
 
 | Images | Dockerhub | Version |
@@ -45,6 +49,7 @@ This app is in docker images and stored in dockerhub.
 | Web mvc | https://hub.docker.com/r/45862391/webmvc | ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/45862391/webmvc) |
 
 ## Hosting
+
 When a new release is created then this app is stored inside a docker image and push to docker hub 
 through CI CD. Hosting in Azure is not done as a part of CI CD. That needs to be done manually.
 
