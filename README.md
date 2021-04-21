@@ -66,3 +66,12 @@ through CI CD. Hosting in Azure is not done as a part of CI CD. That needs to be
 Now open the Web App URL in web browser for Web Mvc and you should access the app.
 
 The future plan is to deploy the services in AKS.
+
+## License
+
+[MIT License](https://github.com/Arnab-Developer/MedicalSystem/blob/main/LICENSE)
+
+## Contributing
+
+Please read [this](https://github.com/Arnab-Developer/MedicalSystem/blob/main/CONTRIBUTING.md) 
+for contribution related guidelines.
