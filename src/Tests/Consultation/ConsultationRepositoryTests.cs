@@ -31,9 +31,10 @@ namespace MedicalSystem.Tests.Services.Consultation
             AddPatients();
             AddConsultations();
 
-            ConsultationDomainModel consultationDomainModel = _consultationRepository!.GetById(1);
+            ConsultationDomainModel? consultationDomainModel = _consultationRepository!.GetById(1);
 
-            Assert.AreEqual(1, consultationDomainModel.Id);
+            Assert.NotNull(consultationDomainModel);
+            Assert.AreEqual(1, consultationDomainModel!.Id);
             Assert.AreEqual(DateTime.Now.Date, consultationDomainModel.Date.Date);
             Assert.AreEqual("India", consultationDomainModel.Place!.Country);
             Assert.AreEqual("Maharashtra", consultationDomainModel.Place!.State);

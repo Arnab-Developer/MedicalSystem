@@ -22,9 +22,9 @@ namespace MedicalSystem.Services.Consultation.Infrastructure
             }
         }
 
-        ConsultationDomainModel IConsultationRepository.GetById(int id)
+        ConsultationDomainModel? IConsultationRepository.GetById(int id)
         {
-            ConsultationDomainModel consultationDomainModel = _consultationContext.Consultations
+            ConsultationDomainModel? consultationDomainModel = _consultationContext.Consultations
                 .Include(consultation => consultation.Doctor)
                 .Include(consultation => consultation.Patient)
                 .FirstOrDefault(consultation => consultation.Id == id);

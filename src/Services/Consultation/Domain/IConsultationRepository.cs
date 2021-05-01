@@ -4,7 +4,7 @@ namespace MedicalSystem.Services.Consultation.Domain
 {
     public interface IConsultationRepository : IRepository<ConsultationDomainModel>
     {
-        ConsultationDomainModel GetById(int id);
+        ConsultationDomainModel? GetById(int id);
 
         void Add(ConsultationDomainModel consultation);
 

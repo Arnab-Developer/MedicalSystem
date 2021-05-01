@@ -16,7 +16,7 @@ namespace MedicalSystem.Services.Consultation.Api.Commands
 
         Task<bool> IRequestHandler<DeleteConsultationCommand, bool>.Handle(DeleteConsultationCommand request, CancellationToken cancellationToken)
         {
-            ConsultationDomainModel consultationDomainModel = _consultationRepository.GetById(request.Id);
+            ConsultationDomainModel? consultationDomainModel = _consultationRepository.GetById(request.Id);
 
             if (consultationDomainModel == null)
             {
