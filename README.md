@@ -34,7 +34,7 @@ This is influenced by [.NET Microservices Sample Reference Application](https://
 
 ## Architecture diagram
 
-![Medical system architecture](https://github.com/Arnab-Developer/MedicalSystem/blob/main/Medical%20system%20architecture.jpg)
+![Medical system architecture](https://github.com/Arnab-Developer/MedicalSystem/blob/main/Assets/MedicalSystem.jpg)
 
 ## Docker images
 
