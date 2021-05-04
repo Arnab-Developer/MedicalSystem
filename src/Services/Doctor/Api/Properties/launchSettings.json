@@ -3,7 +3,7 @@
     "MedicalSystem.Services.Doctor": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:5000",
+      "applicationUrl": "http://localhost:5000;https://localhost:4000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
