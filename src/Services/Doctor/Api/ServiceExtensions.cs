@@ -1,17 +1,17 @@
-﻿using MedicalSystem.Services.Consultation.Infrastructure;
+﻿using MedicalSystem.Services.Doctor.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace MedicalSystem.Services.Consultation.Api
+namespace MedicalSystem.Services.Doctor.Api
 {
     internal static class ServiceExtensions
     {
         public static void AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            string consultationDbConnectionString = configuration.GetConnectionString("ConsultationDbConnectionString");
-            services.AddDbContext<ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
+            string doctorDbConnectionString = configuration.GetConnectionString("DoctorDbConnectionString");
+            services.AddDbContext<DoctorContext>(option => option.UseSqlServer(doctorDbConnectionString));
         }
 
         public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services, IConfiguration configuration)
@@ -20,9 +20,9 @@ namespace MedicalSystem.Services.Consultation.Api
                 .AddHealthChecks()
                 .AddCheck("self", () => HealthCheckResult.Healthy())
                 .AddSqlServer(
-                    configuration.GetConnectionString("ConsultationDbConnectionString"),
-                    name: "ConsultationDbCheck",
-                    tags: new string[] { "ConsultationDb" });
+                    configuration.GetConnectionString("DoctorDbConnectionString"),
+                    name: "DoctorDbCheck",
+                    tags: new string[] { "DoctorDb" });
 
             return services;
         }
