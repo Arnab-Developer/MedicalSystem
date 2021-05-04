@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\consultation.proto" />
+    <None Remove="Protos\doctor.proto" />
+    <None Remove="Protos\patient.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI" Version="5.0.1" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.1" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="5.0.1" />
@@ -16,6 +22,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\consultation.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\doctor.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\patient.proto" GrpcServices="Client" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,7 @@
+using HealthChecks.UI.Client;
+using MedicalSystem.Admin.HealthCheckDashboard.ApiHealthChecks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +15,12 @@ namespace MedicalSystem.Admin.HealthCheckDashboard
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddHealthChecks()
+                .AddCheck<DoctorApiHealthCheck>("doctor api check")
+                .AddCheck<PatientApiHealthCheck>("patient api check")
+                .AddCheck<ConsultationApiHealthCheck>("consultation api check");
+
             services
                 .AddHealthChecksUI()
                 .AddInMemoryStorage();
@@ -31,6 +40,21 @@ namespace MedicalSystem.Admin.HealthCheckDashboard
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/doctor-hc", new HealthCheckOptions()
+                {
+                    Predicate = r => r.Name.Contains("doctor api check"),
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+                endpoints.MapHealthChecks("/patient-hc", new HealthCheckOptions()
+                {
+                    Predicate = r => r.Name.Contains("patient api check"),
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+                endpoints.MapHealthChecks("/consultation-hc", new HealthCheckOptions()
+                {
+                    Predicate = r => r.Name.Contains("consultation api check"),
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Hello World!");
