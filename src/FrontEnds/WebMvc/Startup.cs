@@ -1,5 +1,7 @@
+using HealthChecks.UI.Client;
 using MedicalSystem.FrontEnds.WebMvc.Options;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +28,7 @@ namespace MedicalSystem.FrontEnds.WebMvc
             services.Configure<DoctorOptions>(Configuration);
             services.Configure<PatientOptions>(Configuration);
             services.Configure<ConsultationOptions>(Configuration);
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +51,11 @@ namespace MedicalSystem.FrontEnds.WebMvc
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,3 +1,4 @@
+using HealthChecks.UI.Client;
 using MedicalSystem.Services.Patient.Api.GrpcServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -45,7 +46,8 @@ namespace MedicalSystem.Services.Patient.Api
 
                 endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
                 {
-                    Predicate = _ => true
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
                 endpoints.MapHealthChecks("/liveness", new HealthCheckOptions
                 {
@@ -54,7 +56,7 @@ namespace MedicalSystem.Services.Patient.Api
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-                });                
+                });
             });
         }
     }
