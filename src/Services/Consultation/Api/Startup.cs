@@ -7,7 +7,6 @@ using MedicalSystem.Services.Consultation.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,7 +32,7 @@ namespace MedicalSystem.Services.Consultation.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
-            AddDbContext(services);
+            services.AddCustomDbContext(Configuration);
             services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.CONNECTION_STRINGS));
             services.AddTransient(typeof(IConsultationQueries), typeof(ConsultationQueries));
             services.AddTransient(typeof(IDoctorQueries), typeof(DoctorQueries));
@@ -64,12 +63,6 @@ namespace MedicalSystem.Services.Consultation.Api
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
                 });
             });
-        }
-
-        private void AddDbContext(IServiceCollection services)
-        {
-            string consultationDbConnectionString = Configuration.GetConnectionString("ConsultationDbConnectionString");
-            services.AddDbContext<ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
         }
     }
 }
