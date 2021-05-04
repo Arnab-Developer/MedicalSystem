@@ -1,7 +1,5 @@
-using HealthChecks.UI.Client;
 using MedicalSystem.Services.Patient.Api.GrpcServices;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +25,6 @@ namespace MedicalSystem.Services.Patient.Api
         {
             services.AddGrpc();
             services.AddCustomDbContext(Configuration);
-            services.AddCustomHealthChecks(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,15 +41,6 @@ namespace MedicalSystem.Services.Patient.Api
             {
                 endpoints.MapGrpcService<PatientService>();
 
-                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
-                endpoints.MapHealthChecks("/liveness", new HealthCheckOptions
-                {
-                    Predicate = r => r.Name.Contains("self")
-                });
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");

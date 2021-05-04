@@ -1,4 +1,3 @@
-using HealthChecks.UI.Client;
 using MediatR;
 using MedicalSystem.Services.Consultation.Api.Behaviours;
 using MedicalSystem.Services.Consultation.Api.Options;
@@ -6,7 +5,6 @@ using MedicalSystem.Services.Consultation.Api.Queries;
 using MedicalSystem.Services.Consultation.Domain;
 using MedicalSystem.Services.Consultation.Infrastructure;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -42,7 +40,6 @@ namespace MedicalSystem.Services.Consultation.Api
             services.AddTransient(typeof(IConsultationRepository), typeof(ConsultationRepository));
             services.AddMediatR(typeof(Startup));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehaviour<,>));
-            services.AddCustomHealthChecks(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,15 +58,6 @@ namespace MedicalSystem.Services.Consultation.Api
                 endpoints.MapGrpcService<GrpcServices.PatientService>();
                 endpoints.MapGrpcService<GrpcServices.ConsultationService>();
 
-                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
-                endpoints.MapHealthChecks("/liveness", new HealthCheckOptions
-                {
-                    Predicate = r => r.Name.Contains("self")
-                });
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
