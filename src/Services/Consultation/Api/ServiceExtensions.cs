@@ -7,9 +7,9 @@ namespace MedicalSystem.Services.Consultation.Api
 {
     internal static class ServiceExtensions
     {
-        public static void AddCustomDbContext(this IServiceCollection services, IConfiguration Configuration)
+        public static void AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            string consultationDbConnectionString = Configuration.GetConnectionString("ConsultationDbConnectionString");
+            string consultationDbConnectionString = configuration.GetConnectionString("ConsultationDbConnectionString");
             services.AddDbContext<ConsultationContext>(option => option.UseSqlServer(consultationDbConnectionString));
         }
     }

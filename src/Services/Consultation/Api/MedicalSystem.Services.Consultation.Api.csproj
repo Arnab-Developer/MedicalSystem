@@ -10,7 +10,7 @@
     <Protobuf Include="Protos\consultation.proto" GrpcServices="Server" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup>    
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.37.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />

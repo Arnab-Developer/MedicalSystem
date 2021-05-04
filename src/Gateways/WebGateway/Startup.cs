@@ -1,6 +1,8 @@
+using HealthChecks.UI.Client;
 using MedicalSystem.Gateways.WebGateway.GrpcClients.Consultations;
 using MedicalSystem.Gateways.WebGateway.Options;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +35,7 @@ namespace MedicalSystem.Gateways.WebGateway
             services.AddTransient(typeof(IPatientGrpcClient), typeof(PatientGrpcClient));
             services.AddTransient(typeof(IConsultationGrpcClient), typeof(ConsultationGrpcClient));
             services.AddSwaggerGen();
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +59,11 @@ namespace MedicalSystem.Gateways.WebGateway
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
                 endpoints.MapControllers();
             });
         }

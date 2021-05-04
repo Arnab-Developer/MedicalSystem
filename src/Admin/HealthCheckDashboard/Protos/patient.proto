@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "MedicalSystem.Admin.HealthCheckDashboard.Protos.Patients";
+
+package patient;
+
+service Patient {
+  rpc GetAll (EmptyMessage) returns (PatientModelsMessage);
+  rpc GetById (IdMessage) returns (PatientModelMessage);
+  rpc Add (PatientModelMessage) returns (EmptyMessage);
+  rpc Update (UpdateMessage) returns (EmptyMessage);
+  rpc Delete (IdMessage) returns (EmptyMessage);
+}
+
+message EmptyMessage {
+
+}
+
+message PatientModelsMessage {
+  repeated PatientModelMessage patients = 1;
+}
+
+message PatientModelMessage {
+  int32 Id = 1;
+  string FirstName = 2;
+  string LastName = 3;
+}
+
+message IdMessage{
+  int32 Id = 1;
+}
+
+message UpdateMessage {
+  int32 Id = 1;
+  PatientModelMessage patient = 2;
+}

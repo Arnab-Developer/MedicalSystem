@@ -2,7 +2,6 @@
 using MedicalSystem.Gateways.WebGateway.Options;
 using MedicalSystem.Gateways.WebGateway.Protos.Consultations;
 using Microsoft.Extensions.Options;
-using System;
 using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Consultations
@@ -15,7 +14,6 @@ namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Consultations
         public PatientGrpcClient(IOptionsMonitor<ConsultationOptions> optionsAccessor)
         {
             _optionsAccessor = optionsAccessor;
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             GrpcChannel channel = GrpcChannel.ForAddress(_optionsAccessor.CurrentValue.ConsultationApiUrl);
             _client = new Patient.PatientClient(channel);
         }

@@ -1,9 +1,7 @@
-using MedicalSystem.Services.Patient.Api.Data;
 using MedicalSystem.Services.Patient.Api.GrpcServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,8 +24,7 @@ namespace MedicalSystem.Services.Patient.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
-            string patientDbConnectionString = Configuration.GetConnectionString("PatientDbConnectionString");
-            services.AddDbContext<PatientContext>(option => option.UseSqlServer(patientDbConnectionString));
+            services.AddCustomDbContext(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

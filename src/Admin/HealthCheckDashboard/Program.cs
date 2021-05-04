@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using System.Diagnostics.CodeAnalysis;
 
-namespace MedicalSystem.Services.Doctor.Api
+namespace MedicalSystem.Admin.HealthCheckDashboard
 {
-    [ExcludeFromCodeCoverage]
     public class Program
     {
         public static void Main(string[] args)

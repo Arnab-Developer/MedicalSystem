@@ -47,6 +47,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doctor", "Doctor", "{1C2970
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patient", "Patient", "{B1328002-C6DF-4DEA-9C4C-4AA8D5358EA4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin", "Admin", "{E0459434-0D35-4A7C-8AA1-BC53878B4BB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSystem.Admin.HealthCheckDashboard", "Admin\HealthCheckDashboard\MedicalSystem.Admin.HealthCheckDashboard.csproj", "{4CA00AB3-5267-4554-AD12-19EAEA8BD8BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +113,10 @@ Global
 		{A6347025-83B6-4125-BC9C-A71560845556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6347025-83B6-4125-BC9C-A71560845556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6347025-83B6-4125-BC9C-A71560845556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CA00AB3-5267-4554-AD12-19EAEA8BD8BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CA00AB3-5267-4554-AD12-19EAEA8BD8BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CA00AB3-5267-4554-AD12-19EAEA8BD8BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CA00AB3-5267-4554-AD12-19EAEA8BD8BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +139,7 @@ Global
 		{A6347025-83B6-4125-BC9C-A71560845556} = {AE06F326-63A2-4F0A-B204-B12D96B00EB7}
 		{1C2970BE-9B58-4D10-96B7-4693B2CDEE1C} = {ABAF6BD2-218E-4718-9DBB-309F3622FCD8}
 		{B1328002-C6DF-4DEA-9C4C-4AA8D5358EA4} = {ABAF6BD2-218E-4718-9DBB-309F3622FCD8}
+		{4CA00AB3-5267-4554-AD12-19EAEA8BD8BA} = {E0459434-0D35-4A7C-8AA1-BC53878B4BB3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {52221F93-7556-4DAB-A5ED-97E1C70E5377}

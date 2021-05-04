@@ -1,0 +1,82 @@
+name: Health check dashboard CI CD
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [created]
+jobs:
+  build-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101    
+    - name: Build
+      run: dotnet build 'src/Admin/HealthCheckDashboard/MedicalSystem.Admin.HealthCheckDashboard.csproj' --configuration Release    
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp' ]
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: ${{ matrix.language }}
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v1
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
+  github-docker-push:
+    if: ${{ github.event_name == 'push' }}
+    name: GitHub docker push
+    runs-on: ubuntu-latest
+    needs: [build-test, analyze]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101    
+    - name: Publish
+      run: dotnet publish 'src/Admin/HealthCheckDashboard/MedicalSystem.Admin.HealthCheckDashboard.csproj' --configuration Release -o 'publish/app'
+    - name: Docker build
+      run: docker build -f 'src/Admin/HealthCheckDashboard/Dockerfile' -t docker.pkg.github.com/arnab-developer/medicalsystem/healthcheckdashboard:1.0.2 .
+    - name: Docker push
+      run: |
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://docker.pkg.github.com -u Arnab-Developer --password-stdin
+        docker push docker.pkg.github.com/arnab-developer/medicalsystem/healthcheckdashboard:1.0.2
+  dockerhub-push:
+    if: ${{ github.event_name == 'release' }}
+    name: Dockerhub push
+    runs-on: ubuntu-latest
+    needs: [build-test, analyze]
+    environment:
+      name: Dockerhub
+      url: https://hub.docker.com/r/45862391/webmvc
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101    
+    - name: Publish
+      run: dotnet publish 'src/Admin/HealthCheckDashboard/MedicalSystem.Admin.HealthCheckDashboard.csproj' --configuration Release -o 'publish/app'
+    - name: Docker build
+      run: docker build -f 'src/Admin/HealthCheckDashboard/Dockerfile' -t 45862391/healthcheckdashboard:1.0.2 .
+    - name: Docker push
+      run: |
+        echo "${{ secrets.DOCKERHUB_PWD }}" | docker login -u 45862391 --password-stdin
+        docker push 45862391/healthcheckdashboard:1.0.2 
