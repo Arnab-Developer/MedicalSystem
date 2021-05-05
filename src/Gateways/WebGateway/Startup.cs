@@ -1,6 +1,7 @@
+using Grpc.Net.Client;
 using HealthChecks.UI.Client;
 using MedicalSystem.Gateways.WebGateway.GrpcClients.Consultations;
-using MedicalSystem.Gateways.WebGateway.Options;
+using MedicalSystem.Gateways.WebGateway.Protos.Consultations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -26,14 +27,31 @@ namespace MedicalSystem.Gateways.WebGateway
         {
             services.AddControllers();
             services.AddHttpClient();
-            services.Configure<DoctorOptions>(Configuration);
-            services.Configure<PatientOptions>(Configuration);
-            services.Configure<ConsultationOptions>(Configuration);
-            services.AddTransient(typeof(GrpcClients.Doctors.IDoctorGrpcClient), typeof(GrpcClients.Doctors.DoctorGrpcClient));
-            services.AddTransient(typeof(GrpcClients.Patients.IPatientGrpcClient), typeof(GrpcClients.Patients.PatientGrpcClient));
-            services.AddTransient(typeof(IDoctorGrpcClient), typeof(DoctorGrpcClient));
-            services.AddTransient(typeof(IPatientGrpcClient), typeof(PatientGrpcClient));
-            services.AddTransient(typeof(IConsultationGrpcClient), typeof(ConsultationGrpcClient));
+            services.AddTransient<GrpcClients.Doctors.IDoctorGrpcClient>(options =>
+            {
+                GrpcChannel channel = GrpcChannel.ForAddress(Configuration["DoctorApiUrl"]);
+                return new Protos.Doctors.Doctor.DoctorClient(channel);
+            });
+            services.AddTransient<GrpcClients.Patients.IPatientGrpcClient>(options =>
+            {
+                GrpcChannel channel = GrpcChannel.ForAddress(Configuration["PatientApiUrl"]);
+                return new Protos.Patients.Patient.PatientClient(channel);
+            });
+            services.AddTransient<IDoctorGrpcClient>(options =>
+            {
+                GrpcChannel channel = GrpcChannel.ForAddress(Configuration["ConsultationApiUrl"]);
+                return new Doctor.DoctorClient(channel);
+            });
+            services.AddTransient<IPatientGrpcClient>(options =>
+            {
+                GrpcChannel channel = GrpcChannel.ForAddress(Configuration["ConsultationApiUrl"]);
+                return new Patient.PatientClient(channel);
+            });
+            services.AddTransient<IConsultationGrpcClient>(options =>
+            {
+                GrpcChannel channel = GrpcChannel.ForAddress(Configuration["ConsultationApiUrl"]);
+                return new Consultation.ConsultationClient(channel);
+            });
             services.AddSwaggerGen();
             services.AddHealthChecks();
         }

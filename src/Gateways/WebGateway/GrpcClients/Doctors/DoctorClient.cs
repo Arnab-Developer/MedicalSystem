@@ -1,18 +1,48 @@
-﻿using Grpc.Net.Client;
-using MedicalSystem.Gateways.WebGateway.Options;
-using MedicalSystem.Gateways.WebGateway.Protos.Doctors;
-using Microsoft.Extensions.Options;
-using System;
+﻿using MedicalSystem.Gateways.WebGateway.GrpcClients.Doctors;
 using System.Threading.Tasks;
 
-namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Doctors
+namespace MedicalSystem.Gateways.WebGateway.Protos.Doctors
 {
-    public class DoctorGrpcClient : IDoctorGrpcClient
+    public static partial class Doctor
+    {
+        public partial class DoctorClient : IDoctorGrpcClient
+        {
+            async Task<DoctorModelsMessage> IDoctorGrpcClient.GetAllAsync(EmptyMessage request)
+            {
+                return await GetAllAsync(request);
+            }
+
+            async Task<DoctorModelMessage> IDoctorGrpcClient.GetByIdAsync(IdMessage request)
+            {
+                return await GetByIdAsync(request);
+            }
+
+            async Task IDoctorGrpcClient.AddAsync(DoctorModelMessage request)
+            {
+                await AddAsync(request);
+            }
+
+            async Task IDoctorGrpcClient.UpdateAsync(UpdateMessage request)
+            {
+                await UpdateAsync(request);
+            }
+
+            async Task IDoctorGrpcClient.DeleteAsync(IdMessage request)
+            {
+                await DeleteAsync(request);
+            }
+        }
+    }
+}
+
+/*namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Doctors
+{
+    public class DoctorClient : IDoctorGrpcClient
     {
         private readonly IOptionsMonitor<DoctorOptions> _optionsAccessor;
         private readonly Doctor.DoctorClient _client;
 
-        public DoctorGrpcClient(IOptionsMonitor<DoctorOptions> optionsAccessor)
+        public DoctorClient(IOptionsMonitor<DoctorOptions> optionsAccessor)
         {
             _optionsAccessor = optionsAccessor;
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
@@ -45,4 +75,4 @@ namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Doctors
             await _client.DeleteAsync(request);
         }
     }
-}
+}*/
