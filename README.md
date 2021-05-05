@@ -19,6 +19,7 @@ This is influenced by [.NET Microservices Sample Reference Application](https://
 | Web mvc | [![Web mvc CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/web-mvc-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/web-mvc-ci-cd.yml) |
 | Doctor sync job | [![Doctor sync job CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/doctor-sync-job-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/doctor-sync-job-ci-cd.yml) |
 | Patient sync job | [![Patient sync job CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/patient-sync-job-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/patient-sync-job-ci-cd.yml) |
+| Health check dashboard | [![Health check dashboard CI CD](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/health-check-dashboard-ci-cd.yml/badge.svg)](https://github.com/Arnab-Developer/MedicalSystem/actions/workflows/health-check-dashboard-ci-cd.yml) |
 
 ## Tech stack
 
