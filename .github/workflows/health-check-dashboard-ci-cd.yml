@@ -58,7 +58,7 @@ jobs:
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://docker.pkg.github.com -u Arnab-Developer --password-stdin
         docker push docker.pkg.github.com/arnab-developer/medicalsystem/healthcheckdashboard:1.0.2
   dockerhub-push:
-    if: ${{ github.event_name == 'release' }}
+    #if: ${{ github.event_name == 'release' }}
     name: Dockerhub push
     runs-on: ubuntu-latest
     needs: [build-test, analyze]
