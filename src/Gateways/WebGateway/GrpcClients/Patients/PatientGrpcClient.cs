@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Patients
 {
-    public class PatientGrpcClient : IPatientGrpcClient
+    public class PatientGrpcClient : IPatientGrpcClient, IDisposable
     {
         private readonly IOptionsMonitor<PatientOptions> _optionsAccessor;
         private readonly Patient.PatientClient _client;
+        private readonly GrpcChannel _channel;
+        private bool _disposedValue;
 
         public PatientGrpcClient(IOptionsMonitor<PatientOptions> optionsAccessor)
         {
             _optionsAccessor = optionsAccessor;
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            GrpcChannel channel = GrpcChannel.ForAddress(_optionsAccessor.CurrentValue.PatientApiUrl);
-            _client = new Patient.PatientClient(channel);
+            _channel = GrpcChannel.ForAddress(_optionsAccessor.CurrentValue.PatientApiUrl);
+            _client = new Patient.PatientClient(_channel);
         }
 
         async Task<PatientModelsMessage> IPatientGrpcClient.GetAllAsync(EmptyMessage request)
@@ -43,6 +44,36 @@ namespace MedicalSystem.Gateways.WebGateway.GrpcClients.Patients
         async Task IPatientGrpcClient.DeleteAsync(IdMessage request)
         {
             await _client.DeleteAsync(request);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                    _channel.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                _disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~PatientGrpcClient()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }
