@@ -30,27 +30,27 @@ namespace MedicalSystem.Gateways.WebGateway
             services.AddTransient<GrpcClients.Doctors.IDoctorGrpcClient>(options =>
             {
                 GrpcChannel channel = GrpcChannel.ForAddress(Configuration["DoctorApiUrl"]);
-                return new Protos.Doctors.Doctor.DoctorClient(channel);
+                return new Protos.Doctors.Doctor.DoctorClient(channel, true);
             });
             services.AddTransient<GrpcClients.Patients.IPatientGrpcClient>(options =>
             {
                 GrpcChannel channel = GrpcChannel.ForAddress(Configuration["PatientApiUrl"]);
-                return new Protos.Patients.Patient.PatientClient(channel);
+                return new Protos.Patients.Patient.PatientClient(channel, true);
             });
             services.AddTransient<IDoctorGrpcClient>(options =>
             {
                 GrpcChannel channel = GrpcChannel.ForAddress(Configuration["ConsultationApiUrl"]);
-                return new Doctor.DoctorClient(channel);
+                return new Doctor.DoctorClient(channel, true);
             });
             services.AddTransient<IPatientGrpcClient>(options =>
             {
                 GrpcChannel channel = GrpcChannel.ForAddress(Configuration["ConsultationApiUrl"]);
-                return new Patient.PatientClient(channel);
+                return new Patient.PatientClient(channel, true);
             });
             services.AddTransient<IConsultationGrpcClient>(options =>
             {
                 GrpcChannel channel = GrpcChannel.ForAddress(Configuration["ConsultationApiUrl"]);
-                return new Consultation.ConsultationClient(channel);
+                return new Consultation.ConsultationClient(channel, true);
             });
             services.AddSwaggerGen();
             services.AddHealthChecks();
