@@ -1,8 +1,5 @@
-﻿using Grpc.Net.Client;
-using MedicalSystem.Admin.HealthCheckDashboard.Options;
-using MedicalSystem.Admin.HealthCheckDashboard.Protos.Doctors;
+﻿using MedicalSystem.Admin.HealthCheckDashboard.Protos.Doctors;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Options;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,21 +8,19 @@ namespace MedicalSystem.Admin.HealthCheckDashboard.ApiHealthChecks
 {
     internal class DoctorApiHealthCheck : IHealthCheck
     {
-        private readonly IOptionsMonitor<DoctorOptions> _optionsAccessor;
+        private readonly Doctor.DoctorClient _client;
 
-        public DoctorApiHealthCheck(IOptionsMonitor<DoctorOptions> optionsAccessor)
+        public DoctorApiHealthCheck(Doctor.DoctorClient client)
         {
-            _optionsAccessor = optionsAccessor;
+            _client = client;
         }
 
         Task<HealthCheckResult> IHealthCheck.CheckHealthAsync(
             HealthCheckContext context, CancellationToken cancellationToken)
         {
-            using GrpcChannel channel = GrpcChannel.ForAddress(_optionsAccessor.CurrentValue.DoctorApiUrl);
             try
             {
-                Doctor.DoctorClient client = new(channel);
-                DoctorModelsMessage doctorModelsMessage = client.GetAll(
+                DoctorModelsMessage doctorModelsMessage = _client.GetAll(
                     new EmptyMessage(), cancellationToken: cancellationToken);
 
                 return doctorModelsMessage.Doctors.Any()
