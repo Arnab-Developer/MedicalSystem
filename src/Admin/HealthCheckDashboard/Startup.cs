@@ -1,6 +1,6 @@
 using HealthChecks.UI.Client;
 using MedicalSystem.Admin.HealthCheckDashboard.ApiHealthChecks;
-using MedicalSystem.Admin.HealthCheckDashboard.Options;
+using MedicalSystem.Admin.HealthCheckDashboard.Protos.Consultations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace MedicalSystem.Admin.HealthCheckDashboard
 {
@@ -24,10 +25,26 @@ namespace MedicalSystem.Admin.HealthCheckDashboard
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .Configure<DoctorOptions>(Configuration)
-                .Configure<PatientOptions>(Configuration)
-                .Configure<ConsultationOptions>(Configuration);
+            services.AddGrpcClient<Protos.Doctors.Doctor.DoctorClient>("DoctorService", o =>
+            {
+                o.Address = new Uri(Configuration["DoctorApiUrl"]);
+            });
+            services.AddGrpcClient<Protos.Patients.Patient.PatientClient>("PatientService", o =>
+            {
+                o.Address = new Uri(Configuration["PatientApiUrl"]);
+            });
+            services.AddGrpcClient<Doctor.DoctorClient>("ConsultationDoctorService", o =>
+            {
+                o.Address = new Uri(Configuration["ConsultationApiUrl"]);
+            });
+            services.AddGrpcClient<Patient.PatientClient>("ConsultationPatientService", o =>
+            {
+                o.Address = new Uri(Configuration["ConsultationApiUrl"]);
+            });
+            services.AddGrpcClient<Consultation.ConsultationClient>("ConsultationService", o =>
+            {
+                o.Address = new Uri(Configuration["ConsultationApiUrl"]);
+            });
 
             services
                 .AddHealthChecks()
