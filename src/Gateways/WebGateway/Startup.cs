@@ -27,7 +27,7 @@ namespace MedicalSystem.Gateways.WebGateway
         {
             services.AddControllers();
 
-            services.AddGrpcClient<Protos.Doctors.Doctor.DoctorClient>(o =>
+            services.AddGrpcClient<Protos.Doctors.Doctor.DoctorClient>("DoctorService", o =>
             {
                 o.Address = new Uri(Configuration["DoctorApiUrl"]);
             });
@@ -36,7 +36,7 @@ namespace MedicalSystem.Gateways.WebGateway
                 return options.GetRequiredService<Protos.Doctors.Doctor.DoctorClient>();
             });
 
-            services.AddGrpcClient<Protos.Patients.Patient.PatientClient>(o =>
+            services.AddGrpcClient<Protos.Patients.Patient.PatientClient>("PatientService", o =>
             {
                 o.Address = new Uri(Configuration["PatientApiUrl"]);
             });
@@ -45,7 +45,7 @@ namespace MedicalSystem.Gateways.WebGateway
                 return options.GetRequiredService<Protos.Patients.Patient.PatientClient>();
             });
 
-            services.AddGrpcClient<Doctor.DoctorClient>(o =>
+            services.AddGrpcClient<Doctor.DoctorClient>("ConsultationDoctorService", o =>
             {
                 o.Address = new Uri(Configuration["ConsultationApiUrl"]);
             });
@@ -54,7 +54,7 @@ namespace MedicalSystem.Gateways.WebGateway
                 return options.GetRequiredService<Doctor.DoctorClient>();
             });
 
-            services.AddGrpcClient<Patient.PatientClient>(o =>
+            services.AddGrpcClient<Patient.PatientClient>("ConsultationPatientService", o =>
             {
                 o.Address = new Uri(Configuration["ConsultationApiUrl"]);
             });
@@ -63,7 +63,7 @@ namespace MedicalSystem.Gateways.WebGateway
                 return options.GetRequiredService<Patient.PatientClient>();
             });
 
-            services.AddGrpcClient<Consultation.ConsultationClient>(o =>
+            services.AddGrpcClient<Consultation.ConsultationClient>("ConsultationService", o =>
             {
                 o.Address = new Uri(Configuration["ConsultationApiUrl"]);
             });
