@@ -1,4 +1,3 @@
-using Grpc.Net.Client;
 using HealthChecks.UI.Client;
 using MedicalSystem.Gateways.WebGateway.GrpcClients.Consultations;
 using MedicalSystem.Gateways.WebGateway.Protos.Consultations;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MedicalSystem.Gateways.WebGateway
@@ -26,32 +26,52 @@ namespace MedicalSystem.Gateways.WebGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddHttpClient();
+
+            services.AddGrpcClient<Protos.Doctors.Doctor.DoctorClient>("DoctorService", o =>
+            {
+                o.Address = new Uri(Configuration["DoctorApiUrl"]);
+            });
             services.AddTransient<GrpcClients.Doctors.IDoctorGrpcClient>(options =>
             {
-                GrpcChannel channel = GrpcChannel.ForAddress(Configuration["DoctorApiUrl"]);
-                return new Protos.Doctors.Doctor.DoctorClient(channel, true);
+                return options.GetRequiredService<Protos.Doctors.Doctor.DoctorClient>();
+            });
+
+            services.AddGrpcClient<Protos.Patients.Patient.PatientClient>("PatientService", o =>
+            {
+                o.Address = new Uri(Configuration["PatientApiUrl"]);
             });
             services.AddTransient<GrpcClients.Patients.IPatientGrpcClient>(options =>
             {
-                GrpcChannel channel = GrpcChannel.ForAddress(Configuration["PatientApiUrl"]);
-                return new Protos.Patients.Patient.PatientClient(channel, true);
+                return options.GetRequiredService<Protos.Patients.Patient.PatientClient>();
+            });
+
+            services.AddGrpcClient<Doctor.DoctorClient>("ConsultationDoctorService", o =>
+            {
+                o.Address = new Uri(Configuration["ConsultationApiUrl"]);
             });
             services.AddTransient<IDoctorGrpcClient>(options =>
             {
-                GrpcChannel channel = GrpcChannel.ForAddress(Configuration["ConsultationApiUrl"]);
-                return new Doctor.DoctorClient(channel, true);
+                return options.GetRequiredService<Doctor.DoctorClient>();
+            });
+
+            services.AddGrpcClient<Patient.PatientClient>("ConsultationPatientService", o =>
+            {
+                o.Address = new Uri(Configuration["ConsultationApiUrl"]);
             });
             services.AddTransient<IPatientGrpcClient>(options =>
             {
-                GrpcChannel channel = GrpcChannel.ForAddress(Configuration["ConsultationApiUrl"]);
-                return new Patient.PatientClient(channel, true);
+                return options.GetRequiredService<Patient.PatientClient>();
+            });
+
+            services.AddGrpcClient<Consultation.ConsultationClient>("ConsultationService", o =>
+            {
+                o.Address = new Uri(Configuration["ConsultationApiUrl"]);
             });
             services.AddTransient<IConsultationGrpcClient>(options =>
             {
-                GrpcChannel channel = GrpcChannel.ForAddress(Configuration["ConsultationApiUrl"]);
-                return new Consultation.ConsultationClient(channel, true);
+                return options.GetRequiredService<Consultation.ConsultationClient>();
             });
+
             services.AddSwaggerGen();
             services.AddHealthChecks();
         }
