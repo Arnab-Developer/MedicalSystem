@@ -2,7 +2,7 @@
 
 Contributions are welcome. Every contribution starts from an issue. It can be fixing a bug, 
 develop a new feature or improve the documentation. If you want to fix a bug or work on a new 
-feature or improve the docuemtation, then first check for similar open issues in the issue list. If 
+feature or improve the documentation, then first check for similar open issues in the issue list. If 
 you found one then comment on that issue with the details of how you want to contribute. Or if 
 you don't find an issue of similar subject then create a new one and provide details of how you 
 want to contribute. If your work is approved then only start your work.
