@@ -68,11 +68,8 @@ Now open the Web App URL in web browser for Web Mvc and you should access the ap
 
 The future plan is to deploy the services in AKS.
 
-## License
+## How to run
 
-[MIT License](https://github.com/Arnab-Developer/MedicalSystem/blob/main/LICENSE)
-
-## Contributing
-
-Please read [this](https://github.com/Arnab-Developer/MedicalSystem/blob/main/CONTRIBUTING.md) 
-for contribution related guidelines.
+You need Visual Studio 2019, ASP.NET 5, Entity Framework, Azure tools for Visual Studio 2019 and SQL Server 2016 to work 
+on this project locally. Create the databases and tables with the 
+[script provided](https://github.com/Arnab-Developer/MedicalSystem/tree/main/DatabaseScripts) in the repo before executing this app.
