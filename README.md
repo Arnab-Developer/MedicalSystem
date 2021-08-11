@@ -67,9 +67,3 @@ through CI CD. Hosting in Azure is not done as a part of CI CD. That needs to be
 Now open the Web App URL in web browser for Web Mvc and you should access the app.
 
 The future plan is to deploy the services in AKS.
-
-## How to run
-
-You need Visual Studio 2019, ASP.NET 5, Entity Framework, Azure tools for Visual Studio 2019 and SQL Server 2016 to work 
-on this project locally. Create the databases and tables with the 
-[script provided](https://github.com/Arnab-Developer/MedicalSystem/tree/main/DatabaseScripts) in the repo before executing this app.
