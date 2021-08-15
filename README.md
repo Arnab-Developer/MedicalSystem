@@ -71,7 +71,19 @@ The future plan is to deploy the services in AKS.
 ## How to run
 
 You need Visual Studio 2019, ASP.NET 5, Entity Framework, Azure tools for Visual Studio 2019 and SQL Server 2016 to work 
-on this solution locally. Create the databases and tables with the
+on this solution locally. 
+
+- Clone the repo
+- Create the databases and tables with the
 [script provided](https://github.com/Arnab-Developer/MedicalSystem/tree/main/DatabaseScripts) 
-in the repo and update the connection strings and other configs in `appsettings.Development.json` 
+in the repo.
+- Update the connection strings and other configs in `appsettings.Development.json` 
 file in different projects as applicable to your local settings before executing this app.
+- Open the solution in Visual Studio
+- Set the below projects as startup projects
+  - Doctor service
+  - Patient service
+  - Consultation service
+  - Web gateway
+  - Web frontend
+- Press F5 to run
