@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.101    
+        dotnet-version: 6.0.x
     - name: Build
       run: dotnet build 'src/Tests/WebGateway/MedicalSystem.Tests.Gateways.WebGateway.csproj' --configuration Release
     - name: Test
@@ -50,7 +50,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.101    
+        dotnet-version: 6.0.x
     - name: Publish
       run: dotnet publish 'src/Gateways/WebGateway/MedicalSystem.Gateways.WebGateway.csproj' --configuration Release -o 'publish/app'
     - name: Docker build
@@ -74,7 +74,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.101    
+        dotnet-version: 6.0.x
     - name: Publish
       run: dotnet publish 'src/Gateways/WebGateway/MedicalSystem.Gateways.WebGateway.csproj' --configuration Release -o 'publish/app'
     - name: Docker build
