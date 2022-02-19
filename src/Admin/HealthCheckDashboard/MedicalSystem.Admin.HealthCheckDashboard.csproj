@@ -16,10 +16,10 @@
     <PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.2" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.2" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="6.0.2" />
-    <PackageReference Include="Google.Protobuf" Version="3.16.0" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.37.0" />
-    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.37.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.37.1">
+    <PackageReference Include="Google.Protobuf" Version="3.19.4" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.42.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.42.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.44.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

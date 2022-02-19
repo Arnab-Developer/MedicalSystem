@@ -11,10 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>    
-    <PackageReference Include="Dapper" Version="2.0.90" />
-    <PackageReference Include="Grpc.AspNetCore" Version="2.37.0" />
-    <PackageReference Include="MediatR" Version="9.0.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.42.0" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
   </ItemGroup>
 

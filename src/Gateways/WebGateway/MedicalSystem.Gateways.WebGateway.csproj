@@ -8,14 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.2" />
-    <PackageReference Include="Google.Protobuf" Version="3.16.0" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.37.0" />
-    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.37.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.37.1">
+    <PackageReference Include="Google.Protobuf" Version="3.19.4" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.42.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.42.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.44.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
